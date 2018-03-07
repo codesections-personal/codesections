@@ -1,0 +1,270 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fonst",
+				"font-size"
+			],
+			[
+				"search",
+				"searchResultsHeader"
+			],
+			[
+				"serachRe",
+				"searchResultsDisplayArea"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"hom",
+				"homeButton"
+			],
+			[
+				"sear",
+				"searchInput"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
+				"class",
+				"classList"
+			],
+			[
+				"creat",
+				"createElement"
+			],
+			[
+				"word",
+				"word-wrap"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"na",
+				"nav-bar--top__container"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"text-a",
+				"text-align"
+			],
+			[
+				"tex",
+				"textContent"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "u",
+		"selected_items":
+		[
+			[
+				"u",
+				"UI: Select Color Scheme"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/M/Project Odin/Development Version/Non-NAT pages/Site Search Dev folder/SiteSearch.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Site Search Dev folder/JsonFileBuilder.js",
+		"/M/Project Odin/Development Version/Non-NAT pages/Resources/javascript/SiteSearch.js",
+		"/M/Project Odin/Development Version/Non-NAT pages/Resources/javascript/davispolk_layout.js",
+		"/M/Project Odin/Development Version/Non-NAT pages/Resources/css/davispolk_layout.css",
+		"/M/Project Odin/Development Version/Non-NAT pages/Cyber Compliance/Programs & Policies.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/root/index.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/extra resources/index_9d4a3209e87b57d2fc4e67e1504bb306.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Site Search Dev folder/SiteSearch.js",
+		"/M/Project Odin/Development Version/Non-NAT pages/Resources/javascript/LocalDevEnviornment.js",
+		"/C/Users/sockwell/Desktop/Daniel/cites/root/license.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/root/projects.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/root/about.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/root/leanCow/index.html",
+		"/C/Users/sockwell/Desktop/Daniel/cites/extra resources/workingDir/codeSection_v8.svg",
+		"/C/Users/sockwell/Desktop/Daniel/cites/extra resources/city.svg",
+		"/C/Users/sockwell/Desktop/leanCow/index.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Home Page/Home Page.html",
+		"/C/Users/sockwell/Desktop/Daniel/index.html",
+		"/M/Project Odin/Development Version/NAT output reports/Federal Reports/HIPAA CE Report.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Site Search Dev folder/JsonFileBuilder.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Cyber Compliance/Tabletop Exercises.html",
+		"/M/Project Odin/Development Version/NAT output reports/Federal Reports/HIPAA SP Report.html",
+		"/M/Project Odin/Development Version/NAT output reports/Federal Reports/Gramm-Leach-Bliley Report.html",
+		"/M/Project Odin/Development Version/NAT output reports/SP reports/SP State Report for AK.html",
+		"/M/Project Odin/Development Version/Non-NAT pages/Cyber Compliance/Cybersecurity Checklists.html"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 293.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
