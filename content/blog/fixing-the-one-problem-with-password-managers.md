@@ -195,3 +195,4 @@ hsxkpasswd that was written in a more portable language—ideally bash, since
 that's what Pass is written in.  I'm currently playing with a bash script along
 those lines, and may polish it up for public release if there's any interest.
 </asside>
+
