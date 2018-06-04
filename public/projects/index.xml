@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on My New Hugo Site</title>
-    <link>http://example.org/projects/</link>
-    <description>Recent content in Projects on My New Hugo Site</description>
+    <title>Projects on CodeSections</title>
+    <link>https://www.codesections.com/projects/</link>
+    <description>Recent content in Projects on CodeSections</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jun 2018 13:42:25 -0400</lastBuildDate>
     
-	<atom:link href="http://example.org/projects/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.codesections.com/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>This Website</title>
-      <link>http://example.org/projects/codesections-website/</link>
+      <link>https://www.codesections.com/projects/codesections-website/</link>
       <pubDate>Sun, 03 Jun 2018 13:42:25 -0400</pubDate>
       
-      <guid>http://example.org/projects/codesections-website/</guid>
+      <guid>https://www.codesections.com/projects/codesections-website/</guid>
       <description>&lt;style&gt;
 .equal-display-element {
   display: inline;
@@ -75,11 +75,11 @@
     
     <item>
       <title>Reg Experiment</title>
-      <link>http://example.org/projects/reg-experiment/</link>
+      <link>https://www.codesections.com/projects/reg-experiment/</link>
       <pubDate>Sun, 03 Jun 2018 13:39:00 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-experiment/</guid>
-      <description>&lt;p&gt;Live &lt;a href=&#34;http://example.org/projects/reg-exp/&#34;&gt;demo avalible here&lt;/a&gt;.&lt;/p&gt;
+      <guid>https://www.codesections.com/projects/reg-experiment/</guid>
+      <description>&lt;p&gt;Live &lt;a href=&#34;https://www.codesections.com/projects/reg-exp/&#34;&gt;demo avalible here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;A clone of &lt;a class=&#34;link&#34; href=&#34;http://regexmatch.herokuapp.com/#/&#34;&gt;RegExceptional&lt;/a&gt;, a HackReactor final project that consists of a matching game to help teach regular expressions.  My goal is to show that we can get exactly the same functionality without any frameworks and that the resulting site will not only look nearly identical, but will also load less data and do so faster.  The clone I built reduces the initial data transfer by 99.83%, and cuts the page load time from 600ms to right around 100ms, which I&amp;rsquo;m prepared to score as a victory.&lt;/p&gt;
 
@@ -88,10 +88,10 @@
     
     <item>
       <title>(Much!) More Coming Soon</title>
-      <link>http://example.org/projects/more/</link>
+      <link>https://www.codesections.com/projects/more/</link>
       <pubDate>Sun, 03 Jun 2018 13:16:32 -0400</pubDate>
       
-      <guid>http://example.org/projects/more/</guid>
+      <guid>https://www.codesections.com/projects/more/</guid>
       <description></description>
     </item>
     

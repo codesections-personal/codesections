@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RegExperiment on My New Hugo Site</title>
-    <link>http://example.org/projects/reg-exp/</link>
-    <description>Recent content in RegExperiment on My New Hugo Site</description>
+    <title>RegExperiment on CodeSections</title>
+    <link>https://www.codesections.com/projects/reg-exp/</link>
+    <description>Recent content in RegExperiment on CodeSections</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jun 2018 14:26:44 -0400</lastBuildDate>
     
-	<atom:link href="http://example.org/projects/reg-exp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.codesections.com/projects/reg-exp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/capital_words/</link>
+      <link>https://www.codesections.com/projects/reg-exp/capital_words/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/capital_words/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/capital_words/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/find_prices/</link>
+      <link>https://www.codesections.com/projects/reg-exp/find_prices/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/find_prices/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/find_prices/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/hex_color_code/</link>
+      <link>https://www.codesections.com/projects/reg-exp/hex_color_code/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/hex_color_code/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/hex_color_code/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/one_a/</link>
+      <link>https://www.codesections.com/projects/reg-exp/one_a/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/one_a/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/one_a/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/username_validation/</link>
+      <link>https://www.codesections.com/projects/reg-exp/username_validation/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/username_validation/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/username_validation/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/valid_number/</link>
+      <link>https://www.codesections.com/projects/reg-exp/valid_number/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/valid_number/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/valid_number/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://example.org/projects/reg-exp/validate_password/</link>
+      <link>https://www.codesections.com/projects/reg-exp/validate_password/</link>
       <pubDate>Sun, 03 Jun 2018 14:26:44 -0400</pubDate>
       
-      <guid>http://example.org/projects/reg-exp/validate_password/</guid>
+      <guid>https://www.codesections.com/projects/reg-exp/validate_password/</guid>
       <description>.list-of-questions__item{ padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd } .list-of-questions__row: hover{ background-color: #f5f5f5 } .list-of-questions{ border-collapse: collapse; margin: auto; font-size: 1.4rem; width: 100% } html{ font-size: 10px; font-family: &#34;Helvetica Neue&#34;, Helvetica, Arial, sans-serif } .nav-bar{ font-size: 16px; } .footer { font-size: 16px; } .content-wrapper{ margin: auto; position: relative } .page-title{ font-size: 3em; font-weight: normal; margin-top: 5rem; margin-bottom: 0px } .page-discription__details{ font-size: 1.4em; margin-top: 1em; text-align: left } .</description>
     </item>
     
