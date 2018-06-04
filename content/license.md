@@ -1,6 +1,8 @@
 ---
 title: "License & Legal"
 date: 2018-06-03T10:41:27-04:00
+type: single-page
+layout: standalone
 ---
 
   <p class="content-p"> All non-code content on this site is licensed under the <a class="link" href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. This license generally allows for full duplication of all content, including for commercial use, with attribution.</p>

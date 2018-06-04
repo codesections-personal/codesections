@@ -1,6 +1,8 @@
 ---
 title: "About Me"
 date: 2018-06-03T10:41:27-04:00
+layout: "standalone"
+type: "single-page"
 ---
   
 
