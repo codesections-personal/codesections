@@ -1,0 +1,11 @@
+{{ define "title" }}
+  {{ if .Title }}
+    {{ .Title }} | CodeSections
+  {{ else }}
+    CodeSections
+  {{ end }}
+{{ end }}
+{{ define "main" }}
+<h2>{{.Title}}</h2>
+  {{.Content}}
+{{ end }}
