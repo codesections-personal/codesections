@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on My New Hugo Site</title>
+    <link>http://example.org/blog/</link>
+    <description>Recent content in Blog on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Jun 2018 11:43:27 -0400</lastBuildDate>
+    
+	<atom:link href="http://example.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fixing the One Problem With Password Managers</title>
+      <link>http://example.org/blog/fixing-the-one-problem-with-password-managers/</link>
+      <pubDate>Sun, 03 Jun 2018 11:43:27 -0400</pubDate>
+      
+      <guid>http://example.org/blog/fixing-the-one-problem-with-password-managers/</guid>
+      <description>&lt;p&gt;I recently tweaked the way I use my password manager, and it&#39;s already
+saved me considerable frustration.  Not only that, it&#39;s also brought my
+usage more in line with the Unix philosophy of using tools that do only
+one thing, and do it well—and illustrated, once again, why that philosophy
+is so great.&lt;/p&gt;
+
+&lt;p&gt;This post explains my tweak, and how you can apply it.  But first, some
+background.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Greatness of Static Site Generators, Part II</title>
+      <link>http://example.org/blog/greatness-of-static-site-gen/</link>
+      <pubDate>Sun, 03 Jun 2018 11:40:46 -0400</pubDate>
+      
+      <guid>http://example.org/blog/greatness-of-static-site-gen/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;http://example.org/blog/why-static-site-generators-are-great/&#34;&gt;last post&lt;/a&gt;, we talked about the history of website hosting and the rise of dynamic websites powered by PHP.  Now, we’re going to turn to more recent history and see how content delivery networks have changed the nature of the modern web.&lt;/p&gt;
+
+&lt;h3 id=&#34;content-delivery-networks-and-the-global-mobile-web&#34;&gt;Content Delivery Networks and the Global, Mobile Web&lt;/h3&gt;
+
+&lt;p&gt;One of the biggest advantages of the Internet is how global it is—if your site is hosted in Atlanta, it might get visitors from down the block, but it just as easily might get visitors from New York, or London, or Tokyo.  And that’s pretty incredible.  But it also raises a fundamental problem:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Why Static Site Generators Are Great</title>
+      <link>http://example.org/blog/why-static-site-generators-are-great/</link>
+      <pubDate>Sun, 03 Jun 2018 11:37:56 -0400</pubDate>
+      
+      <guid>http://example.org/blog/why-static-site-generators-are-great/</guid>
+      <description>&lt;p&gt;What makes static site generators so great?  And what is a static site generator, anyway?&lt;/p&gt;
+
+&lt;p&gt;To answer that, let’s take a step back and think about how a website works.  Skipping over some (interesting and important!) details not relevant here, to display a website all you need to do is to send visitors of the website an HTML document.&lt;/p&gt;
+
+&lt;p&gt;As an example, take this stripped-down version of the current &lt;a href=&#34;https://www.codesections.com&#34;&gt;CodeSections&lt;/a&gt; homepage.  To keep things simple, I’ve striped out all the CSS and the parts of the HTML related to how the page would look, which leaves us with just the basic HTML.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Recursive Learning</title>
+      <link>http://example.org/blog/recursive-learning/</link>
+      <pubDate>Sun, 03 Jun 2018 11:32:38 -0400</pubDate>
+      
+      <guid>http://example.org/blog/recursive-learning/</guid>
+      <description>&lt;p&gt;There’s an interestingly recursive nature to learning programing. As part of my ongoing project to build my programing skills to a higher level, I would like to learn Node and modern JavaScript frameworks/libraries like React and Redux.  So, that’s my starting point: What do I need to do to learn these new technologies?&lt;/p&gt;
+
+&lt;p&gt;Except that conventional wisdom holds (and I agree) that it makes more sense to become very comfortable with vanilla JavaScript before jumping to a framework.  This makes a lot of sense, actually: A framework is a powerful tool, but at the end of the day it is compiling down to JavaScript—if I don’t understand the strengths and weaknesses of JavaScript, I won’t understand the problems that these frameworks were built to solve or the trade-offs they make.  And I won’t be able to learn them nearly as well.&lt;/p&gt;
+
+&lt;p&gt;So, I’m off to learn vanilla JavaScript.  Time to read books like Crockford’s &lt;em&gt;JavaScript: The Good Parts&lt;/em&gt; and &lt;em&gt;Eloquent JavaScript&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Except …&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello World! (And past writing)</title>
+      <link>http://example.org/blog/hello-world/</link>
+      <pubDate>Sun, 03 Jun 2018 11:31:03 -0400</pubDate>
+      
+      <guid>http://example.org/blog/hello-world/</guid>
+      <description>&lt;p&gt;Welcome!  Don’t you just love that new-blog smell?&lt;/p&gt;
+
+&lt;p&gt;This blog is my new home for technical topics, book reviews, whatever else
+catches my attention.  I firmly believe that web developers should have their
+own digital space, one that they build, control, and fully understand.  For
+me, this site is that space.&lt;/p&gt;
+
+&lt;h2 id=&#34;colophon&#34;&gt;Colophon&lt;/h2&gt;
+
+&lt;p&gt;As of this writing, this site is built using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, the
+leading static site generator.  It uses a self-written theme and the source
+code lives in a publicly available &lt;a href=&#34;https://github.com/dsock/codesections&#34;&gt;GitHub repository&lt;/a&gt;.  If you’re curious about what I was trying to achieve with
+this site, I’ve written &lt;a href=&#34;http://example.org/projects/this-website&#34;&gt;a whole page&lt;/a&gt; about what
+I was aiming for and how well I did.&lt;/p&gt;
+
+&lt;h2 id=&#34;past-writing&#34;&gt;Past writing&lt;/h2&gt;
+
+&lt;p&gt;While this is the first post on this blog, it’s far from the first public
+writing I’ve done.  Past highlights include:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

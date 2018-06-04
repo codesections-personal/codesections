@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on My New Hugo Site</title>
+    <link>http://example.org/projects/</link>
+    <description>Recent content in Projects on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Jun 2018 13:42:25 -0400</lastBuildDate>
+    
+	<atom:link href="http://example.org/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>This Website</title>
+      <link>http://example.org/projects/codesections-website/</link>
+      <pubDate>Sun, 03 Jun 2018 13:42:25 -0400</pubDate>
+      
+      <guid>http://example.org/projects/codesections-website/</guid>
+      <description>&lt;style&gt;
+.equal-display-element {
+  display: inline;
+}
+
+.code-and-commentary {
+  position: relative;
+  left: calc(50% - 48.5vw);
+  display: flex;
+  width: 97vw;
+}
+
+.code-and-commentary__heading {
+  text-align: center;
+}
+
+.code-and-commentary__code {
+  width: 60%;
+  margin-right: 1vw;
+  background: #f5f2f0;
+  border-radius: 6px;
+}
+
+.code-and-commentary__commentary {
+  width: 39%;
+  background-color: #f5f2f0;
+  border: solid 2px #95b4d8;
+  border-radius: 6px;
+}
+
+.commentary__pre {
+  white-space: pre-wrap;
+  font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, &#39;Helvetica Neue&#39;, Arial, sans-serif;
+  color: #0D1E25; /*nearly black*/
+  max-width:50%;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .code-and-commentary{
+    font-size: .6em;
+    word-break: break-word;
+  }
+}
+&lt;/style&gt;
+
+&lt;p&gt;&lt;p class=&#34;content-p&#34;&gt;The website you&amp;rsquo;re reading right now!  I tried to do things a bit differently with this website.&lt;/p&gt;
+
+&lt;p&gt;In building this website, I had three main goals.  I wanted the site to:&lt;p&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;have understandable source code,&lt;/li&gt;
+    &lt;li&gt;be self-sufficient, and&lt;/li&gt;
+    &lt;li&gt;be the &lt;a href=&#34;https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7&#34;&gt;fastest site in the world&lt;/a&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p class=&#34;content-p&#34;&gt;Here is my analysis of how well I managed to meet these goals.&lt;/p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reg Experiment</title>
+      <link>http://example.org/projects/reg-experiment/</link>
+      <pubDate>Sun, 03 Jun 2018 13:39:00 -0400</pubDate>
+      
+      <guid>http://example.org/projects/reg-experiment/</guid>
+      <description>&lt;p&gt;Live &lt;a href=&#34;http://example.org/projects/reg-exp/&#34;&gt;demo avalible here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A clone of &lt;a class=&#34;link&#34; href=&#34;http://regexmatch.herokuapp.com/#/&#34;&gt;RegExceptional&lt;/a&gt;, a HackReactor final project that consists of a matching game to help teach regular expressions.  My goal is to show that we can get exactly the same functionality without any frameworks and that the resulting site will not only look nearly identical, but will also load less data and do so faster.  The clone I built reduces the initial data transfer by 99.83%, and cuts the page load time from 600ms to right around 100ms, which I&amp;rsquo;m prepared to score as a victory.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>(Much!) More Coming Soon</title>
+      <link>http://example.org/projects/more/</link>
+      <pubDate>Sun, 03 Jun 2018 13:16:32 -0400</pubDate>
+      
+      <guid>http://example.org/projects/more/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

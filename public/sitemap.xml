@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/capital_words/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/find_prices/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/hex_color_code/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/one_a/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/username_validation/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/valid_number/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/validate_password/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/codesections-website/</loc>
+    <lastmod>2018-06-03T13:42:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-experiment/</loc>
+    <lastmod>2018-06-03T13:39:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/more/</loc>
+    <lastmod>2018-06-03T13:16:32-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/fixing-the-one-problem-with-password-managers/</loc>
+    <lastmod>2018-06-03T11:43:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/greatness-of-static-site-gen/</loc>
+    <lastmod>2018-06-03T11:40:46-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/why-static-site-generators-are-great/</loc>
+    <lastmod>2018-06-03T11:37:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/recursive-learning/</loc>
+    <lastmod>2018-06-03T11:32:38-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/hello-world/</loc>
+    <lastmod>2018-06-03T11:31:03-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/about/</loc>
+    <lastmod>2018-06-03T10:41:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/license/</loc>
+    <lastmod>2018-06-03T10:41:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2018-06-03T08:50:42-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/</loc>
+    <lastmod>2018-06-03T11:43:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/</loc>
+    <lastmod>2018-06-03T13:42:25-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/projects/reg-exp/</loc>
+    <lastmod>2018-06-03T14:26:44-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
