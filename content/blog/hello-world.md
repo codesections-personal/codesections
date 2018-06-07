@@ -13,7 +13,7 @@ me, this site is that space.</p>
 
 <p>As of this writing, this site is built using <a href="https://gohugo.io/">Hugo</a>, the
 leading static site generator.  It uses a self-written theme and the source
-code lives in a publicly available <a href="https://github.com/dsock/codesections">GitHub repository</a>.  If you’re curious about what I was trying to achieve with
+code lives in a publicly available <a href="https://github.com/dsock/codesections">GitHub repository</a> [EDIT: Now a <a href="https://gitlab.com/codesections/codesections-website">GitLab repository</a>].  If you’re curious about what I was trying to achieve with
 this site, I’ve written <a href="/projects/this-website">a whole page</a> about what
 I was aiming for and how well I did.</p>
 
