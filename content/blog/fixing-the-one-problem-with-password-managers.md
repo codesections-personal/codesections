@@ -51,11 +51,11 @@ doesn't have your passwords synced to it.  Maybe you have to use a service that
 idiotically disables autofill in your browser</a>.  Maybe you'll be on the
 phone with tech support on a spotty cell connection during a hail storm.  And,
 when you are, you'll really wish you could tell them that your password was 
-"qwerty" instead of "F^EHHtSIbPyDm2&kHsPhSppNYwzQDg".</p>
+`qwerty` instead of `F^EHH`&#8203;`tSIbP`&#8203;`yDm2&k`&#8203;`HsPhSp`&#8203;`pNYw`&#8203;`zQDg`.</p>
 
 
 <p>What you'd really like is to have a password that is just as
-secure as "F^EHHtSIbPyDm2&kHsPhSppNYwzQDg" without being
+secure as `F^EHH`&#8203;`tSIbPyDm2`&#8203;`&kHsPh`&#8203;`SppNY`&#8203;`wzQDg` without being
 anywhere near as difficult to type (or shout during that hail storm).
 Fortunately, this is a famously solved problem:</p>
 <br>
@@ -67,7 +67,7 @@ chained together, creating something long enough to be secure while
 understandable enough to be easy to remember for long enough to type in.  If 
 you're as paranoid as I am, you'll throw in some special characters, 
 capitalization, or numbers, too, so that your final password is something like 
-2222@Correct@Horse@Battery@Staple.  That's just as secure as the 
+`2222@`&#8203;`Correct@`&#8203;`Horse@`&#8203;`Battery@`&#8203;`Staple`.  That's just as secure as the 
 unpronounceable password up above, and way easier to shout during a hail storm.
 </p>
 

@@ -192,11 +192,15 @@ a {
 
 .header__blog {
   margin: auto;
-  margin-right: calc(50% - 55px);
   width: 175px;
   width: fit-content;
   position: relative;
   margin-top: -30px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
+  }
 }
 
 .blog-title {
@@ -207,10 +211,18 @@ a {
 
 .blog-title--left {
   right: 180px;
+  display: none;
 }
 
 .blog-title--right {
   left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
 }
 
 .pagination-nav {
