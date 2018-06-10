@@ -54,10 +54,10 @@ when you are, you'll really wish you could tell them that your password was
 `qwerty` instead of `F^EHH`&#8203;`tSIbP`&#8203;`yDm2&k`&#8203;`HsPhSp`&#8203;`pNYw`&#8203;`zQDg`.</p>
 
 
-<p>What you'd really like is to have a password that is just as
-secure as `F^EHH`&#8203;`tSIbPyDm2`&#8203;`&kHsPh`&#8203;`SppNY`&#8203;`wzQDg` without being
+What you'd really like is to have a password that is just as
+secure as `F^EHH`&#8203;`tSIbP`&#8203;`yDm2&k`&#8203;`HsPhSp`&#8203;`pNYw`&#8203;`zQDg` without being
 anywhere near as difficult to type (or shout during that hail storm).
-Fortunately, this is a famously solved problem:</p>
+Fortunately, this is a famously solved problem:
 <br>
 
 <img src="/xkcd_936.png" width="100%" caption="XKCD comic depicting use of a passphrase instead of a password">
