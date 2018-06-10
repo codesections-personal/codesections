@@ -1,5 +1,5 @@
 ---
-title: "My Git (Paranoid) Setup"
+title: "My (Paranoid) Git Setup"
 date: 2018-06-10T07:55:24-04:00
 ---
 
@@ -19,6 +19,8 @@ So, over the past week, I decided to fix all of these issues.  With my new setup
 4. A GitLab-hosted repository.
 
 And here's my new workflow: As I'm working on content locally, I commit my changes and then `git push`, which is configured to push my changes *only* to the Pi.  When I'm ready to publish changes, run `git push all`, which pushes to all four remote repos, and triggers Netlify to rebuild the site.  (I also switched to using GitLab as the main repository that Netlify builds off of, but that was more of a reaction to the GitHub acquisition than a change related to the above.)
+
+This means that I have a local backup of everything on the Pi and that I have three additional backups of the published content.  What's more, if I ever lose access to GitLab, I could seamlessly switch back to GitHub and tell Netlify to build off of that repo, which eliminates a point of failure. 
 
 I'm very happy with this new workflow, but it took a bit of figuring to get it all set up.  The rest of this post provides a guide for how to set up a similar workflow.  This may be old hat for people with a bit more git experience, but it took me some googling to figure out, so I thought it might be helpful to others. 
 
@@ -49,6 +51,7 @@ In this example, we'll be setting up three additional servers: one remote sever,
 If you are running three, first SSH into the remote server and initialize the bare repo (the same process from step 2, above).  Then create new GitHub and GitLab repos using their web interface. 
 
 Finally, run the following commands:
+
 * `git remote add all <gitlab-git-url>`.  (So, in my case `git remote add all git@gitlab.com:codesections/codesections-website`.)
 * `git remote set-url all <github-git-url>`. (So, in my case `git remote set-url git@github.com:dsock/codesections`.)
 * `git remote set-url all <remote-server-url>`.
