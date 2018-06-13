@@ -3,3 +3,4 @@ languageCode = "en-us"
 title = "CodeSections"
 theme = "sectionOne"
 disqusShortname = "codesections"
+PygmentsCodeFences = true
