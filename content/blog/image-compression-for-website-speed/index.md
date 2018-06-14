@@ -6,7 +6,7 @@ date: 2018-06-12T16:38:54-04:00
 A few months ago, I got very into maximizing the speed of my website.  I feel 
 pretty good about what I accomplished: 
 
-![100% score from Pingdom tools](/blog/image-compression-for-website-speed/pingdom-min.jpg)
+![100% score from Pingdom tools](./pingdom.jpg)
 
 (I actually prefer the results from [webpagetest.org](https://www.webpagetest.org/result/180612_B9_3853bf53a2703c0582863edfd1f34791/), and not just because it show my site as loading even faster.  It's open-source and seems to have a better methodology.  But it doesn't generate as pretty a picture, so I went with the Pingdom screenshot above.) 
 
@@ -42,13 +42,13 @@ So, my first task is to get the logo as an SVG instead of a PNG.  I happen to al
 
 which takes up 28 kb of data, to this image:
 
-![First svg logo](/blog/image-compression-for-website-speed/original-logo.svg)
+![First svg logo](./original-logo.svg)
 
 Which takes up "only" 9.8kb.  But 9.8 is still way to large a fraction of our ~14kb budget.  How can we get it down further?
 
 Well, after opening up this image for editing in Inkscape (a free-as-in-freedom SVG editor) and zooming in, we see something like this:
 
-![Inkscape screenshot](/blog/image-compression-for-website-speed/inkscape-screenshot.jpg)
+![Inkscape screenshot](./inkscape-screenshot.jpg)
 
 If you look closely, you should be able to see a whole mess of grey boxes in that screenshot.  Each one of those is a "node", and each one represents us telling the computer to draw a line from one point to another.  Looking at how many nodes we have, it's clear what's going on: We're telling the computer "draw a straight line.  And then another. And then another …" and on and on.  We could be much more efficient if we just told the computer "draw one long straight line".  And so that's exactly what we'll do.
 
@@ -56,7 +56,7 @@ Lets pause, first, to ask how the SVG got this way in the first place.  Why is t
 
 But we can do better than that.  We know that the line really is straight, so we can delete all the nodes except for the first and the last and tell Inkscape to draw a line just from the first to last.  And, although it's a bit more complicated, we can do the same with the curves as well.  After deleting the relevant nodes, we can get down to this:
 
-![revised SVG logo](/blog/image-compression-for-website-speed/codesections_v3.svg)
+![revised SVG logo](./codesections_v3.svg)
 
 This image is now down to 2.6kb.  Is that the best we can do?  
 
