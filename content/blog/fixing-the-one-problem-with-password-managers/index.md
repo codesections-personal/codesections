@@ -60,7 +60,7 @@ anywhere near as difficult to type (or shout during that hail storm).
 Fortunately, this is a famously solved problem:
 <br>
 
-<img src="/xkcd_936-min-20.jpg" width="100%" caption="XKCD comic depicting use of a passphrase instead of a password">
+<img src="./xkcd_936.jpg" width="100%" caption="XKCD comic depicting use of a passphrase instead of a password">
 
 </p>All you need to do is to use passphrases consisting of simple words 
 chained together, creating something long enough to be secure while 

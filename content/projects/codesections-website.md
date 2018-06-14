@@ -64,7 +64,7 @@ date: 2018-06-03T13:42:25-04:00
 
   <p class="content-p">The Nobel-prize-winning physicist Richard Feynman wrote about his early childhood experience repairing transistor radios in the 1930s.  In case you haven't seen a transistor radio, they look like this:</p>
 
-  <img src="/radio.jpg" width="100%" caption="Transistor radio; image credit: Wikipedia">
+  <img src="/radio-min-20.jpg" width="100%" caption="Transistor radio; image credit: Wikipedia">
 
   <p class="content-p">By contrast, a modern radio receiver is so small that millions of people <a class="link" href="https://www.cnet.com/how-to/unlock-the-secret-fm-tuner-in-your-android-phone/">had one inside their cellphones and didn't even realize it.</a></p>
 
