@@ -44,7 +44,7 @@ trillion centuries".
 That is about 1,000 times longer than the [projected lifespan of the universe](https://en.wikipedia.org/wiki/Heat_death_of_the_universe#Time_frame_for_heat_death), so I think we're safe.
 
 ### List of known passwords
-Of course, a far more common attack is for a cracker to use a list of known passwords.  The all-to-often-correct assumption is that people will reuse passwords, and crackers maintain lists billions of past passwords that people
+Of course, a far more common attack is for a cracker to use a list of known passwords.  The all-too-often-correct assumption is that people will reuse passwords, and crackers maintain lists billions of past passwords that people
 have previously used.
 
 The whole point of using a password generator (and then storing the password 
@@ -80,16 +80,16 @@ Well, given that the pass-gen password is created using a combination of
 words, symbols and numbers, we can calculate the total number of possible 
 passwords using the following formula:
 
-$$w^p * s * n$$
+<div style="text-align: center; font-size: 1.25em">w<sup>p</sup> * s * n</div>
 
-<div>where \(w =\) number of words in our wordlist, \(p=\) the number of words we pick for our password, \(s =\) the number of symbols on our symbol list, and \(n =\) the number of numbers in our password.</div>
+where _w_ = number of words in our wordlist, _p_ = the number of words we pick for our password, _s_  = the number of symbols on our symbol list, and _n_ = the number of numbers in our password.
 
 That got a bit abstract, so let's go through it with actual numbers. As of today, the default search list includes 8,429 words.  However, we effectively 
 have three times that many passwords, because we have three possible capitalization schemes: we pass-gen could produce "example", "Example", or "EXAMPLE"—all three of which are different words for our purposes.
 
 Next, the default configuration chooses 6 of these words for the password. Additionally, pass-gen randomly selects a padding character (or set of two characters) from a list of 54 potential characters, and follows it with a digit between 000 and 999.  We can plug those numbers into our formula.  Thus, (**drumroll please**) the total possible number of possible passwords is
 
-$$(8,429 * 3)^6 * 54 * 1000 = 1.4118 * 10^{31}$$ 
+<div style="text-align: center; font-size: 1.25em">(8,429 * 3)<sup>6</sup> * 54 * 1000 = 1.4118 * 10<sup>31</sup></div>
 
 Or, put differently, 14 followed by 30 zeros.
 
@@ -113,5 +113,3 @@ possible cryptographic attack.
 
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
