@@ -5,10 +5,6 @@
 
   <title></title>
 
-
-
-
-
   <link rel="apple-touch-icon"
         sizes="180x180"
         href="/apple-touch-icon.png">
@@ -125,7 +121,7 @@ html {
 @media (max-width: 599px) { /*Phone only*/
   .nav-bar__button {
     font-size: 1.382em;
-    line-height: 3em;
+    line-height: 1.382em;
     /*  The goal is creating a larger target for
      *  touch navigation while also shrinking
      *  the amount of horizontal space devoted to
@@ -145,14 +141,15 @@ html {
   ##Main content
 \*==================================*/
 .content-main{
-  margin-top: 75px;
+  margin-top: 25px;
   min-height: calc(100vh - 100px - 2.9em);
   /*  This equals [fullscreen - (top margin) -
    *  (space for the 2-line footer, with margin)]*/
   max-width: 775px; /*  Match nav container width*/
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.424em;
+  padding: .5em;
+  font-size: 1em;
   line-height: 1.266em;
 }
 
@@ -207,7 +204,8 @@ img {
   width: 175px;
   width: fit-content;
   position: relative;
-  margin-top: -30px;
+  margin-top: -5px;
+  margin-bottom: -15px;
 }
 @media (min-width:  600px) { /*Tablet-portrait & up*/
   header__blog {
@@ -218,7 +216,7 @@ img {
 .blog-title {
   position: absolute;
   display: inline;
-  top: 43px;
+  top: 48px;
 }
 
 .blog-title--left {

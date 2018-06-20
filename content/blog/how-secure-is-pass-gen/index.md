@@ -27,7 +27,7 @@ The most basic way to crack a password is, of course, to simply try every single
 Just to sure, though, how would a pass-gen password fare against a brute-force
 attack?  Well, as an example, let's consider this password I just generated:
 
-`EMBOSS||comfort||Laborer||HANDLER||powdered||Scarf119`
+`EMBOSS||comfort||Laborer||HANDLER||`&#8203;`powdered||Scarf119`
 
 Calculating the difficulty of brute-forcing our password is a simple matter of figuring out how many characters a cracker would need to include to match our password and then raising that number to the power of the length of our password.  Here, our password includes lowercase letters (26 possibilities), uppercase letters (26), numbers (10), and special characters (33).  So, the 
 full size of the "alphabet" our would-be cracker would need to search would
