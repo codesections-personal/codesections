@@ -1,53 +1,9 @@
----
-title: "This Website"
-date: 2018-06-03T13:42:25-04:00
----
-<style>
-.equal-display-element {
-  display: inline;
-}
-
-.code-and-commentary {
-  position: relative;
-  left: calc(50% - 48.5vw);
-  display: flex;
-  width: 97vw;
-}
-
-.code-and-commentary__heading {
-  text-align: center;
-}
-
-.code-and-commentary__code {
-  width: 60%;
-  margin-right: 1vw;
-  background: #f5f2f0;
-  border-radius: 6px;
-}
-
-.code-and-commentary__commentary {
-  width: 39%;
-  background-color: #f5f2f0;
-  border: solid 2px #95b4d8;
-  border-radius: 6px;
-}
-
-.commentary__pre {
-  white-space: pre-wrap;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: #0D1E25; /*nearly black*/
-  max-width:50%;
-}
-
-@media (max-width: 599px) { /*Phone only*/
-  .code-and-commentary{
-    font-size: .6em;
-    word-break: break-word;
-  }
-}
-</style>
-
-  <p class="content-p">The website you're reading right now!  I tried to do things a bit differently with this website.  
++++
+title = "This Website"
+date = 2018-06-03T13:42:25-04:00
+order = 10
++++
+The website you're reading right now!  I tried to do things a bit differently with this website.  
 
   In building this website, I had three main goals.  I wanted the site to:<p></p>
   <ul>
@@ -55,16 +11,17 @@ date: 2018-06-03T13:42:25-04:00
     <li>be self-sufficient, and</li>
     <li>be the <a href="https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7">fastest site in the world</a>.</li>
   </ul>
-  <p class="content-p">Here is my analysis of how well I managed to meet these goals.</p>
+Here is my analysis of how well I managed to meet these goals.</p>
 
-<!--more-->
+<!-- more -->
+
   <h3>Understandable Source Code</h3>
 
-  <p class="content-p">Why do I want to write a page with understandable source code?  To answer that, I want to first talk about Richard Feynman and transistor radios.</p>
+Why do I want to write a page with understandable source code?  To answer that, I want to first talk about Richard Feynman and transistor radios.</p>
 
-  <p class="content-p">The Nobel-prize-winning physicist Richard Feynman wrote about his early childhood experience repairing transistor radios in the 1930s.  In case you haven't seen a transistor radio, they look like this:</p>
+The Nobel-prize-winning physicist Richard Feynman wrote about his early childhood experience repairing transistor radios in the 1930s.  In case you haven't seen a transistor radio, they look like this:</p>
 
-  <img src="/radio-min-20.jpg" width="100%" caption="Transistor radio; image credit: Wikipedia">
+  ![Transistor radio; image credit: Wikipedia](/radio-min-20.jpg)
 
   <p class="content-p">By contrast, a modern radio receiver is so small that millions of people <a class="link" href="https://www.cnet.com/how-to/unlock-the-secret-fm-tuner-in-your-android-phone/">had one inside their cellphones and didn't even realize it.</a></p>
 
@@ -72,75 +29,85 @@ date: 2018-06-03T13:42:25-04:00
 
   <p class="content-p"> Here's a (slightly modified) copy of the markup from the beginning of <a class="link" href="http://info.cern.ch/hypertext/WWW/TheProject.html">an extremely early website</a>:</p>
 
-  <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #008000; font-weight: bold">head</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">title</span>&gt;The World Wide Web project&lt;/<span style="color: #008000; font-weight: bold">title</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">head</span>&gt;
+```html
+<head>
+  <title>The World Wide Web project</title>
+</head>
 
-&lt;<span style="color: #008000; font-weight: bold">body</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">h1</span>&gt;World Wide Web&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
-
-  &lt;<span style="color: #008000; font-weight: bold">p</span>&gt;The WorldWideWeb (W3) is a wide-area
-  &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">name</span><span style="color: #666666">=</span><span style="color: #BA2121">0</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"WhatIs.html"</span>&gt;hypermedia&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
+<body>
+  <h1>World Wide Web</h1>
+  
+  <p>The WorldWideWeb (W3) is a wide-area
+  <a name=0 href=“WhatIs.html”>hypermedia</a>
   information retrieval initiative aiming to
   give universal access to a large universe
-  of documents.&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
+  of documents.
+  </p>
 
-  &lt;<span style="color: #008000; font-weight: bold">p</span>&gt;Everything there is online about W3 is
+  <p>Everything there is online about W3 is
   linked directly or indirectly to this document,
-  including an &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"Summary.html"</span>&gt;executive
-  summary&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt; of the project.&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
+  including an <a href=“Summary.html”>executive
+  summary</a> of the project.
+  </p>
+```
 
+Even if you've never read a word of markup before in your life, you can probably just about figure out what that does—that it creates a header (with a title for the page) and then creates a body of the document that consists of several paragraphs with some text and a few links to other html pages.
 
+In contrast to that, consider this excerpt from the markup for a <a class="link" href="http://www.businessinsider.com/flashback-this-is-what-the-first-website-ever-looked-like-2011-6"> modern news article</a> <em>about</em> that early site.  The markup starts like this:
   
-</pre></div>
-
-  <p class="content-p">Even if you've never read a word of markup before in your life, you can probably just about figure out what that does—that it creates a header (with a title for the page) and then creates a body of the document that consists of several paragraphs with some text and a few links to other html pages.</p>
-
-  <p class="content-p">In contrast to that, consder this excerpt from the markup for a <a class="link" href="http://www.businessinsider.com/flashback-this-is-what-the-first-website-ever-looked-like-2011-6"> modern news article</a> <em>about</em> that early site.  The markup starts like this:</p>
-  <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color: #008000; font-weight: bold">html</span> <span style="color: #7D9029">lang</span><span style="color: #666666">=</span><span style="color: #BA2121">"en"</span> <span style="color: #7D9029">xmlns</span><span style="color: #666666">=</span><span style="color: #BA2121">"http://www.w3.org/1999/xhtml"</span> <span style="color: #7D9029">xml:lang</span><span style="color: #666666">=</span><span style="color: #BA2121">"en"</span> <span style="color: #7D9029">lang</span><span style="color: #666666">=</span><span style="color: #BA2121">"en"</span> <span style="color: #7D9029">xmlns:fb</span><span style="color: #666666">=</span><span style="color: #BA2121">"http://www.facebook.com/2008/fbml"</span> &gt;
-&lt;<span style="color: #008000; font-weight: bold">head</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">http-equiv</span><span style="color: #666666">=</span><span style="color: #BA2121">"X-UA-Compatible"</span> <span style="color: #7D9029">content</span><span style="color: #666666">=</span><span style="color: #BA2121">"IE=edge"</span> /&gt;
-  &lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">http-equiv</span><span style="color: #666666">=</span><span style="color: #BA2121">"content-type"</span> <span style="color: #7D9029">content</span><span style="color: #666666">=</span><span style="color: #BA2121">"text/html;charset=utf-8"</span> /&gt;
-  &lt;<span style="color: #008000; font-weight: bold">script</span> <span style="color: #7D9029">type</span><span style="color: #666666">=</span><span style="color: #BA2121">"text/javascript"</span>&gt;
-  (window.NREUM||(NREUM={})).loader_config={
-    xpid:"UQ8EUVRACQAFVVdbAQk="
-  };
-  window.NREUM||(NREUM={})
-  ,__nr_require=function(t,n,e){
-    function r(e){if(!n[e]){var o=n[e]={exports:
-      {}};t[e][0].call(o.exports,function(n){
-        var o=t[e][1][n];return r(o||n)},o,o.exports)
-      }return n[e].exports}if("function"==typeof __nr_require)
-      return __nr_require;for(var o=0;o&lt;<span style="color: #008000; font-weight: bold">e.length</span><span style="border: 1px solid #FF0000">;</span><span style="color: #7D9029">o</span><span style="border: 1px solid #FF0000">++)</span><span style="color: #7D9029">r</span><span style="border: 1px solid #FF0000">(</span><span style="color: #7D9029">e</span><span style="border: 1px solid #FF0000">[</span><span style="color: #7D9029">o</span><span style="border: 1px solid #FF0000">]);</span>
-      <span style="color: #7D9029">return</span> <span style="color: #7D9029">r</span><span style="border: 1px solid #FF0000">}</span>
-</pre></div>
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <script type="text/javascript">
+(window.NREUM||(NREUM={})).loader_config={
+  xpid:"UQ8EUVRACQAFVVdbAQk="
+};
+window.NREUM||(NREUM={})
+,__nr_require=function(t,n,e){
+  function r(e){if(!n[e]){var o=n[e]={exports:
+    {}};t[e][0].call(o.exports,function(n){
+      var o=t[e][1][n];return r(o||n)},o,o.exports)
+    }return n[e].exports}if("function"==typeof __nr_require)
+    return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);
+    return r}
+```
 
 
 <p class="content-p">That is, with javascript that has been inlined an minified to the point of being gibberish, even to experienced programers. Even if we give the article the benefit of skipping past 502 lines (!) of inline javascript, we get to this: </p>
 
-  <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"masthead"</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"container"</span>&gt;
-        &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"row-fluid"</span>&gt;
-            &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"span3 span3-mh"</span>&gt;
-                                &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">data-hamburger</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"menu"</span>&gt;
-                    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"hamburger"</span>&gt;
-                        &lt;<span style="color: #008000; font-weight: bold">span</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">span</span>&gt;
-                        &lt;<span style="color: #008000; font-weight: bold">span</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">span</span>&gt;
-                        &lt;<span style="color: #008000; font-weight: bold">span</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">span</span>&gt;
-                    &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-                &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-                                &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/"</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"sprites logo"</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
-            &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-            &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"span6 span6-mh"</span>&gt;
-
-                        &lt;<span style="color: #008000; font-weight: bold">h2</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"vert-name ellipsis"</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"http://www.businessinsider.com/sai"</span>&gt;Tech Insider&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h2</span>&gt;
-
-                                                &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-            <span style="color: #408080; font-style: italic">&lt;!-- links --&gt;</span>
-            &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"span3 span3-mh links list-pipes list-right no-pipe"</span>&gt;
-</pre></div>
-
+```html
+<nav class="l-nav l-nav-centered" data-nav data-e2e-name="l-nav"
+data-track-page-area="Navigation">
+  <section class="container">
+    <ul class="row verticals list-unstyled">
+      <li class="verticals-flex-grow verticals-listitem"
+      data-vertical-label="tech">
+          <a href="/sai" class="verticals-listitem-link"
+          data-e2e-name="vertical-listitem-link" data-vertical-listitem="Tech">
+            <span class="verticals-listitem-label">Tech</span>
+          </a>
+      </li>
+                                      
+      <li class="verticals-flex-grow verticals-listitem"
+      data-vertical-label="finance">
+        <a href="/clusterstock" class="verticals-listitem-link"
+        data-e2e-name="vertical-listitem-link" data-vertical-listitem="Finance">
+          <span class="verticals-listitem-label">Finance</span>
+        </a>
+      </li>
+                                      
+      <li class="verticals-flex-grow verticals-listitem"
+      data-vertical-label="politics">
+        <a href="/politics" class="verticals-listitem-link"
+        data-e2e-name="vertical-listitem-link" data-vertical-listitem="Politics">
+          <span class="verticals-listitem-label">Politics</span>
+        </a>
+      </li>
+```
 
 <p class="content-p">All that is to say that html and css markup, at their best, can be like the transistor radio.  They can be a toy that anyone motivated and curious enough can pull apart and see how it works.  For so many of today's programers, who grew up with (or before) the Internet, that's exactly what html was.</p>
 
@@ -152,290 +119,378 @@ date: 2018-06-03T13:42:25-04:00
 
 <p class="content-p">Below, I have an annotated copy of the markup from the home page.  Anytime I do something non-standard or that is debatable, I'll provide a comment explaining why I made the choice I did and what I'm trying to achieve. If you disagree with any of my choices, feel free to let me know via email, twitter, or any of the contact methods in the site footer.  I'd love to discuss it with you.</p>
 
+<div style="position: relative; left: calc(50% - 48.5vw); display: flex; width: 97vw;">
 
-  <div class="code-and-commentary">
-  <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #BC7A00">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color: #008000; font-weight: bold">html</span> <span style="color: #7D9029">lang</span><span style="color: #666666">=</span><span style="color: #BA2121">"en"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">head</span>&gt;
-	&lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">name</span><span style="color: #666666">=</span><span style="color: #BA2121">"generator"</span> <span style="color: #7D9029">content</span><span style="color: #666666">=</span><span style="color: #BA2121">"Hugo 0.25.1"</span> /&gt;
-&lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">charset</span><span style="color: #666666">=</span><span style="color: #BA2121">"utf-8"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">name</span><span style="color: #666666">=</span><span style="color: #BA2121">"viewport"</span> <span style="color: #7D9029">content</span><span style="color: #666666">=</span><span style="color: #BA2121">"width=device-width"</span>&gt;
+```html
 
-&lt;<span style="color: #008000; font-weight: bold">title</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">title</span>&gt;
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
 
+  <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png">
+  <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png">
+  <link rel="manifest"
+        href="/manifest.json">
+  <link rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5">
+  <meta name="theme-color"
+        content="#d9d9d9">
+<style> 
+/*==================================*\
+  ##All CSS for this page
+\*==================================*/
 
-
-
-
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"apple-touch-icon"</span>
-      <span style="color: #7D9029">sizes</span><span style="color: #666666">=</span><span style="color: #BA2121">"180x180"</span>
-      <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/apple-touch-icon.png"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"icon"</span>
-      <span style="color: #7D9029">type</span><span style="color: #666666">=</span><span style="color: #BA2121">"image/png"</span>
-      <span style="color: #7D9029">sizes</span><span style="color: #666666">=</span><span style="color: #BA2121">"16x16"</span>
-      <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/favicon-16x16.png"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"manifest"</span>
-      <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/manifest.json"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"mask-icon"</span>
-      <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/safari-pinned-tab.svg"</span>
-      <span style="color: #7D9029">color</span><span style="color: #666666">=</span><span style="color: #BA2121">"#5bbad5"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">meta</span> <span style="color: #7D9029">name</span><span style="color: #666666">=</span><span style="color: #BA2121">"theme-color"</span>
-      <span style="color: #7D9029">content</span><span style="color: #666666">=</span><span style="color: #BA2121">"#d9d9d9"</span>&gt;
-
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"prefetch"</span>
-  <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/resources/css/prism-code-highlight.css"</span>&gt;
-&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #7D9029">rel</span><span style="color: #666666">=</span><span style="color: #BA2121">"prefetch"</span>
-  <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/resources/js/prism-code-highlight.js"</span>&gt;
-
-
-&lt;<span style="color: #008000; font-weight: bold">style</span>&gt;
-
-
-  
-<span style="color: #408080; font-style: italic">/*==================================*\</span>
-<span style="color: #408080; font-style: italic">  ##All CSS for this page</span>
-<span style="color: #408080; font-style: italic">\*==================================*/</span>
-
-<span style="color: #408080; font-style: italic">/*  Theme colors:</span>
-<span style="color: #408080; font-style: italic"> *</span>
-<span style="color: #408080; font-style: italic"> *  #fd0     yellow (menu bar)</span>
-<span style="color: #408080; font-style: italic"> *  #cde     pastel blue (note boxes)</span>
-<span style="color: #408080; font-style: italic"> *  #000     true black (site header)</span>
-<span style="color: #408080; font-style: italic"> *  #223     near black (text &amp; logo)</span>
-<span style="color: #408080; font-style: italic"> *  #fff     white (menu text)</span>
-<span style="color: #408080; font-style: italic"> *  #07e     sky blue (links)</span>
-<span style="color: #408080; font-style: italic"> */</span>
-
-<span style="color: #408080; font-style: italic">/*==================================*\</span>
-<span style="color: #408080; font-style: italic">  ##Global</span>
-<span style="color: #408080; font-style: italic">\*==================================*/</span>
-<span style="color: #008000; font-weight: bold">html</span> {
-  <span style="color: #008000; font-weight: bold">font-family</span>: <span style="color: #666666">-</span>apple-system,
+/*  Theme colors:
+ *
+ *  #fd0     yellow (menu bar [old])
+ *  #cde     pastel blue (note boxes)
+ *  #000     true black (site header)
+ *  #4F82BB; Dark Blue  (Nav bar)
+ *  #223     near black (text & logo)
+ *  #fff     white (menu text)
+ *  #07e     sky blue (links)
+ */
+/*==================================*\
+  ##Global
+\*==================================*/
+html {
+  font-family: -apple-system,
                BlinkMacSystemFont,
-               <span style="color: #BA2121">'Segoe UI'</span>,
+               'Segoe UI',
                Roboto,
-               <span style="color: #BA2121">'Helvetica Neue'</span>,
-               Arial, <span style="color: #008000; font-weight: bold">sans-serif</span>;
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #666666">#223</span>; <span style="color: #408080; font-style: italic">/*near black*/</span>
+               'Helvetica Neue',
+               Arial, sans-serif;
+  color: #223; /*near black*/
 }
-
-
-
   
-<span style="color: #408080; font-style: italic">/*==================================*\</span>
-<span style="color: #408080; font-style: italic">  ##Nav bar</span>
-<span style="color: #408080; font-style: italic">\*==================================*/</span>
-.<span style="color: #0000FF; font-weight: bold">nav-bar</span> {
-  <span style="color: #008000; font-weight: bold">position</span>: <span style="color: #008000; font-weight: bold">fixed</span>;
-  <span style="color: #008000; font-weight: bold">z-index</span>: <span style="color: #666666">1</span>;
-  <span style="color: #008000; font-weight: bold">left</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">width</span>: <span style="color: #666666">100</span><span style="color: #B00040">%</span>;
-  <span style="color: #008000; font-weight: bold">padding</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">background-color</span>: <span style="color: #666666">#fd0</span>; <span style="color: #408080; font-style: italic">/*yellow*/</span>
-  <span style="color: #008000; font-weight: bold">box-shadow</span>: <span style="color: #666666">0</span> <span style="color: #666666">3</span><span style="color: #B00040">px</span> <span style="color: #666666">6</span><span style="color: #B00040">px</span> <span style="color: #008000">rgba</span>(<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">.3</span>);
+/*==================================*\
+  ##Nav bar
+\*==================================*/
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #4F82BB; /*Dark Blue*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar--top</span> {
-  <span style="color: #008000; font-weight: bold">top</span>: <span style="color: #666666">0</span>;
+.nav-bar--top {
+  top: 0;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__container</span> {
-  <span style="color: #008000; font-weight: bold">display</span>: <span style="color: #008000; font-weight: bold">flex</span>;
-  <span style="color: #008000; font-weight: bold">max-width</span>: <span style="color: #666666">700</span><span style="color: #B00040">px</span>; <span style="color: #408080; font-style: italic">/*max comfortable line length*/</span>
-  <span style="color: #008000; font-weight: bold">padding-left</span>: <span style="color: #666666">8</span><span style="color: #B00040">px</span>;
-  <span style="color: #008000; font-weight: bold">padding-right</span>:<span style="color: #666666">8</span><span style="color: #B00040">px</span>;
-  <span style="color: #008000; font-weight: bold">margin</span>: <span style="color: #008000; font-weight: bold">auto</span>;
-  <span style="color: #008000; font-weight: bold">justify-content</span>: <span style="color: #008000; font-weight: bold">space-between</span>;
+.nav-bar__container {
+  display: flex;
+  max-width: 700; /*max comfortable line length*/
+  padding-left: 8px;
+  padding-right:8px;
+  margin: auto;
+  justify-content: space-between;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__button</span> {
-  <span style="color: #008000; font-weight: bold">position</span>: <span style="color: #008000; font-weight: bold">relative</span>;
-  <span style="color: #408080; font-style: italic">/*  This isn't needed for display of this element,</span>
-<span style="color: #408080; font-style: italic">   *  but important for the :after pseudo element</span>
-<span style="color: #408080; font-style: italic">   *  below. */</span>
-  <span style="color: #008000; font-weight: bold">cursor</span>: <span style="color: #008000; font-weight: bold">pointer</span>;
-  <span style="color: #008000; font-weight: bold">background-color</span>: <span style="color: #008000; font-weight: bold">inherit</span>;
+.nav-bar__button {
+  position: relative;
+  /*  This isn't needed for display of this element,
+   *  but important for the :after pseudo element
+   *  below. */
+  cursor: pointer;
+  background-color: inherit;
+  height: 1.25em;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__button</span>:<span style="color: #AA22FF">not</span><span style="color: #666666">(</span>.<span style="color: #0000FF; font-weight: bold">nav-bar__button--current-page</span><span style="color: #666666">)</span> {
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #008000; font-weight: bold">white</span>;
+.nav-bar__button:not(.nav-bar__button--current-page) {
+  color: white;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__link</span> {
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #008000; font-weight: bold">inherit</span>;
-  <span style="color: #008000; font-weight: bold">text-decoration</span>: <span style="color: #008000; font-weight: bold">none</span>;
+.nav-bar__link {
+  color: inherit;
+  text-decoration: none;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__link</span>::<span style="color: #AA22FF">selection</span> {
-  <span style="color: #008000; font-weight: bold">background-color</span>: <span style="color: #008000; font-weight: bold">inherit</span>;
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #008000; font-weight: bold">inherit</span>;
+.nav-bar__link::selection {
+  background-color: inherit;
+  color: inherit;
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__link</span>:<span style="color: #AA22FF">after</span> {
-  <span style="color: #008000; font-weight: bold">position</span>: <span style="color: #008000; font-weight: bold">absolute</span>;
-  <span style="color: #008000; font-weight: bold">bottom</span>: <span style="color: #666666">-4</span><span style="color: #B00040">px</span>;
-  <span style="color: #008000; font-weight: bold">left</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">width</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">height</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">content</span>: <span style="color: #BA2121">""</span>;
-  <span style="color: #008000; font-weight: bold">transition</span>: <span style="color: #008000; font-weight: bold">all</span> <span style="color: #666666">0.4</span><span style="color: #B00040">s</span> <span style="color: #008000; font-weight: bold">ease</span>;
-  <span style="color: #008000; font-weight: bold">border-top</span>: <span style="color: #666666">3</span><span style="color: #B00040">px</span> <span style="color: #008000; font-weight: bold">solid</span> <span style="color: #666666">#223</span>; <span style="color: #408080; font-style: italic">/*near black*/</span>
+.nav-bar__link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  transition: all 0.4s ease;
+  border-top: 3px solid #223; /*near black*/
 }
 
-.<span style="color: #0000FF; font-weight: bold">nav-bar__button</span>:<span style="color: #AA22FF">not</span><span style="color: #666666">(</span>.<span style="color: #0000FF; font-weight: bold">nav-bar__button--current-page</span><span style="color: #666666">)</span>
-  .<span style="color: #0000FF; font-weight: bold">nav-bar__link</span>:<span style="color: #AA22FF">hover</span>:<span style="color: #AA22FF">after</span> {
-    <span style="color: #008000; font-weight: bold">width</span>: <span style="color: #666666">100</span><span style="color: #B00040">%</span>;
+.nav-bar__button:not(.nav-bar__button--current-page)
+  .nav-bar__link:hover:after {
+    width: 100%;
 }
 
-@<span style="color: #008000; font-weight: bold">media</span> <span style="color: #666666">(</span><span style="color: #008000; font-weight: bold">max-width</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">599px</span><span style="color: #666666">)</span> { <span style="color: #408080; font-style: italic">/*Phone only*/</span>
-  .<span style="color: #0000FF; font-weight: bold">nav-bar__button</span> {
-    <span style="color: #008000; font-weight: bold">font-size</span>: <span style="color: #666666">1.382</span><span style="color: #B00040">em</span>;
-    <span style="color: #008000; font-weight: bold">line-height</span>: <span style="color: #666666">3</span><span style="color: #B00040">em</span>;
-    <span style="color: #408080; font-style: italic">/*  The goal is creating a larger target for</span>
-<span style="color: #408080; font-style: italic">     *  touch navigation while also shrinking</span>
-<span style="color: #408080; font-style: italic">     *  the amount of horizontal space devoted to</span>
-<span style="color: #408080; font-style: italic">     *  the menu.*/</span>
+.svg__logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .nav-bar__button {
+    font-size: 1.382em;
+    line-height: 1.382em;
+    /*  The goal is creating a larger target for
+     *  touch navigation while also shrinking
+     *  the amount of horizontal space devoted to
+     *  the menu.*/
   }
 }
 
-@<span style="color: #008000; font-weight: bold">media</span> <span style="color: #666666">(</span><span style="color: #008000; font-weight: bold">min-width</span><span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">600px</span><span style="color: #666666">)</span> {  <span style="color: #408080; font-style: italic">/*Tablet-portrait &amp; up*/</span>
-  .<span style="color: #0000FF; font-weight: bold">nav-bar__button</span> {
-    <span style="color: #008000; font-weight: bold">font-size</span>: <span style="color: #666666">2</span><span style="color: #B00040">em</span>;
+@media (min-width: 600px) {  /*Tablet-portrait & up*/
+  .nav-bar__button {
+    font-size: 2em;
+  }
+  .svg__logo {
+    height: 64px;
+    width: 64px;
+  }
+}
+  
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  article {
+    margin-top: 2em;
   }
 }
 
-
-  
-<span style="color: #408080; font-style: italic">/*==================================*\</span>
-<span style="color: #408080; font-style: italic">  ##Main content</span>
-<span style="color: #408080; font-style: italic">\*==================================*/</span>
-.<span style="color: #0000FF; font-weight: bold">content-main</span>{
-  <span style="color: #008000; font-weight: bold">margin-top</span>: <span style="color: #666666">75</span><span style="color: #B00040">px</span>;
-  <span style="color: #008000; font-weight: bold">min-height</span>: <span style="color: #008000">calc</span>(<span style="color: #666666">100</span><span style="color: #B00040">vh</span> <span style="color: #666666">-</span> <span style="color: #666666">75</span><span style="color: #B00040">px</span> <span style="color: #666666">-</span> <span style="color: #666666">2.9</span><span style="color: #B00040">em</span>);
-  <span style="color: #408080; font-style: italic">/*  This equals [fullscreen - (top margin) -</span>
-<span style="color: #408080; font-style: italic">   *  (space for the 2-line footer, with margin)]*/</span>
-  <span style="color: #008000; font-weight: bold">max-width</span>: <span style="color: #666666">700</span><span style="color: #B00040">px</span>; <span style="color: #408080; font-style: italic">/*  Match nav container width*/</span>
-  <span style="color: #008000; font-weight: bold">margin-left</span>: <span style="color: #008000; font-weight: bold">auto</span>;
-  <span style="color: #008000; font-weight: bold">margin-right</span>: <span style="color: #008000; font-weight: bold">auto</span>;
-  <span style="color: #008000; font-weight: bold">font-size</span>: <span style="color: #666666">1.424</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">line-height</span>: <span style="color: #666666">1.266</span><span style="color: #B00040">em</span>;
+.site-header{
+  margin-bottom: 0;
+  margin-top: 1em;
+  text-align: left;
+  font-size: 1.618em;
+  font-weight: 400;
+  line-height: .85;
+  color: #000;
 }
 
-.<span style="color: #0000FF; font-weight: bold">site-header</span>{
-  <span style="color: #008000; font-weight: bold">margin-bottom</span>: <span style="color: #666666">0</span>;
-  <span style="color: #008000; font-weight: bold">text-align</span>: <span style="color: #008000; font-weight: bold">left</span>;
-  <span style="color: #008000; font-weight: bold">font-size</span>: <span style="color: #666666">1.618</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">font-weight</span>: <span style="color: #666666">400</span>;
-  <span style="color: #008000; font-weight: bold">line-height</span>: <span style="color: #666666">.85</span>;
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #666666">#000</span>;
+.content-p {
+  color: #223; /*near black*/
+  margin-top: 1em;
+  margin-bottom: 0;
 }
 
-.<span style="color: #0000FF; font-weight: bold">content-p</span> {
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #666666">#223</span>; <span style="color: #408080; font-style: italic">/*near black*/</span>
-  <span style="color: #008000; font-weight: bold">margin-top</span>: <span style="color: #666666">1</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">margin-bottom</span>: <span style="color: #666666">0</span>;
+.link,
+a {
+  color: #07e; /*sky blue*/
+  text-decoration: none;
 }
 
-.<span style="color: #0000FF; font-weight: bold">link</span> {
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #666666">#07e</span>; <span style="color: #408080; font-style: italic">/*sky blue*/</span>
-  <span style="color: #008000; font-weight: bold">text-decoration</span>: <span style="color: #008000; font-weight: bold">none</span>;
+.note {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
 }
 
-.<span style="color: #0000FF; font-weight: bold">note</span> {
-  <span style="color: #008000; font-weight: bold">background-color</span>: <span style="color: #666666">#cde</span>; <span style="color: #408080; font-style: italic">/* Pastel blue*/</span>
-  <span style="color: #008000; font-weight: bold">display</span>: <span style="color: #008000; font-weight: bold">block</span>;
-  <span style="color: #008000; font-weight: bold">padding</span>: <span style="color: #666666">.5</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">margin-top</span>: <span style="color: #666666">1</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">color</span>: <span style="color: #666666">#0d1d25</span>; <span style="color: #408080; font-style: italic">/*near black*/</span>
-  <span style="color: #008000; font-weight: bold">border</span>: <span style="color: #008000; font-weight: bold">solid</span> <span style="color: #666666">2</span><span style="color: #B00040">px</span> <span style="color: #666666">#0d1d25</span>; <span style="color: #408080; font-style: italic">/* Near black*/</span>
+p code,
+ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
 }
 
-.<span style="color: #0000FF; font-weight: bold">highlight</span> {
-  <span style="color: #008000; font-weight: bold">overflow</span>: <span style="color: #008000; font-weight: bold">auto</span>;
+pre {
+  overflow: scroll;
 }
 
-@<span style="color: #008000; font-weight: bold">media</span> <span style="color: #666666">(</span><span style="color: #008000; font-weight: bold">min-width</span><span style="color: #666666">:</span>  <span style="color: #008000; font-weight: bold">600px</span><span style="color: #666666">)</span> { <span style="color: #408080; font-style: italic">/*Tablet-portrait &amp; up*/</span>
-  .<span style="color: #0000FF; font-weight: bold">site-header</span> {
-    <span style="color: #008000; font-weight: bold">font-size</span>:  <span style="color: #666666">2.618</span><span style="color: #B00040">em</span>;
-    <span style="color: #008000; font-weight: bold">padding-top</span>: <span style="color: #666666">4</span><span style="color: #B00040">vh</span>;
-    <span style="color: #008000; font-weight: bold">padding-bottom</span>: <span style="color: #666666">1</span><span style="color: #B00040">vh</span>;
+img {
+  width: 100%;
+}
+
+.highlight {
+  overflow: auto;
+}
+
+.header__blog {
+  margin: auto;
+  width: 175px;
+  width: fit-content;
+  position: relative;
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
   }
 }
 
-
-
-  
-<span style="color: #408080; font-style: italic">/*==================================*\</span>
-<span style="color: #408080; font-style: italic">  ##Footer</span>
-<span style="color: #408080; font-style: italic">\*==================================*/</span>
-.<span style="color: #0000FF; font-weight: bold">footer</span> {
-  <span style="color: #008000; font-weight: bold">margin-top</span>: <span style="color: #666666">1</span><span style="color: #B00040">em</span>;
-  <span style="color: #008000; font-weight: bold">text-align</span>: <span style="color: #008000; font-weight: bold">center</span>;
+.blog-title {
+  position: absolute;
+  display: inline;
+  top: 54px;
 }
 
-&lt;/<span style="color: #008000; font-weight: bold">style</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">head</span>&gt;
+.blog-title--left {
+  right: 180px;
+  display: none;
+}
 
+.blog-title--right {
+  left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
+}
 
-&lt;<span style="color: #008000; font-weight: bold">body</span>&gt;
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
 
-  &lt;<span style="color: #008000; font-weight: bold">nav</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar nav-bar--top"</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__container"</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__button nav-bar__button--current-page"</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/"</span>&gt;Home&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__button"</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/about"</span>&gt;About&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__button"</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/blog"</span>&gt;Blog&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__button"</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"nav-bar__link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/projects"</span>&gt;Projects&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-  &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">nav</span>&gt;
-
-
-
-
-  &lt;<span style="color: #008000; font-weight: bold">section</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"content-main"</span>&gt;
-
-  &lt;<span style="color: #008000; font-weight: bold">h1</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"site-header"</span>&gt; I’m Daniel, a web developer 
-who started coding in an odd way:  I was a lawyer in
-New York, when my firm needed a coding lawyer.&lt;/<span style="color: #008000; font-weight: bold">h1</span>&gt;
-
-  &lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"content-p"</span>&gt;Lawyers and programmers are both
-incredibly logical, but somehow they don't always speak
-the same language.  My goal is to bridge that gap, by
-being skilled in both domains—and the first step in
-doing that is leveling up my programming skills.&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt; 
-
-  &lt;<span style="color: #008000; font-weight: bold">p</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"content-p"</span>&gt;As part of that process, I've built
-this site to provide a home for the 
-&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/projects.html"</span>&gt;
-projects&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt; I'll build along the way—and
-to take the opportunity to build a
-&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"/projects/this-website/"</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span>&gt;website
-that is like Richard Feynman’s radios&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;.&lt;/<span style="color: #008000; font-weight: bold">p</span>&gt;
-
-&lt;/<span style="color: #008000; font-weight: bold">section</span>&gt;
-
-
-
-
-&lt;<span style="color: #008000; font-weight: bold">footer</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"footer"</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"footer_copyright"</span>&gt;
-    © 2018 | &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"../license/"</span>&gt;
-    Some Rights Reserved&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
-  &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"footer_contact"</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"https://github.com/dsock"</span>&gt;Github&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt; |
-    &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"https://www.linkedin.com/in/daniel-sockwell/"</span> &gt;LinkedIn&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt; |
-    &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #7D9029">class</span><span style="color: #666666">=</span><span style="color: #BA2121">"link"</span> <span style="color: #7D9029">href</span><span style="color: #666666">=</span><span style="color: #BA2121">"mailto:daniel-public-email@codesections.com"</span>&gt;Email&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
-  &lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">footer</span>&gt;
-
-
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .site-header {
+    font-size:  2.618em;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+  }
+}
   
-</pre></div>
+/*==================================*\
+  ##Footer
+\*==================================*/
+.footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+<nav class="nav-bar nav-bar--top">
+  <div class="nav-bar__container">
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/">Home</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/about">About</a></div>
+    <div class="nav-bar__button">
+      <a href="/">
+        <!-- The code for the site logo, which is an inline SVG because that loads faster-->
+        <svg class="svg__logo" viewBox="0 60 700 700" >
+          <circle r="412.74" fill="#4F82bb" cy="250" cx="350"></circle>        
+          <path d="M 291,128 C 259,154 252,196 268,229 c 11,20
+          32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+          56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+          82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+          74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+          c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+          m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+          C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+          -123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+          71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+          123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+          633,420 696,345 645,287 534,164 487,111 Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/blog">Blog</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/projects">Projects</a></div>
+  </div>
+</nav>
+
+<section class="content-main">
+
+  <h1 class="site-header"> I’m Daniel Sockwell, a
+  web developer who started coding in an odd way: 
+  I was a lawyer in New York, when my firm needed
+  a coding lawyer.</h1>
+
+  <p class="content-p">Lawyers and programmers are
+  both incredibly logical, but somehow they don't
+  always speak the same language.  My goal is to
+  bridge that gap, by being skilled in both
+  domains—and the first step in doing that is
+  leveling up my programming skills.</p> 
+
+  <p class="content-p">As part of that process,
+  I've built this site to provide a home for the
+  <a class="link" href="/projects">projects</a>
+  I'll build along the way—and to take the
+  opportunity to build a
+  <a href="/projects/codesections-website/"
+  class="link">website that is like Richard
+  Feynman’s radios</a>.</p>
+
+</section>
+ 
+<footer class="footer">
+  <div class="footer_copyright">
+    © 2018 |
+    <a href="https://www.codesections.com/blog/index.xml" type="application/rss+xml">
+    RSS </a> |
+    <a class="link" href="/license/">  Some Rights Reserved</a>
+  </div>
+  <div class="footer_contact">
+    <a class="link" href="https://gitlab.com/codesections">GitLab</a> |
+    <a class="link" href="https://github.com/dsock">GitHub</a> |
+    <a class="link" href="https://www.linkedin.com/in/daniel-sockwell/">LinkedIn</a> |
+    <a class="link" href="https://fosstodon.org/@codesections">Mastodon</a> |
+    <a class="link" href="mailto:daniel-public-email@codesections.com">Email</a>
+  </div>
+</footer>
+<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</html>
+```
 
 <pre class="commentary__pre">
 
 
-Prevents phones from "zooming out" to display a window/​viewport into the page.  This behavior is helpful for sites that are not optimized for mobile presentation, but isn't helpful for this site because it contains mobile-specific css styles
+Prevents phones from "zooming out"
+to display a window/viewport into
+the page.  This behavior is helpful
+for sites that are not optimized
+for mobile presentation, but isn't
+helpful for this site because it
+contains mobile-specific css styles
 
 
 
@@ -455,7 +510,22 @@ Prevents phones from "zooming out" to display a window/​viewport into the page
 
 
 
-These next several lines link to various favicon icons (the little icon that shows up in your tab on most modern browsers.  Many sites just link to 1 favicon, but that results in either sending much too large of an icon to all browsers (reducing page speed) on in sending an icon that isn't optimized the the relevant browser.  This code instead sends just the correct icon for each browser.  See <a class="link" href="https://realfavicongenerator.net/">realfavicon​generator.net/</a>, (which is also the site I used to generate these icons) for more details.
+These next several lines link to
+various favicon icons (the little
+icon that shows up in your tab on
+most modern browsers.  Many sites
+just link to 1 favicon, but that
+results in either sending much too
+large of an icon to all browsers
+(reducing page speed) on in sending
+an icon that isn't optimized the
+the relevant browser.  This code
+instead sends just the correct icon
+for each browser.  See
+<a class="link" href="https://realfavicongenerator.net/">realfavicon-generator.net/</a>,
+(which is also the site I used to
+generate these icons) for more
+details.
 
 
 
@@ -474,23 +544,76 @@ These next several lines link to various favicon icons (the little icon that sho
 
 
 
-This is the CSS style for the site.  A few notes:
+This is the CSS style for the site. 
+A few notes:
 
-First, some people would consider it poor practice to inline all the CSS as I have instead of linking to an external file with the css. Linking to an external file has several advantages that make it much more widely used:
+First, some people would consider
+it poor practice to inline all the CSS
+as I have instead of linking to an external
+file with the css. Linking to an external
+file has several advantages that make it
+much more widely used:
 
-<ul><li>It is more maintainable.  Different pages on the site can all link to the same css file, which means that changing formatting for a particular element only requires changing the single css file.  In contrast, if I want to change, say, the color of the navigation bar, then I have to change that piece of css in all my files.</li>
+<ul><li>It is more maintainable.  Different
+pages on the site can all link to the same
+css file, which means that changing
+formatting for a particular element only
+requires changing the single css file. 
+In contrast, if I want to change, say, the
+color of the navigation bar, then I have to
+change that piece of css in all my files.</li>
 
-<li>It is typically faster for repeat visitors (or people who visit the site more than once). Once someone has downloaded the css for the first time, the css file will be cached locally, and they won't need to request it from the server.  This means that subsequent requests will be able to load the local resource, which is faster.</li>
+<li>It is typically faster for repeat visitors
+(or people who visit the site more than once).
+Once someone has downloaded the css for the first
+time, the css file will be cached locally, and
+they won't need to request it from the server. 
+This means that subsequent requests will be able
+to load the local resource, which is faster.</li>
 
-<li>It allows resources to be downloaded in parallel. Modern browsers can download multiple files at the same time, which means that the browser can download something else while it is downloading the first css file (such as an image or other css file).  In contrast, with inline css, the browser won't start downloading any resources until it has fully downloaded and parsed the html file.</li>
+<li>It allows resources to be downloaded in parallel.
+Modern browsers can download multiple files at the
+same time, which means that the browser can download
+something else while it is downloading the first
+css file (such as an image or other css file). 
+In contrast, with inline css, the browser won't start
+downloading any resources until it has fully
+downloaded and parsed the html file.</li>
 
-So, given all those arguments, why did I decide to inline the css for this page?  A few reasons. First of all, most of those arguments only apply to this site very slightly (if at all).  This site is small enough that editing multiple files isn't much of a burden, and I'm prioritizing speed and simplicity so much that each page of this site fits into the initial 14kb TCP request--so my speed penalty for repeat visitors for inline css is minimal (at most ~20ms, even on very slow systems).
+So, given all those arguments, why did I decide to
+inline the css for this page?  A few reasons.
+First of all, most of those arguments only apply
+to this site very slightly (if at all). 
+This site is small enough that editing multiple
+files isn't much of a burden [EDIT: and is now
+done with a Static Site Generator, eliminating 
+the need to edit multiple files], and I'm
+prioritizing speed and simplicity so much that
+each page of this site fits into the initial
+14kb TCP request--so my speed penalty for repeat
+visitors for inline css is minimal (at most
+~20ms, even on very slow systems).
 
-There are also a few advantages to inlining my css.  Most importantly, it reduces load time for first-time visitors.  You only get one chance to make a first impression, and I want this it to be a fast one. Inlining all css (and keeping the page size below 14kb) means that we can load the page in a single round-trip from the server--the fastest possible scenario. (This isn't true for pages that have images, but most of my pages don't, and even when they do it still reduces the number of requests.)
+There are also a few advantages to inlining my css. 
+Most importantly, it reduces load time for first-time
+visitors.  You only get one chance to make a first
+impression, and I want this it to be a fast one.
+Inlining all css (and keeping the page size below 14kb)
+means that we can load the page in a single round-trip
+from the server--the fastest possible scenario.
+(This isn't true for pages that have images, but most
+of my pages don't, and even when they do it still
+reduces the number of requests.)
 
-Inlining the css also has advantages for my project of making this site as simple as Feynman's radios. It lets me have a single source file that I can point to and say, "There it is.  That file has all you need to know to understand that page on the site".  And I appreciate that simplicity.
+Inlining the css also has advantages for my project
+of making this site as simple as Feynman's radios. It
+lets me have a single source file that I can point to
+and say, "There it is.  That file has all you need to
+know to understand that page on the site".  And I
+appreciate that simplicity.
 
-Second, the css is written with the BEM (Block-Element-Modifier) methodology. See getbem.com/ //TODO expand on this.
+Second, the css is written with the BEM
+(Block-Element-Modifier) methodology. See getbem.com
       </ul></pre>
     </div>
   

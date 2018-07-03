@@ -1,7 +1,7 @@
----
-title: "Hexo Review"
-date: 2018-06-18T16:57:52-04:00
----
++++
+title = "Hexo Review"
+date = 2018-06-18T16:57:52-04:00
++++
 
 As I've [written about](https://www.codesections.com/blog/why-static-site-generators-are-great/) a [couple of times](https://www.codesections.com/blog/greatness-of-static-site-generators-ii/) 
 already, I think static site generators are pretty great.  But that

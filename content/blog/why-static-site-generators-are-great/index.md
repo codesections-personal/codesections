@@ -1,7 +1,7 @@
----
-title: "Why Static Site Generators Are Great"
-date: 2018-06-03T11:37:56-04:00
----
++++
+title = "Why Static Site Generators Are Great"
+date = 2018-06-03T11:37:56-04:00
++++
    
 What makes static site generators so great?  And what is a static site generator, anyway?
 
@@ -11,6 +11,7 @@ As an example, take this stripped-down version of the current <a href="https://w
 
 
 <!--more-->
+
 ```html
   <nav>
     <div>

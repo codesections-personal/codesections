@@ -1,7 +1,7 @@
----
-title: "Fixing the One Problem With Password Managers"
-date: 2018-06-03T11:43:27-04:00
----
++++
+title = "Fixing the One Problem With Password Managers"
+date = 2018-06-03T11:43:27-04:00
++++
 
 
 

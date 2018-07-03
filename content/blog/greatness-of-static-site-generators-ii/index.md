@@ -1,9 +1,9 @@
----
-title: "Greatness of Static Site Generators, Part II"
-date: 2018-06-03T11:40:46-04:00
----
++++
+title = "Greatness of Static Site Generators, Part II"
+date = 2018-06-03T11:40:46-04:00
++++
 
-    <p>In the <a href="/blog/why-static-site-generators-are-great/">last post</a>, we talked about the history of website hosting and the rise of dynamic websites powered by PHP.  Now, we’re going to turn to more recent history and see how content delivery networks have changed the nature of the modern web.</p>
+In the <a href="/blog/why-static-site-generators-are-great/">last post</a>, we talked about the history of website hosting and the rise of dynamic websites powered by PHP.  Now, we’re going to turn to more recent history and see how content delivery networks have changed the nature of the modern web.
 
 <h3 id="content-delivery-networks-and-the-global-mobile-web">Content Delivery Networks and the Global, Mobile Web</h3>
 

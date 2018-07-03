@@ -1,7 +1,7 @@
----
-title: "Hello World! (And past writing)"
-date: 2018-06-03T11:31:03-04:00
----
++++
+title = "Hello World! (And past writing)"
+date = 2018-06-03T11:31:03-04:00
++++
 <p>Welcome!  Don’t you just love that new-blog smell?</p>
 
 <p>This blog is my new home for technical topics, book reviews, whatever else

@@ -1,12 +1,12 @@
----
-title: "Image Compression for Website Speed: Turning it up to 11"
-date: 2018-06-12T16:38:54-04:00
----
++++
+title = "Image Compression for Website Speed: Turning it up to 11"
+date = 2018-06-12T16:38:54-04:00
++++
 
 A few months ago, I got very into maximizing the speed of my website.  I feel 
 pretty good about what I accomplished: 
 
-![100% score from Pingdom tools]({{< ref "image-compression-for-website-speed" >}}pingdom.jpg)
+![100% score from Pingdom tools](/blog/image-compression-for-website-speed/pingdom.jpg)
 
 (I actually prefer the results from [webpagetest.org](https://www.webpagetest.org/result/180612_B9_3853bf53a2703c0582863edfd1f34791/), and not just because it show my site as loading even faster.  It's open-source and seems to have a better methodology.  But it doesn't generate as pretty a picture, so I went with the Pingdom screenshot above.) 
 

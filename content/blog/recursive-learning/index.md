@@ -1,7 +1,7 @@
----
-title: "Recursive Learning"
-date: 2018-06-03T11:32:38-04:00
----
++++
+title = "Recursive Learning"
+date = 2018-06-03T11:32:38-04:00
++++
 
 <p>There’s an interestingly recursive nature to learning programing. As part of my ongoing project to build my programing skills to a higher level, I would like to learn Node and modern JavaScript frameworks/libraries like React and Redux.  So, that’s my starting point: What do I need to do to learn these new technologies?</p>
 

@@ -1,9 +1,10 @@
----
-title: "About Me"
-date: 2018-06-03T10:41:27-04:00
-layout: "standalone"
-type: "single-page"
----
++++
+title = "About Me"
+date = 2018-06-03T10:41:27-04:00
+layout = "standalone"
+type = "single-page"
+page = "about.html"
++++
   
 
   <asside class="note">This page is about me, Daniel Sockwell, the person.  If you're interested in details about this site, there’s a <a class="link" href="../projects">separate page for that</a>.

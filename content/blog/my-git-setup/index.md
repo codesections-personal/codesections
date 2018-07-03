@@ -1,7 +1,7 @@
----
-title: "My (Paranoid) Git Setup"
-date: 2018-06-10T07:55:24-04:00
----
++++
+title = "My (Paranoid) Git Setup"
+date = 2018-06-10T07:55:24-04:00
++++
 
 Until recently, I had a very simple git workflow: I worked in a local repository, and then pushed my changes to a single remote, which lived at GitHub.  In the case of the [code for this site](https://www.gitlab.com/codesections/codesections-website), pushing to GitHub would automatically trigger a rebuild of the website and publish the changes live to the Internet. (Thanks, [Netlify](https://www.netlify.com)!)
 

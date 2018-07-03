@@ -1,7 +1,7 @@
----
-title: "Just How Secure Is pass-gen?"
-date: 2018-06-14T17:44:45-04:00
----
++++
+title = "Just How Secure Is pass-gen?"
+date = 2018-06-14T17:44:45-04:00
++++
 
 The other day, I posted on Mastodon that [pass-gen](www.gitlab.com/codesections/pas-gen) (my new passphrase generator written in pure bash and designed to follow the Unix philosophy) has achieved 100 bits of entropy with default settings and is now 128 times as secure as when it first launched.
 But how secure is 100 bits of entropy, really?  And how do you even go about 
@@ -12,7 +12,7 @@ measuring the security of a passphrase generator, really?
 The security of a given password depends entirely on the method used to 
 attack that password.  As xkcd [famously pointed out](https://xkcd.com/538/), basically all passwords are weak against physical attacks:
 
-![xkcd 538]({{< ref "how-secure-is-pass-gen" >}}/security.png)
+![xkcd 538](/blog/how-secure-is-pass-gen/security.png)
 
 But let's set aside the $5-wrench attack for the moment, and dive into the crypto-nerd's imagined attack.  Just what would it take to actually crack 
 the sort of password that pass-gen creates?

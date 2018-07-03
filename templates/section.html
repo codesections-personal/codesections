@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ section.content | safe }}
+  {% if section.pages %}
+    {% for page in section.pages %}
+    <article>
+      <div>
+        {% if page.content | length > 1000 %}
+          <h2><a href="{{ page.permalink }}">{{ page.title  }}</a></h2>
+        {% else %}
+          <h2>{{ page.title }}</h2>
+        {% endif %}
+
+        {% if page.summary %}
+          {{ page.summary | safe }}
+        {% else %}
+          {{ page.content | safe | truncate(length=1000)}} <span class=">\""><span>
+        {% endif %}
+          <br>
+      </div>
+      {% if page.content | length > 1000 %}
+        <a href="{{ page.permalink }}">(read more)</a>
+      {% endif %}
+    </article>
+      
+    {% endfor %}
+  {% endif %}
+{% endblock content %}
