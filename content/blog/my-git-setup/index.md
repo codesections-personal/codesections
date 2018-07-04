@@ -18,6 +18,8 @@ So, over the past week, I decided to fix all of these issues.  With my new setup
 3. A GitHub-hosted repository.
 4. A GitLab-hosted repository.
 
+<!-- more -->
+
 And here's my new workflow: As I'm working on content locally, I commit my changes and then `git push`, which is configured to push my changes *only* to the Pi.  When I'm ready to publish changes, run `git push all`, which pushes to all four remote repos, and triggers Netlify to rebuild the site.  (I also switched to using GitLab as the main repository that Netlify builds off of, but that was more of a reaction to the GitHub acquisition than a change related to the above.)
 
 This means that I have a local backup of everything on the Pi and that I have three additional backups of the published content.  What's more, if I ever lose access to GitLab, I could seamlessly switch back to GitHub and tell Netlify to build off of that repo, which eliminates a point of failure. 

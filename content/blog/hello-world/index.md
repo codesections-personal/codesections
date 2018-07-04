@@ -22,7 +22,7 @@ I was aiming for and how well I did.</p>
 While this is the first post on this blog, it’s far from the first public
 writing I’ve done.  Past highlights include:
 
-<!--more-->
+<!-- more -->
 
 <h3 id="writing-a-brief-for-the-ipad-judge">Writing a Brief for the iPad Judge&gt;</h3>
 

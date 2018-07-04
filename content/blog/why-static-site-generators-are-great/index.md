@@ -10,7 +10,7 @@ To answer that, let’s take a step back and think about how a website works.  S
 As an example, take this stripped-down version of the current <a href="https://www.codesections.com">CodeSections</a> homepage.  To keep things simple, I’ve striped out all the CSS and the parts of the HTML related to how the page would look, which leaves us with just the basic HTML.
 
 
-<!--more-->
+<!-- more -->
 
 ```html
   <nav>

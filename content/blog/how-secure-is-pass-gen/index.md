@@ -17,7 +17,7 @@ attack that password.  As xkcd [famously pointed out](https://xkcd.com/538/), ba
 But let's set aside the $5-wrench attack for the moment, and dive into the crypto-nerd's imagined attack.  Just what would it take to actually crack 
 the sort of password that pass-gen creates?
 
-<!--more-->
+<!-- more -->
 
 I'd like to take a look at three attacks and explain why—even with worst-case assumptions, stacking the deck as far as possible in favor of the would-be crackers—pass-gen's passwords would remain secure.
 

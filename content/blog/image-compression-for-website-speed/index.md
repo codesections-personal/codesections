@@ -18,7 +18,7 @@ much larger—and therefore slower—than they had any right to be.
 
 So, I decided to fix that.
 
-<!--more-->
+<!-- more -->
 
 ## From .PNG to inline .SVG
 

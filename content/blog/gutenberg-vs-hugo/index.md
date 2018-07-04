@@ -28,6 +28,8 @@ bragging about it's speed, but Gutenberg is built in Rust which—at least to
 hear the Rust partisans tell it—should give it a definite speed edge.  So,
 who is the ultimate speed champion?
 
+<!-- more -->
+
 Well, it actually depends.  If you're generating a blog or other site 
 **without** any code samples, then Gutenberg is the undisputed champion.  
 When I ran a test on my blog with the most basic settings, Gutenberg built
@@ -130,5 +132,79 @@ And here's the same thing in Hugo:
   {{.Content}}
 {{ end }}
 ```
+Even though these two snippets are **very** similar, there are a few key 
+differences—and they all come down to one philosophical difference: Gutenberg
+is explicit where Hugo is implicit.  Gutenberg uses `{% code %}` to mark a 
+control structure, but `{{ code }}` to mark a template; Hugo uses `{{ code }}`
+for both.  Gutenberg uses `endblock`, `endif`, `endfor`, and similar to end
+various block; Hugo uses `end` for everything.  Gutenberg specifies the base
+template that a particular template extends; Hugo applies a [complex set of
+rules](https://gohugo.io/templates/lookup-order/) to automatically extend 
+various templates.
 
+All of these differences are minor, but they add up to a significantly 
+different overall experience.  And, having tried both, the experience is 
+a lot better with the Gutenberg/Jinja2/Liquid style.
 
+## Features
+
+This one is going to depend heavily on your use case: Hugo and Gutenberg 
+share the same basic features, but both have features built in that the other
+one lacks. Both (of course) parse Markdown into html; both support themes 
+(though Hugo has more available); and both support using shortcodes as 
+quick ways to, for example, embed YouTube videos (though, again, Hugo has
+more pre-built ones available).  And both support basic syntax highlighting.
+
+Hugo pulls ahead in a few areas (in addition to the better theme and 
+shortcode selection): it has great support for multi-language sites
+using full i18n.  And it lets you output content in as many formats as you 
+like, including JSON or Google's Accelerated Mobile Pages format.  So, if you
+need either of those, Hugo will have an edge.  Finally, Hugo also has slightly
+better support for easily integrating external comments (e.g., Disqus) or 
+external hosts—but neither is exactly hard to do manually.
+
+On the other hand, Gutenberg has three key features that Hugo lacks, at least
+out of the box.  Gutenberg can compile Sass files to generate CSS output.  
+Hugo doesn't have that functionality built in, though you can use [external tools](http://danbahrami.io/articles/building-a-production-website-with-hugo-and-gulp-js/) to accomplish the same thing.  Similarly, Gutenberg will 
+optionally generate an automatic search index; Hugo lacks that feature, works
+well with [several external plugins](https://gohugo.io/tools/search/#readout).
+
+(Note that the speed comparisons above didn't include either of these features, or the multi-language feature in Hugo.  All of these would slow down
+site generation.)
+
+The last feature where Gutenberg pulls ahead is syntax highlighting.  As I 
+already mentioned, both Gutenberg and Hugo are capable of applying syntax
+highlighting to any code samples, but Gutenberg is more capable.  Specifically,
+[Gutenberg performs](https://github.com/Keats/gutenberg/issues/325) 
+"context-aware highlighting", in contrast to Hugo, which only "highlights
+keywords".
+
+In practice, this means that Gutenberg is capable of applying different 
+highlighting rules for in different situations.  Lets see this in action
+by returning to example syntax highlighting I showed before.  As a refresher,
+here's what it looks like with Gutenberg:
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <script type="text/javascript">
+(window.NREUM||(NREUM={})).loader_config={
+  xpid:"UQ8EUVRACQAFVVdbAQk="
+};
+window.NREUM||(NREUM={})
+,__nr_require=function(t,n,e){
+  function r(e){if(!n[e]){var o=n[e]={exports:
+    {}};t[e][0].call(o.exports,function(n){
+      var o=t[e][1][n];return r(o||n)},o,o.exports)
+    }return n[e].exports}if("function"==typeof __nr_require)
+    return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);
+    return r}
+```
+
+And here's what it looks like with Hugo:
+
+![Syntax highlighting in Hugo]()

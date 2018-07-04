@@ -7,7 +7,7 @@ As I mentioned [last time](https://www.codesections.com/blog/fixing-the-one-prob
 I also said that I've been using [hsxkpasswd](https://www.bartbusschots.ie/s/publications/software/xkpasswd/) to solve that issue and generate usable passphrases.  I like hsxkpasswd a lot, but there's one thing I hate about it—it's written in Perl.  It's the only Perl program I have on my current computer, and it feels really burdensome to install an entire programming language just to generate a simple passphrase.  So, after being bugged by that, I finally decided to do something about it.
 
 I've written pass-gen, a pure bash password generator.  I just used it to generate a password, and I got `UPTURNED!`&#8203;`gone!`&#8203;`DASH!`&#8203;`renewable!`&#8203;`GUIDE!`&#8203;`joystick!524`—hopefully much easier to type.  I had several goals for pass-gen:
-<!--more-->
+<!-- more -->
 
 *  No dependencies.  The whole idea was to get away from Perl, so I don't want to pull in Python, Node, or anything else that isn't part of a bare Linux install. 
 *  Security.  I want pass-gen to be at least as secure as hsxkpasswd.  (I think I well exceeded this goal; based on my calculations, pass-gen should provide 93 bits of entropy using default settings, thanks largely to finding some better wordlists). 

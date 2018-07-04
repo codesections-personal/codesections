@@ -11,7 +11,7 @@ date = 2018-06-03T11:32:38-04:00
 
 Except … 
 
-<!--more-->
+<!-- more -->
 
 To effectively learn JavaScript at a high level, I really should have a text editor that I’m deeply familiar with.  Sure, I’ve gotten by with the core functionality in Sublime Text—syntax highlighting, tab settings, and simple macros have been very helpful for the projects I’ve worked on so far.  But I know there’s a lot more to learn.  Before I invest time in learning JavaScript more deeply, I really should dive into the program and figure out its more advanced features.  Doing so will let me take full advantage of Sublime, and will save me significant time in the long run as I learn JavaScript.</p>
 

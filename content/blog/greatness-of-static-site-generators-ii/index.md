@@ -9,7 +9,7 @@ In the <a href="/blog/why-static-site-generators-are-great/">last post</a>, we t
 
 <p>One of the biggest advantages of the Internet is how global it is—if your site is hosted in Atlanta, it might get visitors from down the block, but it just as easily might get visitors from New York, or London, or Tokyo.  And that’s pretty incredible.  But it also raises a fundamental problem:</p>
 
-<!--more-->
+<!-- more -->
 <p> To see your site, a visitor has to literally wait for data to be transmitted across the distance from your web server to their computer. And, because the world is a big place, and the speed of light is a bit slow, that can be a long wait (especially because the data likely won’t go in a straight line, but will <a href="https://en.wikipedia.org/wiki/Internet_backbone">instead bounce around in a fascinating way</a> as it makes its way across the globe).</p>
 
 <p>How big of a problem is this, really?  Well, it depends.  It might hardly matter at all, if you have a text-only website that has a local audience who visits it from a desktop computer with a high-speed Internet connection.  On the other hand, if you want your site to have high-definition pictures or, even worse, video, then it’s likely going to be a concern.  And that goes double if you think that many of your visitors might be browsing your site over slower internet connections, like those on cellular networks.  With how popular mobile browsing is these days, pretty much <strong>everyone</strong> should be thinking about that.  So, it depends, but it’s pretty likely that it matters for your site.</p>

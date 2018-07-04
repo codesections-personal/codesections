@@ -16,7 +16,7 @@ This post is all about what drew me to Hexo in the first place.  And
 then, part two of this review, I'll get into what ultimately pushed
 me away from it.
 
-<!--more-->
+<!-- more -->
 
 ### What I loved about Hexo
 Hexo has two huge advantages over Hugo (at least in my book).  First,

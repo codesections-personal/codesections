@@ -15,7 +15,7 @@ is so great.</p>
 <p>This post explains my tweak, and how you can apply it.  But first, some
 background.</p>
 
-<!--more-->
+<!-- more -->
 
 <h2>Password managers</h2>
 <p>I love password managers like Pass, 1Pass, KeePass, KeePassXC, LastPass (ok,
