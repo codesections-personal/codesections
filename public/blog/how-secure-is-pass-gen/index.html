@@ -1,0 +1,443 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png">
+  <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png">
+  <link rel="manifest"
+        href="/manifest.json">
+  <link rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5">
+  <meta name="theme-color"
+        content="#d9d9d9">
+  
+    <title> Just How Secure Is pass-gen? | CodeSections </title>
+  
+<style> 
+/*==================================*\
+  ##All CSS for this page
+\*==================================*/
+
+/*  Theme colors:
+ *
+ *  #fd0     yellow (menu bar [old])
+ *  #cde     pastel blue (note boxes)
+ *  #000     true black (site header)
+ *  #4F82BB; Dark Blue  (Nav bar)
+ *  #223     near black (text & logo)
+ *  #fff     white (menu text)
+ *  #07e     sky blue (links)
+ */
+/*==================================*\
+  ##Global
+\*==================================*/
+html {
+  font-family: -apple-system,
+               BlinkMacSystemFont,
+               'Segoe UI',
+               Roboto,
+               'Helvetica Neue',
+               Arial, sans-serif;
+  color: #223; /*near black*/
+}
+  
+/*==================================*\
+  ##Nav bar
+\*==================================*/
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #4F82BB; /*Dark Blue*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+}
+
+.nav-bar--top {
+  top: 0;
+}
+
+.nav-bar__container {
+  display: flex;
+  max-width: 700; /*max comfortable line length*/
+  padding-left: 8px;
+  padding-right:8px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.nav-bar__button {
+  position: relative;
+  /*  This isn't needed for display of this element,
+   *  but important for the :after pseudo element
+   *  below. */
+  cursor: pointer;
+  background-color: inherit;
+  height: 1.25em;
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page) {
+  color: white;
+}
+
+.nav-bar__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-bar__link::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
+.nav-bar__link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  transition: all 0.4s ease;
+  border-top: 3px solid #223; /*near black*/
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page)
+  .nav-bar__link:hover:after {
+    width: 100%;
+}
+
+.svg__logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .nav-bar__button {
+    font-size: 1.382em;
+    line-height: 1.382em;
+    /*  The goal is creating a larger target for
+     *  touch navigation while also shrinking
+     *  the amount of horizontal space devoted to
+     *  the menu.*/
+  }
+}
+
+@media (min-width: 600px) {  /*Tablet-portrait & up*/
+  .nav-bar__button {
+    font-size: 2em;
+  }
+  .svg__logo {
+    height: 64px;
+    width: 64px;
+  }
+}
+  
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  article {
+    margin-top: 2em;
+  }
+}
+
+table {
+  overflow: auto;
+  border-spacing: 0;
+  margin: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 0.5px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.site-header{
+  margin-bottom: 0;
+  margin-top: 1em;
+  text-align: left;
+  font-size: 1.618em;
+  font-weight: 400;
+  line-height: .85;
+  color: #000;
+}
+
+.content-p {
+  color: #223; /*near black*/
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.link,
+a {
+  color: #07e; /*sky blue*/
+  text-decoration: none;
+}
+
+.note {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
+}
+
+p code,
+ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+img {
+  width: 100%;
+}
+
+.highlight {
+  overflow: auto;
+}
+
+.header__blog {
+  margin: auto;
+  width: 175px;
+  width: fit-content;
+  position: relative;
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
+  }
+}
+
+.blog-title {
+  position: absolute;
+  display: inline;
+  top: 54px;
+}
+
+.blog-title--left {
+  right: 180px;
+  display: none;
+}
+
+.blog-title--right {
+  left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .site-header {
+    font-size:  2.618em;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+  }
+}
+  
+/*==================================*\
+  ##Footer
+\*==================================*/
+.footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<nav class="nav-bar nav-bar--top">
+  <div class="nav-bar__container">
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/">Home</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/about">About</a></div>
+    <div class="nav-bar__button">
+      <a href="/">
+        <!-- The code for the site logo, which is an inline SVG because that loads faster-->
+        <svg class="svg__logo" viewBox="0 60 700 700" >
+          <circle r="412.74" fill="#4F82bb" cy="250" cx="350"></circle>        
+          <path d="M 291,128 C 259,154 252,196 268,229 c 11,20
+          32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+          56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+          82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+          74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+          c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+          m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+          C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+          -123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+          71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+          123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+          633,420 696,345 645,287 534,164 487,111 Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/blog">Blog</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/projects">Projects</a></div>
+  </div>
+</nav>
+
+<section class="content-main">
+  
+  <h2>Just How Secure Is pass-gen?</h2>
+  <p>The other day, I posted on Mastodon that <a href="www.gitlab.com/codesections/pas-gen">pass-gen</a> (my new passphrase generator written in pure bash and designed to follow the Unix philosophy) has achieved 100 bits of entropy with default settings and is now 128 times as secure as when it first launched.
+But how secure is 100 bits of entropy, really?  And how do you even go about
+measuring the security of a passphrase generator, really?</p>
+<h2 id="attack-vectors">Attack Vectors</h2>
+<p>The security of a given password depends entirely on the method used to
+attack that password.  As xkcd <a href="https://xkcd.com/538/">famously pointed out</a>, basically all passwords are weak against physical attacks:</p>
+<p><img src="/blog/how-secure-is-pass-gen/security.png" alt="xkcd 538" /></p>
+<p>But let's set aside the $5-wrench attack for the moment, and dive into the crypto-nerd's imagined attack.  Just what would it take to actually crack
+the sort of password that pass-gen creates?</p>
+<p><a name="continue-reading"></a></p>
+<p>I'd like to take a look at three attacks and explain why—even with worst-case assumptions, stacking the deck as far as possible in favor of the would-be crackers—pass-gen's passwords would remain secure.</p>
+<h3 id="old-fashioned-brute-force">Old-fashioned brute force</h3>
+<p>The most basic way to crack a password is, of course, to simply try every single possible combination of characters.  In theory, this method is guaranteed to work: the cracker will eventually get the correct password if they wait long enough.  In practice, little things like impatience, old age, and/or the heat death of the universe tend to get in the way, and this method is rarely successful against any but the most basic of passwords.</p>
+<p>Just to sure, though, how would a pass-gen password fare against a brute-force
+attack?  Well, as an example, let's consider this password I just generated:</p>
+<p><code>EMBOSS||comfort||Laborer||HANDLER||</code>​<code>powdered||Scarf119</code></p>
+<p>Calculating the difficulty of brute-forcing our password is a simple matter of figuring out how many characters a cracker would need to include to match our password and then raising that number to the power of the length of our password.  Here, our password includes lowercase letters (26 possibilities), uppercase letters (26), numbers (10), and special characters (33).  So, the
+full size of the &quot;alphabet&quot; our would-be cracker would need to search would
+be 95 characters, and they'd be trying to crack a 53-character password.  That
+would be… challenging.</p>
+<p>The website <a href="https://www.grc.com/haystack.htm">password haystacks</a> automates
+the calculation of just how long this password would take to crack.  Here's
+what it says (with extremely favorable assumptions about the hardware
+available to the cracker).  According to that site, our password would be
+cracked in: &quot;2.12 billion trillion trillion trillion trillion trillion
+trillion centuries&quot;.</p>
+<p>That is about 1,000 times longer than the <a href="https://en.wikipedia.org/wiki/Heat_death_of_the_universe#Time_frame_for_heat_death">projected lifespan of the universe</a>, so I think we're safe.</p>
+<h3 id="list-of-known-passwords">List of known passwords</h3>
+<p>Of course, a far more common attack is for a cracker to use a list of known passwords.  The all-too-often-correct assumption is that people will reuse passwords, and crackers maintain lists billions of past passwords that people
+have previously used.</p>
+<p>The whole point of using a password generator (and then storing the password
+in a password vault like <a href="https://www.passwordstore.org/">pass</a>, however, is
+that you <strong>don't</strong> reuse passwords.  Each password should be used for a single
+account and for a single account only.  If you need to pick a new password,
+pass-gen makes it easy to do so, and pass (or another password manager)
+makes it easy to store that password.  So just don't reuse passwords, and this
+attack is no more of a threat than the brute-force attack.</p>
+<p>&quot;But,&quot; I can already hear you asking, &quot;what if I don't reuse my password, but
+someone else just happens to have used the same password before?&quot;  That is
+not going to happen.  I was going to calculate out the odds of that happening.  I was going to imagine that every single one of the 5,115,553,456 passwords in Troy Hunt's <a href="https://haveibeenpwned.com/">Have I Been Pwned</a>
+password database had been generated with pass-gen and then calculate the odds
+of someone else having generated your password.</p>
+<p>I was going to do that, but I couldn't find a calculator that would show me an
+answer other than &quot;0&quot;.  Suffice it to say, it's just not going to happen.</p>
+<h3 id="dictionary-attack">Dictionary attack</h3>
+<p>Finally, we're down to the main event: the only strategy that has a prayer of
+working against a well-designed passphrase.</p>
+<p>So, let's start by stacking the deck fully in favor of the cracker: they know
+that the password was generated with pass-gen.  They know that it was generated
+using the default settings.  They know that it was generated from the default
+word list, rather from any of the dozen+ other wordlists that ship with pass
+gen.</p>
+<p>So, how big is their search space?</p>
+<p>Well, given that the pass-gen password is created using a combination of
+words, symbols and numbers, we can calculate the total number of possible
+passwords using the following formula:</p>
+<div style="text-align: center; font-size: 1.25em">w<sup>p</sup> * s * n</div>
+<p>where <em>w</em> = number of words in our wordlist, <em>p</em> = the number of words we pick for our password, <em>s</em>  = the number of symbols on our symbol list, and <em>n</em> = the number of numbers in our password.</p>
+<p>That got a bit abstract, so let's go through it with actual numbers. As of today, the default search list includes 8,429 words.  However, we effectively
+have three times that many passwords, because we have three possible capitalization schemes: we pass-gen could produce &quot;example&quot;, &quot;Example&quot;, or &quot;EXAMPLE&quot;—all three of which are different words for our purposes.</p>
+<p>Next, the default configuration chooses 6 of these words for the password. Additionally, pass-gen randomly selects a padding character (or set of two characters) from a list of 54 potential characters, and follows it with a digit between 000 and 999.  We can plug those numbers into our formula.  Thus, (<strong>drumroll please</strong>) the total possible number of possible passwords is</p>
+<div style="text-align: center; font-size: 1.25em">(8,429 * 3)<sup>6</sup> * 54 * 1000 = 1.4118 * 10<sup>31</sup></div>
+<p>Or, put differently, 14 followed by 30 zeros.</p>
+<p>Is that a big number?  Well, yes, obviously.  Ok, better questions: <em>in the context of password security</em> is that a big <em>enough</em> number?</p>
+<p>Well, one way security researchers come at that question is to calculate how many bits of entropy the password space generates.  That is, what power would we need
+to raise two to in order to get the large number up above?  It turns out that the answer is about 103, so we can say that pass-gen's password has 103 bits of
+entropy.</p>
+<p>There doesn't seem to be a standard recommendation for password entropy, but I'm satisfied that 103 bits is extremely high.  I've found recommendations as low as
+<a href="https://security.stackexchange.com/questions/54846/how-many-bits-of-entropy-should-i-aim-at-for-my-password">33 bits</a>, and as high as <a href="https://blog.webernetz.net/password-strengthentropy-characters-vs-words/">80 bits</a>.  The <a href="https://www.eff.org/dice">EFF Dice</a> passwords—which come from a reputable, paranoid organisation—contain 77 bits of entropy, so I'm inclined to think that anything over that amount is sufficient.  (And, recall that the scale is exponential, so entropy of 103 bits doesn't mean that the password is ~25% harder to crack than one with 77 bits of entropy; it means that it is over 67 <em>million</em> times harder to
+crack.)</p>
+<p>Or, circling back to the password haystacks calculator linked above, we can see that a password with 103 bits of entropy would take 35.33 million centuries to crack.  That's not exactly heat-death-of-the-universe time, but it's not next Tuesday, either.  And recall that the haystacks number assumes <em>extremely</em> powerful
+hardware for the potential crackers.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Cutting through the math, the calculations, and the details, the bottom line is clear: if not reused, the passwords generated by pass-gen are secure against any
+possible cryptographic attack.</p>
+
+
+</section>
+ 
+<footer class="footer">
+  <div class="footer_copyright">
+    © 2018 | <a href="https://www.codesections.com/blog/index.xml" type="application/rss+xml" > RSS </a> | <a class="link" href="/license/">    Some Rights Reserved</a>
+  </div>
+  <div class="footer_contact">
+    <a class="link" href="https://gitlab.com/codesections">GitLab</a> |
+    <a class="link" href="https://github.com/dsock">GitHub</a> |
+    <a class="link" href="https://www.linkedin.com/in/daniel-sockwell/">LinkedIn</a> |
+    <a class="link" href="https://fosstodon.org/@codesections">Mastodon</a> |
+    <a class="link" href="mailto:daniel-public-email@codesections.com">Email</a>
+  </div>
+</footer>
+
+
+<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</html>

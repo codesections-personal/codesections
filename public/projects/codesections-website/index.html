@@ -1,0 +1,959 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png">
+  <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png">
+  <link rel="manifest"
+        href="/manifest.json">
+  <link rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5">
+  <meta name="theme-color"
+        content="#d9d9d9">
+  
+    <title> This Website | CodeSections </title>
+  
+<style> 
+/*==================================*\
+  ##All CSS for this page
+\*==================================*/
+
+/*  Theme colors:
+ *
+ *  #fd0     yellow (menu bar [old])
+ *  #cde     pastel blue (note boxes)
+ *  #000     true black (site header)
+ *  #4F82BB; Dark Blue  (Nav bar)
+ *  #223     near black (text & logo)
+ *  #fff     white (menu text)
+ *  #07e     sky blue (links)
+ */
+/*==================================*\
+  ##Global
+\*==================================*/
+html {
+  font-family: -apple-system,
+               BlinkMacSystemFont,
+               'Segoe UI',
+               Roboto,
+               'Helvetica Neue',
+               Arial, sans-serif;
+  color: #223; /*near black*/
+}
+  
+/*==================================*\
+  ##Nav bar
+\*==================================*/
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #4F82BB; /*Dark Blue*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+}
+
+.nav-bar--top {
+  top: 0;
+}
+
+.nav-bar__container {
+  display: flex;
+  max-width: 700; /*max comfortable line length*/
+  padding-left: 8px;
+  padding-right:8px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.nav-bar__button {
+  position: relative;
+  /*  This isn't needed for display of this element,
+   *  but important for the :after pseudo element
+   *  below. */
+  cursor: pointer;
+  background-color: inherit;
+  height: 1.25em;
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page) {
+  color: white;
+}
+
+.nav-bar__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-bar__link::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
+.nav-bar__link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  transition: all 0.4s ease;
+  border-top: 3px solid #223; /*near black*/
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page)
+  .nav-bar__link:hover:after {
+    width: 100%;
+}
+
+.svg__logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .nav-bar__button {
+    font-size: 1.382em;
+    line-height: 1.382em;
+    /*  The goal is creating a larger target for
+     *  touch navigation while also shrinking
+     *  the amount of horizontal space devoted to
+     *  the menu.*/
+  }
+}
+
+@media (min-width: 600px) {  /*Tablet-portrait & up*/
+  .nav-bar__button {
+    font-size: 2em;
+  }
+  .svg__logo {
+    height: 64px;
+    width: 64px;
+  }
+}
+  
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  article {
+    margin-top: 2em;
+  }
+}
+
+table {
+  overflow: auto;
+  border-spacing: 0;
+  margin: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 0.5px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.site-header{
+  margin-bottom: 0;
+  margin-top: 1em;
+  text-align: left;
+  font-size: 1.618em;
+  font-weight: 400;
+  line-height: .85;
+  color: #000;
+}
+
+.content-p {
+  color: #223; /*near black*/
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.link,
+a {
+  color: #07e; /*sky blue*/
+  text-decoration: none;
+}
+
+.note {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
+}
+
+p code,
+ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+img {
+  width: 100%;
+}
+
+.highlight {
+  overflow: auto;
+}
+
+.header__blog {
+  margin: auto;
+  width: 175px;
+  width: fit-content;
+  position: relative;
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
+  }
+}
+
+.blog-title {
+  position: absolute;
+  display: inline;
+  top: 54px;
+}
+
+.blog-title--left {
+  right: 180px;
+  display: none;
+}
+
+.blog-title--right {
+  left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .site-header {
+    font-size:  2.618em;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+  }
+}
+  
+/*==================================*\
+  ##Footer
+\*==================================*/
+.footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<nav class="nav-bar nav-bar--top">
+  <div class="nav-bar__container">
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/">Home</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/about">About</a></div>
+    <div class="nav-bar__button">
+      <a href="/">
+        <!-- The code for the site logo, which is an inline SVG because that loads faster-->
+        <svg class="svg__logo" viewBox="0 60 700 700" >
+          <circle r="412.74" fill="#4F82bb" cy="250" cx="350"></circle>        
+          <path d="M 291,128 C 259,154 252,196 268,229 c 11,20
+          32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+          56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+          82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+          74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+          c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+          m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+          C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+          -123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+          71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+          123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+          633,420 696,345 645,287 534,164 487,111 Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/blog">Blog</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/projects">Projects</a></div>
+  </div>
+</nav>
+
+<section class="content-main">
+  
+  <h2>This Website</h2>
+  <p>The website you're reading right now!  I tried to do things a bit differently with this website.</p>
+<p>In building this website, I had three main goals.  I wanted the site to:</p>
+  <ul>
+    <li>have understandable source code,</li>
+    <li>be self-sufficient, and</li>
+    <li>be the <a href="https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7">fastest site in the world</a>.</li>
+  </ul>
+Here is my analysis of how well I managed to meet these goals.</p>
+<p><a name="continue-reading"></a></p>
+  <h3>Understandable Source Code</h3>
+<p>Why do I want to write a page with understandable source code?  To answer that, I want to first talk about Richard Feynman and transistor radios.</p>
+<p>The Nobel-prize-winning physicist Richard Feynman wrote about his early childhood experience repairing transistor radios in the 1930s.  In case you haven't seen a transistor radio, they look like this:</p>
+<p><img src="/radio-min-20.jpg" alt="Transistor radio; image credit: Wikipedia" /></p>
+  <p class="content-p">By contrast, a modern radio receiver is so small that millions of people <a class="link" href="https://www.cnet.com/how-to/unlock-the-secret-fm-tuner-in-your-android-phone/">had one inside their cellphones and didn't even realize it.</a></p>
+  <p class="content-p">Why am I talking about radios on a page about this website?  Because Feynman was able to learn and apply basic physics in a way that children today basically can't.  Radios have gotten too miniaturized, have had their complexity hidden away where no one can learn from it.  And I see the same thing happening with websites</p>
+  <p class="content-p"> Here's a (slightly modified) copy of the markup from the beginning of <a class="link" href="http://info.cern.ch/hypertext/WWW/TheProject.html">an extremely early website</a>:</p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">head</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">title</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;The World Wide Web project&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">title</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">head</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">body</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">h1</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;World Wide Web&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">h1</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;The WorldWideWeb (W3) is a wide-area
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">name</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#a3be8c;">0 </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#a3be8c;">“WhatIs.html”</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;hypermedia&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">information retrieval initiative aiming to
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">give universal access to a large universe
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">of documents.
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;Everything there is online about W3 is
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">linked directly or indirectly to this document,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">including an &lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#a3be8c;">“Summary.html”</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;executive
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">summary&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; of the project.
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre>
+<p>Even if you've never read a word of markup before in your life, you can probably just about figure out what that does—that it creates a header (with a title for the page) and then creates a body of the document that consists of several paragraphs with some text and a few links to other html pages.</p>
+<p>In contrast to that, consider this excerpt from the markup for a <a class="link" href="http://www.businessinsider.com/flashback-this-is-what-the-first-website-ever-looked-like-2011-6"> modern news article</a> <em>about</em> that early site.  The markup starts like this:</p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">&lt;!</span><span style="background-color:#2b303b;color:#bf616a;">DOCTYPE</span><span style="background-color:#2b303b;color:#c0c5ce;"> html&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">html </span><span style="background-color:#2b303b;color:#d08770;">lang</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">en</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">xmlns</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.w3.org/1999/xhtml</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">xml:lang</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">en</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#d08770;">lang</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">en</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">xmlns:fb</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.facebook.com/2008/fbml</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; &gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">head</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">meta </span><span style="background-color:#2b303b;color:#d08770;">http-equiv</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">X-UA-Compatible</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">content</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">IE=edge</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">meta </span><span style="background-color:#2b303b;color:#d08770;">http-equiv</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">content-type</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">content</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">text/html;charset=utf-8</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">script </span><span style="background-color:#2b303b;color:#d08770;">type</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">text/javascript</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">(window.NREUM||(</span><span style="background-color:#2b303b;color:#bf616a;">NREUM</span><span style="background-color:#2b303b;color:#c0c5ce;">={})).loader_config={
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">xpid:&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">UQ8EUVRACQAFVVdbAQk=</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">};
+</span><span style="background-color:#2b303b;color:#c0c5ce;">window.NREUM||(</span><span style="background-color:#2b303b;color:#bf616a;">NREUM</span><span style="background-color:#2b303b;color:#c0c5ce;">={})
+</span><span style="background-color:#2b303b;color:#c0c5ce;">,</span><span style="background-color:#2b303b;color:#8fa1b3;">__nr_require</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#b48ead;">function</span><span style="background-color:#2b303b;color:#c0c5ce;">(t,n,e){
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">function </span><span style="background-color:#2b303b;color:#8fa1b3;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">(e){</span><span style="background-color:#2b303b;color:#b48ead;">if</span><span style="background-color:#2b303b;color:#c0c5ce;">(!</span><span style="background-color:#2b303b;color:#bf616a;">n</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">]){</span><span style="background-color:#2b303b;color:#b48ead;">var </span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#bf616a;">n</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">]={exports:
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">{}};</span><span style="background-color:#2b303b;color:#bf616a;">t</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">][</span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">].</span><span style="background-color:#2b303b;color:#bf616a;">call</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">.exports,function(n){
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#b48ead;">var </span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#bf616a;">t</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">][</span><span style="background-color:#2b303b;color:#d08770;">1</span><span style="background-color:#2b303b;color:#c0c5ce;">][</span><span style="background-color:#2b303b;color:#bf616a;">n</span><span style="background-color:#2b303b;color:#c0c5ce;">];</span><span style="background-color:#2b303b;color:#b48ead;">return </span><span style="background-color:#2b303b;color:#bf616a;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">||</span><span style="background-color:#2b303b;color:#bf616a;">n</span><span style="background-color:#2b303b;color:#c0c5ce;">)},</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">,</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">.exports</span><span style="background-color:#bf616a;color:#2b303b;">)</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">}</span><span style="background-color:#2b303b;color:#b48ead;">return </span><span style="background-color:#2b303b;color:#bf616a;">n</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">].exports}</span><span style="background-color:#2b303b;color:#b48ead;">if</span><span style="background-color:#2b303b;color:#c0c5ce;">(&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">function</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;==typeof </span><span style="background-color:#2b303b;color:#bf616a;">__nr_require</span><span style="background-color:#2b303b;color:#c0c5ce;">)
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">return </span><span style="background-color:#2b303b;color:#bf616a;">__nr_require</span><span style="background-color:#2b303b;color:#c0c5ce;">;</span><span style="background-color:#2b303b;color:#b48ead;">for</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#b48ead;">var </span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">=</span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">.length;</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">++)</span><span style="background-color:#2b303b;color:#bf616a;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#bf616a;">e</span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#bf616a;">o</span><span style="background-color:#2b303b;color:#c0c5ce;">]);
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">return </span><span style="background-color:#2b303b;color:#bf616a;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span></pre><p class="content-p">That is, with javascript that has been inlined an minified to the point of being gibberish, even to experienced programers. Even if we give the article the benefit of skipping past 502 lines (!) of inline javascript, we get to this: </p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">nav </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">l-nav l-nav-centered</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">data-nav data-e2e-name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">l-nav</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#d08770;">data-track-page-area</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">Navigation</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">section </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">container</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">ul </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">row verticals list-unstyled</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">li </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-flex-grow verticals-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-label</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">tech</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/sai</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#d08770;">data-e2e-name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">vertical-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">Tech</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">            </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">span </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-label</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Tech&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">span</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">li</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">                                      </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">li </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-flex-grow verticals-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-label</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">finance</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/clusterstock</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">data-e2e-name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">vertical-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">Finance</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">span </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-label</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Finance&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">span</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">li</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">                                      </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">li </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-flex-grow verticals-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-label</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">politics</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/politics</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">data-e2e-name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">vertical-listitem-link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">data-vertical-listitem</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">Politics</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">span </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">verticals-listitem-label</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Politics&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">span</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">li</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre><p class="content-p">All that is to say that html and css markup, at their best, can be like the transistor radio.  They can be a toy that anyone motivated and curious enough can pull apart and see how it works.  For so many of today's programers, who grew up with (or before) the Internet, that's exactly what html was.</p>
+<p class="content-p">But I worry that today's html is much more like the tiny, miniaturized radio inside a cell phone—a marvel of engineering, perhaps, but so complex that it (seems to be) outside the realm of understanding for any non-expert.</p>
+<p class="content-p">So, with this website, I'm pushing back against that trend.  I've built a highly performant, modern website—but one with markup that is just as understandable as the websites from 1991. Like the radios that Feynman repaired, this is a website that anyone can take apart to see how it works.</p>
+<p class="content-p">To that end, I've left in the comments and have not minified any of the source.  This bloats the page a bit, because those comments get sent to your computer even if you don't read them.   Nevertheless, I've kept the page tiny and <em>fast</em>—the total page weight is still under 14kb, which means it loads in a single http request.</p>
+<p class="content-p">Below, I have an annotated copy of the markup from the home page.  Anytime I do something non-standard or that is debatable, I'll provide a comment explaining why I made the choice I did and what I'm trying to achieve. If you disagree with any of my choices, feel free to let me know via email, twitter, or any of the contact methods in the site footer.  I'd love to discuss it with you.</p>
+<div style="position: relative; left: calc(50% - 48.5vw); display: flex; width: 97vw;">
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">html</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">head</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">meta </span><span style="background-color:#2b303b;color:#d08770;">charset</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">UTF-8</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">meta </span><span style="background-color:#2b303b;color:#d08770;">name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">viewport</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">content</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">width=device-width</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">link </span><span style="background-color:#2b303b;color:#d08770;">rel</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">apple-touch-icon</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">sizes</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">180x180</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/apple-touch-icon.png</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">link </span><span style="background-color:#2b303b;color:#d08770;">rel</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">icon</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">type</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">image/png</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">sizes</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">16x16</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/favicon-16x16.png</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">link </span><span style="background-color:#2b303b;color:#d08770;">rel</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">manifest</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/manifest.json</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">link </span><span style="background-color:#2b303b;color:#d08770;">rel</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">mask-icon</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/safari-pinned-tab.svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">color</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">#5bbad5</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">meta </span><span style="background-color:#2b303b;color:#d08770;">name</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">theme-color</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#d08770;">content</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">#d9d9d9</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">style</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; 
+</span><span style="background-color:#2b303b;color:#65737e;">/*==================================*\
+</span><span style="background-color:#2b303b;color:#65737e;">  </span><span style="background-color:#2b303b;color:#65737e;">##All CSS for this page
+</span><span style="background-color:#2b303b;color:#65737e;">\*==================================*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#65737e;">/*  Theme colors:
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #fd0     yellow (menu bar [old])
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #cde     pastel blue (note boxes)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #000     true black (site header)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #4F82BB; Dark Blue  (Nav bar)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #223     near black (text &amp; logo)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #fff     white (menu text)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*  #07e     sky blue (links)
+</span><span style="background-color:#2b303b;color:#65737e;"> </span><span style="background-color:#2b303b;color:#65737e;">*/
+</span><span style="background-color:#2b303b;color:#65737e;">/*==================================*\
+</span><span style="background-color:#2b303b;color:#65737e;">  </span><span style="background-color:#2b303b;color:#65737e;">##Global
+</span><span style="background-color:#2b303b;color:#65737e;">\*==================================*/
+</span><span style="background-color:#2b303b;color:#bf616a;">html </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">font-family: </span><span style="background-color:#2b303b;color:#a3be8c;">-apple-system</span><span style="background-color:#2b303b;color:#c0c5ce;">,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">               </span><span style="background-color:#2b303b;color:#a3be8c;">BlinkMacSystemFont</span><span style="background-color:#2b303b;color:#c0c5ce;">,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">               </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Segoe UI</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">               </span><span style="background-color:#2b303b;color:#a3be8c;">Roboto</span><span style="background-color:#2b303b;color:#c0c5ce;">,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">               </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Helvetica Neue</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">               </span><span style="background-color:#2b303b;color:#a3be8c;">Arial</span><span style="background-color:#2b303b;color:#c0c5ce;">, sans-serif;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#223</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*near black*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#65737e;">/*==================================*\
+</span><span style="background-color:#2b303b;color:#65737e;">  </span><span style="background-color:#2b303b;color:#65737e;">##Nav bar
+</span><span style="background-color:#2b303b;color:#65737e;">\*==================================*/
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">position: fixed;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">z-index: </span><span style="background-color:#2b303b;color:#d08770;">1</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">left: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">100%</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">background-color: </span><span style="background-color:#2b303b;color:#96b5b4;">#4F82BB</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*Dark Blue*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">box-shadow: </span><span style="background-color:#2b303b;color:#d08770;">0 3px 6px </span><span style="background-color:#2b303b;color:#96b5b4;">rgba</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#d08770;">.3</span><span style="background-color:#2b303b;color:#c0c5ce;">);
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar--top </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">top: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__container </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: flex;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">max-width: </span><span style="background-color:#2b303b;color:#d08770;">700</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*max comfortable line length*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding-left: </span><span style="background-color:#2b303b;color:#d08770;">8px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding-right:</span><span style="background-color:#2b303b;color:#d08770;">8px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin: auto;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">justify-content: space-between;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">position: relative;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#65737e;">/*  This isn&#39;t needed for display of this element,
+</span><span style="background-color:#2b303b;color:#65737e;">   </span><span style="background-color:#2b303b;color:#65737e;">*  but important for the :after pseudo element
+</span><span style="background-color:#2b303b;color:#65737e;">   </span><span style="background-color:#2b303b;color:#65737e;">*  below. */
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">cursor: pointer;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">background-color: inherit;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">height: </span><span style="background-color:#2b303b;color:#d08770;">1.25em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button</span><span style="background-color:#2b303b;color:#8fa1b3;">:</span><span style="background-color:#2b303b;color:#b48ead;">not(</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button--current-page</span><span style="background-color:#2b303b;color:#b48ead;">) </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: white;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__link </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: inherit;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">text-decoration: none;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__link</span><span style="background-color:#2b303b;color:#8fa1b3;">::</span><span style="background-color:#2b303b;color:#b48ead;">selection </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">background-color: inherit;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: inherit;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__link</span><span style="background-color:#2b303b;color:#8fa1b3;">:</span><span style="background-color:#2b303b;color:#b48ead;">after </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">position: absolute;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">bottom: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">left: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">height: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">content: &quot;&quot;;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">transition: all </span><span style="background-color:#2b303b;color:#d08770;">0.4s </span><span style="background-color:#2b303b;color:#c0c5ce;">ease;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-top: </span><span style="background-color:#2b303b;color:#d08770;">3px </span><span style="background-color:#2b303b;color:#c0c5ce;">solid </span><span style="background-color:#2b303b;color:#96b5b4;">#223</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*near black*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button</span><span style="background-color:#2b303b;color:#8fa1b3;">:</span><span style="background-color:#2b303b;color:#b48ead;">not(</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button--current-page</span><span style="background-color:#2b303b;color:#b48ead;">)
+</span><span style="background-color:#2b303b;color:#b48ead;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__link</span><span style="background-color:#2b303b;color:#8fa1b3;">:</span><span style="background-color:#2b303b;color:#b48ead;">hover</span><span style="background-color:#2b303b;color:#8fa1b3;">:</span><span style="background-color:#2b303b;color:#b48ead;">after </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">100%</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">svg__logo </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">height: </span><span style="background-color:#2b303b;color:#d08770;">40px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">40px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(max-width: </span><span style="background-color:#2b303b;color:#d08770;">599px</span><span style="background-color:#2b303b;color:#c0c5ce;">) { </span><span style="background-color:#2b303b;color:#65737e;">/*Phone only*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">font-size: </span><span style="background-color:#2b303b;color:#d08770;">1.382em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">line-height: </span><span style="background-color:#2b303b;color:#d08770;">1.382em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#65737e;">/*  The goal is creating a larger target for
+</span><span style="background-color:#2b303b;color:#65737e;">     </span><span style="background-color:#2b303b;color:#65737e;">*  touch navigation while also shrinking
+</span><span style="background-color:#2b303b;color:#65737e;">     </span><span style="background-color:#2b303b;color:#65737e;">*  the amount of horizontal space devoted to
+</span><span style="background-color:#2b303b;color:#65737e;">     </span><span style="background-color:#2b303b;color:#65737e;">*  the menu.*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(min-width: </span><span style="background-color:#2b303b;color:#d08770;">600px</span><span style="background-color:#2b303b;color:#c0c5ce;">) {  </span><span style="background-color:#2b303b;color:#65737e;">/*Tablet-portrait &amp; up*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">nav-bar__button </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">font-size: </span><span style="background-color:#2b303b;color:#d08770;">2em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">svg__logo </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">height: </span><span style="background-color:#2b303b;color:#d08770;">64px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">64px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#65737e;">/*==================================*\
+</span><span style="background-color:#2b303b;color:#65737e;">  </span><span style="background-color:#2b303b;color:#65737e;">##Main content
+</span><span style="background-color:#2b303b;color:#65737e;">\*==================================*/
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">content-main</span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">2em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">min-height: </span><span style="background-color:#2b303b;color:#96b5b4;">calc</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#d08770;">100vh </span><span style="background-color:#2b303b;color:#c0c5ce;">- </span><span style="background-color:#2b303b;color:#d08770;">100px </span><span style="background-color:#2b303b;color:#c0c5ce;">- </span><span style="background-color:#2b303b;color:#d08770;">2.9em</span><span style="background-color:#2b303b;color:#c0c5ce;">);
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#65737e;">/*  This equals [fullscreen - (top margin) -
+</span><span style="background-color:#2b303b;color:#65737e;">   </span><span style="background-color:#2b303b;color:#65737e;">*  (space for the 2-line footer, with margin)]*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">max-width: </span><span style="background-color:#2b303b;color:#d08770;">700px</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*  Match nav container width*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-left: auto;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-right: auto;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding: </span><span style="background-color:#2b303b;color:#d08770;">.1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">font-size: </span><span style="background-color:#2b303b;color:#d08770;">1.15em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">line-height: </span><span style="background-color:#2b303b;color:#d08770;">1.6em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#444</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#bf616a;">article </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding: </span><span style="background-color:#2b303b;color:#d08770;">.75em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding-top: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-style: solid;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-color: </span><span style="background-color:#2b303b;color:#96b5b4;">#f2f2f2</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-radius: </span><span style="background-color:#2b303b;color:#d08770;">13.3px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-width: </span><span style="background-color:#2b303b;color:#d08770;">1.5px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-bottom: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">box-shadow: </span><span style="background-color:#2b303b;color:#d08770;">1px 1px 25px </span><span style="background-color:#2b303b;color:#96b5b4;">#f2f2f2</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(min-width:  </span><span style="background-color:#2b303b;color:#d08770;">600px</span><span style="background-color:#2b303b;color:#c0c5ce;">) { </span><span style="background-color:#2b303b;color:#65737e;">/*Tablet-portrait &amp; up*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#bf616a;">article </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">2em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">site-header</span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-bottom: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">text-align: left;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">font-size: </span><span style="background-color:#2b303b;color:#d08770;">1.618em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">font-weight: </span><span style="background-color:#2b303b;color:#d08770;">400</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">line-height: </span><span style="background-color:#2b303b;color:#d08770;">.85</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#000</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">content-p </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#223</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*near black*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-bottom: </span><span style="background-color:#2b303b;color:#d08770;">0</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">link</span><span style="background-color:#2b303b;color:#b48ead;">,
+</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#07e</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*sky blue*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">text-decoration: none;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">note </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">background-color: </span><span style="background-color:#2b303b;color:#96b5b4;">#cde</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/* Pastel blue*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: block;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding: </span><span style="background-color:#2b303b;color:#d08770;">.5em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#0d1d25</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/*near black*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border: solid </span><span style="background-color:#2b303b;color:#d08770;">2px </span><span style="background-color:#2b303b;color:#96b5b4;">#0d1d25</span><span style="background-color:#2b303b;color:#c0c5ce;">; </span><span style="background-color:#2b303b;color:#65737e;">/* Near black*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#bf616a;">p code</span><span style="background-color:#2b303b;color:#b48ead;">,
+</span><span style="background-color:#2b303b;color:#bf616a;">ul code </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">padding: </span><span style="background-color:#2b303b;color:#d08770;">2px 4px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">color: </span><span style="background-color:#2b303b;color:#96b5b4;">#c0341d</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">background-color: </span><span style="background-color:#2b303b;color:#96b5b4;">#fbe5e1</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">border-radius: </span><span style="background-color:#2b303b;color:#d08770;">3px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#bf616a;">pre </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">overflow: scroll;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#bf616a;">img </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">100%</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">highlight </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">overflow: auto;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">header__blog </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin: auto;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: </span><span style="background-color:#2b303b;color:#d08770;">175px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">width: fit-content;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">position: relative;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">-5px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-bottom: </span><span style="background-color:#2b303b;color:#d08770;">-15px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(min-width:  </span><span style="background-color:#2b303b;color:#d08770;">600px</span><span style="background-color:#2b303b;color:#c0c5ce;">) { </span><span style="background-color:#2b303b;color:#65737e;">/*Tablet-portrait &amp; up*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">header__blog </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-right: </span><span style="background-color:#2b303b;color:#96b5b4;">calc</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#d08770;">50% </span><span style="background-color:#2b303b;color:#c0c5ce;">- </span><span style="background-color:#2b303b;color:#d08770;">55px</span><span style="background-color:#2b303b;color:#c0c5ce;">);
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">blog-title </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">position: absolute;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: inline;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">top: </span><span style="background-color:#2b303b;color:#d08770;">54px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">blog-title--left </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">right: </span><span style="background-color:#2b303b;color:#d08770;">180px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: none;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">blog-title--right </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">left: </span><span style="background-color:#2b303b;color:#d08770;">180px</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: none;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(min-width:  </span><span style="background-color:#2b303b;color:#d08770;">600px</span><span style="background-color:#2b303b;color:#c0c5ce;">) { </span><span style="background-color:#2b303b;color:#65737e;">/*Tablet-portrait &amp; up*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">blog-title--right</span><span style="background-color:#2b303b;color:#b48ead;">,
+</span><span style="background-color:#2b303b;color:#b48ead;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">blog-title--left </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">display: inline;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">pagination-nav </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">display: flex;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">justify-content: space-around;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">@media </span><span style="background-color:#2b303b;color:#c0c5ce;">(min-width:  </span><span style="background-color:#2b303b;color:#d08770;">600px</span><span style="background-color:#2b303b;color:#c0c5ce;">) { </span><span style="background-color:#2b303b;color:#65737e;">/*Tablet-portrait &amp; up*/
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">site-header </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">font-size:  </span><span style="background-color:#2b303b;color:#d08770;">2.618em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">padding-top: </span><span style="background-color:#2b303b;color:#d08770;">4vh</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">padding-bottom: </span><span style="background-color:#2b303b;color:#d08770;">1vh</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#65737e;">/*==================================*\
+</span><span style="background-color:#2b303b;color:#65737e;">  </span><span style="background-color:#2b303b;color:#65737e;">##Footer
+</span><span style="background-color:#2b303b;color:#65737e;">\*==================================*/
+</span><span style="background-color:#2b303b;color:#8fa1b3;">.</span><span style="background-color:#2b303b;color:#d08770;">footer </span><span style="background-color:#2b303b;color:#c0c5ce;">{
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">margin-top: </span><span style="background-color:#2b303b;color:#d08770;">1em</span><span style="background-color:#2b303b;color:#c0c5ce;">;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">text-align: center;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">}
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">style</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">head</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">body</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">nav </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar nav-bar--top</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__container</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__button</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Home&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__button</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/about</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;About&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__button</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#65737e;">&lt;!-- The code for the site logo, which is an inline SVG because that loads faster--&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">svg </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">svg__logo</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">viewBox</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">0 60 700 700</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; &gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">circle </span><span style="background-color:#2b303b;color:#d08770;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">412.74</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">fill</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">#4F82bb</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">cy</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">250</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">cx</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">350</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">circle</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;        
+</span><span style="background-color:#2b303b;color:#c0c5ce;">          </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">path </span><span style="background-color:#2b303b;color:#d08770;">d</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">M 291,128 C 259,154 252,196 268,229 c 11,20
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">-123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+</span><span style="background-color:#2b303b;color:#a3be8c;">          </span><span style="background-color:#2b303b;color:#a3be8c;">633,420 696,345 645,287 534,164 487,111 Z</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__button</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/blog</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Blog&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__button</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">nav-bar__link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/projects</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Projects&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">nav</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">section </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">content-main</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">h1 </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">site-header</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt; I’m Daniel Sockwell, a
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">web developer who started coding in an odd way: 
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">I was a lawyer in New York, when my firm needed
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">a coding lawyer.&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">h1</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">p </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">content-p</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Lawyers and programmers are
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">both incredibly logical, but somehow they don&#39;t
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">always speak the same language.  My goal is to
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">bridge that gap, by being skilled in both
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">domains—and the first step in doing that is
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">leveling up my programming skills.&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; 
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">p </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">content-p</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;As part of that process,
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">I&#39;ve built this site to provide a home for the
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/projects</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;projects&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">I&#39;ll build along the way—and to take the
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">opportunity to build a
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/projects/codesections-website/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;website that is like Richard
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">Feynman’s radios&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;.&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">p</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">section</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">footer </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">footer</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">footer_copyright</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">© 2018 |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">https://www.codesections.com/blog/index.xml</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">type</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">application/rss+xml</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">RSS &lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/license/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;  Some Rights Reserved&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">div </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">footer_contact</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">https://gitlab.com/codesections</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;GitLab&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">https://github.com/dsock</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;GitHub&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">https://www.linkedin.com/in/daniel-sockwell/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;LinkedIn&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">https://fosstodon.org/@codesections</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Mastodon&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt; |
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">a </span><span style="background-color:#2b303b;color:#d08770;">class</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">link</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">href</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">mailto:daniel-public-email@codesections.com</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;Email&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">a</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">div</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">footer</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">script </span><span style="background-color:#2b303b;color:#d08770;">src</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">/livereload.js?port=1112&amp;mindelay=10</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">script</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">body</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">html</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre><pre class="commentary__pre">
+
+
+Prevents phones from "zooming out"
+to display a window/viewport into
+the page.  This behavior is helpful
+for sites that are not optimized
+for mobile presentation, but isn't
+helpful for this site because it
+contains mobile-specific css styles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+These next several lines link to
+various favicon icons (the little
+icon that shows up in your tab on
+most modern browsers.  Many sites
+just link to 1 favicon, but that
+results in either sending much too
+large of an icon to all browsers
+(reducing page speed) on in sending
+an icon that isn't optimized the
+the relevant browser.  This code
+instead sends just the correct icon
+for each browser.  See
+<a class="link" href="https://realfavicongenerator.net/">realfavicon-generator.net/</a>,
+(which is also the site I used to
+generate these icons) for more
+details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This is the CSS style for the site. 
+A few notes:
+
+First, some people would consider
+it poor practice to inline all the CSS
+as I have instead of linking to an external
+file with the css. Linking to an external
+file has several advantages that make it
+much more widely used:
+
+<ul><li>It is more maintainable.  Different
+pages on the site can all link to the same
+css file, which means that changing
+formatting for a particular element only
+requires changing the single css file. 
+In contrast, if I want to change, say, the
+color of the navigation bar, then I have to
+change that piece of css in all my files.</li>
+
+<li>It is typically faster for repeat visitors
+(or people who visit the site more than once).
+Once someone has downloaded the css for the first
+time, the css file will be cached locally, and
+they won't need to request it from the server. 
+This means that subsequent requests will be able
+to load the local resource, which is faster.</li>
+
+<li>It allows resources to be downloaded in parallel.
+Modern browsers can download multiple files at the
+same time, which means that the browser can download
+something else while it is downloading the first
+css file (such as an image or other css file). 
+In contrast, with inline css, the browser won't start
+downloading any resources until it has fully
+downloaded and parsed the html file.</li>
+
+So, given all those arguments, why did I decide to
+inline the css for this page?  A few reasons.
+First of all, most of those arguments only apply
+to this site very slightly (if at all). 
+This site is small enough that editing multiple
+files isn't much of a burden [EDIT: and is now
+done with a Static Site Generator, eliminating 
+the need to edit multiple files], and I'm
+prioritizing speed and simplicity so much that
+each page of this site fits into the initial
+14kb TCP request--so my speed penalty for repeat
+visitors for inline css is minimal (at most
+~20ms, even on very slow systems).
+
+There are also a few advantages to inlining my css. 
+Most importantly, it reduces load time for first-time
+visitors.  You only get one chance to make a first
+impression, and I want this it to be a fast one.
+Inlining all css (and keeping the page size below 14kb)
+means that we can load the page in a single round-trip
+from the server--the fastest possible scenario.
+(This isn't true for pages that have images, but most
+of my pages don't, and even when they do it still
+reduces the number of requests.)
+
+Inlining the css also has advantages for my project
+of making this site as simple as Feynman's radios. It
+lets me have a single source file that I can point to
+and say, "There it is.  That file has all you need to
+know to understand that page on the site".  And I
+appreciate that simplicity.
+
+Second, the css is written with the BEM
+(Block-Element-Modifier) methodology. See getbem.com
+      </ul></pre>
+    </div>
+  <h3>Self-Sufficient Website</h3>
+  <p class="content-p">[Coming soon]</p>
+  <h3>Fast</h3>
+  <p class="content-p">[Coming soon]</p>
+</section>
+
+
+</section>
+ 
+<footer class="footer">
+  <div class="footer_copyright">
+    © 2018 | <a href="https://www.codesections.com/blog/index.xml" type="application/rss+xml" > RSS </a> | <a class="link" href="/license/">    Some Rights Reserved</a>
+  </div>
+  <div class="footer_contact">
+    <a class="link" href="https://gitlab.com/codesections">GitLab</a> |
+    <a class="link" href="https://github.com/dsock">GitHub</a> |
+    <a class="link" href="https://www.linkedin.com/in/daniel-sockwell/">LinkedIn</a> |
+    <a class="link" href="https://fosstodon.org/@codesections">Mastodon</a> |
+    <a class="link" href="mailto:daniel-public-email@codesections.com">Email</a>
+  </div>
+</footer>
+
+
+<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</html>

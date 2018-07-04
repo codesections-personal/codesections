@@ -1,0 +1,488 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png">
+  <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png">
+  <link rel="manifest"
+        href="/manifest.json">
+  <link rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5">
+  <meta name="theme-color"
+        content="#d9d9d9">
+  
+    <title> Image Compression for Website Speed: Turning it up to 11 | CodeSections </title>
+  
+<style> 
+/*==================================*\
+  ##All CSS for this page
+\*==================================*/
+
+/*  Theme colors:
+ *
+ *  #fd0     yellow (menu bar [old])
+ *  #cde     pastel blue (note boxes)
+ *  #000     true black (site header)
+ *  #4F82BB; Dark Blue  (Nav bar)
+ *  #223     near black (text & logo)
+ *  #fff     white (menu text)
+ *  #07e     sky blue (links)
+ */
+/*==================================*\
+  ##Global
+\*==================================*/
+html {
+  font-family: -apple-system,
+               BlinkMacSystemFont,
+               'Segoe UI',
+               Roboto,
+               'Helvetica Neue',
+               Arial, sans-serif;
+  color: #223; /*near black*/
+}
+  
+/*==================================*\
+  ##Nav bar
+\*==================================*/
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #4F82BB; /*Dark Blue*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+}
+
+.nav-bar--top {
+  top: 0;
+}
+
+.nav-bar__container {
+  display: flex;
+  max-width: 700; /*max comfortable line length*/
+  padding-left: 8px;
+  padding-right:8px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.nav-bar__button {
+  position: relative;
+  /*  This isn't needed for display of this element,
+   *  but important for the :after pseudo element
+   *  below. */
+  cursor: pointer;
+  background-color: inherit;
+  height: 1.25em;
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page) {
+  color: white;
+}
+
+.nav-bar__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-bar__link::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
+.nav-bar__link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  transition: all 0.4s ease;
+  border-top: 3px solid #223; /*near black*/
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page)
+  .nav-bar__link:hover:after {
+    width: 100%;
+}
+
+.svg__logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .nav-bar__button {
+    font-size: 1.382em;
+    line-height: 1.382em;
+    /*  The goal is creating a larger target for
+     *  touch navigation while also shrinking
+     *  the amount of horizontal space devoted to
+     *  the menu.*/
+  }
+}
+
+@media (min-width: 600px) {  /*Tablet-portrait & up*/
+  .nav-bar__button {
+    font-size: 2em;
+  }
+  .svg__logo {
+    height: 64px;
+    width: 64px;
+  }
+}
+  
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  article {
+    margin-top: 2em;
+  }
+}
+
+table {
+  overflow: auto;
+  border-spacing: 0;
+  margin: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 0.5px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.site-header{
+  margin-bottom: 0;
+  margin-top: 1em;
+  text-align: left;
+  font-size: 1.618em;
+  font-weight: 400;
+  line-height: .85;
+  color: #000;
+}
+
+.content-p {
+  color: #223; /*near black*/
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.link,
+a {
+  color: #07e; /*sky blue*/
+  text-decoration: none;
+}
+
+.note {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
+}
+
+p code,
+ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+img {
+  width: 100%;
+}
+
+.highlight {
+  overflow: auto;
+}
+
+.header__blog {
+  margin: auto;
+  width: 175px;
+  width: fit-content;
+  position: relative;
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
+  }
+}
+
+.blog-title {
+  position: absolute;
+  display: inline;
+  top: 54px;
+}
+
+.blog-title--left {
+  right: 180px;
+  display: none;
+}
+
+.blog-title--right {
+  left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .site-header {
+    font-size:  2.618em;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+  }
+}
+  
+/*==================================*\
+  ##Footer
+\*==================================*/
+.footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<nav class="nav-bar nav-bar--top">
+  <div class="nav-bar__container">
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/">Home</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/about">About</a></div>
+    <div class="nav-bar__button">
+      <a href="/">
+        <!-- The code for the site logo, which is an inline SVG because that loads faster-->
+        <svg class="svg__logo" viewBox="0 60 700 700" >
+          <circle r="412.74" fill="#4F82bb" cy="250" cx="350"></circle>        
+          <path d="M 291,128 C 259,154 252,196 268,229 c 11,20
+          32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+          56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+          82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+          74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+          c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+          m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+          C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+          -123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+          71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+          123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+          633,420 696,345 645,287 534,164 487,111 Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/blog">Blog</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/projects">Projects</a></div>
+  </div>
+</nav>
+
+<section class="content-main">
+  
+  <h2>Image Compression for Website Speed: Turning it up to 11</h2>
+  <p>A few months ago, I got very into maximizing the speed of my website.  I feel
+pretty good about what I accomplished:</p>
+<p><img src="/blog/image-compression-for-website-speed/pingdom.jpg" alt="100% score from Pingdom tools" /></p>
+<p>(I actually prefer the results from <a href="https://www.webpagetest.org/result/180612_B9_3853bf53a2703c0582863edfd1f34791/">webpagetest.org</a>, and not just because it show my site as loading even faster.  It's open-source and seems to have a better methodology.  But it doesn't generate as pretty a picture, so I went with the Pingdom screenshot above.)</p>
+<p>My home page loads in well under a second, and transfers only 2.4kb of data.  All of the pages in my site loaded their above-the-fold content without any blocking scripts or external CSS.  Plus, my site is served of of Netlify's global CDN, so it attains basically the same speed for visitors from anywhere in the world.  I was generally satisfied with that result, and stopped thinking much about my site speed.</p>
+<p>Then, today, I realized that I'd let things slip a bit; I'd uploaded a few
+images without giving any thought to compression, and a couple of pages were
+much larger—and therefore slower—than they had any right to be.</p>
+<p>So, I decided to fix that.</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="from-png-to-inline-svg">From .PNG to inline .SVG</h2>
+<p>The first step was to deal with the codesections logo on the <a href="/blog">blog home page</a>.  This logo, as you might have noticed, is a section symbol surrounded by angle brackets: &lt;§&gt;.  To render that image, I'd lazily used a PNG file I had lying around from a previous project.  At 27kb, it wasn't that large for a PNG file, but it was much larger than it needed to be and—since the logo is at the top of the page—meant that the above-the-fold content for my main blog page could never load in the first round trip of data sent by the server. (Due to a <a href="https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/">quirk of the TCP protocol</a>, only 14kb of data are sent in the first round trip.)</p>
+<p>So, I need to get that image a lot smaller.  The first step is to switch from the PNG file I'd lazily inserted and to an SVG. If you're not familiar with SVGs (<a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">Scalable Vector Graphics</a>), here are the basics: An SVG is a recording of an image that tells the computer how to draw it using shapes and lines.  So to draw a black circle, you might have an SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle">like this</a>:</p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">svg </span><span style="background-color:#2b303b;color:#d08770;">viewBox</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">0 0 100 100</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">xmlns</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.w3.org/2000/svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">circle </span><span style="background-color:#2b303b;color:#d08770;">cx</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">50</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">cy</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">50</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">r</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">50</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;/&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre>
+<p>This contrasts with JPEG and PNG files, which (to grossly oversimplify), store information about the color of each pixel in the image.</p>
+<p>All this means that, at least for simple images, there's the possibility that an SVG can take up far less space—if it can describe a few simple shapes, it can create the same image with less data.</p>
+<p>So, my first task is to get the logo as an SVG instead of a PNG.  I happen to also have an SVG version of the logo, so this task is easy—and, as an added bonus, it gets me a better-looking version of the logo too. So, we've gone from this image:</p>
+<p><img src="/blog/image-compression-for-website-speed/android-chrome-384x384.png" alt="PNG logo" /></p>
+<p>which takes up 28 kb of data, to this image:</p>
+<p><img src="./original-logo.svg" alt="First svg logo" /></p>
+<p>Which takes up &quot;only&quot; 9.8kb.  But 9.8 is still way to large a fraction of our ~14kb budget.  How can we get it down further?</p>
+<p>Well, after opening up this image for editing in Inkscape (a free-as-in-freedom SVG editor) and zooming in, we see something like this:</p>
+<p><img src="./inkscape-screenshot.jpg" alt="Inkscape screenshot" /></p>
+<p>If you look closely, you should be able to see a whole mess of grey boxes in that screenshot.  Each one of those is a &quot;node&quot;, and each one represents us telling the computer to draw a line from one point to another.  Looking at how many nodes we have, it's clear what's going on: We're telling the computer &quot;draw a straight line.  And then another. And then another …&quot; and on and on.  We could be much more efficient if we just told the computer &quot;draw one long straight line&quot;.  And so that's exactly what we'll do.</p>
+<p>Lets pause, first, to ask how the SVG got this way in the first place.  Why is the straight line in that angle bracket being represented as dozens of little lines instead of the one long line it should be?  This almost certainly happened because the SVG was created by converting a PNG or JPG to SVG.  The line in the PNG wasn't perfectly straight—it was close but, pixels being square and all, it wasn't quite 100% straight.  So, the SVG conversion did it's best to approximate the almost-straight line by joining a series of straight lines.</p>
+<p>But we can do better than that.  We know that the line really is straight, so we can delete all the nodes except for the first and the last and tell Inkscape to draw a line just from the first to last.  And, although it's a bit more complicated, we can do the same with the curves as well.  After deleting the relevant nodes, we can get down to this:</p>
+<p><img src="./codesections_v3.svg" alt="revised SVG logo" /></p>
+<p>This image is now down to 2.6kb.  Is that the best we can do?</p>
+<p>Not quite.</p>
+<h2 id="hand-editing-svg-files">Hand-editing SVG files</h2>
+<p>Remember how I said that an SVG is literally telling the computer to draw lines and shapes?  And remember the example of the plane black circle?  What that showed us was that SVGs are really just text files, which means we can open them up as text files and edit them by hand.</p>
+<p>If we open up this latest SVG, here's what we get:</p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;?</span><span style="background-color:#2b303b;color:#bf616a;">xml </span><span style="background-color:#2b303b;color:#d08770;">version</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">1.0</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">encoding</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">UTF-8</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">standalone</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">no</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;?&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">svg
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">xmlns:dc</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://purl.org/dc/elements/1.1/</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">xmlns:cc</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://creativecommons.org/ns#</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">xmlns:rdf</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.w3.org/1999/02/22-rdf-syntax-ns#</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">xmlns:svg</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.w3.org/2000/svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">xmlns</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://www.w3.org/2000/svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">id</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">svg4</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">viewBox</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">0 0 697.000000 697.000000</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">height</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">929.333</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">width</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">929.333</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">   </span><span style="background-color:#2b303b;color:#d08770;">version</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">1</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">metadata
+</span><span style="background-color:#2b303b;color:#c0c5ce;">     </span><span style="background-color:#2b303b;color:#d08770;">id</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">metadata10</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">rdf:RDF</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">cc:Work
+</span><span style="background-color:#2b303b;color:#c0c5ce;">         </span><span style="background-color:#2b303b;color:#d08770;">rdf:about</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;&quot;&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">dc:format</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;image/svg+xml&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">dc:format</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">dc:type
+</span><span style="background-color:#2b303b;color:#c0c5ce;">           </span><span style="background-color:#2b303b;color:#d08770;">rdf:resource</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">http://purl.org/dc/dcmitype/StillImage</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">        </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">dc:title</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">dc:title</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">cc:Work</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">rdf:RDF</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">metadata</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">defs
+</span><span style="background-color:#2b303b;color:#c0c5ce;">     </span><span style="background-color:#2b303b;color:#d08770;">id</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">defs8</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">path
+</span><span style="background-color:#2b303b;color:#c0c5ce;">     </span><span style="background-color:#2b303b;color:#d08770;">style</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">fill:#000000;fill-opacity:1</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">     </span><span style="background-color:#2b303b;color:#d08770;">id</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">path2</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">     </span><span style="background-color:#2b303b;color:#d08770;">d</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">M 291.7501,128.4998 C 259.12035,154.45085 252.33043,196.38614
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">268.2,229.7 c 11.12395,20.29793 32.32727,29.24885 40.80011,37.54985
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-36.56595,16.77496 -57.53011,44.33155 -59.25002,85.50003 -1.77838,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">64.12102 56.47868,91.467 99.00003,111.75004 39.87151,11.6827 
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">56.99316,62.95427 29.25001,96.00003 -8.28965,12.60803 -52.14788,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">18.05768 -60.60013,-4.19995 -21.73612,-76.01451 -86.49645,-28.5634
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-40.6499,24.44996 37.74022,20.30559 82.86095,23.41328 120.75004,-1.5
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">19.44032,-14.39791 39.56987,-47.70337 36.75001,-81.00003 -5.53921,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-34.28839 -21.4429,-44.78456 -49.50002,-66.00002 61.99383,-32.5635
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">74.45652,-124.43646 21.75001,-155.25006 C 364.5592,249.90487
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">307.64442,232.63183 300.75011,196.74982 290.8481,145.89728 325.9521,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">132.17336 357,132.2498 c 29.40633,1.41536 33.74607,31.8798 41.25014,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">45.75002 31.72169,28.76918 39.619,-12.37961 34.50001,-27.00001 C 
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">415.26091,98.989802 327.84563,104.77506 291.7501,128.4998 Z m 
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">69.7500,292.5001 C 268.95774,381.01565 271.30101,320.71831 331.5,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">279.24985 c 100.47547,9.35417 81.67411,111.46981 30.00013,141.75005
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">z M 0.75000026,347.49988 C 42.664217,395.84147 168.85857,539.80643 
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">207.75007,581.49996 c 0.37902,-33.59273 0.82917,-57.36989 0.75,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-94.50003 -41.88686,-46.67619 -85.69273,-96.55522 -123.00004,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-139.50005 37.58387,-49.87042 85.61892,-98.45817 123.00004,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-143.25005 0.63705,-16.36965 -0.56839,-81.03471 -1.5,-93.00004
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">C 136.89127,195.44151 71.521089,271.04919 0.75000026,347.49988
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">Z M 487.50017,111.9998 c -0.49348,32.0443 -0.0766,56.35026 
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">-1.7e-4,90.75003 38.75787,45.35593 96.72358,111.80538 123.75021,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">143.25005 C 568.4583,396.8741 526.8563,446.06682 487.5,490.74993
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">c 0.91441,10.6116 1.72887,82.29659 1.50017,90.75003 C 544.01547,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">518.88602 633.62692,420.84172 696.75024,345.99988 645.15898,
+</span><span style="background-color:#2b303b;color:#a3be8c;">     </span><span style="background-color:#2b303b;color:#a3be8c;">287.19487 534.88535,164.32884 487.50017,111.9998 Z</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre>
+<p>That's certainly a lot more complex than our circle example!  But even without parsing the whole SVG syntax, we can make a few observations right off the bat.  First, we can see that the top of the document contains a lot of metadata—data that we may be able to cut if we don't need to record that much information.</p>
+<p>Second, we can notice that the numbers in the long block of text are <strong>really precise</strong>.  In most of the numbers, we have 8 decimals of precision—far more than we're likely to need, especially considering that we're planning to use this image as a header in our logo.</p>
+<p>So, lets edit our file to remove that precision and strip out some of the metadata we don't need.  What does that leave us with?</p>
+<pre style="background-color:#2b303b">
+<span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">svg </span><span style="background-color:#2b303b;color:#d08770;">height</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">175</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">width</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">175</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; </span><span style="background-color:#2b303b;color:#d08770;">viewBox</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">0 0 700 700</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; &gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;</span><span style="background-color:#2b303b;color:#bf616a;">path </span><span style="background-color:#2b303b;color:#d08770;">d</span><span style="background-color:#2b303b;color:#c0c5ce;">=&quot;</span><span style="background-color:#2b303b;color:#a3be8c;">M 291,128 C 259,154 252,196 268,229 c 11,20 32,29 40,37 -36,16
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">-57,44 -59,85 -1,64 56,91 99,111 39,11 56,62 29,96 -8,12 -52,18 -60,-4 
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">-21,-76 -86,-28 -40,24 37,20 82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">-21,-44 -49,-66 61,-32 74,-124 21,-155 C 364,249 307,232 300,196 290,145
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">325,132 357,132 c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">291,128 Z m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">0,347 C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96 -123
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195 71,271 0,347
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111 123,143 C 568,396 526,
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">446 487,490 c 0,10 1,82 1,90 C 544,518 633,420 696,345 645,287 534,164
+</span><span style="background-color:#2b303b;color:#a3be8c;">  </span><span style="background-color:#2b303b;color:#a3be8c;">487,111 Z</span><span style="background-color:#2b303b;color:#c0c5ce;">&quot; /&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;/</span><span style="background-color:#2b303b;color:#bf616a;">svg</span><span style="background-color:#2b303b;color:#c0c5ce;">&gt;
+</span></pre>
+<p>At this point, we've reduced the file size down below a single kilobyte—in fact, we've gotten it down to only 817 bytes.</p>
+<p>We can pull one final trick, however: we can &quot;inline&quot; the SVG; that is, we can include it directly into our HTML instead of linking it as an external file.  This has two advantages.  First, it means that our page has one fewer HTTP request to make, which further speeds up page load time.  Second, it means that we can compress the text of the SVG at the same time we compress our HTML—which means we can compress both a little bit more.  It's always easier to compress a longer file than to compress two shorter files, since there will be more repetition and textual compression thrives on repetition.</p>
+<p>So, we now have our image into the page, and have done so in a way that takes up hardly any space at all—less than one-twenty-eighth of what we started with.  We've achieved an ~97% reduction in storage space devoted to the image, and can declare victory.</p>
+<p>At least, we can declare victory over the images that can be converted to SVGs. In the next post in this series, I'll talk about how I'm compressing the images that <strong>can't</strong> be converted to SVGs, including all the JPGs in this post itself.</p>
+
+
+</section>
+ 
+<footer class="footer">
+  <div class="footer_copyright">
+    © 2018 | <a href="https://www.codesections.com/blog/index.xml" type="application/rss+xml" > RSS </a> | <a class="link" href="/license/">    Some Rights Reserved</a>
+  </div>
+  <div class="footer_contact">
+    <a class="link" href="https://gitlab.com/codesections">GitLab</a> |
+    <a class="link" href="https://github.com/dsock">GitHub</a> |
+    <a class="link" href="https://www.linkedin.com/in/daniel-sockwell/">LinkedIn</a> |
+    <a class="link" href="https://fosstodon.org/@codesections">Mastodon</a> |
+    <a class="link" href="mailto:daniel-public-email@codesections.com">Email</a>
+  </div>
+</footer>
+
+
+<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</html>

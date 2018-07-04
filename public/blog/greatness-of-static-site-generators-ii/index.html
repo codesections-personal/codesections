@@ -1,0 +1,393 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png">
+  <link rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png">
+  <link rel="manifest"
+        href="/manifest.json">
+  <link rel="mask-icon"
+        href="/safari-pinned-tab.svg"
+        color="#5bbad5">
+  <meta name="theme-color"
+        content="#d9d9d9">
+  
+    <title> Greatness of Static Site Generators, Part II | CodeSections </title>
+  
+<style> 
+/*==================================*\
+  ##All CSS for this page
+\*==================================*/
+
+/*  Theme colors:
+ *
+ *  #fd0     yellow (menu bar [old])
+ *  #cde     pastel blue (note boxes)
+ *  #000     true black (site header)
+ *  #4F82BB; Dark Blue  (Nav bar)
+ *  #223     near black (text & logo)
+ *  #fff     white (menu text)
+ *  #07e     sky blue (links)
+ */
+/*==================================*\
+  ##Global
+\*==================================*/
+html {
+  font-family: -apple-system,
+               BlinkMacSystemFont,
+               'Segoe UI',
+               Roboto,
+               'Helvetica Neue',
+               Arial, sans-serif;
+  color: #223; /*near black*/
+}
+  
+/*==================================*\
+  ##Nav bar
+\*==================================*/
+.nav-bar {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #4F82BB; /*Dark Blue*/
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+}
+
+.nav-bar--top {
+  top: 0;
+}
+
+.nav-bar__container {
+  display: flex;
+  max-width: 700; /*max comfortable line length*/
+  padding-left: 8px;
+  padding-right:8px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.nav-bar__button {
+  position: relative;
+  /*  This isn't needed for display of this element,
+   *  but important for the :after pseudo element
+   *  below. */
+  cursor: pointer;
+  background-color: inherit;
+  height: 1.25em;
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page) {
+  color: white;
+}
+
+.nav-bar__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-bar__link::selection {
+  background-color: inherit;
+  color: inherit;
+}
+
+.nav-bar__link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  transition: all 0.4s ease;
+  border-top: 3px solid #223; /*near black*/
+}
+
+.nav-bar__button:not(.nav-bar__button--current-page)
+  .nav-bar__link:hover:after {
+    width: 100%;
+}
+
+.svg__logo {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 599px) { /*Phone only*/
+  .nav-bar__button {
+    font-size: 1.382em;
+    line-height: 1.382em;
+    /*  The goal is creating a larger target for
+     *  touch navigation while also shrinking
+     *  the amount of horizontal space devoted to
+     *  the menu.*/
+  }
+}
+
+@media (min-width: 600px) {  /*Tablet-portrait & up*/
+  .nav-bar__button {
+    font-size: 2em;
+  }
+  .svg__logo {
+    height: 64px;
+    width: 64px;
+  }
+}
+  
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  article {
+    margin-top: 2em;
+  }
+}
+
+table {
+  overflow: auto;
+  border-spacing: 0;
+  margin: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 0.5px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.site-header{
+  margin-bottom: 0;
+  margin-top: 1em;
+  text-align: left;
+  font-size: 1.618em;
+  font-weight: 400;
+  line-height: .85;
+  color: #000;
+}
+
+.content-p {
+  color: #223; /*near black*/
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.link,
+a {
+  color: #07e; /*sky blue*/
+  text-decoration: none;
+}
+
+.note {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
+}
+
+p code,
+ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+img {
+  width: 100%;
+}
+
+.highlight {
+  overflow: auto;
+}
+
+.header__blog {
+  margin: auto;
+  width: 175px;
+  width: fit-content;
+  position: relative;
+  margin-top: -5px;
+  margin-bottom: -15px;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  header__blog {
+    margin-right: calc(50% - 55px);
+  }
+}
+
+.blog-title {
+  position: absolute;
+  display: inline;
+  top: 54px;
+}
+
+.blog-title--left {
+  right: 180px;
+  display: none;
+}
+
+.blog-title--right {
+  left: 180px;
+  display: none;
+}
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .blog-title--right,
+  .blog-title--left {
+    display: inline;
+  }
+}
+
+.pagination-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .site-header {
+    font-size:  2.618em;
+    padding-top: 4vh;
+    padding-bottom: 1vh;
+  }
+}
+  
+/*==================================*\
+  ##Footer
+\*==================================*/
+.footer {
+  margin-top: 1em;
+  text-align: center;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<nav class="nav-bar nav-bar--top">
+  <div class="nav-bar__container">
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/">Home</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/about">About</a></div>
+    <div class="nav-bar__button">
+      <a href="/">
+        <!-- The code for the site logo, which is an inline SVG because that loads faster-->
+        <svg class="svg__logo" viewBox="0 60 700 700" >
+          <circle r="412.74" fill="#4F82bb" cy="250" cx="350"></circle>        
+          <path d="M 291,128 C 259,154 252,196 268,229 c 11,20
+          32,29 40,37 -36,16 -57,44 -59,85 -1,64 56,91 99,111 39,11
+          56,62 29,96 -8,12 -52,18 -60,-4 -21,-76 -86,-28 -40,24 37,20
+          82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 -21,-44 -49,-66 61,-32
+          74,-124 21,-155 C 364,249 307,232 300,196 290,145 325,132 357,132
+          c 29,1 33,31 41,45 31,28 39,-12 34,-27 C 415,98 327,104 291,128 Z
+          m 69,292 C 268,381 271,320 331,279 c 100,9 81,111 30,141 z M 0,347
+          C 42,395 168,539 207,581 c 0,-33 0,-57 0,-94 -41,-46 -85,-96
+          -123,-139 37,-49 85,-98 123,-143 0,-16 -0,-81 -1,-93 C 136,195
+          71,271 0,347 Z M 487,111 c -0,32 -0,56 -1.7e-4,90 38,45 96,111
+          123,143 C 568,396 526,446 487,490 c 0,10 1,82 1,90 C 544,518
+          633,420 696,345 645,287 534,164 487,111 Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/blog">Blog</a></div>
+    <div class="nav-bar__button"><a class="nav-bar__link" href="/projects">Projects</a></div>
+  </div>
+</nav>
+
+<section class="content-main">
+  
+  <h2>Greatness of Static Site Generators, Part II</h2>
+  <p>In the <a href="/blog/why-static-site-generators-are-great/">last post</a>, we talked about the history of website hosting and the rise of dynamic websites powered by PHP.  Now, we’re going to turn to more recent history and see how content delivery networks have changed the nature of the modern web.</p>
+<h3 id="content-delivery-networks-and-the-global-mobile-web">Content Delivery Networks and the Global, Mobile Web</h3>
+<p>One of the biggest advantages of the Internet is how global it is—if your site is hosted in Atlanta, it might get visitors from down the block, but it just as easily might get visitors from New York, or London, or Tokyo.  And that’s pretty incredible.  But it also raises a fundamental problem:</p>
+<p><a name="continue-reading"></a></p>
+<p> To see your site, a visitor has to literally wait for data to be transmitted across the distance from your web server to their computer. And, because the world is a big place, and the speed of light is a bit slow, that can be a long wait (especially because the data likely won’t go in a straight line, but will <a href="https://en.wikipedia.org/wiki/Internet_backbone">instead bounce around in a fascinating way</a> as it makes its way across the globe).</p>
+<p>How big of a problem is this, really?  Well, it depends.  It might hardly matter at all, if you have a text-only website that has a local audience who visits it from a desktop computer with a high-speed Internet connection.  On the other hand, if you want your site to have high-definition pictures or, even worse, video, then it’s likely going to be a concern.  And that goes double if you think that many of your visitors might be browsing your site over slower internet connections, like those on cellular networks.  With how popular mobile browsing is these days, pretty much <strong>everyone</strong> should be thinking about that.  So, it depends, but it’s pretty likely that it matters for your site.</p>
+<p>Your Atlanta-hosted site might be blazingly fast in Rome, GA, but very slow in Rome, Italy.  If only there were a way for your visitors from Italy to get the same experience that your visitors in Georgia get.</p>
+<p>Of course, there is: you can host a second copy of your website in Venice and redirect your Italian visitors to that site.  So then your Italian visitors will get the same experience as your Georgian visitors … unless, of course, we’re talking about the Georgia that boarders Russia, in which case they’ll still be out of luck.  To get those visitors a fast experience, you’ll need to host a copy of your website close to them, and then one (or several!) close to your visitors from Asia.  And, while we’re at it, California isn’t really that close to Atlanta, nor is London that close to Venice …</p>
+<p>Clearly, if you really went down that route, you could quickly find yourself hosting dozens of copies of your site.  Is that really worth it, even if it makes your site vastly faster for many visitors?</p>
+<p>Well, probably not for the simple example site we’ve been thinking about, but for Google, Amazon, or other huge global companies, absolutely.  And, as far back as the late 90s, other companies understood this need and started building Content Delivery Networks to provide it.  A CDN basically runs local copies of your website, and steers visitors to the closest available copy.</p>
+<p>So, CDNs started out as a premium service for large sites.  (Indeed, the CDN that I use, Akamai, which is one of the largest and best CDNs, still largely does business exclusively with large companies.)  But it didn’t stay that way for long.  By the early 2010s, there were multiple CDNs offering services to consumer websites, with cheap or even free plans.  By 2018, if a site isn’t using a CDN, it basically can’t provide the sort of speed that its competitors can offer.</p>
+<p>“But wait a second,” I hear you reasonably object.  “How can a CDN host dozens of copies of my site for free when it isn’t even free to host a single copy of my site?”  That’s a very good question, and to answer it, we’ll need to go into a bit more detail, and expose an oversimplification from the explanation above.</p>
+<p>When first introducing CDNs, I gave the example of literally running copies of your site all over the globe.  That may sometimes be the way it’s done, but it’s typically not (at least for consumer CDNs).  Instead, a CDN will ask you to label content that isn’t likely to change, like images you post to particular pages.  The CDN will then host that content, and only that content.  For content that changes all the time (including all dynamically generated content) the CDN will direct your visitors back to your main server.</p>
+<p>But that raises two questions.  First, even if the CDN is only hosting some of the files, how does that get it cheap enough that they can offer the prices that they do?  And, second, how do CDNs speed up the load times, if users have to wait for a response from the main server anyway?</p>
+<p>The first answer turns on the distinction between static content and dynamic content we talked about back when we were discussing PHP.  Remember how I said it was much cheaper to host static content (like the flat HTML files from the 90s) than to host dynamic content (the dynamically generated pages produced by PHP from the early 2000s)?  That’s still true today, and is the reason CDNs work the way they do: because they don’t need to devote any processing power to deciding what to send back to a visitor, or to building a website based on PHP code.  Instead, it can just send back the resource, which is computationally cheap—so cheap that CDNs can offer the great prices that they do.</p>
+<p>The answer to the second question is a little more complicated.  The length of time it takes to load a website will depend on <em>both</em> the amount of data transferred <em>and</em> the distance the data has to travel.  So, if your CDN-less Atlanta-hosted site has a visitor from Rome, GA, it will be incredibly fast to send them a small file (like the text of your page), and a bit slow to send them a large file (like a HD picture set as your background).  If your site has a visitor from Rome, Italy, it will be a bit slow even to send the small file (due to the distance), and <strong>very</strong> slow to send the HD picture.</p>
+<p>A CDN helps in that situation, because it can handle hosting the image for you (since that’s one of those things that don’t change frequently that you can put on a CDN).  With a CDN, a visitor from Rome would still have to wait a bit for your text to load and (like everyone) they’d have to wait a bit for your large image to load.  But they’d avoid the excruciating wait for a large image being transmitted across a large ocean.</p>
+<p>But they still wouldn’t get <em>quite</em> as good an experience as your visitors from Rome, GA—they’d still have to wait for the basic HTML/text content of your site to load across the ocean.  The only way to avoid that loading time would be to put your entire site onto the CDN, which isn’t possible … at least not with a dynamic site, built the way sites were built fifteen years ago.</p>
+<h3 id="static-site-generators-the-speed-of-static-with-the-power-of-dynamic">Static Site Generators: The Speed of Static, with the Power of Dynamic</h3>
+<p>With that context, we can at last see the problem that static site generators are built to solve: How can we build a site that has all the power of a dynamic site while also keeping the finished product static?  We want a tool that gives us the power to manage our content and reuse elements just like we can with a site built with PHP, but that also lets us host our entire site on a CDN.</p>
+<p>And that’s exactly what a static site generator gives us.  How does it pull that off?</p>
+<p>By flipping the order.  Instead of building a copy of the site every time a visitor comes to your site (which requires the web server to use it’s processor to apply the logic in PHP files), a static site generator builds the website on the developer’s computer—that is, on <em>your</em> computer as you’re coding the site.  Instead of writing a PHP file with templating logic (“first the navigation menu, <em>then</em> the content …”) and letting the web server apply that logic, you instead write a template file, and have the static site generator spit out a built file assembled from our separate pieces.  The end result is that you have exactly the same site that you would have had if you’d coded it all by hand like you would have in the early 90s—it’s incredibly fast, totally static, and can be hosted on an CDN for pennies (or even for free).  But, crucially, you didn’t need to build it all by hand, and can reuse (or update) different pieces by making changes to a single file and then updating the site.</p>
+<p>This is <em>almost</em> the same as with PHP.  But with two crucial differences.  First, it’s done whenever you add content to the site, instead of every time someone visits the site (which means it’s done much less frequently).  And, second, it’s done on your own computer, which has plenty of processing power to spare that you’ve already paid for, instead of on a web server that you rent (and have to pay for processing power on).</p>
+<p>And so that’s the best way to build a website in the late 2010s: write a dynamic website, with each component separated out and easily editable, and then use a static site generator to transform that dynamic site into a set of flat, static files that can be hosted on a CDN.  The power and flexibility of a dynamic site, with the speed and low cost of a static one.</p>
+<p>I don’t want to make this sound perfect—there are a few downsides to a static site, and I’ll have more about what those are and how to overcome them soon.  And, even after deciding to use a static site, there’s still the matter of selecting a static site generator—and there are many!  But the basic point stands: these days, there’s no faster or cheaper way to build a website than by using a static site generator.</p>
+
+
+</section>
+ 
+<footer class="footer">
+  <div class="footer_copyright">
+    © 2018 | <a href="https://www.codesections.com/blog/index.xml" type="application/rss+xml" > RSS </a> | <a class="link" href="/license/">    Some Rights Reserved</a>
+  </div>
+  <div class="footer_contact">
+    <a class="link" href="https://gitlab.com/codesections">GitLab</a> |
+    <a class="link" href="https://github.com/dsock">GitHub</a> |
+    <a class="link" href="https://www.linkedin.com/in/daniel-sockwell/">LinkedIn</a> |
+    <a class="link" href="https://fosstodon.org/@codesections">Mastodon</a> |
+    <a class="link" href="mailto:daniel-public-email@codesections.com">Email</a>
+  </div>
+</footer>
+
+
+<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</html>
