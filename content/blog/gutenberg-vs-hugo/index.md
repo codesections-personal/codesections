@@ -1,20 +1,14 @@
 +++
-title = "Gutenberg versus Hugo"
+title = "Benchmarking & Comparing Static Site Generators: Gutenberg versus Hugo"
 date = 2018-07-02
 +++
 
-I've recently decided to switch from the [Hugo](https://gohugo.io/) static
-site generator to [Gutenberg](https://www.getgutenberg.io/), another static
-site generator.  I think they're both great tools (I [really
-love](https://www.codesections.com/blog/why-static-site-generators-are-great/)
-[static site generators](https://www.codesections.com/blog/greatness-of-static-site-generators-ii/),
-after all), and I'd be happy to recommend either one.  And, depending on your
-use case, Hugo could be the better choice.  Nevertheless, as of this post,
-I've officially switched to Gutenberg, and I'm very happy to have made the
-switch.
-
-This post compares Gutenberg and Hugo on five metrics: speed, template syntax,
-features, documentation/support, and hackability. 
+As of this post, this blog is now powered by the static site generator 
+[Gutenberg](https://www.getgutenberg.io/) instead of [hugo](https://gohugo.io).
+I was pretty happy about Hugo and don't have much bad to say about it, but
+I'm even happier with Gutenberg.  This post provides an in-depth comparison 
+between the two on five dimensions (speed, template syntax, features,
+documentation/support, and hackability) and explains why I decided to switch.
 
 ## Speed
 
