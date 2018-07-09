@@ -11,7 +11,6 @@ between the two on five dimensions (speed, template syntax, features,
 documentation/support, and hackability) and explains why I decided to switch.
 
 ## Speed
-
 In some sense, this is the least important of the five metrics—both Hugo and
 Gutenberg are fast.  Really fast.  So fast that, at least with small sites,
 you'll likely never have a noticeable wait when using either program.
@@ -88,7 +87,6 @@ syntax highlighting, so it's entirely possible that Gutenberg might eke out
 a win on a site with less syntax highlighting.
 
 ## Template Syntax
-
 This is another area that could either be all important or totally irrelevant,
 depending entirely on your use case.  It's entirely possible to use Hugo, 
 Gutenberg, or any other static site generator entirely by selecting themes
@@ -130,6 +128,7 @@ Here's a simple template from Gutenberg:
 ```
 
 And here's the same thing in Hugo:
+
 ```go
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
@@ -151,7 +150,6 @@ different overall experience.  And, having tried both, the experience is
 a lot better with the Gutenberg/Tera/Jinja2/Liquid style.
 
 ## Features
-
 This one is going to depend heavily on your use case: Hugo and Gutenberg 
 share the same basic features, but both have features built in that the other
 one lacks. Both (of course) parse Markdown into html; both support themes 
@@ -212,7 +210,7 @@ window.NREUM||(NREUM={})
 
 And here's what it looks like with Hugo:
 
-![Syntax highlighting in Hugo](hugo-syntax-highlighting.png)
+[![Syntax highlighting in Hugo](hugo-syntax-highlighting.png)](hugo-syntax-highlighting.png)
 
 As you can see, the Hugo version works fine on the HTML but totally fails
 with the inline JavaScript.  That's because Hugo is looking for keywords but
@@ -226,7 +224,6 @@ Of course, how much this feature matters to you will depend entirely on how
 much you want to highlight complex/nested code.
 
 ## Documentation/Support
-
 Hugo and Gutenberg both have **excellent** documentation and support, but they
 each have very **different** documentation and support.  Hugo comes with a 
 somewhat overwhelming 22,400 lines of (English) documentation detailing 

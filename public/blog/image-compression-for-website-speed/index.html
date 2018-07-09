@@ -348,7 +348,7 @@ img {
   <h2>Image Compression for Website Speed: Turning it up to 11</h2>
   <p>A few months ago, I got very into maximizing the speed of my website.  I feel
 pretty good about what I accomplished:</p>
-<p><img src="/blog/image-compression-for-website-speed/pingdom.jpg" alt="100% score from Pingdom tools" /></p>
+<p><a href="/blog/image-compression-for-website-speed/pingdom.png"><img src="/blog/image-compression-for-website-speed/pingdom-min.jpg" alt="100% score from Pingdom tools" /></a></p>
 <p>(I actually prefer the results from <a href="https://www.webpagetest.org/result/180612_B9_3853bf53a2703c0582863edfd1f34791/">webpagetest.org</a>, and not just because it show my site as loading even faster.  It's open-source and seems to have a better methodology.  But it doesn't generate as pretty a picture, so I went with the Pingdom screenshot above.)</p>
 <p>My home page loads in well under a second, and transfers only 2.4kb of data.  All of the pages in my site loaded their above-the-fold content without any blocking scripts or external CSS.  Plus, my site is served of of Netlify's global CDN, so it attains basically the same speed for visitors from anywhere in the world.  I was generally satisfied with that result, and stopped thinking much about my site speed.</p>
 <p>Then, today, I realized that I'd let things slip a bit; I'd uploaded a few
@@ -367,24 +367,23 @@ much larger—and therefore slower—than they had any right to be.</p>
 <p>This contrasts with JPEG and PNG files, which (to grossly oversimplify), store information about the color of each pixel in the image.</p>
 <p>All this means that, at least for simple images, there's the possibility that an SVG can take up far less space—if it can describe a few simple shapes, it can create the same image with less data.</p>
 <p>So, my first task is to get the logo as an SVG instead of a PNG.  I happen to also have an SVG version of the logo, so this task is easy—and, as an added bonus, it gets me a better-looking version of the logo too. So, we've gone from this image:</p>
-<p><img src="/blog/image-compression-for-website-speed/android-chrome-384x384.png" alt="PNG logo" /></p>
+<p><a href="android-chrome-384x384.png"><img src="android-chrome-384x384.png" alt="PNG logo" /></a></p>
 <p>which takes up 28 kb of data, to this image:</p>
-<p><img src="./original-logo.svg" alt="First svg logo" /></p>
+<p><a href="original-logo.svg"><img src="original-logo.svg" alt="First svg logo" /></a></p>
 <p>Which takes up &quot;only&quot; 9.8kb.  But 9.8 is still way to large a fraction of our ~14kb budget.  How can we get it down further?</p>
 <p>Well, after opening up this image for editing in Inkscape (a free-as-in-freedom SVG editor) and zooming in, we see something like this:</p>
-<p><img src="./inkscape-screenshot.jpg" alt="Inkscape screenshot" /></p>
+<p><a href="inkscape-screenshot.jpg"><img src="inkscape-screenshot-min.jpg" alt="Inkscape screenshot" /></a></p>
 <p>If you look closely, you should be able to see a whole mess of grey boxes in that screenshot.  Each one of those is a &quot;node&quot;, and each one represents us telling the computer to draw a line from one point to another.  Looking at how many nodes we have, it's clear what's going on: We're telling the computer &quot;draw a straight line.  And then another. And then another …&quot; and on and on.  We could be much more efficient if we just told the computer &quot;draw one long straight line&quot;.  And so that's exactly what we'll do.</p>
 <p>Lets pause, first, to ask how the SVG got this way in the first place.  Why is the straight line in that angle bracket being represented as dozens of little lines instead of the one long line it should be?  This almost certainly happened because the SVG was created by converting a PNG or JPG to SVG.  The line in the PNG wasn't perfectly straight—it was close but, pixels being square and all, it wasn't quite 100% straight.  So, the SVG conversion did it's best to approximate the almost-straight line by joining a series of straight lines.</p>
 <p>But we can do better than that.  We know that the line really is straight, so we can delete all the nodes except for the first and the last and tell Inkscape to draw a line just from the first to last.  And, although it's a bit more complicated, we can do the same with the curves as well.  After deleting the relevant nodes, we can get down to this:</p>
-<p><img src="./codesections_v3.svg" alt="revised SVG logo" /></p>
+<p><a href="codesections_v3.svg"><img src="codesections_v3.svg" alt="revised SVG logo" /></a></p>
 <p>This image is now down to 2.6kb.  Is that the best we can do?</p>
 <p>Not quite.</p>
 <h2 id="hand-editing-svg-files">Hand-editing SVG files</h2>
 <p>Remember how I said that an SVG is literally telling the computer to draw lines and shapes?  And remember the example of the plane black circle?  What that showed us was that SVGs are really just text files, which means we can open them up as text files and edit them by hand.</p>
 <p>If we open up this latest SVG, here's what we get:</p>
 <pre style="background-color:#002b36">
-<span style="background-color:#002b36;color:#839496;">
-</span><span style="background-color:#002b36;color:#586e75;">&lt;?</span><span style="background-color:#002b36;color:#268bd2;">xml </span><span style="background-color:#002b36;color:#839496;">version=&quot;</span><span style="background-color:#002b36;color:#2aa198;">1.0</span><span style="background-color:#002b36;color:#839496;">&quot; encoding=&quot;</span><span style="background-color:#002b36;color:#2aa198;">UTF-8</span><span style="background-color:#002b36;color:#839496;">&quot; standalone=&quot;</span><span style="background-color:#002b36;color:#2aa198;">no</span><span style="background-color:#002b36;color:#839496;">&quot;</span><span style="background-color:#002b36;color:#586e75;">?&gt;
+<span style="background-color:#002b36;color:#586e75;">&lt;?</span><span style="background-color:#002b36;color:#268bd2;">xml </span><span style="background-color:#002b36;color:#839496;">version=&quot;</span><span style="background-color:#002b36;color:#2aa198;">1.0</span><span style="background-color:#002b36;color:#839496;">&quot; encoding=&quot;</span><span style="background-color:#002b36;color:#2aa198;">UTF-8</span><span style="background-color:#002b36;color:#839496;">&quot; standalone=&quot;</span><span style="background-color:#002b36;color:#2aa198;">no</span><span style="background-color:#002b36;color:#839496;">&quot;</span><span style="background-color:#002b36;color:#586e75;">?&gt;
 </span><span style="background-color:#002b36;color:#586e75;">&lt;</span><span style="background-color:#002b36;color:#268bd2;">svg
 </span><span style="background-color:#002b36;color:#839496;">   </span><span style="background-color:#002b36;color:#b58900;">xmlns:dc</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">http://purl.org/dc/elements/1.1/</span><span style="background-color:#002b36;color:#839496;">&quot;
 </span><span style="background-color:#002b36;color:#839496;">   </span><span style="background-color:#002b36;color:#b58900;">xmlns:cc</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">http://creativecommons.org/ns#</span><span style="background-color:#002b36;color:#839496;">&quot;
@@ -447,8 +446,7 @@ much larger—and therefore slower—than they had any right to be.</p>
 <p>Second, we can notice that the numbers in the long block of text are <strong>really precise</strong>.  In most of the numbers, we have 8 decimals of precision—far more than we're likely to need, especially considering that we're planning to use this image as a header in our logo.</p>
 <p>So, lets edit our file to remove that precision and strip out some of the metadata we don't need.  What does that leave us with?</p>
 <pre style="background-color:#002b36">
-<span style="background-color:#002b36;color:#839496;">
-</span><span style="background-color:#002b36;color:#586e75;">&lt;</span><span style="background-color:#002b36;color:#268bd2;">svg </span><span style="background-color:#002b36;color:#b58900;">height</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">175</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#b58900;">width</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">175</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#b58900;">viewBox</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">0 0 700 700</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#586e75;">&gt;
+<span style="background-color:#002b36;color:#586e75;">&lt;</span><span style="background-color:#002b36;color:#268bd2;">svg </span><span style="background-color:#002b36;color:#b58900;">height</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">175</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#b58900;">width</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">175</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#b58900;">viewBox</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">0 0 700 700</span><span style="background-color:#002b36;color:#839496;">&quot; </span><span style="background-color:#002b36;color:#586e75;">&gt;
 </span><span style="background-color:#002b36;color:#839496;">  </span><span style="background-color:#002b36;color:#586e75;">&lt;</span><span style="background-color:#002b36;color:#268bd2;">path </span><span style="background-color:#002b36;color:#b58900;">d</span><span style="background-color:#002b36;color:#839496;">=&quot;</span><span style="background-color:#002b36;color:#2aa198;">M 291,128 C 259,154 252,196 268,229 c 11,20 32,29 40,37 -36,16
 </span><span style="background-color:#002b36;color:#2aa198;">  </span><span style="background-color:#002b36;color:#2aa198;">-57,44 -59,85 -1,64 56,91 99,111 39,11 56,62 29,96 -8,12 -52,18 -60,-4 
 </span><span style="background-color:#002b36;color:#2aa198;">  </span><span style="background-color:#002b36;color:#2aa198;">-21,-76 -86,-28 -40,24 37,20 82,23 120,-1 19,-14 39,-47 36,-81 -5,-34 
@@ -484,5 +482,5 @@ much larger—and therefore slower—than they had any right to be.</p>
 </footer>
 
 
-<script src="/livereload.js?port=1112&mindelay=10"></script></body>
+</body>
 </html>

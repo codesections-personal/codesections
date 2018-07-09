@@ -29,13 +29,11 @@ I'm very happy with this new workflow, but it took a bit of figuring to get it a
 ## How to set up a similar workflow
 
 ### 1. Initialize a local git repo and make your initial commit
-
 (If you already have a local git repo set up, you can skip this step.)
 
 From within the directory that contains your project, run `git init`, which creates a new repository.  Then run `git add .` to begin tracking all the files in the directory, and `git commit -am "Intial commit"` to commit the current state of your repository locally.
 
 ### 2. Push your changes to the Raspberry Pi (or other server for backup)
-
 First, SSH into the server you intend to use for backup of unpublished content—in my case, the local Pi.  For my setup, this means running `ssh pi@192.168.0.102`, but your command will differ depending on the username and IP address. 
 
 From the server, run `git init --bare <name_of_project>`.  The `--bare` flag tells git that there isn't a local working directory, which will prevent it from viewing the lack of files as a problem.
@@ -45,7 +43,6 @@ Then, end the SSH session and run `git remote add origin <username>@<IP>:<path/t
 Run `git push --set-upstream master` to push to the server.
 
 ### 3.  Add the remote servers for production deployment
-
 Up through this point, we've been using very basic git commands.  Here's where it gets (slightly) more advanced.
 
 In this example, we'll be setting up three additional servers: one remote sever, a GitHub one, and a GitLab one.  But you could omit one or two of these severs if desired. 
@@ -60,4 +57,3 @@ Finally, run the following commands:
 * `git remote set-url all <pi-git-url>`. (In my case, `git remote set-url pi@192.168.0.102:/home/pi/projects/codesections`.)
 
 Now, you can run `git push all` to push your changes to all the remote repos.  
-

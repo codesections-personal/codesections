@@ -1,112 +1,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
         <url>
-            <loc>http://127.0.0.1:1111/about/</loc>
+            <loc>https://www.codesections.com/about/</loc>
             
                 <lastmod>2018-06-03T10:41:27-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/announcing-pass-gen/</loc>
+            <loc>https://www.codesections.com/blog/announcing-pass-gen/</loc>
             
                 <lastmod>2018-06-07T16:44:57-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/fixing-the-one-problem-with-password-managers/</loc>
+            <loc>https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/</loc>
             
                 <lastmod>2018-06-03T11:43:27-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/greatness-of-static-site-generators-ii/</loc>
+            <loc>https://www.codesections.com/blog/greatness-of-static-site-generators-ii/</loc>
             
                 <lastmod>2018-06-03T11:40:46-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/gutenberg-vs-hugo/</loc>
+            <loc>https://www.codesections.com/blog/gutenberg-vs-hugo/</loc>
             
                 <lastmod>2018-07-02</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/hello-world/</loc>
+            <loc>https://www.codesections.com/blog/hello-world/</loc>
             
                 <lastmod>2018-06-03T11:31:03-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/hexo-review/</loc>
+            <loc>https://www.codesections.com/blog/hexo-review/</loc>
             
                 <lastmod>2018-06-18T16:57:52-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/how-secure-is-pass-gen/</loc>
+            <loc>https://www.codesections.com/blog/how-secure-is-pass-gen/</loc>
             
                 <lastmod>2018-06-14T17:44:45-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/image-compression-for-website-speed/</loc>
+            <loc>https://www.codesections.com/blog/image-compression-for-website-speed/</loc>
             
                 <lastmod>2018-06-12T16:38:54-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/my-git-setup/</loc>
+            <loc>https://www.codesections.com/blog/my-git-setup/</loc>
             
                 <lastmod>2018-06-10T07:55:24-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/recursive-learning/</loc>
+            <loc>https://www.codesections.com/blog/recursive-learning/</loc>
             
                 <lastmod>2018-06-03T11:32:38-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/why-static-site-generators-are-great/</loc>
+            <loc>https://www.codesections.com/blog/why-static-site-generators-are-great/</loc>
             
                 <lastmod>2018-06-03T11:37:56-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/content/</loc>
+            <loc>https://www.codesections.com/content/</loc>
             
                 <lastmod>2018-06-03T08:50:42-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/license/</loc>
+            <loc>https://www.codesections.com/license/</loc>
             
                 <lastmod>2018-06-03T10:41:27-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/codesections-website/</loc>
+            <loc>https://www.codesections.com/projects/codesections-website/</loc>
             
                 <lastmod>2018-06-03T13:42:25-04:00</lastmod>
             
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/regular-expression-project/</loc>
+            <loc>https://www.codesections.com/projects/regular-expression-project/</loc>
             
                 <lastmod>2018-06-03T13:39:00-04:00</lastmod>
             
@@ -114,57 +114,57 @@
     
     
         <url>
-            <loc>http://127.0.0.1:1111/</loc>
+            <loc>https://www.codesections.com/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/blog/</loc>
+            <loc>https://www.codesections.com/blog/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/</loc>
+            <loc>https://www.codesections.com/projects/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/capital_words/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/capital_words/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/find_prices/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/find_prices/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/hex_color_code/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/hex_color_code/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/one_a/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/one_a/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/username_validation/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/username_validation/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/valid_number/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/valid_number/</loc>
         </url>
     
         <url>
-            <loc>http://127.0.0.1:1111/projects/reg-exp/validate_password/</loc>
-        </url>
-    
-    
-        <url>
-            <loc>http://127.0.0.1:1111/categories/</loc>
+            <loc>https://www.codesections.com/projects/reg-exp/validate_password/</loc>
         </url>
     
     
         <url>
-            <loc>http://127.0.0.1:1111/tags/</loc>
+            <loc>https://www.codesections.com/categories/</loc>
+        </url>
+    
+    
+        <url>
+            <loc>https://www.codesections.com/tags/</loc>
         </url>
     
 </urlset>
