@@ -1,6 +1,26 @@
 {% extends "base.html" %}
 
+{% block page_specific_styles %}
+  .site-header{
+    margin-bottom: 0;
+    margin-top: 1em;
+    text-align: left;
+    font-size: 1.618em;
+    font-weight: 400;
+    line-height: .85;
+    color: #000;
+  }
+
+  @media (min-width:  600px) { /*Tablet-portrait & up*/
+    .site-header {
+      font-size:  2.618em;
+      padding-top: 4vh;
+      padding-bottom: 1vh;
+    }
+  }
+{% endblock page_specific_styles %}
+
 {% block content %}
-{% set page = get_page(path="index.md") %}
+  {% set page = get_page(path="index.md") %}
   {{ page.content | safe }}
 {% endblock content %}

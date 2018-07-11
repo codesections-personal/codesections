@@ -1,5 +1,5 @@
 {% extends "section.html" %}
-{% block head %}
+{% block page_specific_styles %}
 .list-of-questions__item{
   padding: 8px;
   line-height: 1.42857143;
@@ -119,8 +119,8 @@ html{
 .should-not-match-string{
   color: red
 }
-{% endblock head %}
-{% block bodyend %}
+{% endblock page_specific_styles %}
+{% block page_specific_js_tag %}
 <script>
 document.querySelector('.regex-solution').addEventListener('input', () => {
   updateWords({
@@ -182,4 +182,4 @@ const displayResultMessage = function () {
   document.querySelector('.result-msg').innerHTML = result;
 };
 </script> 
-{% endblock bodyend %}
+{% endblock page_specific_js_tag %}

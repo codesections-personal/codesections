@@ -1,29 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <h2> {{ section.title }} </h2>
   {{ section.content | safe }}
+  
+  {# If we have pages in the section (e.g., for the blog) loop over the pages #}
   {% if section.pages %}
     {% for page in section.pages %}
     <article>
       <div>
-        {% if page.content | length > 1000 %}
-          <h2><a href="{{ page.permalink }}">{{ page.title  }}</a></h2>
-        {% else %}
-          <h2>{{ page.title }}</h2>
-        {% endif %}
+        <h2>
+          {% if page.content | length > 1000 %}
+            <a href="{{ page.permalink }}">{{ page.title  }}</a>
+          {% else %}
+            {{ page.title }}
+          {% endif %}
+        </h2>
 
+        {# display the appropreate summary of the page #}
         {% if page.summary %}
           {{ page.summary | safe }}
         {% else %}
-          {{ page.content | safe | truncate(length=1000)}} <span class=">\""><span>
+          {{ page.content | safe | truncate(length=1000)}} 
+          {# hack to deal with truncation in the middle of html #}
+          <span class='>"'><span>
         {% endif %}
-          <br>
+        <br>
       </div>
+      
       {% if page.content | length > 1000 %}
         <a href="{{ page.permalink }}">(read more)</a>
       {% endif %}
+
     </article>
-      
     {% endfor %}
   {% endif %}
 {% endblock content %}

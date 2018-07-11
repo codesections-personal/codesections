@@ -1,0 +1,85 @@
+/*==================================*\
+  ##Main content
+\*==================================*/
+.content-main{
+  margin-top: 2em;
+  min-height: calc(100vh - 100px - 2.9em);
+  /*  This equals [fullscreen - (top margin) -
+   *  (space for the 2-line footer, with margin)]*/
+  max-width: 700px; /*  Match nav container width*/
+  margin-left: auto;
+  margin-right: auto;
+  padding: .1em;
+  font-size: 1.15em;
+  line-height: 1.6em;
+  color: #444;
+}
+
+.content-main article {
+  padding: .75em;
+  padding-top: 0;
+  border-style: solid;
+  border-color: #f2f2f2;
+  border-radius: 13.3px;
+  border-width: 1.5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  box-shadow: 1px 1px 25px #f2f2f2;
+}
+
+@media (min-width:  600px) { /*Tablet-portrait & up*/
+  .content-main article {
+    margin-top: 2em;
+  }
+}
+
+.content-main table {
+  overflow: auto;
+  border-spacing: 0;
+  margin: auto;
+}
+
+.content-main table th {
+  font-weight: 600;
+}
+
+.content-main table th,
+.content-main table td {
+  padding: 6px 13px;
+  border: 0.5px solid #dfe2e5;
+}
+
+.content-main table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.content-main table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.content-main asside {
+  background-color: #cde; /* Pastel blue*/
+  display: block;
+  padding: .5em;
+  margin-top: 1em;
+  color: #0d1d25; /*near black*/
+  border: solid 2px #0d1d25; /* Near black*/
+}
+
+.content-main p code,
+.content-main ul code {
+  padding: 2px 4px;
+  color: #c0341d;
+  background-color: #fbe5e1;
+  border-radius: 3px;
+}
+
+.content-main pre {
+  overflow-x: scroll;
+}
+
+.content-main img {
+  width: 100%;
+}
+
