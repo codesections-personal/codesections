@@ -21,6 +21,5 @@
 {% endblock page_specific_styles %}
 
 {% block content %}
-  {% set page = get_page(path="index.md") %}
-  {{ page.content | safe }}
+  {{ section.content | safe }}
 {% endblock content %}
