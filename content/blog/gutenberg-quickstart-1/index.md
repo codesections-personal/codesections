@@ -15,8 +15,10 @@ sites that show exactly what a site like the one I've described looks like, and
 you'll be able to see the exact code that generated that demo site—it's all on
 GitHub, and there'll be links at every step.
 
-First, we'll start with creating a simple, single-page site.  It won't be much,
-but it will give us a firm foundation to build on.
+In this first part, we'll start with creating a simple, single-page site.  It
+won't be much, but it will give us a firm foundation to build on.
+
+<!-- more -->
 
 ## Installation and initialization
 The first step, of course, is to install Gutenberg by following the 
@@ -101,7 +103,7 @@ section without actually including the data in the section itself.
 
 OK, now we have an `index.html` template, and an `_index.md` content page. 
 Lets run our server command and see what we get.  If you're following along,
-you should get something like this:
+you should get something like this (again, click for the live site):
 
 [![Screenshot of v2](v2.png)](https://v02--gutenberg-simple-demo.netlify.com/)
 
@@ -130,7 +132,7 @@ This is our first **filter**, a command after a `|` that tells Gutenberg to
 process the provided text differently.  In this case `safe` tells Gutenberg
 _not_ to sanitize the text.
 
-After that change, we get a site that looks like this:
+After that change, we get a site that looks like this (click for live site):
 
 [![Screenshot of v03](v3.png)](https://v03--gutenberg-simple-demo.netlify.com/)
 
@@ -197,7 +199,7 @@ in culpa qui officia deserunt mollit anim id est laborum
 With those two changes, we're starting to get something that at least 
 resembles an actual website:
 
-[![v04 screenshots](v4.png)](https://v04--gutenberg-simple-demo.netlify.com/).
+[![v04 screenshots](v4.png)](https://v04--gutenberg-simple-demo.netlify.com/)
 
 As always, click for the live site, and visit the [relevant
 branch](https://github.com/codesections/gutenberg-simple-demo/tree/v04) of
