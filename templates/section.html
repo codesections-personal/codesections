@@ -5,8 +5,8 @@
   {{ section.content | safe }}
   
   {# If we have pages in the section (e.g., for the blog) loop over the pages #}
-  {% if section.pages %}
-    {% for page in section.pages %}
+  {% if paginator.pages %}
+    {% for page in paginator.pages %}
     <article>
       <div>
         <h2>
@@ -31,8 +31,18 @@
       {% if page.content | length > 1000 %}
         <a href="{{ page.permalink }}">(read more)</a>
       {% endif %}
-
+      
     </article>
     {% endfor %}
+    
+    <nav class="pagination">
+        {% if paginator.previous %}
+            <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+        {% endif %}
+        {% if paginator.next %}
+            <a class="next" href="{{ paginator.next }}">Next ›</a>
+        {% endif %}
+    </nav>
+
   {% endif %}
 {% endblock content %}
