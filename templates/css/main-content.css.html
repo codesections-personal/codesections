@@ -22,7 +22,6 @@
   border-color: #f2f2f2;
   border-radius: 13.3px;
   border-width: 1.5px;
-  margin-top: 1em;
   margin-bottom: 1em;
   box-shadow: 1px 1px 25px #f2f2f2;
   transition: all .4s ease;
@@ -30,7 +29,8 @@
 
 @media (min-width:  600px) { /*Tablet-portrait & up*/
   .content-main article {
-    margin-top: 2em;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
   }
 }
 
@@ -41,8 +41,15 @@
 }
 
 .content-main h2 {
-  margin-top: 1.75em;
+  margin-top: .25em;
 }
+
+@media (min-width: 600px) {
+  .content-main h2 {
+    margin-top: 1.25em;
+  }
+}
+
 
 .content-main p {
   line-height: 1.4em;
