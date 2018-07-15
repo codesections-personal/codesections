@@ -7,12 +7,11 @@
   {# If we have pages in the section (e.g., for the blog) loop over the pages #}
   {% if section.pages %}
     {% for page in section.pages %}
-    <a href="{{ page.permalink }}">
       <article>
         <div>
           <h1>
             {% if page.content | length > 1000 %}
-              {{ page.title  }}
+              <a href="{{ page.permalink }}"> {{ page.title  }}</a>
             {% else %}
               {{ page.title }}
             {% endif %}
@@ -20,25 +19,19 @@
 
           {# display the appropreate summary of the page #}
           {% if page.summary %}
-          {{ page.summary |
-             safe |
-             replace(from="<a", to="</a> <a class='fake-link'") |
-             replace(from="</a>", to="</a><a href='{{ page.permalink }}'>")
-          }}
+          {{ page.summary | safe }}
           {% else %}
             {{ page.content | safe | truncate(length=1000)}} 
             {# hack to deal with truncation in the middle of html #}
             <span class='>"'><span>
           {% endif %}
-          <br>
         </div>
         
         {% if page.content | length > 1000 %}
-          <a class="fake-link" href="{{ page.permalink }}">(read more)</a>
+          <a href="{{ page.permalink }}">(read more)</a>
         {% endif %}
 
       </article>
-    </a>
     {% endfor %}
   {% endif %}
 {% endblock content %}
