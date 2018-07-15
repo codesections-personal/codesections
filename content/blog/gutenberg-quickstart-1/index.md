@@ -244,7 +244,7 @@ in the tab bar.  This isn't **stictly** required, but it sure helps our site
 look a bit better and it will let us see the process for uploading static
 files.  
 
-Since we don't have a favicon of our own, let's barrow Gutenberg's.  I've 
+Since we don't have a favicon of our own, let's borrow Gutenberg's.  I've 
 [saved a copy of the file](https://raw.githubusercontent.com/codesections/gutenberg-simple-demo/v05/static/favicon.ico) to the GitHub repository.  Go
 ahead and download it now, and save it to `static/favicon.ico`.  Having
 done that, what else do we need to do? 
