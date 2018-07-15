@@ -25,12 +25,42 @@
   margin-top: 1em;
   margin-bottom: 1em;
   box-shadow: 1px 1px 25px #f2f2f2;
+  transition: all .4s ease;
+}
+
+.content-main article:hover {
+  box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+  transition: all .4s ease;
+  transform: translate3D(0,-1px,0) scale(1.02);
 }
 
 @media (min-width:  600px) { /*Tablet-portrait & up*/
   .content-main article {
     margin-top: 2em;
   }
+}
+
+.content-main article a {
+  color: unset;
+}
+
+.content-main .fake-link {
+  color: #07e;
+}
+
+.content-main article h1 {
+  color: #4F82BB;
+  font-size: 1.75em;
+  margin-top: .75em;
+}
+
+.content-main h2 {
+  margin-top: 1.75em;
+}
+
+.content-main p {
+  line-height: 1.4em;
+  margin-bottom: 1.75em;
 }
 
 .content-main table {
