@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>pass-gen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+      body {
+        margin: 20px auto;
+        max-width: 750px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px
+      }
+      h1 {
+        margin-bottom: -.75em;
+        margin-top: .5em;
+      }
+      h2 {
+        margin-top: 2em;
+        margin-bottom: -.5em;
+      }
+      a {
+        color: #07e;
+      }
+      code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      pre {
+        overflow: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{ section.content | safe }}
+  </body>
+</html>
