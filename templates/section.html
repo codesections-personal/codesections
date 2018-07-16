@@ -33,5 +33,15 @@
 
       </article>
     {% endfor %}
+    
+    <nav class="pagination">
+        {% if paginator.previous %}
+            <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+        {% endif %}
+        {% if paginator.next %}
+            <a class="next" href="{{ paginator.next }}">Next ›</a>
+        {% endif %}
+    </nav>
+
   {% endif %}
 {% endblock content %}
