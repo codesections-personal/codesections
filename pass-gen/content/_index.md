@@ -96,5 +96,5 @@ There are many alternative passphrase generators.  I believe they all have some 
 
 ## Bug reports and contributing 
 
-pass-gen is under active development (see the roadmap, below) and would welcome new contributors.  pass-gen is currently co-hosted on both GitLab and GitHub, so please feel free to file issues, make pull requests, or otherwise contribute through either site.  Also feel free to submit bug reports or patches via email, either to <pass-gen@codesections.com> or to <daniel@codesections.com>.
+pass-gen is under active development and would welcome new contributors.  pass-gen is currently co-hosted on both GitLab and GitHub, so please feel free to file issues, make pull requests, or otherwise contribute through either site.  Also feel free to submit bug reports or patches via email, either to <pass-gen@codesections.com> or to <daniel@codesections.com>.
 
