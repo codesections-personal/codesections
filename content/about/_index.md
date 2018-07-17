@@ -13,7 +13,7 @@ date = 2018-06-03T10:41:27-04:00
 I’m Daniel, and I’m on a mission to bridge the gap between law and
 technology.  Before embarking on this project, I  was an attorney at a major
 New York law firm, where my practice focused on civil litigation and
-emphasised cybersecurity, data privacy, and other intersections between law
+emphasized cybersecurity, data privacy, and other intersections between law
 and technology.
 
 I grew up in Birmingham, Alabama, and have also lived in California,

@@ -1,48 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2> {{ section.title }} </h2>
+  {% if section.title %}<h2> {{ section.title }} </h2> {% endif %}
   {{ section.content | safe }}
   
   {# If we have pages in the section (e.g., for the blog) loop over the pages #}
-  {% if paginator.pages %}
-    {% for page in paginator.pages %}
-    <article>
-      <div>
-        <h2>
-          {% if page.content | length > 1000 %}
-            <a href="{{ page.permalink }}">{{ page.title  }}</a>
-          {% else %}
-            {{ page.title }}
-          {% endif %}
-        </h2>
+  {% if section.pages %}
+    {% for page in section.pages %}
+      <article>
+        <div>
+          <h1>
+            {% if page.content | length > 1000 %}
+              <a href="{{ page.permalink }}"> {{ page.title  }}</a>
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </h1>
 
-        {# display the appropreate summary of the page #}
-        {% if page.summary %}
+          {# display the appropreate summary of the page #}
+          {% if page.summary %}
           {{ page.summary | safe }}
-        {% else %}
-          {{ page.content | safe | truncate(length=1000)}} 
-          {# hack to deal with truncation in the middle of html #}
-          <span class='>"'><span>
+          {% else %}
+            {{ page.content | safe | truncate(length=1000)}} 
+            {# hack to deal with truncation in the middle of html #}
+            <span class='>"'><span>
+          {% endif %}
+        </div>
+        
+        {% if page.content | length > 1000 %}
+          <a href="{{ page.permalink }}">(read more)</a>
         {% endif %}
-        <br>
-      </div>
-      
-      {% if page.content | length > 1000 %}
-        <a href="{{ page.permalink }}">(read more)</a>
-      {% endif %}
-      
-    </article>
+
+      </article>
     {% endfor %}
     
-    <nav class="pagination">
-        {% if paginator.previous %}
-            <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
-        {% endif %}
-        {% if paginator.next %}
-            <a class="next" href="{{ paginator.next }}">Next ›</a>
-        {% endif %}
-    </nav>
-
   {% endif %}
 {% endblock content %}
