@@ -3,4 +3,13 @@
 {% block content %}
   <h2>{{ page.title }}</h2>
   {{ page.content | safe }}
+
+  <div>
+    {% if page.next %}
+      <a class="page-nav__later" href="{{ page.next.permalink }}">← Later post</a>
+    {% endif %}
+    {% if page.previous %}
+    <a class="page-nav__earlier" href="{{ page.previous.permalink }}">Earlier post →</a>
+    {% endif %}
+  </div>
 {% endblock content %}

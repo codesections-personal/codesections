@@ -4,32 +4,31 @@
   {% if section.title %}<h2> {{ section.title }} </h2> {% endif %}
   {{ section.content | safe }}
   
-  {% for page in section.pages %}
+  {% for page in paginator.pages %}
     <article>
       <div>
         <h1>
-          {% if page.content | length > 1000 %}
             <a href="{{ page.permalink }}"> {{ page.title  }}</a>
-          {% else %}
-            {{ page.title }}
-          {% endif %}
         </h1>
 
-        {# display the appropreate summary of the page #}
         {% if page.summary %}
-        {{ page.summary | safe }}
+          {{ page.summary | safe }}
         {% else %}
-          {{ page.content | safe | truncate(length=1000)}} 
-          {# hack to deal with truncation in the middle of html #}
-          <span class='>"'><span>
+          {# hackish way to throw an error #}
+          {{ please_include_a_summary }}
         {% endif %}
       </div>
-      
-      {% if page.content | length > 1000 %}
-        <a href="{{ page.permalink }}">(read more)</a>
-      {% endif %}
-
+      <a href="{{ page.permalink }}">(read more)</a>
     </article>
   {% endfor %}
+
+  <div>
+    {% if paginator.previous %}
+      <a class="page-nav__later" href="{{ paginator.previous }}">← Later posts</a>
+    {% endif %}
+    {% if paginator.next %}
+    <a class="page-nav__earlier" href="{{ paginator.next }}">Earlier posts →</a>
+    {% endif %}
+  </div>
     
 {% endblock content %}

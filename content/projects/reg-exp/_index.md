@@ -1,5 +1,6 @@
 +++
 title = "RegExperiment"
+template = "projects.html"
 +++
 <style>
   .list-of-questions__item{
