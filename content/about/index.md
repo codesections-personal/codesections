@@ -23,11 +23,18 @@ reading a science fiction book, or playing a board game with my wife ([Race for
 the Galaxy](https://boardgamegeek.com/boardgame/28143/race-galaxy) is a 
 current favorite).
 
-In addition to my [blog](/blog) here on CodeSections, I also post shorter 
-content to Mastodon.  You can follow me there at
-[fosstodon.org/@CodeSections](https://fosstodon.org/@codesections).  I also 
-maintain a profile at [KeyBase](https://keybase.io/codesections), which
-cryptographically verifies my different online identities.  If you
-would like to contact me more directly, feel free to send me an email at
-<daniel@codesections.com>.  And if you would like that email to be encrypted
-feel free to use my [public key](/public-key.txt).
+# Contact 
+Please feel free to reach out to me using any of the methods below.  Please
+note that, while I maintain placeholder profiles on Facebook and Twitter, I do
+not use either of those services—instead, I use
+[Mastodon](https://joinmastodon.org/) as my primary social network.
+
+| Contact Method | Link                          |
+|:--------|:------------------------------------------------------------------|
+| Mastodon| [fosstodon.org/@codesections](https://fosstodon.org/@codesections)|
+| GitLab  | [gitlab.com/codesections](https://gitlab.com/codesections)        |
+| GitHub  | [github.com/codesections](https://github.com/codesections)        |
+| LinkedIn| [linkedin.com/in/daniel-sockwell](https://www.linkedin.com/in/daniel-sockwell) |
+| KeyBase | [keybase.io/codesections](https://keybase.io/codesections)        |
+| Email   | <daniel@codesections.com>                                         |
+|Public Key| [codesections.com/public-key.txt](https://www.codesections.com/public-key.txt) |
