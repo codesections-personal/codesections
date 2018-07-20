@@ -1,4 +1,4 @@
-
+{% macro content(page) %}
   <h2>{{ page.title }}</h2>
   {{ page.content | safe }}
 
@@ -10,3 +10,4 @@
     <a class="page-nav__earlier" href="{{ page.previous.permalink }}">Earlier post →</a>
     {% endif %}
   </div>
+{% endmacro blog_post %}

@@ -1,10 +1,24 @@
 {% extends "base.html" %}
+{% import "macros/page_macros/regexp.html" as regexp %}
+{% import "macros/page_macros/blog_post.html" as blog_post %}
+{% import "macros/page_macros/standalone_page.html" as standalone_page %}
+
+{% block page_specific_styles %}
+  {% if current_path is matching("^projects/reg-exp/") %}
+    {{ regexp::css() }}
+  {% endif %}
+{% endblock page_specific_styles %}
 
 {% block content %}
-  {% if current_path is starting_with("blog") %}
-    {% include "pages/blog_post.html" %}
+  {% if current_path is matching("^blog") %}
+    {{ blog_post::content(page=page) }}
   {% else %}
-    {% include "pages/standalone_page.html" %}
-
+    {{ standalone_page::content(page=page) }}
   {% endif %}
 {% endblock content %}
+
+{% block page_specific_js_tag %}
+  {% if current_path is matching("^projects/reg-exp/") %}
+    {{ regexp::js() }}
+  {% endif %}
+{% endblock %}

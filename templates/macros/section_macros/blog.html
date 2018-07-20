@@ -1,5 +1,4 @@
 {% macro content(section, paginator) %}
-  {% if section.title %}<h2> {{ section.title }} </h2> {% endif %}
   {{ section.content | safe }}
 
   {% for page in paginator.pages %}

@@ -1,24 +1,15 @@
 {% extends "base.html" %}
-{% import "sections/regexp.html" as regexp %}
-{% import "sections/blog.html" as blog %}
-{% import "sections/projects.html" as projects %}
-
-{% block page_specific_styles %}
-  {% if current_path is starting_with("projects/reg-exp/") %}
-    {{ regexp::page_specific_styles()  }}
-  {% endif %}
-{% endblock page_specific_styles %}
+{% import "macros/section_macros/blog.html" as blog %}
+{% import "macros/section_macros/projects.html" as projects %}
 
 {% block content %}
-  {% if current_path is starting_with("blog") %}
+  {% if current_path is matching("^blog") %}
     {{ blog::content(section=section, paginator=paginator) }}
-  {% else %}
+  {% elif current_path is matching("^projects/reg-exp") %}
+    {{ section.content | safe }}
+  {% elif current_path is matching("^projects") %}
     {{ projects::content(section=section) }}
+  {% else %}
+    {{ unknown_template }}
   {% endif %}
 {% endblock content %}
-
-{% block page_specific_js_tag %}
-  {% if current_path is starting_with("projects/reg-exp") %}
-    {{ regexp::page_specific_js_tag() }}
-  {% endif %}
-{% endblock %}
