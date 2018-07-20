@@ -6,4 +6,4 @@ command = "gutenberg build"
 
 [build.environment]
 # Set the version name that you want and Netlify will automatically use it
-GUTENBERG_VERSION = "0.3.3"
+GUTENBERG_VERSION = "0.3.4"
