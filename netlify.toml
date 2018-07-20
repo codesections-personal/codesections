@@ -1,6 +1,7 @@
 [build]
 # assuming the gutenberg site is in a docs folder, if it isn't you don't need 
 # to have a `base` variable but you do need the `publish` and `command`
+base    = "pass-gen"
 publish = "pass-gen/public"
 command = "gutenberg build"
 
