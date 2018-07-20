@@ -5,5 +5,5 @@ publish = "pass-gen/public"
 command = "gutenberg build"
 
 [build.environment]
-# Set the version name that you want to use and Netlify will automatically use it
+# Set the version name that you want and Netlify will automatically use it
 GUTENBERG_VERSION = "0.3.4"
