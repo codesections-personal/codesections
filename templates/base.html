@@ -1,9 +1,18 @@
+{% import "macros/css_macros.html" as css %}
+{% import "macros/component_macros.html" as component %}
+  {% if page %}
+    {% set context = page %}
+  {% elif section %}
+    {% set context = section %}
+  {% endif %}
+
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    {% include "component/meta-discription.html" %}
-    {% include "component/favicon.html" %}
+    {{ component::description(context=context) }}
+    {{ component::favicon() }}
     <title>
       {% if page.title %} {{ page.title }} | {% endif %} CodeSections 
     </title>
@@ -11,25 +20,24 @@
       /*==================================*\
         ##All CSS for this page
       \*==================================*/
-      {% include "css/global-styles.css.html" %}
-      {% include "css/nav-bar.css.html" %}
-      {% include "css/main-content.css.html" %}
-      {% include "css/footer.css.html" %}
-
-      {% block page_specific_styles %} {% endblock page_specific_styles %}
+      {{ css::global_styles() }}
+      {{ css::nav_bar() }}
+      {{ css::main_content() }}
+      {{ css::footer() }}
+      {% block page_specific_styles %}
+      {% endblock page_specific_styles %}
     </style>
   </head>
 
   <body>
-    {% include "component/nav-bar.html" %}
-
+    {{ component::navbar() }}
     <section class="content-main">
       {% block content %}
       {% endblock content %}
     </section>
-   
-    {% include "component/footer.html" %}
+    {{ component::footer() }}
 
-    {% block page_specific_js_tag %} {% endblock page_specific_js_tag %}
+    {% block page_specific_js_tag %}
+    {% endblock page_specific_js_tag %}
   </body>
 </html>

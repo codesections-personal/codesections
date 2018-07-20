@@ -1,5 +1,4 @@
 +++
-title = "RegExperiment"
 +++
 <style>
   .list-of-questions__item{
@@ -131,7 +130,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Capital Words</strong></td>
       <td class="list-of-questions__item">Validate whether a given string starts with a capital letter</td>
       <td class="list-of-questions__item">
-        <a href="capital_words">
+        <a href="capital-words">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -140,7 +139,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Does a Word Contain One 'a'</strong></td>
       <td class="list-of-questions__item">Validate whether the given word contains one and only one letter 'a'.</td>
       <td class="list-of-questions__item">
-        <a href="one_a">
+        <a href="one-a">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -149,7 +148,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Find Prices</strong></td>
       <td class="list-of-questions__item">Determine whether the given string is a valid price</td>
       <td class="list-of-questions__item">
-        <a href="find_prices">
+        <a href="find-prices">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -158,7 +157,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Username Validation</strong></td>
       <td class="list-of-questions__item">Determine whether a given username is valid according to the following restrictions: A username has to be between 6 and 10 characters and can only contain alphanumeric characters and '_'!</td>
       <td class="list-of-questions__item">
-        <a href="username_validation">
+        <a href="username-validation">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -167,7 +166,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Hex Color Code</strong></td>
       <td class="list-of-questions__item">Determine whether a given string is valid Hex color code.</td>
       <td class="list-of-questions__item">
-        <a href="hex_color_code">
+        <a href="hex-color-code">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -176,7 +175,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Valid Number?</strong></td>
       <td class="list-of-questions__item">Match a valid phone number.</td>
       <td class="list-of-questions__item">
-        <a href="valid_number">
+        <a href="valid-number">
           <div class="button">Solve</div>
         </a>
       </td>
@@ -185,7 +184,7 @@ title = "RegExperiment"
       <td class="list-of-questions__item"><strong>Validate Password</strong></td>
       <td class="list-of-questions__item">Validate a password to have the following criteria: 8-16 characters must include: 1 lowercase, 1 uppercase, 1 number only lowercase, uppercase, and numbers are valid</td>
       <td class="list-of-questions__item">
-        <a href="validate_password">
+        <a href="validate-password">
           <div class="button">Solve</div>
         </a>
       </td>
