@@ -275,4 +275,28 @@
     text-align: center;
   }
 {% endmacro footer %}
+
+{% macro projects() %}
+  .content-main {
+    max-width: 90%;
+  }
+  .intro {
+    max-width: 750px;
+    margin: auto;
+  }
+  .flexbox {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .content-main article {
+    max-width: 400px;
+    min-width: 400px;
+    height: 500px;
+    margin: auto;
+    margin-top: 2em;
+  }
+  .source-link {
+    float: right;
+  }
+{% endmacro projects %}
 </style>
