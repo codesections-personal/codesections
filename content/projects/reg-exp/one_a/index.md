@@ -1,8 +1,6 @@
 +++
-title = "One A"
 date = 2018-06-03T14:26:44-04:00
 order = 1
-template = "regexp.html"
 +++
 
 <div class="content-wrapper">

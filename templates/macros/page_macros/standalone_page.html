@@ -1,0 +1,6 @@
+{% macro content(page) %}
+
+  <h2>{{ page.title }}</h2>
+  {{ page.content | safe }}
+
+{% endmacro content %}

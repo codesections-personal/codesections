@@ -1,6 +1,5 @@
 +++
 date = 2018-06-03T14:26:44-04:00
-template = "regexp.html"
 +++
 
 <div class="content-wrapper">
