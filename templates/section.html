@@ -3,11 +3,11 @@
 {% import "macros/section_macros/projects.html" as projects %}
 
 {% block content %}
-  {% if current_path is matching("^blog") %}
+  {% if current_path is starting_with("blog") %}
     {{ blog::content(section=section, paginator=paginator) }}
-  {% elif current_path is matching("^projects/reg-exp") %}
+  {% elif current_path is starting_with("projects/reg-exp") %}
     {{ section.content | safe }}
-  {% elif current_path is matching("^projects") %}
+  {% elif current_path is starting_with("projects") %}
     {{ projects::content(section=section) }}
   {% else %}
     {{ unknown_template }}
