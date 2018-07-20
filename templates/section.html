@@ -1,34 +1,24 @@
 {% extends "base.html" %}
+{% import "sections/regexp.html" as regexp %}
+{% import "sections/blog.html" as blog %}
+{% import "sections/projects.html" as projects %}
+
+{% block page_specific_styles %}
+  {% if current_path is starting_with("projects/reg-exp/") %}
+    {{ regexp::page_specific_styles()  }}
+  {% endif %}
+{% endblock page_specific_styles %}
 
 {% block content %}
-  {% if section.title %}<h2> {{ section.title }} </h2> {% endif %}
-  {{ section.content | safe }}
-  
-  {% for page in paginator.pages %}
-    <article>
-      <div>
-        <h1>
-            <a href="{{ page.permalink }}"> {{ page.title  }}</a>
-        </h1>
-
-        {% if page.summary %}
-          {{ page.summary | safe }}
-        {% else %}
-          {# hackish way to throw an error #}
-          {{ please_include_a_summary }}
-        {% endif %}
-      </div>
-      <a href="{{ page.permalink }}">(read more)</a>
-    </article>
-  {% endfor %}
-
-  <div>
-    {% if paginator.previous %}
-      <a class="page-nav__later" href="{{ paginator.previous }}">← Later posts</a>
-    {% endif %}
-    {% if paginator.next %}
-    <a class="page-nav__earlier" href="{{ paginator.next }}">Earlier posts →</a>
-    {% endif %}
-  </div>
-    
+  {% if current_path is starting_with("blog") %}
+    {{ blog::content(section=section, paginator=paginator) }}
+  {% else %}
+    {{ projects::content(section=section) }}
+  {% endif %}
 {% endblock content %}
+
+{% block page_specific_js_tag %}
+  {% if current_path is starting_with("projects/reg-exp") %}
+    {{ regexp::page_specific_js_tag() }}
+  {% endif %}
+{% endblock %}

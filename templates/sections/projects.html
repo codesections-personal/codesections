@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% macro content(section) %}
   {% if section.title %}<h2> {{ section.title }} </h2> {% endif %}
   {{ section.content | safe }}
-  
+
   {% for page in section.pages %}
     <article>
       <div>
@@ -15,7 +13,7 @@
           {% endif %}
         </h1>
 
-        {# display the appropreate summary of the page #}
+        {# display the appropriate summary of the page #}
         {% if page.summary %}
         {{ page.summary | safe }}
         {% else %}
@@ -31,5 +29,4 @@
 
     </article>
   {% endfor %}
-    
-{% endblock content %}
+{% endmacro content %}

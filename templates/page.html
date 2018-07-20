@@ -2,9 +2,9 @@
 
 {% block content %}
   {% if current_path is starting_with("blog") %}
-    {% include "blog_post.html" %}
+    {% include "pages/blog_post.html" %}
   {% else %}
-    {% include "standalone_page.html" %}
+    {% include "pages/standalone_page.html" %}
 
   {% endif %}
 {% endblock content %}
