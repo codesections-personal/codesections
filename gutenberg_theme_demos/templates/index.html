@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Gutenberg Demo</title>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        margin: 40px auto;
+        line-height: 1.6;
+        font-size: 22px;
+        color: #444;
+        padding: 0 10px;
+background: #ECE9E6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+      .intro {
+        max-width: 650px;
+        margin: auto;
+      }
+      .display__sections {
+        margin: auto;
+        max-width: 1200px;
+      }
+      h1,h2,h3 {
+        line-height: 1.2;
+        text-align: center;
+      }
+      h2 {
+        margin-top: 2em;
+      }
+      img {
+        width: 100%;
+      }
+      a {
+        color: #07e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="intro">
+      <h1>Live Theme Demos</h1>
+      {{ section.content | safe }}
+    </div>
+
+    <div class="display__sections">
+      {% for page in section.pages | sort(attribute="title") %}
+        <h2><a href="{{ page.extra.url }}">{{ page.title }}</a></h2>
+        {{ page.content | safe }}
+      {% endfor %}
+    </div>
+  </body>
+</html>
