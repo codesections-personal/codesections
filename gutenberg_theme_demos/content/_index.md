@@ -2,7 +2,11 @@
 title = "Live Theme Demos"
 +++
 # Live Theme Demos
-A [codesections](https://www.codesections.com) project 
+A [codesections](https://www.codesections.com) project |
+Source available at 
+[GitHub](https://github.com/codesections/codesections/tree/gutenbergthemes)
+or [GitLab](https://gitlab.com/codesections/codesections-website/tree/gutenbergthemes)
+<br>
 
 This intentionally un-themed site serves as a hub for links to live demos
 of sites displaying various Gutenberg themes.  For full details about each 
@@ -13,4 +17,3 @@ repository](https://github.com/Keats/gutenberg-themes) as described in that
 repo's README file.
 
 Current demos are:
-
