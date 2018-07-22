@@ -1,10 +1,16 @@
 +++
-title = "Hi, guys!"
+title = "Live Theme Demos"
 +++
-This—intentionally minimalistic—site serves as a hub for links to live demos
+# Live Theme Demos
+A [codesections](https://www.codesections.com) project 
+
+This intentionally un-themed site serves as a hub for links to live demos
 of sites displaying various Gutenberg themes.  For full details about each 
 theme, installation instructions, and a link to the source code, please see
-<https://www.getgutenberg.io/themes/>
+<https://www.getgutenberg.io/themes/>.  If you would like to have your theme
+included here, please submit it to the [themes GitHub
+repository](https://github.com/Keats/gutenberg-themes) as described in that
+repo's README file.
 
 Current demos are:
 
