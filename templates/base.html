@@ -1,10 +1,6 @@
 {% import "macros/css_macros.html" as css %}
 {% import "macros/component_macros.html" as component %}
-  {% if page %}
-    {% set context = page %}
-  {% elif section %}
-    {% set context = section %}
-  {% endif %}
+  {% set context = page | default(value = section) %}
 
 
 <html lang="en">
