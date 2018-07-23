@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width">
     {{ component::description(context=context) }}
     {{ component::favicon() }}
+    {# use string concatenation with `~` after upgrading to next version #}
+    <link rel="canonical" href="{{ config.extra.live_base_url }}{{ context.path }}">
+    <script>
+      console.log({{__tera_context}})
+    </script>
     <title>
       {% if page.title %} {{ page.title }} | {% endif %} CodeSections 
     </title>
