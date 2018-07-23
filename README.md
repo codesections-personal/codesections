@@ -7,8 +7,6 @@ and best static site generator.  It is hosted by
 [Netlify](https://www.netlify.com/), which provides high-speed hosting for 
 static sites.
 
-This branch is for the <passgen.codesections.com> subdomain.
-
 ## License
 The source code of the site is licensed under the MIT License.  Any code posted
 to the site is likewise licensed under the MIT License unless otherwise 
