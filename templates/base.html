@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width">
     {{ component::description(context=context) }}
     {{ component::favicon() }}
+    <link rel="canonical" href="{{ config.base_url ~ "/" ~ context.path }}">
+    <script>
+      console.log({{__tera_context}})
+    </script>
     <title>
       {% if page.title %} {{ page.title }} | {% endif %} CodeSections 
     </title>
