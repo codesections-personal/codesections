@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width">
     {{ component::description(context=context) }}
     {{ component::favicon() }}
-    <link rel="canonical" href="{{ config.base_url ~ "/" ~ context.path }}">
+    {# use string concatenation with `~` after upgrading to next version #}
+    <link rel="canonical" href="{{ config.extra.live_base_url }}{{ context.path }}">
     <script>
       console.log({{__tera_context}})
     </script>
