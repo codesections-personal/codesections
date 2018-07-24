@@ -28,8 +28,8 @@ What is the problem, exactly?  Well, with default settings Netlify makes
 every page available as a page on your domain *and* as a page in a subdomain
 inside Netlify.com.  So, for example, the page you are reading right now
 would be available by default at both
-[www.codesections.com/blog/netlify](www.codesections.com/blog/netlify) and at
-[codesections.netlify.com/blog/netlify](codesections.netlify.com/blog/Netlify);
+[www.codesections.com/blog/netlify](https://www.codesections.com/blog/netlify) and at
+[codesections.netlify.com/blog/netlify](https://codesections.netlify.com/blog/Netlify);
 since it shows up at both locations, it would be counted as duplicate
 content. 
 
