@@ -1,6 +1,7 @@
 +++
 title = "Announcing pass-gen"
 date = 2018-06-07T16:44:57-04:00
+description = "A CLI for generating secure, easy-to-type passwords"
 +++
 As I mentioned [last time](https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/), I think many password managers have a serious flaw: they don't have a way for you to generate a secure, memorable passphrase.  That means that, if you ever have to type your password in, you're stuck typing in something like `{!]&Sk)r"ss|$K40:]PP''3k-`—and nobody wants to type `{!]&Sk)r"ss|$K40:]PP''3k-`.  
 
