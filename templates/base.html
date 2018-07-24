@@ -8,8 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
 
-<link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
-<link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+<meta itemprop="image" content="http://www.codesections.com/apple-touch-icon.png">
+<meta name="twitter:image:src" content="http://www.codesections.com/apple-touch-icon.png">
+<meta property="og:image" content="http://www.codesections.com/apple-touch-icon.png" />
+
+
     {{ component::description(context=context) }}
     {{ component::favicon() }}
     {# use string concatenation with `~` after upgrading to next version #}
