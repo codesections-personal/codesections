@@ -1,6 +1,7 @@
 +++
 title = "Why Static Site Generators Are Great"
 date = 2018-06-03T11:37:56-04:00
+description = "The case for static site generators"
 +++
    
 What makes static site generators so great?  And what is a static site generator, anyway?
