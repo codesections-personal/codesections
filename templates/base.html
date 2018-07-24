@@ -10,7 +10,7 @@
     {{ component::description(context=context) }}
     {{ component::favicon() }}
     {# use string concatenation with `~` after upgrading to next version #}
-    <link rel="canonical" href="{{ config.extra.live_base_url }}{{ context.path }}">
+    <link rel="canonical" href="{{ config.extra.live_base_url }}{{ current_path }}">
     <script>
       console.log({{__tera_context}})
     </script>
