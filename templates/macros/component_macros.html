@@ -1,5 +1,10 @@
 {% macro description(context) %}
   <meta property="og:title" content="{% if context.title %} {{ context.title }} | {% endif %} CodeSections" /> 
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if context.title %} {{ context.title }} | {% endif %} CodeSections">
+  <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
   <meta property="og:type" content="article" />
   <meta property="og:url" content="www.codesections.com" />
   <meta property="og:site_name" content="CodeSections" />
@@ -8,8 +13,11 @@
   {% if context.description %}
     <meta property="og:description" content="{{ context.description }}" />
     <meta name="description" content="{{ context.description }}">
+    <meta name="twitter:description" content="{{ context.description }}">
   {% else %}
+    <meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
     <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
   {% endif %}
 {% endmacro description %}
 
