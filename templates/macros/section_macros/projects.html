@@ -6,7 +6,7 @@
 
   <div class="flexbox">
   {% for page in section.pages %}
-    <article>
+    <article class="card">
       <div>
         <h2>
           {% if page.content | length > 1000 %}
@@ -26,6 +26,7 @@
         {% endif %}
       </div>
       
+      <div class="card__link">
       {% if page.content | length > 1000 %}
         <a href="{{ page.permalink }}">(read more)</a>
       {% elif page.extra.external_link %}
@@ -34,6 +35,7 @@
       {% elif page.extra.demo_link %}
         <a href="{{ page.extra.demo_link }}">Live Demo</a>
       {% endif %}
+      </div>
 
     </article>
   {% endfor %}
