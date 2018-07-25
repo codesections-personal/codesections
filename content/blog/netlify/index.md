@@ -15,14 +15,14 @@ your site could be penalized for having "duplicate content"—the same penalty
 that search engines apply to content mills that steal other people's work and
 repost it as their own.
 
-<asside>
+<aside>
 I have no interest in playing SEO games or trying to get my site ranked
 more highly than it organically would be.  I basically figure that the way
 to get more readers is to write things that people want to read.  Plus, it's
 not like I'm planing to add ads to the site or profit off my readers in any
 way.  At the same time, however, I don't want simple mistakes to make my 
 content harder to find for those who are interested in it.
-</asside>
+</aside>
 
 What is the problem, exactly?  Well, with default settings Netlify makes
 every page available as a page on your domain *and* as a page in a subdomain

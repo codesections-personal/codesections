@@ -83,7 +83,7 @@ doesn't seem to be the right fit.
 <br><br>
 Now, none of that is to say that Go is a *bad* language.  In fact, 
 it's still one I'd like to learn.  It's just lower on my list than… 
-oh, at least a half-dozen others. (Rust, I'm coming for you soon!)</asside>
+oh, at least a half-dozen others. (Rust, I'm coming for you soon!)</aside>
 
 So, Hexo had two strong points in its favor: a better templating 
 language and a better (for me) underlying language.  Those two 

@@ -3,12 +3,12 @@ title = "About Me"
 date = 2018-06-03T10:41:27-04:00
 +++
 
-<asside>
+<aside>
   This page is about me, Daniel Sockwell, the person.  If you're interested in
   details about this site, there’s a [separate page for
   that](../projects) (or you can just [check out the source code for this
   site](https://gitlab.com/codesections/codesections-website)).
-</asside>
+</aside>
 
 I’m Daniel, and I’m on a mission to bridge the gap between law and
 technology.  Before embarking on this project, I  was an attorney at a major

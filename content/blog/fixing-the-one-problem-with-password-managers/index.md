@@ -177,4 +177,4 @@ hsxkpasswd that was written in a more portable language—ideally bash, since
 that's what Pass is written in.  I'm currently playing with a bash script along
 those lines, and may polish it up for public release if there's any interest.
 **EDIT: Playing around led to [pass-gen](https://www.gitlab.com/codesections/pass-gen), which implements all my ideas and has now replaced the workaround described in this post.**
-</asside>
+</aside>
