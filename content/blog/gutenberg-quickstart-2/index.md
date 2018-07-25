@@ -7,7 +7,9 @@ When we left of, we'd just created a "Hello, World" website—nothing that fancy
 but enough to get a feel for the basic structure of Gutenberg's templating
 system.
 
-[![v5 screenshot](/blog/gutenberg-quickstart-1/v5.png)](https://v05--gutenberg-simple-demo.netlify.com/)
+<span class="give-border">
+  [![v5 screenshot](/blog/gutenberg-quickstart-1/v5.png)](https://v05--gutenberg-simple-demo.netlify.com/)
+</span>
 
 ([source code](https://github.com/codesections/gutenberg-simple-demo/tree/v05), as always, in the GitHub repo.)
 
@@ -65,7 +67,9 @@ And that's all it takes to have a second page up and running.  Fire up your
 local server with `gutenberg serve` and you should get something like this,
 with working links:
 
+<span class="give-border">
 [![v06 screenshot](v06.png)](https://v06--gutenberg-simple-demo.netlify.com/)
+</span>
 
 ([Source code](https://github.com/codesections/gutenberg-simple-demo/tree/v06))
 
@@ -115,7 +119,7 @@ A few points are worth noting here:
  *  However, you can chain extensions—that is, another template could extend
     `index.html` even though `index.html` is extending `base.html`.
  *  Templates can have more than one `block`.  For example, I will frequently
-    have at least three block in my `base.html`: `page_speciffic_css`, 
+    have at least three blocks in my `base.html`: `page_speciffic_css`, 
     `content`, and `page_specific_js`.  That lets me easily add in any of 
     those elements if necessary in a child template. 
  *  Blocks can have default values in the parent template.  For instance, 
@@ -298,7 +302,9 @@ And now, launch the live site.  If all goes well, you'll have a site that's
 only slightly changed from when you were using includes, but that is now 
 powered by the full strength of macros.
 
+<span class="give-border">
 [![v08 screenshot](v08.png)](https://v08--gutenberg-simple-demo.netlify.com/)
+</span>
 
 {% aside() %}
   Why are macros better than includes here?  A few reasons:
