@@ -56,9 +56,11 @@ Now, run `gutenberg serve` and you'll get your first site.  Navigate to the
 URL, and you'll see it live!  (Admittedly, it's not—yet—all that impressive).
 
 If everything has gone according to plan, you should see something like this 
-(with this and all other screenshots, click for a live version)
+(with this and all other screenshots, click for a live version).
 
+<span class="give-border">
 [![v1 screenshot](v1.png)](https://v01--gutenberg-simple-demo.netlify.com/)
+</span>
 
 
 ## Our first template
@@ -105,7 +107,9 @@ OK, now we have an `index.html` template, and an `_index.md` content page.
 Lets run our server command and see what we get.  If you're following along,
 you should get something like this (again, click for the live site):
 
+<span class="give-border">
 [![Screenshot of v2](v2.png)](https://v02--gutenberg-simple-demo.netlify.com/)
+</span>
 
 And your code, minimal though it is, should [look like the code in this
 branch](https://github.com/codesections/gutenberg-simple-demo/tree/v01).  Well,
@@ -134,7 +138,9 @@ _not_ to sanitize the text.
 
 After that change, we get a site that looks like this (click for live site):
 
+<span class="give-border">
 [![Screenshot of v03](v3.png)](https://v03--gutenberg-simple-demo.netlify.com/)
+</span>
 
 ## Adding some formatting
 We've made it!  A (very) basic webpage saying "Hello, world".  But lets see if
@@ -199,7 +205,9 @@ in culpa qui officia deserunt mollit anim id est laborum
 With those two changes, we're starting to get something that at least 
 resembles an actual website:
 
+<span class="give-border">
 [![v04 screenshots](v4.png)](https://v04--gutenberg-simple-demo.netlify.com/)
+</span>
 
 As always, click for the live site, and visit the [relevant
 branch](https://github.com/codesections/gutenberg-simple-demo/tree/v04) of
@@ -251,7 +259,9 @@ done that, what else do we need to do?
 
 Nothing!  Fire up your server, and you should see something like this:
 
+<span class="give-border">
 [![v5 screenshot](v5.png)](https://v05--gutenberg-simple-demo.netlify.com/)
+</span>
 
 How does this magic work?  To understand this, let's talk a bit about how 
 Gutenberg generates your site.  At a big-picture level, it takes all the files
