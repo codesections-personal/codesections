@@ -1,5 +1,5 @@
 +++
-title = "Mastodon is better than Twitter: Elevator Pitch"
+title = "Mastodon Is Better than Twitter: Elevator Pitch"
 date = 2018-07-26
 +++
 Mastodon is a new (ish) social media platform that is basically like Twitter, but 
@@ -38,7 +38,7 @@ ultimately giving that viewpoint *more* exposure, not less.
 As a result, Mastodon users basically never boost toots to say how wrong they are,
 and there isn't an issue with armies of followers descending on the original author.
 
-## Mastodon is Local (while still being global)
+## Mastodon Is Local (while still being global)
 With Twitter, everyone belongs to a single, global Twitter, with a single set of 
 moderation policies spanning every group individual on the service.  If you get
 banned from Twitter, you're banned from *all* of Twitter.
@@ -67,10 +67,10 @@ So what stops people from setting up instances that allow for any sort of awful 
 and then pestering the rest of us?  Well, they *can*, but Mastodon lets you or your 
 moderators decide to block entire instances.  If a particular instance won't mind its
 own users, then it will likely find that few other instances want anything to do with 
-it—or at least that it's limited to equally lazy faire instances.
+it—or at least that it's limited to equally laissez-faire instances.
 
 ## Using Technology to Downplay Politics
-Mastodon's user interface makes gives the very prominent option to hide a portion of
+Mastodon's user interface provides the very prominent option to hide a portion of
 a post behind a screen that is only removed when and if the user chooses.  This is a
 great format for hiding the punchline in jokes or concealing spoilers.  More 
 importantly, it's also commonly used to hide controversial posts—including posts about
@@ -82,7 +82,7 @@ practice of allowing people to avoid those posts if they want.  But it's a cultu
 practice that the technology nudges people towards with good user-interface design,
 and it's a cultural practice that, at this point, is firmly established. 
 
-## The Why: Twitter Is in the Outrage Business; Mastodon isn't a Business
+## The Why: Twitter Is in the Outrage Business; Mastodon Isn't a Business
 Twitter is a business that makes money (… er, *tries* to make money) by selling ads. 
 To maximize ad revenue, they want to keep you on Twitter for as long as they possibly 
 can, which means making sure their content is as engaging as possible.
