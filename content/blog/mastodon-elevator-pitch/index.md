@@ -2,18 +2,18 @@
 title = "Mastodon Is Better than Twitter: Elevator Pitch"
 date = 2018-07-26
 +++
-Mastodon is a new (ish) social media platform that is basically like Twitter, but 
-much better than Twitter.  It's like Twitter in that it lets you post short messages
-to a group of followers and receive the tweet-like messages from the people you follow,
-complete with hashtags, images, and all the rest.
+Mastodon is a newcomer social media platform that is a lot like Twitter—short 
+messages, followers, hashtags, all that.  But Mastodon is much better than Twitter,
+and not just because being totally ad-free and keeping chronological timelines make
+it far more enjoyable to use (though that certainly helps!).  
 
-It's better than Twitter not just because it's more enjoyable to use—though it is that—
-but also because it's not an [outrage machine that's corroding our ability to view
+All that is nice, but the real advantage Mastodon has over Twitter is that
+Mastodon is **not** an [outrage machine that's corroding our ability to view
 our politic opponents as real humans, deserving of sympathy and 
 understanding](http://shamusyoung.com/twentysidedtale/?p=41853).
 
-To convince you of how much better Mastodon is, I want to give you three examples of
-**how** Mastodon is better, and then I want to take a step back and talk about **why**
+To explain how much better Mastodon is, I'm going to give you three examples of
+**how** Mastodon is better, and then I'll step back and talk about **why**
 Mastodon is better.
 
 <!-- more -->
@@ -25,7 +25,8 @@ opponent.  Over time, this leads people on all sides of an issue to see only a
 distorted caricature of their opponents, comprised of an amalgam of all the worst
 features of that group.  (This phenomenon of cherry-picking the worst bits of an 
 opposing group [exists independently of
-Twitter](http://slatestarcodex.com/2014/05/12/weak-men-are-superweapons/), but Twitter makes it much, much worse.)
+Twitter](http://slatestarcodex.com/2014/05/12/weak-men-are-superweapons/), but
+Twitter makes it much, much worse.)
 
 How does Mastodon solve this issue?  Well, Mastodon doesn't have retweets; it has 
 "boosts".  Boosts are essentially like retweets, with one key difference: there's 
@@ -69,18 +70,27 @@ moderators decide to block entire instances.  If a particular instance won't min
 own users, then it will likely find that few other instances want anything to do with 
 it—or at least that it's limited to equally laissez-faire instances.
 
-## Using Technology to Downplay Politics
+## A User Interface that Encourages Thoughtfulness
 Mastodon's user interface provides the very prominent option to hide a portion of
 a post behind a screen that is only removed when and if the user chooses.  This is a
 great format for hiding the punchline in jokes or concealing spoilers.  More 
 importantly, it's also commonly used to hide controversial posts—including posts about
 politics.
 
-Now, to some extent this is just a cultural practice; it's dependent on Mastodon 
-users recognizing how corrosive political discussions can be and opting in to the 
-practice of allowing people to avoid those posts if they want.  But it's a cultural
-practice that the technology nudges people towards with good user-interface design,
-and it's a cultural practice that, at this point, is firmly established. 
+What this comes down to is **control**.  This pattern of tagging politics and letting
+the reader decide whether they want to engage with them puts the reader back in control;
+they can chose to engage with politics—and many do!  But if they don't want to (or 
+don't want to right now), they also have the option not to view those posts.  And
+that's not the only way the Mastodon UI puts the reader back in control; for example,
+it also has very powerful options for hiding toots based on keywords to give you a
+middle ground between unfollowing someone and seeing every toot they ever make.
+
+Now, I acknowledge that some of this is just a cultural practice; having political toots
+hidden is dependent on Mastodon users recognizing how corrosive political discussions
+can be and opting to give their readers control over when and if they see those toots.
+But it's a cultural practice that the technology nudges people towards with good
+user-interface design, and it's a cultural practice that, at this point, is firmly
+established.
 
 ## The Why: Twitter Is in the Outrage Business; Mastodon Isn't a Business
 Twitter is a business that makes money (… er, *tries* to make money) by selling ads. 
@@ -93,7 +103,7 @@ awful the other side is—is a tweet that keeps people around to view ads.  Outr
 is good for Twitter's bottom line.
 
 And that's why Twitter isn't—and will never be—as healthy a community as Mastodon is.
-Mastodon's innovations aren't *technologiclaly* that challenging (I mean, a lot of the
+Mastodon's innovations aren't *technologically* that challenging (I mean, a lot of the
 tech is pretty cool, but it's nothing Twitter couldn't copy if they really wanted to).
 No, the reason that Mastodon has all these advantages is that they *aren't* advantages
 from Twitter's perspective.  From Twitter's perspective, anything that makes people
@@ -116,8 +126,12 @@ privileged position to help craft a healthy community.  Mastodon's entire model 
 its incentives right.
 
 ## Joining
-If this sounds at all appealing to you, I encourage you to check out Mastodon.  The
-main website, [joinmastodon.org](https://joinmastodon.org/), is full of good info. 
+If this sounds at all appealing to you, I encourage you to check out Mastodon.  It's
+not perfect, and it might not fully replace Twitter if you're a heavy user—if for no
+other reason than that people you like to follow won't (yet) have switched.  But the
+community is really great, and growing quickly.  And I've had a blast with it since I
+got involved. If you'd like to join, the main website,
+[joinmastodon.org](https://joinmastodon.org/), is full of good info. 
 There's also a good tool for picking an instance available at
 [instances.social](https://instances.social/).  
 

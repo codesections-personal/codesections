@@ -20,7 +20,7 @@ reading a science fiction book, or playing a board game with my wife ([Race for
 the Galaxy](https://boardgamegeek.com/boardgame/28143/race-galaxy) is a 
 current favorite).
 
-# Contact 
+## Contact 
 Please feel free to reach out to me using any of the methods below.  Please
 note that, while I maintain placeholder profiles on Facebook and Twitter, I do
 not use either of those services—instead, I use

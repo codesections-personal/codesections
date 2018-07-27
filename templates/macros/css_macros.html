@@ -36,7 +36,6 @@
 {% macro homepage() %}
   .site-header{
     margin-bottom: 1.5em;
-    margin-top: 1em;
     text-align: left;
     font-size: 1.618em;
     font-weight: 400;
@@ -47,7 +46,6 @@
   @media (min-width:  600px) { /*Tablet-portrait & up*/
     .site-header {
       font-size:  2.618em;
-      padding-top: 4vh;
       padding-bottom: 1vh;
     }
   }
@@ -156,7 +154,7 @@
     ##Main content
   \*==================================*/
   .content-main{
-    margin-top: 2em;
+    margin-top: 3em;
     min-height: calc(100vh - 100px - 1.5em);
     /*  This equals [fullscreen - (top margin) -
      *  (space for the 2-line footer, with margin)]*/
@@ -190,10 +188,15 @@
 
   .content-main article h1 a {
     color: #4F82BB;
-    font-size: 1.25em;
-    margin-top: .75em;
+    font-size: 0.85em;
+    margin-top: .25em;
   }
 
+  .content-main h1 {
+    font-size: 2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
   .content-main h2 {
     margin-top: .25em;
   }
