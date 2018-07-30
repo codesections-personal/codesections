@@ -1,6 +1,6 @@
 +++
 title = "Gutenberg Themes & Documentation"
-order = 20
+weight = 1
 [extra]
 external_link = "https://gutenbergthemes.codesections.com"
 source_link = "https://github.com/codesections/gutenberg-theme-demo"

@@ -304,8 +304,10 @@
 {% endmacro footer %}
 
 {% macro projects() %}
-  .content-main {
-    max-width: 90%;
+  @media (min-width: 600px) {  /*Tablet-portrait & up*/
+    .content-main {
+      max-width: 90%;
+    }
   }
   .intro {
     max-width: 750px;
@@ -317,8 +319,7 @@
   }
   .content-main article {
     max-width: 400px;
-    min-width: 400px;
-    height: 500px;
+    min-height: 500px;
     margin: auto;
     margin-bottom: 2em;
   }

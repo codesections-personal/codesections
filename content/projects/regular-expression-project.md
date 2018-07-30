@@ -1,7 +1,7 @@
 +++
 title = "Reg Experiment"
 date = 2018-06-03T13:39:00-04:00
-order = 9
+weight = 4
 [extra]
 demo_link = "/projects/reg-exp/" 
 +++

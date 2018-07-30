@@ -1,7 +1,7 @@
 +++
 title = "This Website"
 date = 2018-06-03T13:42:25-04:00
-order = 10
+weight = 3
 +++
 The website you're reading right now!  I tried to do things a bit differently with this website.  
 
