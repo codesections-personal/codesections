@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width">
     {{ component::description(context=context) }}
     {{ component::favicon() }}
-    <link rel="canonical" href="{{ config.extra.live_base_url~current_path }}">
+    {#- workaround to remove trailing slash -#}
+    {%- set len = config.extra.live_base_url~current_path | length -%}
+    <link rel="canonical" href="{{ config.extra.live_base_url ~ current_path 
+    | truncate(length=len - 1, end="") }}">
     <title>
       {% if context.title %} {{ context.title }} | {% endif %} CodeSections 
     </title>
@@ -19,13 +22,13 @@
       {{ css::nav_bar() }}
       {{ css::main_content() }}
       {{ css::footer() }}
-      {%- if context.content is containing("<article") -%}
+      {%- if context.content is containing("<article") or context.pages -%}
         {{ css::article() }}
       {%- endif %}
-      {%- if context.content is containing("<table") -%}
+      {%- if context.content is containing("<table") or context.pages -%}
         {{ css::table() }}
       {%- endif %}
-      {%- if context.content is containing("<aside") -%}
+      {%- if context.content is containing("<aside") or context.pages -%}
         {{ css::aside() }}
       {%- endif %}
       {%- block page_specific_styles -%}
