@@ -1,8 +1,6 @@
-{% import "macros/css_macros.html" as css %}
-{% import "macros/component_macros.html" as component %}
-  {% set context = page | default(value = section) %}
-
-
+{%- import "macros/css_macros.html" as css -%}
+{%- import "macros/component_macros.html" as component -%}
+  {%- set context = page | default(value = section) -%}
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -21,20 +19,28 @@
       {{ css::nav_bar() }}
       {{ css::main_content() }}
       {{ css::footer() }}
-      {% block page_specific_styles %}
-      {% endblock page_specific_styles %}
+      {%- if context.content is containing("<article") -%}
+        {{ css::article() }}
+      {%- endif %}
+      {%- if context.content is containing("<table") -%}
+        {{ css::table() }}
+      {%- endif %}
+      {%- if context.content is containing("<aside") -%}
+        {{ css::aside() }}
+      {%- endif %}
+      {%- block page_specific_styles -%}
+      {%- endblock page_specific_styles -%}
     </style>
   </head>
 
   <body>
     {{ component::navbar() }}
     <section class="content-main">
-      {% block content %}
-      {% endblock content %}
+      {%- block content -%}
+      {%- endblock content -%}
     </section>
     {{ component::footer() }}
-
-    {% block page_specific_js_tag %}
-    {% endblock page_specific_js_tag %}
+    {%- block page_specific_js_tag -%}
+    {%- endblock page_specific_js_tag -%}
   </body>
 </html>

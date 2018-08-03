@@ -1,330 +1,314 @@
 <style>
 {% macro global_styles() %}
-  /*==================================*\
-    ##Global
-  \*==================================*/
-  /*  Theme colors
-   *
-   *  #cde     pastel blue (note boxes)
-   *  #000     true black (site header)
-   *  #4F82BB; Dark Blue  (Nav bar)
-   *  #223     near black (text & logo)
-   *  #fff     white (menu text)
-   *  #07e     sky blue (links)
-   *  #dfe2e5  Light grey (tables & borders)
-   */
-  html {
-    font-family: -apple-system,
-                 BlinkMacSystemFont,
-                 'Segoe UI',
-                 Roboto,
-                 'Helvetica Neue',
-                 Arial, sans-serif;
-    color: #223; /*near black*/
-  }
+      /*==================================*\
+        ##Global
+      \*==================================*/
+      /*  Theme colors
+       *
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,
+                     BlinkMacSystemFont,
+                     'Segoe UI',
+                     Roboto,
+                     'Helvetica Neue',
+                     Arial, sans-serif;
+        color: #223; /*near black*/
+      }
 
-  a {
-    color: #0071F0; /*sky blue*/
-    text-decoration: none;
-  }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
 
-  .hidden {
-    display: none;
-  }
+      .hidden {
+        display: none;
+      }
 {% endmacro global_styles %}
 
 {% macro homepage() %}
-  .site-header{
-    margin-bottom: 1.5em;
-    text-align: left;
-    font-size: 1.618em;
-    font-weight: 400;
-    line-height: .85;
-    color: #000;
-  }
+      .site-header{
+        margin-bottom: 1.5em;
+        text-align: left;
+        font-size: 1.618em;
+        font-weight: 400;
+        line-height: .85;
+        color: #000;
+      }
 
-  @media (min-width:  600px) { /*Tablet-portrait & up*/
-    .site-header {
-      font-size:  2.618em;
-      padding-bottom: 1vh;
-    }
-  }
+      @media (min-width:  600px) { /*Tablet-portrait & up*/
+        .site-header {
+          font-size:  2.618em;
+          padding-bottom: 1vh;
+        }
+      }
 {% endmacro homepage %}
 
 {% macro nav_bar() %}
-  /*==================================*\
-    ##Nav bar
-  \*==================================*/
-  .nav-bar {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    width: 100%;
-    padding: 0;
-    background-color: #4F82BB; /*Dark Blue*/
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
-  }
+      /*==================================*\
+        ##Nav bar
+      \*==================================*/
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
 
-  .nav-bar--top {
-    top: 0;
-  }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
 
-  .nav-bar__container {
-    display: flex;
-    max-width: 700; /*max comfortable line length*/
-    padding-left: 8px;
-    padding-right:8px;
-    margin: auto;
-    justify-content: space-between;
-  }
+      .nav-bar__button {
+        position: relative;
+        /*  This isn't needed for display of this element,
+         *  but important for the :after pseudo element
+         *  below. */
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+      }
 
-  .nav-bar__button {
-    position: relative;
-    /*  This isn't needed for display of this element,
-     *  but important for the :after pseudo element
-     *  below. */
-    cursor: pointer;
-    background-color: inherit;
-    height: 1.25em;
-  }
+      .nav-bar__button:not(.nav-bar__button--current-page) {
+        color: white;
+      }
 
-  .nav-bar__button:not(.nav-bar__button--current-page) {
-    color: white;
-  }
+      .nav-bar__link {
+        color: inherit;
+        text-decoration: none;
+      }
 
-  .nav-bar__link {
-    color: inherit;
-    text-decoration: none;
-  }
+      .nav-bar__link::selection {
+        background-color: inherit;
+        color: inherit;
+      }
 
-  .nav-bar__link::selection {
-    background-color: inherit;
-    color: inherit;
-  }
+      .nav-bar__link:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
 
-  .nav-bar__link:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    content: "";
-    transition: all 0.4s ease;
-    border-top: 3px solid #223; /*near black*/
-  }
+      .nav-bar__button:not(.nav-bar__button--current-page)
+        .nav-bar__link:hover:after {
+          width: 100%;
+      }
 
-  .nav-bar__button:not(.nav-bar__button--current-page)
-    .nav-bar__link:hover:after {
-      width: 100%;
-  }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
 
-  .svg__logo {
-    height: 40px;
-    width: 40px;
-  }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
 
-  .svg__logo--background {
-    fill: #4F82BB;
-  }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__button {
+          font-size: 1.382em;
+          line-height: 1.382em;
+          /*  The goal is creating a larger target for
+           *  touch navigation while also shrinking
+           *  the amount of horizontal space devoted to
+           *  the menu.*/
+        }
+      }
 
-  @media (max-width: 599px) { /*Phone only*/
-    .nav-bar__button {
-      font-size: 1.382em;
-      line-height: 1.382em;
-      /*  The goal is creating a larger target for
-       *  touch navigation while also shrinking
-       *  the amount of horizontal space devoted to
-       *  the menu.*/
-    }
-  }
-
-  @media (min-width: 600px) {  /*Tablet-portrait & up*/
-    .nav-bar__button {
-      font-size: 2em;
-    }
-    .svg__logo {
-      height: 64px;
-      width: 64px;
-    }
-  }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__button {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
 {% endmacro nav_bar %}
 
 {% macro main_content() %}
-  /*==================================*\
-    ##Main content
-  \*==================================*/
-  .content-main{
-    margin-top: 3em;
-    min-height: calc(100vh - 100px - 1.5em);
-    /*  This equals [fullscreen - (top margin) -
-     *  (space for the 2-line footer, with margin)]*/
-    max-width: 700px; /*  Match nav container width*/
-    margin-left: auto;
-    margin-right: auto;
-    padding: .1em;
-    font-size: 1.15em;
-    line-height: 1.6em;
-    color: #444;
-  }
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
 
-  .content-main article {
-    padding: .75em;
-    padding-top: 0;
-    border-style: solid;
-    border-color: #f2f2f2;
-    border-radius: 13.3px;
-    border-width: 1.5px;
-    margin-bottom: 1em;
-    box-shadow: 1px 1px 25px #f2f2f2;
-    transition: all .4s ease;
-  }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
 
-  @media (min-width:  600px) { /*Tablet-portrait & up*/
-    .content-main article {
-      margin-bottom: 1.5em;
-      margin-top: 1.5em;
-    }
-  }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
 
-  .content-main article h1 a {
-    color: #4F82BB;
-    font-size: 0.85em;
-    margin-top: .25em;
-  }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
 
-  .content-main h1 {
-    font-size: 2em;
-    margin-top: .5em;
-    margin-bottom: .5em;
-    line-height: 1.1em;
-  }
-  .content-main h2 {
-    margin-top: .25em;
-  }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
 
-  @media (min-width: 600px) {
-    .content-main h2 {
-      margin-top: 1.25em;
-    }
-  }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
 
+      .content-main img {
+        width: 100%;
+      }
 
-  .content-main p {
-    margin-bottom: 1.75em;
-  }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
 
-  .content-main table {
-    overflow: auto;
-    border-spacing: 0;
-    margin: auto;
-  }
-
-  .content-main table th {
-    font-weight: 600;
-  }
-
-  .content-main table th,
-  .content-main table td {
-    padding: 6px 13px;
-    border: 0.5px solid #dfe2e5;
-  }
-
-  .content-main table tr {
-    background-color: #fff;
-    border-top: 1px solid #c6cbd1;
-  }
-
-  .content-main table tr:nth-child(2n) {
-    background-color: #f6f8fa;
-  }
-
-  .content-main aside {
-    background-color: #cde; /* Pastel blue*/
-    display: block;
-    padding: .75em;
-    margin-top: 1em;
-    color: #0d1d25; /*near black*/
-    border: solid 2px #0d1d25; /* Near black*/
-    max-width: 90%;
-    margin: auto;
-  }
-
-  .content-main aside p:first-child {
-    margin-top: 0;
-  }
-  
-  .content-main aside p:last-child {
-    margin-bottom: 0;
-  }
-
-  .content-main p code,
-  .content-main ul code {
-    color: #c0341d;
-    background-color: #fbe5e1;
-    border-radius: 3px;
-  }
-
-  .content-main pre {
-    overflow-x: auto;
-    padding: .5em;
-    line-height: 1.3em;
-  }
-
-  .content-main img {
-    width: 100%;
-  }
-
-  .content-main .card {
-    position: relative;
-  }
-
-  .content-main .card__link {
-    position: absolute;
-    bottom: 8px;
-    width: 92%;
-  }
-  
-  .content-main .give-border img {
-    border: #dfe2e5 solid 1px;
-  }
-
-  .page-nav__earlier {
-    float: right;
-  }
+      .page-nav__earlier {
+        float: right;
+      }
 {% endmacro main_content %}
 
+{% macro article() %}
+      .content-main article {
+        padding: .75em;
+        padding-top: 0;
+        border: 1px solid #f2f2f2;
+        border-radius: 13.3px;
+        margin-bottom: 1em;
+        box-shadow: 1px 1px 25px #f2f2f2;
+      }
+
+      @media (min-width:  600px) { /*Tablet-portrait & up*/
+        .content-main article {
+          margin: 1.5em auto;
+        }
+      }
+
+      .content-main article h1 a {
+        color: #4F82BB;
+      }
+{% endmacro article %}
+
+{% macro table() %}
+      .content-main table {
+        overflow: auto;
+        border-spacing: 0;
+        margin: auto;
+      }
+
+      .content-main table th {
+        font-weight: 600;
+      }
+
+      .content-main table th,
+      .content-main table td {
+        padding: 6px 13px;
+        border: 0.5px solid #dfe2e5;
+      }
+
+      .content-main table tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+      }
+
+      .content-main table tr:nth-child(2n) {
+        background-color: #f6f8fa;
+      }
+{% endmacro table %}
+
+{% macro aside() %}
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+{% endmacro asside %}
+
 {% macro footer() %}
-  /*==================================*\
-    ##Footer
-  \*==================================*/
-  .footer {
-    margin-top: 2em;
-    text-align: center;
-  }
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
 {% endmacro footer %}
 
 {% macro projects() %}
-  @media (min-width: 600px) {  /*Tablet-portrait & up*/
-    .content-main {
-      max-width: 90%;
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+      .content-main {
+        max-width: 90%;
+      }
     }
-  }
-  .intro {
-    max-width: 750px;
-    margin: auto;
-  }
-  .flexbox {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .content-main article {
-    max-width: 400px;
-    min-height: 500px;
-    margin: auto;
-    margin-bottom: 2em;
-  }
-  .source-link {
-    float: right;
-  }
+    .intro {
+      max-width: 750px;
+      margin: auto;
+    }
+    .flexbox {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .content-main article {
+      max-width: 400px;
+      min-height: 500px;
+      margin: auto;
+      margin-bottom: 2em;
+    }
+    .source-link {
+      float: right;
+    }
 {% endmacro projects %}
 </style>
