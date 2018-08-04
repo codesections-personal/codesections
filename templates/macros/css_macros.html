@@ -19,16 +19,14 @@
         font-size: 17px;
         color: #223; /*near black*/
       }
-
       a {
         color: #0071F0; /*sky blue*/
         text-decoration: none;
       }
-
       .hidden {
         display: none;
       }
-{% endmacro global_styles %}
+{%- endmacro global_styles -%}
 
 {% macro homepage() %}
       .site-header{
@@ -39,14 +37,13 @@
         line-height: .85;
         color: #000;
       }
-
       @media (min-width:  600px) { /*Tablet-portrait & up*/
         .site-header {
           font-size:  2.618em;
           padding-bottom: 1vh;
         }
       }
-{% endmacro homepage %}
+{%- endmacro homepage -%}
 
 {% macro nav_bar() %}
       /*==================================*\
@@ -62,7 +59,6 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
         top: 0;
       }
-
       .nav-bar__container {
         display: flex;
         max-width: 700; /*max comfortable line length*/
@@ -71,7 +67,6 @@
         margin: auto;
         justify-content: space-between;
       }
-
       .nav-bar__button {
         position: relative;
         /*  This isn't needed for display of this element,
@@ -81,21 +76,17 @@
         background-color: inherit;
         height: 1.25em;
       }
-
       .nav-bar__button:not(.nav-bar__button--current-page) {
         color: white;
       }
-
       .nav-bar__link {
         color: inherit;
         text-decoration: none;
       }
-
       .nav-bar__link::selection {
         background-color: inherit;
         color: inherit;
       }
-
       .nav-bar__link:after {
         position: absolute;
         bottom: 0;
@@ -106,21 +97,17 @@
         transition: all 0.4s ease;
         border-top: 3px solid #223; /*near black*/
       }
-
       .nav-bar__button:not(.nav-bar__button--current-page)
         .nav-bar__link:hover:after {
           width: 100%;
       }
-
       .svg__logo {
         height: 40px;
         width: 40px;
       }
-
       .svg__logo--background {
         fill: #4F82BB;
       }
-
       @media (max-width: 599px) { /*Phone only*/
         .nav-bar__button {
           font-size: 1.382em;
@@ -131,7 +118,6 @@
            *  the menu.*/
         }
       }
-
       @media (min-width: 600px) {  /*Tablet-portrait & up*/
         .nav-bar__button {
           font-size: 2em;
@@ -141,7 +127,7 @@
           width: 64px;
         }
       }
-{% endmacro nav_bar %}
+{%- endmacro nav_bar -%}
 
 {% macro main_content() %}
       /*==================================*\
@@ -158,7 +144,6 @@
         line-height: 1.6em;
         color: #444;
       }
-
       .content-main h1 {
         font-size: 1.7em;
         margin-top: .5em;
@@ -168,42 +153,35 @@
       .content-main h2 {
         margin-top: .25em;
       }
-
       @media (min-width: 600px) {
         .content-main h2 {
           margin-top: 1.25em;
         }
       }
-
       .content-main p {
         margin-bottom: 1.75em;
       }
-
       .content-main p code,
       .content-main ul code {
         color: #c0341d;
         background-color: #fbe5e1;
         border-radius: 3px;
       }
-
       .content-main pre {
         overflow-x: auto;
         padding: .5em;
         line-height: 1.3em;
       }
-
       .content-main img {
         width: 100%;
       }
-
       .content-main .give-border img {
         border: #dfe2e5 solid 1px;
       }
-
       .page-nav__earlier {
         float: right;
       }
-{% endmacro main_content %}
+{%- endmacro main_content -%}
 
 {% macro article() %}
       .content-main article {
@@ -214,17 +192,15 @@
         margin-bottom: 1em;
         box-shadow: 1px 1px 25px #f2f2f2;
       }
-
       @media (min-width:  600px) { /*Tablet-portrait & up*/
         .content-main article {
           margin: 1.5em auto;
         }
       }
-
       .content-main article h1 a {
         color: #4F82BB;
       }
-{% endmacro article %}
+{%- endmacro article -%}
 
 {% macro table() %}
       .content-main table {
@@ -232,26 +208,22 @@
         border-spacing: 0;
         margin: auto;
       }
-
       .content-main table th {
         font-weight: 600;
       }
-
       .content-main table th,
       .content-main table td {
         padding: 6px 13px;
         border: 0.5px solid #dfe2e5;
       }
-
       .content-main table tr {
         background-color: #fff;
         border-top: 1px solid #c6cbd1;
       }
-
       .content-main table tr:nth-child(2n) {
         background-color: #f6f8fa;
       }
-{% endmacro table %}
+{%- endmacro table -%}
 
 {% macro aside() %}
       .content-main aside {
@@ -264,15 +236,13 @@
         max-width: 90%;
         margin: auto;
       }
-
       .content-main aside p:first-child {
         margin-top: 0;
       }
-      
       .content-main aside p:last-child {
         margin-bottom: 0;
       }
-{% endmacro asside %}
+{%- endmacro asside -%}
 
 {% macro footer() %}
       /*==================================*\
@@ -282,36 +252,36 @@
         margin-top: 2em;
         text-align: center;
       }
-{% endmacro footer %}
+{%- endmacro footer -%}
 
 {% macro projects() %}
       @media (min-width: 600px) {  /*Tablet-portrait & up*/
-      .content-main {
-        max-width: 90%;
+        .content-main {
+          max-width: 90%;
+        }
       }
-    }
-    .intro {
-      max-width: 750px;
-      margin: auto;
-    }
-    .flexbox {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .content-main article {
-      max-width: 400px;
-      margin: auto;
-      margin-bottom: 2em;
-      height: 50ch;
-      position: relative;
-    }
-    .card__link {
-      position: absolute;
-      width: 92%;
-      bottom: 5px;
-    }
-    .source-link {
-      float: right;
-    }
-{% endmacro projects %}
+      .intro {
+        max-width: 750px;
+        margin: auto;
+      }
+      .flexbox {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .content-main article {
+        max-width: 400px;
+        margin: auto;
+        margin-bottom: 2em;
+        height: 50ch;
+        position: relative;
+      }
+      .card__link {
+        position: absolute;
+        width: 92%;
+        bottom: 5px;
+      }
+      .source-link {
+        float: right;
+      }
+{%- endmacro projects -%}
 </style>
