@@ -132,10 +132,16 @@ other reason than that people you like to follow won't (yet) have switched.  But
 community is really great, and growing quickly.  And I've had a blast with it since I
 got involved. If you'd like to join, the main website,
 [joinmastodon.org](https://joinmastodon.org/), is full of good info. 
-There's also a good tool for picking an instance available at
-[instances.social](https://instances.social/).  
 
 [![joinmastodon.org](mastodon_homepage.png)](https://joinmastodon.org/)
+
+You certainly don't need to understand the details of how Mastodon works, but
+if you would like a bit better understanding of how Mastodon works under the
+hood, Mastodon user [@kev](https://fosstodon.org/@kev) wrote 
+[an excellent guide to Mastodon](https://kevq.uk/how-does-mastodon-work/).  
+And, when you're ready to pick an instance, there's a great tool that 
+lets you search available instances at
+[instances.social](https://instances.social/).  
 
 My recommendation is to use that tool to find a few relatively small instances with
 names that sound interesting to you. Then, click through and read about the culture
