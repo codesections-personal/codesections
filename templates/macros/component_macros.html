@@ -28,15 +28,11 @@
 {%- endmacro favicon -%}
 
 {%- macro navbar() -%}
-    <nav class="nav-bar nav-bar--top">
-      <div class="nav-bar__container">
-        <div class="nav-bar__button">
-          <a class="nav-bar__link" href="/">Home</a>
-        </div>
-        <div class="nav-bar__button">
-          <a class="nav-bar__link" href="/about">About</a>
-        </div>
-        <div class="nav-bar__button">
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn">
             <!-- site logo, as an inline SVG because that loads faster-->
             <a href="/"><span class="hidden">Home</span>
             <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
@@ -54,30 +50,26 @@
               cy="51" cx="50" fill="#fff"/>
             </svg>
             </a>
-        </div>
-        <div class="nav-bar__button">
-          <a class="nav-bar__link" href="/blog">Blog</a>
-        </div>
-        <div class="nav-bar__button">
-          <a class="nav-bar__link" href="/projects">Projects</a>
-        </div>
-      </div>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
     </nav>
 {%- endmacro navbar -%}
 
 {% macro footer() %}
   <footer class="footer">
-    <div>
-      © 2018 | 
-      <a href="/about#contact">Contact</a> |
-      <a href="/license/">Few Rights Reserved</a> |
-      <a href="/rss.xml" type="application/rss+xml"> RSS</a>
-    </div>
-    <div>
-      <a href="/privacy">Privacy Guarantees</a> |
-      <a href="https://gitlab.com/codesections/codesections-website">
-        Source Code for codesections.com
-      </a>
-    </div>
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
   </footer>
 {% endmacro footer %}
