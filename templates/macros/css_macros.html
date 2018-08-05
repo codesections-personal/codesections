@@ -77,29 +77,20 @@
         height: 1.25em;
         display: inline-block;
       }
-      .nav-bar__btn:not(.nav-bar__button--current-page) {
-        color: white;
-      }
       .nav-bar__btn a {
-        color: inherit;
+        color: white;
         text-decoration: none;
-      }
-      .nav-bar__btn a::selection {
-        background-color: inherit;
-        color: inherit;
       }
       .nav-bar__btn a:after {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 0;
-        height: 0;
         content: "";
         transition: all 0.4s ease;
         border-top: 3px solid #223; /*near black*/
       }
-      .nav-bar__btn:not(.nav-bar__button--current-page)
-        .nav-bar__btn a:hover:after {
+      .nav-bar__btn a:hover:after {
           width: 100%;
       }
       .svg__logo {
@@ -113,10 +104,8 @@
         .nav-bar__btn {
           font-size: 1.382em;
           line-height: 1.382em;
-          /*  The goal is creating a larger target for
-           *  touch navigation while also shrinking
-           *  the amount of horizontal space devoted to
-           *  the menu.*/
+          /*  create a larger target for touch navigation while also shrinking
+           *  the amount of horizontal space devoted to the menu.*/
         }
       }
       @media (min-width: 600px) {  /*Tablet-portrait & up*/
