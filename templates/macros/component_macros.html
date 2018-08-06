@@ -1,15 +1,15 @@
 {%- macro description(context) -%}
-    <meta property="og:title" content="{% if context.title %} {{ context.title }} | {% endif %} CodeSections" /> 
+    <meta property="og:title" content="{% if context.title %} {{ context.title }} | {% endif %} CodeSections"> 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{% if context.title %} {{ context.title }} | {% endif %} CodeSections">
     <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="www.codesections.com" />
-    <meta property="og:site_name" content="CodeSections" />
-    <meta property="article:section" content="Article Section" />
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
     <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png">
   {%- if context.description -%}
-    <meta property="og:description" content="{{ context.description }}" />
+    <meta property="og:description" content="{{ context.description }}">
     <meta name="description" content="{{ context.description }}">
     <meta name="twitter:description" content="{{ context.description }}">
   {%- else -%}
@@ -32,7 +32,7 @@
       <ul class="nav-bar__container">
         <li class="nav-bar__btn"><a href="/">Home</a></li>
         <li class="nav-bar__btn"><a href="/about">About</a></li>
-        <li class="nav-bar__btn">
+        <li class="nav-bar__btn nav-bar__btn--icon">
             <!-- site logo, as an inline SVG because that loads faster-->
             <a href="/"><span class="hidden">Home</span>
             <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"

@@ -1,10 +1,6 @@
 <style>
 {% macro global_styles() %}
-      /*==================================*\
-        ##Global
-      \*==================================*/
       /*  Theme colors
-       *
        *  #cde     pastel blue (note boxes)
        *  #000     true black (site header)
        *  #4F82BB; Dark Blue  (Nav bar)
@@ -46,9 +42,6 @@
 {%- endmacro homepage -%}
 
 {% macro nav_bar() %}
-      /*==================================*\
-        ##Nav bar
-      \*==================================*/
       .nav-bar {
         position: fixed;
         z-index: 1;
@@ -68,10 +61,10 @@
         justify-content: space-between;
       }
       .nav-bar__btn {
-        position: relative;
-        /*  This isn't needed for display of this element,
-         *  but important for the :after pseudo element
-         *  below. */
+        position: relative;{#- 
+       /*  This isn't needed for display of this element,
+        *  but important for the :after pseudo element
+        *  below. */ -#}
         cursor: pointer;
         background-color: inherit;
         height: 1.25em;
@@ -79,7 +72,6 @@
       }
       .nav-bar__btn a {
         color: white;
-        text-decoration: none;
       }
       .nav-bar__btn a:after {
         position: absolute;
@@ -90,7 +82,7 @@
         transition: all 0.4s ease;
         border-top: 3px solid #223; /*near black*/
       }
-      .nav-bar__btn a:hover:after {
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
           width: 100%;
       }
       .svg__logo {
@@ -103,9 +95,9 @@
       @media (max-width: 599px) { /*Phone only*/
         .nav-bar__btn {
           font-size: 1.382em;
-          line-height: 1.382em;
+          line-height: 1.382em;{#-
           /*  create a larger target for touch navigation while also shrinking
-           *  the amount of horizontal space devoted to the menu.*/
+           *  the amount of horizontal space devoted to the menu.*/-#}
         }
       }
       @media (min-width: 600px) {  /*Tablet-portrait & up*/
