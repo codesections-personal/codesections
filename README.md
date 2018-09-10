@@ -25,4 +25,5 @@ notice any bugs or have any feature requests, please feel free to open an issue.
 
 More broadly, I'd love to hear your thoughts and feedback on the app.  You can
 send me an email at <daniel@codesections.com> or reach me on Mastodon, where 
-my handle is @codesections@fosstodon.org.
+my handle is [@codesections@fosstodon.org](https://fosstodon.org/@codesections).
+
