@@ -386,8 +386,9 @@ const getFavorites = function getAllTheUsersFavoriates(url) {
     M.onreadystatechange = () => {
       if (M.readyState === 2) {
         if (
-          parseInt(M.getResponseHeader('X-RateLimit-Remaining')) <= 1
-        || !M.getResponseHeader('link').match(/next/)
+          !M.getResponseHeader('link')
+          || !M.getResponseHeader('link').match(/next/)
+          || parseInt(M.getResponseHeader('X-RateLimit-Remaining')) <= 1
         ) {
           done = true;
         }
