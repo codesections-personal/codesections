@@ -71,20 +71,58 @@
 .tagline {
   margin-top: 0;
 }
-.instance-adding-form {
-    width: 50%;
-    width: fit-content;
-    margin: auto;
-    margin-top: 3em;
-    text-align: center;
+.inline-code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  word-break: break-all;
 }
-.instance-adding-form__label {
+
+.button {
+  border: 10px none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 1em;
+  font-size: 1.25em;
+}
+.button--good {
+  background-color: #2b90d9; /* Blue, matching Mastodon "Toot!" button */
+  float: right;
+  margin-right: 15%;
+}
+.button--error {
+  background-color: #c00;
+  float: left;
+  margin-left: 15%;
+}
+/*
+ * Styles for forms
+ */
+.form {
+  width: 50%;
+  width: fit-content;
+  margin: auto;
+  margin-top: 3em;
+  text-align: center;
+}
+.form--pick-toot,
+.login__pick-toot {
+  display: none;
+}
+.form__label {
   font-size: 2em;
 }
-.instance-adding-form__input {
+.form__input {
   font-size: 1em;
 }
-.instance-adding-form__button {
+.form__button {
   background-color: #2b90d9; /* Blue, matching Mastodon "Toot!" button */
   border: 10px none;
   border-radius: 4px;
@@ -105,24 +143,38 @@
 .content__results {
   display: none; /* Initially hidden, show by JavaScript */
 }
-.results-table {
+.results--target-toot {
   overflow: hidden;
   border-spacing: 0;
   margin: auto;
   border-radius: 12px;
   text-align: left;
-}
-.results-table__header {
-  font-weight: 600;
-}
-.results-table__cell {
   padding: 6px 13px;
   border-bottom: 1px solid #393f4f; /* grey, same as used in Mastodon*/
   max-width: 63vw; /* to ensure table doesn't overflow on mobile */
-}
-.results-table__row {
   background-color: #282c37; /* Dark grey; same as Mastodon timelines */
 }
+.results--target-toot a {
+  color: #2b90d9; /* blue that matches buttons from Mastodon */
+  text-decoration: none;
+}
+.results--target-toot .invisible {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+.results--target-toot .ellipsis:after{
+  content: "\2026";
+}
+.toot-header__img {
+  width: 48px;
+  height: 48px;
+  padding-right: 1em;
+  float: left;
+}
+
 .account-name {
   color: #606984; /* Light grey; same as used in Mastodon */
 }
@@ -133,6 +185,15 @@
 .content__loading {
   display: none; /* initially hidden, revealed by JavaScript */
   text-align: center;
+}
+.loading--done {
+  display: none;
+}
+.error--unknown {
+  display: none;
+}
+.error--toot-not-found {
+  display: none;
 }
 @-webkit-keyframes blink {
   50% {
@@ -190,11 +251,11 @@
     </style>
   <body lang="en" class="body__defaults">
     <h1 class="header--main" id="add-an-instance-h1">
-      Tool for Tabulating Thirty Top Tooters
+      Mastodon De-Mob
     </h1>
     <p class="tagline">
       A <a class="link" href="https://www.codesections.com">codesections</a> project |
-<a class="link" href="https://github.com/codesections/t5">source code</a>
+      <a class="link" href="https://github.com/codesections/t5">source code</a>
     </p>
     <noscript>
       <div class="alert alert__warning">
@@ -203,7 +264,7 @@
         JavaScript disabled for good reasons—I also value my privacy and
         don't like the bloat of the modern web.  But look, this app is
         neither bloated nor spying on you.  If you don't believe me, check
-        out the <a class="link" href="https://github.com/codesections/t5">source</a>. 
+        out the <a class="link" href="https://github.com/codesections/mastodon-de-mob">source</a>. 
         In fact, just read the source for this page—I didn't even minify 
         anything or take out the comments.  You can see for yourself that
         there aren't any trackers; just simple http requests to your mastodon
@@ -213,249 +274,99 @@
     </noscript>
 
     <div class="content__login">
-      <p>
+      <p class="login__auth">
         A tool for
         <a class="link" href="https://joinmastodon.org">Mastodon</a>
-        users that will scan all the toots you've favorited and find
-        the 30 people whose toots you've favorited most often.
+        users designed to help prevent harassment.  Using this tool, you can
+        block all the users who boosted or favorited a harassing toot.
+        This tool will simultaneously report the harassing toot to your 
+        instance moderators and send them the following message:
       </p>
-      <p>
+      <blockquote class="login__auth">
+        This toot is harassment, and I have blocked all the users who 
+        boosted or favorited it using the Mastodon De-Mob tool.
+      </blockquote> 
+      <p class="login__auth">
         To get started, enter your instance below.
       </p>
-      <form class="instance-adding-form">
-        <label class="instance-adding-form__label" for="instanceInput">
+      <form class="form form--auth">
+        <label class="form__label" for="instanceInput">
           Instance:
         </label>
         <br>
-        <input class="instance-adding-form__input" type="text" id="instanceInput" placeholder="Enter instance name" required="">
+        <input class="form__input input--auth" type="text" id="instanceInput" placeholder="Enter instance name" required="">
         <br>
-        <button class="instance-adding-form__button"type="submit" id="submitButton">
-          Tabulate
+        <button class="form__button"type="submit" id="submitButton">
+          Authorize
         </button>
         <div class="alert alert__error">
           <strong>Error</strong>: Could not load instance.  Please check the name and try again.
         </div>
       </form>
+      <p class="login__pick-toot">
+        Now paste the URL of the toot.  This can be the URL from when you view 
+        the toot in your instance (e.g.,
+        <code class="inline-code">
+          https://fosstodon.org/web/statuses/100736935090837256</code>)
+        or the URL
+        from public page for the toot—the page you get by clicking on the 
+        timestamp for the toot on the user's public profile page (e.g., 
+        <code class="inline-code">
+          https://fosstodon.org/@codesections/100736935090837256</code>).
+      </p>
+      <form class="form form--pick-toot">
+        <label class="form__label" for="instanceInput">
+          Toot URL:
+        </label>
+        <br>
+        <input class="form__input input--pick-toot" type="text" id="instanceInput" placeholder="Enter toot URL" required="">
+        <br>
+        <button class="form__button"type="submit" id="submitButton">
+          Get Toot
+        </button>
+        <div class="alert alert__error">
+          <strong>Error</strong>: Could not load instance.  Please check the name and try again.
+        </div>
+      </form>
+
     </div>
     
     <div class="content__loading">
-      <h2 class="header--secondary">
-      Loading your favorited toots<span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span>
-      </h2>
-      <p>
-        (this could take a minute or two)
-      </p>
-      <h2 class="header--secondary">
-        <span class="loading__fav-count">0</span> toots loaded.
-      </h2>
+      <div class="loading--in-progress">
+        <h2 class="header--secondary">
+          Blocking <span class="js-number-of-blocked-accounts">a number of
+          accounts </span><span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span>
+        </h2>
+        <p>
+          (this could take a minute or two; please do not close the page
+          while blocking is in progress.)
+        </p>
+      </div>
+      <div class="loading--done">
+        <h2 class="header--secondary">All accounts blocked!</h2>
+      </div>
     </div>
     
+      <div class="alert alert__error error--toot-not-found">
+        <strong>Error</strong>: Could not find toot.  Please check the URL and try again.
+      </div>
+
+    <div class="alert alert__error error--unknown">
+        <strong class="header--alert">Sever error</strong>
+        <p>
+          Something went wrong.  Sorry about that!
+        </p>
+    </div> 
+    
     <div class="content__results">
-      <table class="results-table">
-        <thead class="results-table__header">
-          <tr class="results-table__row">
-            <th class="results-table__cell">You've favorited toots by:</th>
-            <th class="results-table__cell">Times:</th>
-          </tr>
-        </thead>
-        <tbody class="results-table">
-          <!-- to be filled in by JS -->
-        </tbody>
-      </table>
+      <h2 class="header--secondary">
+        You are about to block everyone who favorited or boosted this toot:
+      </h2>
+      <div class="results--target-toot">
+      </div>
+      <button class="button button--error button--abort">Abort</button>
+      <button class="button button--good button--block-all">Block All</button>
     </div>
-    <script>
-const config = {
-  appName: 't5 v0.0.4',
-  appSite: 'https://t5.codesections.com',
-  scope: 'read:favourites',
-};
-
-const init = function init() {
-  setupEventListeners();
-  // Wait for the user to submit their instance, then run all functions
-  if (window.location.search) {
-    // if the authorization_code code has been returned, it will be in the URL
-    getAuthToken();
-    // Then, clean up the URL
-    window.history.pushState({}, '', config.appSite);
-  }
-};
-
-const setupEventListeners = function setupEventListeners() {
-  document.querySelector('.instance-adding-form')
-    .addEventListener('submit', (e) => {
-      let url = document.querySelector('.instance-adding-form__input').value;
-      url = url.toLowerCase().trim();
-      if (!/https/.test(url)) { url = `https://${url}`; }
-      // This breaks on http sites.  But Mastodon doesn't federate with http sites
-
-      window.localStorage.setItem('baseUrl', url);
-      e.preventDefault();
-      getClientSecret();
-    });
-};
-
-const getClientSecret = function getClientSecret() {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',
-    `${window.localStorage.getItem('baseUrl')}/api/v1/apps`,
-    true);
-
-  xhr.onerror = () => {
-    document.querySelector('.alert__error').style.display = 'block';
-  };
-
-  const params = new FormData();
-  params.append('client_name', config.appName);
-  params.append('scopes', config.scope);
-  params.append('redirect_uris', config.appSite);
-  xhr.onreadystatechange = () => {
-    if (
-      xhr.readyState === XMLHttpRequest.DONE
-      && xhr.status === 200
-    ) {
-      const clientId = JSON.parse(xhr.responseText).client_id;
-      const clientSecret = JSON.parse(xhr.responseText).client_secret;
-      window.localStorage.setItem(`${config.appName}clientId`, clientId);
-      window.localStorage.setItem(`${config.appName}clientSecret`, clientSecret);
-      auth();
-    }
-  };
-  xhr.send(params);
-};
-
-const auth = function authorizeApplication() {
-  const url = `${window.localStorage.getItem('baseUrl')}/oauth/authorize?`
-    + `scope=${config.scope}&`
-    + 'response_type=code&'
-    + `redirect_uri=${config.appSite}&`
-    + `client_id=${window.localStorage.getItem(`${config.appName}clientId`)}&`
-    + `client_secret=${window.localStorage.getItem(`${config.appName}clientSecret`)}&`;
-  window.location.href = url;
-};
-
-const getAuthToken = function useAuthCodeToGetAuthToken() {
-  window.localStorage.setItem(`${config.appName}t5AuthCode`,
-    window.location.search.split('=')[1]);
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST',
-    `${window.localStorage.getItem('baseUrl')}/oauth/token`,
-    true);
-
-  const params = new FormData();
-  params.append('client_id',
-    window.localStorage.getItem(`${config.appName}clientId`));
-  params.append('client_secret',
-    window.localStorage.getItem(`${config.appName}clientSecret`));
-  params.append('grant_type', 'authorization_code');
-  params.append('code', window.localStorage.getItem(`${config.appName}t5AuthCode`));
-  params.append('redirect_uri', config.appSite);
-
-  xhr.onreadystatechange = () => {
-    if (
-      xhr.readyState === XMLHttpRequest.DONE
-      && xhr.status === 200
-    ) {
-      const authToken = JSON.parse(xhr.responseText).access_token;
-      window.localStorage.setItem(`${config.appName}token`, authToken);
-      displayLoading();
-      getFavorites(`${window.localStorage.getItem('baseUrl')}/api/v1/favourites?limit=40`);
-    }
-  };
-  xhr.send(params);
-};
-
-const displayLoading = function hideStartPageAndDisplayLoggedInPage() {
-  document.querySelector('.content__login').style.display = 'none';
-  document.querySelector('.content__loading').style.display = 'block';
-};
-
-const getFavorites = function getAllTheUsersFavoriates(url) {
-  const response = [];
-
-  const getNextFavs = function getNextFavs(next) {
-    let done = false;
-    const accessToken = `Bearer ${window.localStorage.getItem(`${config.appName}token`)}`;
-    const M = new XMLHttpRequest();
-    M.open('get', next, true);
-
-    M.setRequestHeader('Authorization', accessToken);
-
-    M.send(null);
-
-    M.onreadystatechange = () => {
-      if (M.readyState === 2) {
-        if (
-          !M.getResponseHeader('link')
-          || !M.getResponseHeader('link').match(/next/)
-          || parseInt(M.getResponseHeader('X-RateLimit-Remaining')) <= 1
-        ) {
-          done = true;
-        }
-        else {
-          getNextFavs(M.getResponseHeader('link').split('>')[0].slice(1));
-        }
-      }
-      if (M.readyState === 4 && M.status === 200) {
-        JSON.parse(M.responseText).forEach((el) => {
-          const item = {
-            accountName: el.account.acct,
-            displayName: el.account.display_name,
-          };
-          response.push(item);
-        });
-        if (done === true) {
-          processResults(response);
-        }
-        incrementFavCount();
-      }
-    };
-  };
-  getNextFavs(url);
-};
-
-const incrementFavCount = function incrementCountOfFavoratedTootsLoaded() {
-  const currentCount = parseInt(
-    document.querySelector('.loading__fav-count').innerHTML, 10,
-  );
-  document.querySelector('.loading__fav-count').innerHTML = currentCount + 40;
-};
-
-const processResults = function countAndDisplayResults(response) {
-  const resultTable = document.querySelector('.results-table');
-  const obj = {};
-  response.forEach((el) => {
-    if (!obj[el.accountName]) {
-      obj[el.accountName] = {
-        count: 1,
-        displayName: el.displayName,
-      };
-    } else {
-      obj[el.accountName].count++;
-    }
-  });
-  const keys = Object.keys(obj);
-
-  keys.sort((a, b) => obj[b].count - obj[a].count);
-  keys.slice(0, 30).forEach((key) => {
-    const accountName = key;
-    const { displayName, count } = obj[key];
-
-    resultTable.innerHTML += `
-<tr class="results-table__row">
-  <td class="results-table__cell">
-    ${displayName}<span class="account-name"> @${accountName}<span>
-  </td>
-  <td class="results-table__cell">
-    ${count}
-  </td>
-</tr>`;
-  });
-  document.querySelector('.content__results').style.display = 'block';
-  document.querySelector('.content__loading').style.display = 'none';
-};
-
-init();
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>

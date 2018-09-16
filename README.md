@@ -1,28 +1,40 @@
-# The Tool for Tabulating Thirty Top Tooters (t5)
-This web app, which is live at <https://t5.codesections.com>, reads the toots
-that a particular [Mastodon](https://joinmastodon.org) user has favorited.  It
-then calculates which other Mastodon users were favorited the most—creating a 
-list of the user's favorite 30 users.
-
-Why would anyone want this?  For fun, mostly.  I put it together when I wasn't
-sure who to "feature" on my profile.  I decided I wanted a scientific approach
-to seeing whose toots I'd liked the most, and this tool was born.
+# Mastodon De-Mob
+This web app, which is live at <https://mastodon-de-mob.codesections.com>, is a
+tool for Mastodon users to protect themselves against harassment.  Using this 
+tool, the target of harassment or other attacks can block all of the users who
+have boosted or favorited a toot infighting harassment.  This tool will block
+all the users and report the instal toot to the moderators.
 
 ## Goals
-This software is intentionally minimalist.  Before making API calls, it is under
-14KB, uses no external libraries, and has no dependencies.  It does only one thing;
-hopefully, it does that well.
+The goal of this tool is to help Mastodon users protect themselves from 
+harassment.  For example, imagine someone posted a toot that said:
 
-## Note on API calls
-Due to the nature of the Mastodon API, this app makes a fairly high number of API 
-calls.  It should not be excessive, but please keep in mind that your instance 
-likely pays for bandwidth—don't sit there refreshing this app needlessly.  Just 
-check your favorite users and move on.
+> Codesections is a awful person.  Everyone should @ him and tell him to die
+
+That toot is, itself, an attack.  It is so much of an attack that boosting or
+favoriting it is also an attack.  Using this tool would allow someone to block
+everyone who had participated in that sort of mob attack.
+
+One additional goal is that some people may be able to use this tool as an 
+*alternative* to block lists.  Block lists were sometimes necessary, but have
+many unintended harms.  This tool allows users to block people based on their 
+specific actions—endorsing an attack—and thus not to need cruder tools that 
+have a higher chance for false positives.
+
+## Non-Goals
+Blocking people who boosted a toot could potentially be used for guilt-by-association.
+
+Imagine there is a particularly obnoxious user.  Some other users might be
+tempted to block anyone who had every interacted positively with that obnoxious
+user.  I think this is a mistake; guilt-by-association is not just.
+
+Thus, this tool is not intended to facilitate that sort of behavior.  It makes
+a report to the users' moderators about each use, which I hope will limit the
+amount people use this tool for non-harassing purposes.
 
 ## Contributing
-I don't anticipate adding a tremendous amount to this application, but if you 
-notice any bugs or have any feature requests, please feel free to open an issue.
+If you notice any bugs or have any feature requests, please feel free to open an issue.
 
 More broadly, I'd love to hear your thoughts and feedback on the app.  You can
 send me an email at <daniel@codesections.com> or reach me on Mastodon, where 
-my handle is [@codesections@fosstodon.org](https://fosstodon.org/@codesections).
+my handle is @codesections@fosstodon.org.
