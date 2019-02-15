@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import "macros/section_macros/blog.html" as blog %}
+{% import "macros/section_macros/projects.html" as projects %}
+{% import "macros/css_macros.html" as css %}
+
+{% block page_specific_styles %}
+  {% if current_path is starting_with("projects") %}
+    {{ css::projects() }}
+  {% endif %}
+{% endblock page_specific_styles %}
+
+
+{% block content %}
+  {% if current_path is starting_with("blog") %}
+    {{ blog::content(section=section, paginator=paginator) }}
+  {% elif current_path is starting_with("projects/reg-exp") %}
+    {{ section.content | safe }}
+  {% elif current_path is starting_with("projects") %}
+    {{ projects::content(section=section) }}
+  {% else %}
+    {{ unknown_template }}
+  {% endif %}
+{% endblock content %}

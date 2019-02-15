@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "macros/css_macros.html" as css %}
+
+{%- block page_specific_styles -%}
+  {{ css::homepage() }}
+{%- endblock page_specific_styles -%}
+
+{%- block content -%}
+  {{ section.content | safe }}
+{%- endblock content -%}

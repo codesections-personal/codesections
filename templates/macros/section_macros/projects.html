@@ -1,0 +1,40 @@
+{% macro content(section) %}
+  <div class="intro">
+    {%- if section.title -%}<h2> {{ section.title }} </h2> {%- endif -%}
+    {{ section.content | safe }}
+  </div>
+
+  <div class="flexbox">
+  {% for page in section.pages %}
+    <article class="card">
+      <div>
+        <h2>
+          {%- if page.content | length > 1000 -%}
+            <a href="{{ page.permalink }}"> {{ page.title }}</a>
+          {%- else -%}
+            {{ page.title }}
+          {%- endif -%}
+        </h2>
+        {#- display the appropriate summary of the page -#}
+        {%- if page.summary -%}
+        {{ page.summary | safe }}
+        {%- else -%}
+          {{ page.content | safe | truncate(length=1000)}} 
+        {%- endif -%}
+      </div>
+      <div class="card__link">
+      {%- if page.content | length > 1000 -%}
+        <a href="{{ page.permalink }}">(read more)</a>
+      {%- elif page.extra.external_link -%}
+        <a href="{{ page.extra.external_link }}">(read more)</a>
+        <a class="source-link" href="{{ page.extra.source_link }}">Source Code</a>
+      {%- elif page.extra.source_link-%}
+        <a class="source-link" href="{{ page.extra.source_link }}">Source Code</a>
+      {%- elif page.extra.demo_link -%}
+        <a href="{{ page.extra.demo_link }}">Live Demo</a>
+      {%- endif -%}
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+{% endmacro content %}

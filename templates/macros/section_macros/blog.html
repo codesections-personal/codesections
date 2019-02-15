@@ -1,0 +1,30 @@
+{% macro content(section, paginator) %}
+  {{ section.content | safe }}
+
+  {% for page in paginator.pages %}
+    <article>
+      <div>
+        <h1>
+            <a href="{{ page.permalink }}"> {{ page.title  }}</a>
+        </h1>
+
+        {% if page.summary %}
+          {{ page.summary | safe }}
+        {% else %}
+          {# hackish way to throw an error #}
+          {{ please_include_a_summary }}
+        {% endif %}
+      </div>
+      <a href="{{ page.permalink }}">(read more)</a>
+    </article>
+  {% endfor %}
+
+  <div>
+    {% if paginator.previous %}
+      <a class="page-nav__later" href="{{ paginator.previous }}">← Later posts</a>
+    {% endif %}
+    {% if paginator.next %}
+    <a class="page-nav__earlier" href="{{ paginator.next }}">Earlier posts →</a>
+    {% endif %}
+  </div>
+{% endmacro content %}

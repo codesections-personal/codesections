@@ -1,0 +1,50 @@
+{%- import "macros/css_macros.html" as css -%}
+{%- import "macros/component_macros.html" as component -%}
+  {%- set context = page | default(value = section) -%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    {{ component::description(context=context) }}
+    {{ component::favicon() }}
+    {#- workaround to remove trailing slash -#}
+    {%- set len = config.extra.live_base_url~current_path | length -%}
+    <link rel="canonical" href="{{ config.extra.live_base_url ~ current_path 
+    | truncate(length=len - 1, end="") }}">
+    <title>
+      {% if context.title %} {{ context.title }} | {% endif %} CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      {{ css::global_styles() }}
+      {{ css::nav_bar() }}
+      {{ css::main_content() }}
+      {%- if context.content is containing("<article") or paginator.pages or context.pages -%}
+        {{ css::article() }}
+      {%- endif %}
+      {%- if context.content is containing("<table") -%}
+        {{ css::table() }}
+      {%- endif %}
+      {%- if context.content is containing("<aside") or paginator.pages -%}
+        {{ css::aside() }}
+      {%- endif %}
+      {{ css::footer() }}
+      {%- block page_specific_styles -%}
+      {%- endblock page_specific_styles -%}
+    </style>
+  </head>
+
+  <body>
+    {{ component::navbar() }}
+    <section class="content-main">
+      {%- block content -%}
+      {%- endblock content -%}
+    </section>
+    {{ component::footer() }}
+    {%- block page_specific_js_tag -%}
+    {%- endblock page_specific_js_tag -%}
+  </body>
+</html>
