@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog">
+    <title>
+       CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main article {
+        padding: .75em;
+        padding-top: 0;
+        border: 1px solid #f2f2f2;
+        border-radius: 13.3px;
+        margin-bottom: 1em;
+        box-shadow: 1px 1px 25px #f2f2f2;
+      }
+      @media (min-width:  600px) { /*Tablet-portrait & up*/
+        .content-main article {
+          margin: 1.5em auto;
+        }
+      }
+      .content-main article h1 a {
+        color: #4F82BB;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  
+
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;sunday-screenshot-feb-2019&#x2F;"> Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup</a>
+        </h1>
+
+        
+          <p>I recently made a number of pretty significant change to the look and feel of my
+Linux desktop environment, and I'm pretty happy with how my setup looks now.
+It's not for everyone, but I thought at least some of y'all might be interested
+in seeing how it looks.</p>
+<h2 id="what-i-changed">What I changed</h2>
+<p>I was previously using <a href="https://dwm.suckless.org/">dwm</a> as my display manager—and, if you haven't tried it, I highly recommend it.  But I just
+switched to <a href="https://stumpwm.github.io/">stumpwm</a>, which sacrifices a bit in
+minimalism but makes up for it in configurability.  That change deserves—and
+will get—it's own blog post.  But, for now, you'll just get to see the
+pictures.</p>
+<p>At the same time, I've changed from a standard <a href="https://ethanschoonover.com/solarized/">Solarized</a> color scheme for vim to the <a href="https://www.robertmelton.com/posts/syntax-highlighting-off/">nofrils</a> color scheme as part of an experiment with removing (almost) all syntax highlight from my code.  That <strong>also</strong> deserves its own post; again, all you get right now is the
+screenshots.</p>
+<p>The result of all of these changes is a highly <strong>minimalist</strong>, <strong>distraction-free</strong>, and <strong>keyboard-centric</strong> window setup—and I'm very happy with it for now.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p>(In each case, click for a bigger image—and most of these really need it.)</p>
+<p>My main desktop, when I log in:
+<a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/desktop.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/desktop.png" alt="screenshot of my default desktop" /></a></p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;sunday-screenshot-feb-2019&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;vim-timestamped&#x2F;"> Using Vim to take time-stamped notes</a>
+        </h1>
+
+        
+          <p>I frequently find myself needing to take time-stamped notes.  Specifically, I'll
+be in a call, meeting, or interview and need to take notes that show how long
+it's been since the meeting started.  Basically, I want something that looks
+like this:</p>
+<p><img src="https://www.codesections.com/blog/vim-timestamped/result.jpg" alt="Screenshot of time stamps generated in vim" /></p>
+<p>My first thought was that there's be a plugin to add time stamps, but a quick
+search didn't turn anything up.  However, I little digging <strong>did</strong> turn up the
+fact that vim has the built-in ability to tell time.</p>
+<p>This means that writing a bit of vimscript to insert a time stamp is pretty
+easy.  After a bit of fiddling, I came up with something that serves my needs, and I decided it might be useful enough to others to be worth sharing.  Here's what I came up with:</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;vim-timestamped&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;leaving-netlify&#x2F;"> Thinking about moving the site away from Netlify</a>
+        </h1>
+
+        
+          <p>I'm very strongly considering moving this site away from Netlify.  In fact, I'd go so far as saying that I'm planning to unless writing this post—or hearing from y'all—changes my mind.</p>
+<p>Before I launch into why, though, I want to clarify: I've been very happy with Netlify.  They've delivered exactly what they promised: fast, free, static hosting backed by a global CDN.  Deploying is as easy as running <code>git push</code> in the terminal; if you're thinking about using them, you probably shouldn't let this post dissuade you.</p>
+<p>So, given all those positives, why am I still thinking about migrating the site?</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;leaving-netlify&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;javascript-vs-rust-linked-list&#x2F;"> Comparing Rust and JavaScript Ergonomics with a Simple Linked List</a>
+        </h1>
+
+        
+          <p>My day-to-day work involves writing a fair bit of JavaScript but, lately, I've gotten really interested in Rust.</p>
+<p>I'm into the idea of building lightweight programs that can run with lower resource consumption than is typically required for a JS runtime, and Rust's speed, memory safety, and <a href="https://insights.stackoverflow.com/survey/2018/#most-loved-dreaded-and-wanted">status as the most loved programming language</a> was enough to get my attention.  Add in Rust's strong type system and support for many functional-programming features—both areas I've long wanted to dig into—and it's fair to say that I'm Rust-curious at the least.  Curious enough to work through the <a href="https://doc.rust-lang.org/book/index.html">Rust book</a> and the first half of <a href="https://doc.rust-lang.org/rust-by-example/index.html">Rust By Example</a> (both of which are great, by the way!).  I'm certainly enjoying the process so far.</p>
+<p>But, the other day, I decided to take a slightly different approach: I decided to take a simple linked list program—the type can and do ask my students to implement in JavaScript in ~20 minutes—and re-implement it in Rust.  Specifically, I decided to build a queue implemented with a singly linked list.</p>
+<p>Going in, I expected the Rust version to be much more verbose than the JavaScript version, far faster, and moderately difficult to write.  As it turns out, though, the Rust version is hardly any more verbose than the JavaScript version, but was virtually impossible to write—at least in safe Rust.  (I was right about it being faster, though).</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;javascript-vs-rust-linked-list&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;guide-to-placeholder-images&#x2F;"> Generating placeholder images with Pixabay, jq, and curl</a>
+        </h1>
+
+        
+          <p>Just recently, I found myself in need of several hundred pictures.  I'm working on a fairly large-scale app, and I want to be able to test its server infrastructure under load.  In my case, that means uploading a decent number of images to Amazon's S3 servers and testing how the app's performs holds up.</p>
+<p>So, where to get several hundred reasonably decent pictures, preferably with as little work as possible?</p>
+<h2 id="licensing-difficulties">Licensing Difficulties</h2>
+<p>I asked around, and several of my colleagues recommended <a href="https://unsplash.com/">Unsplash</a>.  In a lot of ways, that would be perfect—they have gorgeous photos, and an easy-to-use API.  There's just one problem: The Unsplash API <a href="https://medium.com/unsplash/unsplash-api-guidelines-hotlinking-images-6c6b51030d2a">expressly requires</a> all images to be hotlinked back to their servers.  As they explain:</p>
+<blockquote>
+<p>Downloads and views are one of the main motivations for many Unsplash contributors. By opening up the Unsplash API to 3rd party applications their photography is seen and used by more users which inspires them to contribute more, new contributors to join, and an even better library for you and your community of creatives.</p>
+<p>When displaying Unsplash images, you should use the urls property returned by the API on all of the API photo objects.</p>
+</blockquote>
+<p>That makes a certain amount of sense.  (I suspect they might also be harvesting the data for advertising purposes too, based on a closer reading of their ToS—but, either way, it's their product and they make the rules.)</p>
+<p>So, if Unsplash is out, what does that leave us with?</p>
+<h2 id="other-options">Other Options</h2>
+<p>Well, there's always <a href="placekitten.com/">placekitten</a>.  But, just for the sake of argument, let's assume that we'd like somewhat realistic data in our app and that we're building an app that <em>isn't</em> kitten-centric (I know, what is the Internet coming to!).</p>
+<p>I investigated a few other options, but none of them quite worked.  I looked at <a href="https://tools.wmflabs.org/magnus-toolserver/commonsapi.php">Wikimedia Commons</a> (limited API, no way to programmatically filter based on license); <a href="https://www.pexels.com/">Pexels</a> (no public access to API—only after requesting access); <a href="https://www.flickr.com/creativecommons/">Flicker CC</a> (API is exclusively non-commercial); <a href="http://placeimg.com/">PlaceImage</a> and <a href="http://lorempixel.com/">LoremPixel</a> (Good APIs but very limited image selection).</p>
+<h2 id="the-best-choice">The Best Choice</h2>
+<p>After sorting through the contenders, I finally found a site that would work perfectly: <a href="https://pixabay.com/">Pixabay</a>, which has a great (although not 100% user-friendly) API and allows full use of their images on external server.  And everything there is perfectly open-source.  Thanks to <a href="https://fosstodon.org/@colomar">Thomas Pfeiffer</a> for pointing me in the right direction, by the way.</p>
+<p>Having settled on the source of our images, how do we actually go about pulling some down?  Let's code!</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;guide-to-placeholder-images&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;mastodon-mobs-and-mastodon-mobs&#x2F;"> Mastodon Mobs and Mastodon Mods: Dealing with Outside Groups Pressuring Instance Administrators</a>
+        </h1>
+
+        
+          <aside>
+  <p>This post is a focused on issues of community governance within <a href="https://www.joinmastodon.org">Mastodon</a> and the fediverse more broadly.  If you're not involved in the fediverse, this might not be as relevant to you.</p>
+</aside>
+<p>The fediverse recently had an incident after a minor celebrity created an account.  I very much do <strong>not</strong> want to talk about the details/merits of that incident¸ but I do want to use it as a prompt for thinking about how the fediverse should deal with some related issues.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;mastodon-mobs-and-mastodon-mobs&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gtypist&#x2F;"> Gtypist Lesson Focusing on Programming Keys</a>
+        </h1>
+
+        
+          <p>Just published a <a href="https://github.com/codesections/gtypist_programming_characters">gtypist lesson</a>.
+The README is below.</p>
+<p>GNU's <a href="https://www.gnu.org/software/gtypist/">gtypist program</a> is a great
+way for Linux users to improve their typing speed right from the command
+line, and is widely available for every distribution. I personally used
+it extensively when I switched from practicing law to programming and
+discovered that the keyboard was full of keys I'd basically never needed
+before.  (If you need convincing of the importance of typing speed to
+programming, please see the post<a href="https://steve-yegge.blogspot.com/2008/09/programmings-dirtiest-little-secret.html">Programming's Dirtiest Little
+Secret</a>.</p>
+<p>However, despite fitting so perfectly into a programming/command-line
+workflow, gtypist doesn't actually have a lot of content focused on
+programmer-specific keys.  This lesson fills that gap.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gtypist&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;sending-keybase-chats-with-vim&#x2F;"> Sending Keybase Chats Using Vim</a>
+        </h1>
+
+        
+          <p>I cannot spell.  Like, was-sent-to-special-classes-as-a-child-and-they-gave-up-on-me cannot spell.  Luckily, this isn't an issue 99% of the time as an adult, because I'm never asked to operate in an environment without a spellcheck.  Except … I just started using keybase.io's chat program, and it doesn't check spelling.  Clearly, this needed to be fixed.</p>
+<p>I found a way to fix it: I now write my chat messages in Vim and then pipe them to keybase chat.  I thought this would be a pretty rare use case (how many other people <em>really</em> care about spelling, or want to edit one-line chat messages in Vim?)  But a number of people expressed interest, so I decided to write this post as a how-to.</p>
+<p>I'll give you the tl;dr how-to version quickly, and then I'll walk though what we're doing in a little more detail and talk about how you could customize it for your use-case.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;sending-keybase-chats-with-vim&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;mastodon-elevator-pitch&#x2F;"> Mastodon Is Better than Twitter: Elevator Pitch</a>
+        </h1>
+
+        
+          <p>Mastodon is a newcomer social media platform that is a lot like Twitter—short
+messages, followers, hashtags, all that.  But Mastodon is much better than Twitter,
+and not just because being totally ad-free and keeping chronological timelines make
+it far more enjoyable to use (though that certainly helps!).</p>
+<p>All that is nice, but the real advantage Mastodon has over Twitter is that
+Mastodon is <strong>not</strong> an <a href="http://shamusyoung.com/twentysidedtale/?p=41853">outrage machine that's corroding our ability to view
+our politic opponents as real humans, deserving of sympathy and
+understanding</a>.</p>
+<p>To explain how much better Mastodon is, I'm going to give you three examples of
+<strong>how</strong> Mastodon is better, and then I'll step back and talk about <strong>why</strong>
+Mastodon is better.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;mastodon-elevator-pitch&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-quickstart-2&#x2F;"> Gutenberg quickstart 2: From &quot;Hello, World&quot; to macros</a>
+        </h1>
+
+        
+          <p>When we left of, we'd just created a &quot;Hello, World&quot; website—nothing that fancy,
+but enough to get a feel for the basic structure of Gutenberg's templating
+system.</p>
+<p><span class="give-border">
+<a href="https://v05--gutenberg-simple-demo.netlify.com/"><img src="/blog/gutenberg-quickstart-1/v5.png" alt="v5 screenshot" /></a>
+</span></p>
+<p>(<a href="https://github.com/codesections/gutenberg-simple-demo/tree/v05">source code</a>, as always, in the GitHub repo.)</p>
+<p>Today, we're going to dive in a bit deeper and take a look how we can use
+Gutenberg's templates to support a multi-page site.</p>
+<h2 id="an-about-page">An About page</h2>
+<p>First, let's create an About page for our demo site.  Before we do, though,
+lets add a link to our new page from our homepage.  Add the following HTML to
+your <code>index.html</code> file just after the body begins:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Home</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/about</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">About</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+</span></pre>
+<p>Now that we have a link, lets make the page.  To do that, we'll need a
+template that applies to pages—right now, we only have the <code>index.html</code> template
+but, as we talked about last time, that template <em>only</em> applies to the home page.</p>
+<p>By default, all other pages are governed by the <code>page.html</code> template.  (Note
+that I said <em>pages</em>, which are distinct from <em>sections</em>.  We'll get to sections
+next time.)  So, if we're going to have an About page, we're going to need a
+<code>pages.html</code> template.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-quickstart-2&#x2F;">(read more)</a>
+    </article>
+  
+
+  <div>
+    
+    
+    <a class="page-nav__earlier" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;page&#x2F;2&#x2F;">Earlier posts →</a>
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+</body>
+</html>

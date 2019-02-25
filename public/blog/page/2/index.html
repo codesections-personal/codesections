@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/page/2">
+    <title>
+       CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main article {
+        padding: .75em;
+        padding-top: 0;
+        border: 1px solid #f2f2f2;
+        border-radius: 13.3px;
+        margin-bottom: 1em;
+        box-shadow: 1px 1px 25px #f2f2f2;
+      }
+      @media (min-width:  600px) { /*Tablet-portrait & up*/
+        .content-main article {
+          margin: 1.5em auto;
+        }
+      }
+      .content-main article h1 a {
+        color: #4F82BB;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  
+
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;netlify&#x2F;"> How to avoid SEO penalties when using Netlify</a>
+        </h1>
+
+        
+          <h2 id="the-problem">The Problem</h2>
+<p>I've been really happy with my Netlify hosting.  It's fast, free, and deploys
+my site on a global CDN.  Even better, Netlify has all sorts of advanced
+deploy previews and other features that I'm only starting to play with.</p>
+<p>All that said, today I realized that one consequence of how Netlify does things
+is that sites could end up penalized by Google and other search engines.<br />
+Specifically, because Netlify makes multiple versions of your site available,
+your site could be penalized for having &quot;duplicate content&quot;—the same penalty
+that search engines apply to content mills that steal other people's work and
+repost it as their own.</p>
+<aside>
+I have no interest in playing SEO games or trying to get my site ranked
+more highly than it organically would be.  I basically figure that the way
+to get more readers is to write things that people want to read.  Plus, it's
+not like I'm planing to add ads to the site or profit off my readers in any
+way.  At the same time, however, I don't want simple mistakes to make my 
+content harder to find for those who are interested in it.
+</aside>
+<p>What is the problem, exactly?  Well, with default settings Netlify makes
+every page available as a page on your domain <em>and</em> as a page in a subdomain
+inside Netlify.com.  So, for example, the page you are reading right now
+would be available by default at both
+<a href="https://www.codesections.com/blog/netlify">www.codesections.com/blog/netlify</a> and at
+<a href="https://codesections.netlify.com/blog/Netlify">codesections.netlify.com/blog/netlify</a>;
+since it shows up at both locations, it would be counted as duplicate
+content.</p>
+<p>In fact, the problem is even worse than that: Netlify may also (depending on
+your settings) publish different branches of your site to different URLS (even
+with the same content) and will create &quot;deploy-previews&quot; that allow you to
+test live deploys before publishing them to your primary domain.  These features
+are <strong>really</strong> great, and I make use of both of them.  (In fact, branch deploys
+are what let me easily have
+<a href="https://passgen.codesections.com">passgen.codesections.com</a> as a subdomain
+in my site).  But they mean that you could end up with more than just two
+copies of each page on your site—way more, in fact.</p>
+<h2 id="the-solution">The Solution</h2>
+<p>Fortunately, the solution is very simple.  You to entirely avoid this issue,
+you need to take two steps.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;netlify&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-quickstart-1&#x2F;"> Gutenberg Quick Start: from 0 to Hello, World</a>
+        </h1>
+
+        
+          <p>Gutenberg is a fantastic static site generator.  It is likely the fastest
+generator in existence, it's got an easy-to-use yet powerful templating syntax,
+and it supports advanced features like syntax highlighting and Sass compilation
+out of the box.</p>
+<p>This quick start guide will give you everything you need to know to build a
+custom static site, with your own templates, and taking advantage of all of
+Gutenberg's powerful features.  At each stage, you'll be able to see demo
+sites that show exactly what a site like the one I've described looks like, and
+you'll be able to see the exact code that generated that demo site—it's all on
+GitHub, and there'll be links at every step.</p>
+<p>In this first part, we'll start with creating a simple, single-page site.  It
+won't be much, but it will give us a firm foundation to build on.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-quickstart-1&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-vs-hugo&#x2F;"> Benchmarking &amp; Comparing Static Site Generators: Gutenberg versus Hugo</a>
+        </h1>
+
+        
+          <p>As of this post, this blog is now powered by the static site generator
+<a href="https://www.getgutenberg.io/">Gutenberg</a> instead of <a href="https://gohugo.io">hugo</a>.
+I was pretty happy about Hugo and don't have much bad to say about it, but
+I'm even happier with Gutenberg.  This post provides an in-depth comparison
+between the two on five dimensions (speed, template syntax, features,
+documentation/support, and hackability) and explains why I decided to switch.</p>
+<h2 id="speed">Speed</h2>
+<p>In some sense, this is the least important of the five metrics—both Hugo and
+Gutenberg are fast.  Really fast.  So fast that, at least with small sites,
+you'll likely never have a noticeable wait when using either program.</p>
+<p>However, I'm still starting with speed because Hugo's tagline has always been
+that it's &quot;the world's fastest framework for building static sites&quot;, and I
+really wanted to know if that's actually the case.  Hugo is constantly
+bragging about it's speed, but Gutenberg is built in Rust which—at least to
+hear the Rust partisans tell it—should give it a definite speed edge.  So,
+who is the ultimate speed champion?</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;gutenberg-vs-hugo&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;hexo-review&#x2F;"> Hexo Review</a>
+        </h1>
+
+        
+          <p>As I've <a href="https://www.codesections.com/blog/why-static-site-generators-are-great/">written about</a> a <a href="https://www.codesections.com/blog/greatness-of-static-site-generators-ii/">couple of times</a>
+already, I think static site generators are pretty great.  But that
+still leaves picking the right static site generator.</p>
+<p>As I've mentioned before, this site is built with <a href="https://gohugo.io/">Hugo</a>, and I'm currently very happy with the setup.  However,
+I didn't start with Hugo.  My first experience with a static site
+generator was actually with <a href="https://hexo.io/">Hexo</a>—a static site
+generator that I wanted to love but found that I just could not.</p>
+<p>This post is all about what drew me to Hexo in the first place.  And
+then, part two of this review, I'll get into what ultimately pushed
+me away from it.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;hexo-review&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;how-secure-is-pass-gen&#x2F;"> Just How Secure Is pass-gen?</a>
+        </h1>
+
+        
+          <p>The other day, I posted on Mastodon that <a href="www.gitlab.com/codesections/pas-gen">pass-gen</a> (my new passphrase generator written in pure bash and designed to follow the Unix philosophy) has achieved 100 bits of entropy with default settings and is now 128 times as secure as when it first launched.
+But how secure is 100 bits of entropy, really?  And how do you even go about
+measuring the security of a passphrase generator, really?</p>
+<h2 id="attack-vectors">Attack Vectors</h2>
+<p>The security of a given password depends entirely on the method used to
+attack that password.  As xkcd <a href="https://xkcd.com/538/">famously pointed out</a>, basically all passwords are weak against physical attacks:</p>
+<p><a href="/blog/how-secure-is-pass-gen/security.png"><img src="/blog/how-secure-is-pass-gen/security.png" alt="xkcd 538" /></a></p>
+<p>But let's set aside the $5-wrench attack for the moment, and dive into the crypto-nerd's imagined attack.  Just what would it take to actually crack
+the sort of password that pass-gen creates?</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;how-secure-is-pass-gen&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;image-compression-for-website-speed&#x2F;"> Image Compression for Website Speed: Turning it up to 11</a>
+        </h1>
+
+        
+          <p>A few months ago, I got very into maximizing the speed of my website.  I feel
+pretty good about what I accomplished:</p>
+<p><a href="/blog/image-compression-for-website-speed/pingdom.png"><img src="/blog/image-compression-for-website-speed/pingdom-min.jpg" alt="100% score from Pingdom tools" /></a></p>
+<p>(I actually prefer the results from <a href="https://www.webpagetest.org/result/180612_B9_3853bf53a2703c0582863edfd1f34791/">webpagetest.org</a>, and not just because it show my site as loading even faster.  It's open-source and seems to have a better methodology.  But it doesn't generate as pretty a picture, so I went with the Pingdom screenshot above.)</p>
+<p>My home page loads in well under a second, and transfers only 2.4kb of data.  All of the pages in my site loaded their above-the-fold content without any blocking scripts or external CSS.  Plus, my site is served of of Netlify's global CDN, so it attains basically the same speed for visitors from anywhere in the world.  I was generally satisfied with that result, and stopped thinking much about my site speed.</p>
+<p>Then, today, I realized that I'd let things slip a bit; I'd uploaded a few
+images without giving any thought to compression, and a couple of pages were
+much larger—and therefore slower—than they had any right to be.</p>
+<p>So, I decided to fix that.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;image-compression-for-website-speed&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;my-git-setup&#x2F;"> My (Paranoid) Git Setup</a>
+        </h1>
+
+        
+          <p>Until recently, I had a very simple git workflow: I worked in a local repository, and then pushed my changes to a single remote, which lived at GitHub.  In the case of the <a href="https://www.gitlab.com/codesections/codesections-website">code for this site</a>, pushing to GitHub would automatically trigger a rebuild of the website and publish the changes live to the Internet. (Thanks, <a href="https://www.netlify.com">Netlify</a>!)</p>
+<p>This setup had the virtue of simplicity, but it had three important drawbacks:</p>
+<ul>
+<li>I had no backups of any changes I'd made but not published.  For example, if I had a draft blog post, it lived <em>only</em> on my laptop, and thus could easily be lost.  This isn't <em>that</em> big of a deal with my current workflow—unlike some <a href="https://fosstodon.org/@h4ck3r9/100174544939337521">some</a> bloggers, I don't tend to keep a ton of posts as drafts.  Still, though, I'd like to not lose what I do have, and I always might keep more drafts in the future.</li>
+<li>I was relying heavily on GitHub to publish updates to my site.  If GitHub were down or locked me out of my account or something, I would have no <em>easy</em> way to make posts to my blog.  I could migrate to a different git host or manually update Netlify, but it wouldn't be seamless.</li>
+<li>I had only one backup of the site, and that was on GitHub.  If anything happen to my computer, I'd be 100% relying on GitHub for all of my site content.</li>
+</ul>
+<p>So, over the past week, I decided to fix all of these issues.  With my new setup, I have:</p>
+<ol>
+<li>A git server on a Raspberry Pi on my home LAN.</li>
+<li>A git server on a cheep shared host.</li>
+<li>A GitHub-hosted repository.</li>
+<li>A GitLab-hosted repository.</li>
+</ol>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;my-git-setup&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;announcing-pass-gen&#x2F;"> Announcing pass-gen</a>
+        </h1>
+
+        
+          <p>As I mentioned <a href="https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/">last time</a>, I think many password managers have a serious flaw: they don't have a way for you to generate a secure, memorable passphrase.  That means that, if you ever have to type your password in, you're stuck typing in something like <code>{!]&amp;Sk)r&quot;ss|$K40:]PP''3k-</code>—and nobody wants to type <code>{!]&amp;Sk)r&quot;ss|$K40:]PP''3k-</code>.</p>
+<p>I also said that I've been using <a href="https://www.bartbusschots.ie/s/publications/software/xkpasswd/">hsxkpasswd</a> to solve that issue and generate usable passphrases.  I like hsxkpasswd a lot, but there's one thing I hate about it—it's written in Perl.  It's the only Perl program I have on my current computer, and it feels really burdensome to install an entire programming language just to generate a simple passphrase.  So, after being bugged by that, I finally decided to do something about it.</p>
+<p>I've written pass-gen, a pure bash password generator.  I just used it to generate a password, and I got <code>UPTURNED!</code>​<code>gone!</code>​<code>DASH!</code>​<code>renewable!</code>​<code>GUIDE!</code>​<code>joystick!524</code>—hopefully much easier to type.  I had several goals for pass-gen:</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;announcing-pass-gen&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;fixing-the-one-problem-with-password-managers&#x2F;"> Fixing the One Problem With Password Managers</a>
+        </h1>
+
+        
+          <p>I recently tweaked the way I use my password manager, and it's already
+saved me considerable frustration.  Not only that, it's also brought my
+usage more in line with the Unix philosophy of using tools that do only
+one thing, and do it well—and illustrated, once again, why that philosophy
+is so great.</p>
+<p>This post explains my tweak, and how you can apply it.  But first, some
+background.</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;fixing-the-one-problem-with-password-managers&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;greatness-of-static-site-generators-ii&#x2F;"> Greatness of Static Site Generators, Part II</a>
+        </h1>
+
+        
+          <p>In the <a href="/blog/why-static-site-generators-are-great/">last post</a>, we talked about the history of website hosting and the rise of dynamic websites powered by PHP.  Now, we’re going to turn to more recent history and see how content delivery networks have changed the nature of the modern web.</p>
+<h2 id="content-delivery-networks-and-the-global-mobile-web">Content Delivery Networks and the Global, Mobile Web</h2>
+<p>One of the biggest advantages of the Internet is how global it is—if your site is hosted in Atlanta, it might get visitors from down the block, but it just as easily might get visitors from New York, or London, or Tokyo.  And that’s pretty incredible.  But it also raises a fundamental problem:</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;greatness-of-static-site-generators-ii&#x2F;">(read more)</a>
+    </article>
+  
+
+  <div>
+    
+      <a class="page-nav__later" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;">← Later posts</a>
+    
+    
+    <a class="page-nav__earlier" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;page&#x2F;3&#x2F;">Earlier posts →</a>
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+</body>
+</html>

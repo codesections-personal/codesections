@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Announcing pass-gen |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Announcing pass-gen |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta property="og:description" content="A CLI for generating secure, easy-to-type passwords">
+    <meta name="description" content="A CLI for generating secure, easy-to-type passwords">
+    <meta name="twitter:description" content="A CLI for generating secure, easy-to-type passwords">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/announcing-pass-gen">
+    <title>
+       Announcing pass-gen |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Announcing pass-gen</h1>
+  <p>As I mentioned <a href="https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/">last time</a>, I think many password managers have a serious flaw: they don't have a way for you to generate a secure, memorable passphrase.  That means that, if you ever have to type your password in, you're stuck typing in something like <code>{!]&amp;Sk)r&quot;ss|$K40:]PP''3k-</code>—and nobody wants to type <code>{!]&amp;Sk)r&quot;ss|$K40:]PP''3k-</code>.</p>
+<p>I also said that I've been using <a href="https://www.bartbusschots.ie/s/publications/software/xkpasswd/">hsxkpasswd</a> to solve that issue and generate usable passphrases.  I like hsxkpasswd a lot, but there's one thing I hate about it—it's written in Perl.  It's the only Perl program I have on my current computer, and it feels really burdensome to install an entire programming language just to generate a simple passphrase.  So, after being bugged by that, I finally decided to do something about it.</p>
+<p>I've written pass-gen, a pure bash password generator.  I just used it to generate a password, and I got <code>UPTURNED!</code>​<code>gone!</code>​<code>DASH!</code>​<code>renewable!</code>​<code>GUIDE!</code>​<code>joystick!524</code>—hopefully much easier to type.  I had several goals for pass-gen:</p>
+<p><a name="continue-reading"></a></p>
+<ul>
+<li>No dependencies.  The whole idea was to get away from Perl, so I don't want to pull in Python, Node, or anything else that isn't part of a bare Linux install.</li>
+<li>Security.  I want pass-gen to be at least as secure as hsxkpasswd.  (I think I well exceeded this goal; based on my calculations, pass-gen should provide 93 bits of entropy using default settings, thanks largely to finding some better wordlists).</li>
+<li>Customizability.  One of the features I love about hsxkpasswd is how customizable it is, and I want pass-gen to be just as customizable, if not more so.</li>
+</ul>
+<p>I believe I've achieved these goals with the initial v0.0.1 release, and would love to have any thoughts or feedback.  The current version has essentially achieved feature parity with hsxkpasswd—the only feature I'm missing is the ability to report on the entropy of generated passwords.</p>
+<p>It also has what I hope will be a large advantage compared to hsxkpasswd in the security department.  This is largely due to the great work done by the Electronic Freedom Foundation, which has put together <a href="https://www.eff.org/dice">several wordlists</a> designed to be used for dice-generated passwords.  Because pass-gen isn't limited to physical dice, it uses a custom wordlist that combines all three of the EFF lists.  Since this list is much larger than the default hsxkpasswd wordlist, pass-gen provides far better out-of-the-box security.</p>
+<p>Of course, both tools allow you to use custom wordlists.  And pass-gen ships with well over a dozen potential wordlists, many of which are vastly longer than even the combined EFF list and thus could provide even better security—though at the cost of not having been vetted for usability.</p>
+<p>In the spirit of any good Linux/Unix/FOSS tool, pass-gen ships with an extensive man page, in addition to supporting a <code>--help</code> command and having a README.  Additionally, I'm happy to answer any questions about it, either here or on <a href="https://fosstodon.org/@codesections">Mastodon</a>.</p>
+<p>The source code is available at both <a href="https://gitlab.com/codesections/pass-gen">GitLab</a> and <a href="https://github.com/dsock/pass-gen">GitHub</a>, though I expect to primarily use GitLab going forward.</p>
+<p>If you have any ideas for improvements, please let me know and I'll add them to the roadmap (I already have ideas!).  If you like the project as it is, I'd greatly appreciate your sharing it with others; I think this could be an easy way for people who make good use of the command line to improve the usability of their passwords without any cost to security.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

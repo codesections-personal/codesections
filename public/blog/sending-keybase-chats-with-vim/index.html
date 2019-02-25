@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Sending Keybase Chats Using Vim |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Sending Keybase Chats Using Vim |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta property="og:description" content="A guide for using vim to send chat messages through the keybase.io client">
+    <meta name="description" content="A guide for using vim to send chat messages through the keybase.io client">
+    <meta name="twitter:description" content="A guide for using vim to send chat messages through the keybase.io client">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/sending-keybase-chats-with-vim">
+    <title>
+       Sending Keybase Chats Using Vim |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Sending Keybase Chats Using Vim</h1>
+  <p>I cannot spell.  Like, was-sent-to-special-classes-as-a-child-and-they-gave-up-on-me cannot spell.  Luckily, this isn't an issue 99% of the time as an adult, because I'm never asked to operate in an environment without a spellcheck.  Except … I just started using keybase.io's chat program, and it doesn't check spelling.  Clearly, this needed to be fixed.</p>
+<p>I found a way to fix it: I now write my chat messages in Vim and then pipe them to keybase chat.  I thought this would be a pretty rare use case (how many other people <em>really</em> care about spelling, or want to edit one-line chat messages in Vim?)  But a number of people expressed interest, so I decided to write this post as a how-to.</p>
+<p>I'll give you the tl;dr how-to version quickly, and then I'll walk though what we're doing in a little more detail and talk about how you could customize it for your use-case.</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="how-to">How To</h2>
+<p>First, you'll need to have the keybase app installed, which will automatically install their command-line client.  If you don't have it, you can get it from <a href="https://keybase.io/download">their website</a>. And you'll obviously need vim/neovim installed too.</p>
+<p>Next, add this bit of code to your <code>.vimrc</code> file (or <code>~/.config/nvim/init.vim</code> file for Neovim users).</p>
+<pre style="background-color:#002b36;">
+<span style="color:#859900;">augroup</span><span style="color:#839496;"> keybase
+</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd</span><span style="color:#839496;">!
+</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* let</span><span style="color:#839496;"> conversation = </span><span style="color:#859900;">expand</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&#39;%:e&#39;</span><span style="color:#839496;">)
+</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* inoremap &lt;CR&gt; &lt;esc&gt;</span><span style="color:#839496;">:w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
+</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* nnoremap &lt;leader&gt;&lt;CR&gt;</span><span style="color:#839496;"> :w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
+</span><span style="color:#859900;">augroup</span><span style="color:#839496;"> END
+</span></pre>
+<p>Then, to send a chat message to a keybase use vim to open a file with the filename <code>keybase-outbox.&lt;USERNAME&gt;</code> (so, if you wanted to message me, you'd type <code>vim keybase-outbos.codesections</code>).</p>
+<p>Type your message and then (while still in insert mode) hit enter to send it (just like you would in a chat client).  Or, if you're in normal mode, hit <code>&lt;leader&gt;</code> and then enter.  This will send your chat, clear the file, and drop you back into insert mode, ready to type your next message.</p>
+<aside>
+  <p>Note that this doesn't display your chat messages in vim/the terminal.  I'm sure you could do that if you really want to live in the terminal (using the <code>keybase chat read</code> in a loop should do the trick) but that's not the exercise here.  I still have the keybase app up in a split-screen window with Vim next to it.</p>
+</aside>
+<h2 id="the-details">The Details</h2>
+<p>How does this work?  Well, I don't claim to be a vimsrcipt master (I'm still halfway through <a href="http://learnvimscriptthehardway.stevelosh.com/">Learn Vimscript the Hard Way</a> and probably won't get around to finishing it for quite some time).  But here's what's going on:</p>
+<p>First, we create a group of commands to be run automatically, and we tell Vim to run those commands whenever the filename includes the string &quot;keybase-outbox&quot;.</p>
+<p>What does this command do?  Well, first, the command looks at the current file (<code>%</code>) and grabs its extension (<code>:e</code>).  It then saves this extension to the variable <code>conversation</code>.</p>
+<p>Next, these commands cause Vim to remap enter in insert mode and <code>&lt;leader&gt;</code> enter in normal mode.  Each of these keys now saves the current file (<code>:w&lt;CR&gt;</code>) and then runs a terminal command (<code>:!</code>).  That terminal command invokes the keybase cli and tells it to send a chat message (<code>keybase chat send</code>).</p>
+<p>At this point, we need to specify the target of the chat message.  To do that, we
+need to get at the variable we've saved—but we can't access it directly within the ex command we're running.  So, instead, we invoke the <a href="http://vimcasts.org/episodes/simple-calculations-with-vims-expression-register/">expression register</a> (<code>&lt;C-R&gt;=</code>) and give it the name of our variable.</p>
+<p>Finally, we pipe in the contents of the current file (<code>&lt; %</code>) and enter our command.  This sends the message.</p>
+<p>After this, we're just dealing with some cleanup.  We clear the current line (<code>dd</code>) and drop back into insert mode (<code>i</code>) so that we can send our next message.</p>
+<h2 id="potential-tweaks">Potential Tweaks</h2>
+<p>This setup is optimized for sending one-line chat messages: since we've remapped enter in insert mode, it's very difficult to send multi-line messages. If you prefer to send longer messages, you might want to remove the insert-mode mapping and change the script to delete the whole message instead of just the current line. (<code>ggdG</code> should do the trick).</p>
+<p>Conversely, you might want to keep your sent message until you manually delete it, in which case you can just cut the part of autocmd that deletes the current line.</p>
+<h2 id="notes">Notes</h2>
+<p>A few important notes.  Less importantly: because this command saves the file, it will leave behind a file with the name you gave it.  This doesn't bother me; I just keep them in a <code>keybase-chat</code> directory and can then tab-complete to open them again later.  But if they annoy you, just remember to delete them.</p>
+<p>More importantly, depending on your threat model, their could be security risks to using this approach.  Keybase doesn't lack a spellcheck because the devs are <em>lazy</em>—they kept it out because they were concerned about security risks of sending keystrokes outside the program.  Here, we're definitely doing that, and even keeping them in Vim's swap files (if you haven't changed that setting).  So, if you're at all concerned about the security of your local machine, this may not be the best approach for sensitive content.</p>
+<p>But, with those caveats, this should let you use Vim to edit your chat messages.  Hope this is helpful!</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

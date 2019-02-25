@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Why Static Site Generators Are Great |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Why Static Site Generators Are Great |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta property="og:description" content="The case for static site generators">
+    <meta name="description" content="The case for static site generators">
+    <meta name="twitter:description" content="The case for static site generators">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/why-static-site-generators-are-great">
+    <title>
+       Why Static Site Generators Are Great |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Why Static Site Generators Are Great</h1>
+  <p>What makes static site generators so great?  And what is a static site generator, anyway?</p>
+<p>To answer that, let’s take a step back and think about how a website works.  Skipping over some (interesting and important!) details not relevant here, to display a website all you need to do is to send visitors of the website an HTML document.</p>
+<p>As an example, take this stripped-down version of the current <a href="https://www.codesections.com">codesections</a> homepage.  To keep things simple, I've striped out all the CSS and the parts of the HTML related to how the page would look, which leaves us with just the basic HTML.</p>
+<p><a name="continue-reading"></a></p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Home</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/about</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">About</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/writing</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Writing</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/projects</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Projects</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">section</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">h1</span><span style="color:#586e75;">&gt; 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">I&#39;m Daniel, a web developer who started coding in 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">an odd way:  I was a lawyer in New York, when my firm 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">needed a coding lawyer.
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">h1</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">p</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#839496;">Lawyers and programmers are both incredibly logical, 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">but somehow they don&#39;t always speak the same language.  
+</span><span style="color:#839496;">      </span><span style="color:#839496;">My goal is to bridge that gap by being skilled in both 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">domains—and the first step in doing that is leveling 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">up my programming skills.
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">p</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">p</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#839496;">As part of that process, I&#39;ve built this site to 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">provide a home for the </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/projects.html</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">projects
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> I&#39;ll build along the way—and to take the opportunity
+</span><span style="color:#839496;">      </span><span style="color:#839496;">to build a </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/projects/this-website/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">website that 
+</span><span style="color:#839496;">      </span><span style="color:#839496;">is like Richard Feynman&#39;s radios</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">.
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">p</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">section</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">footer</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#cb4b16;">&amp;copy;</span><span style="color:#839496;"> 2018 | </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/license/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Some Rights Reserved</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">https://github.com/dsock</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Github</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | 
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">www.linkedin.com/in/daniel-sockwell/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">LinkedIn</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | 
+</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">mailto:daniel-public-email@codesections.com</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Email</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">div</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">footer</span><span style="color:#586e75;">&gt;
+</span></pre>
+<p>Even if you're not familiar with HTML, you can probably tell what’s going on
+with that code: we've got one section up top that sets up the navigation menu, then a block of code for the main content of the page, and finally a block of code that structures the footer.  That code is enough to set up the whole page (again, skipping over CSS and JavaScript for now), and all you need to do is get that code to the visitors of your website.  So, how do you get it to them?</p>
+<p>To answer that, we need a bit of history.</p>
+<h2 id="internet-the-early-years">Internet: The Early Years</h2>
+<p>Well, there are three basic ways.  First, you can just have file on your computer with that exact content.  Then, whenever someone tries to visit www.codesections.com, you send them that HTML file.</p>
+<p>This method, known as a “static website”, has the virtue of being very simple, and very fast—all you have to do is send a single file, and it doesn't get any faster than that.  In the very early days of the Internet, this was exactly how sites got built.</p>
+<p>However, this simple system has a few major drawbacks, too.  Take a look at that code sample again.  As we talked about, it has three sections—and only one of them is specific to the home page.  The navigation menu and the footer need to appear on every page, which means that you need that exact same code on every page.  So, if you're coding like it’s 1994, then you’ll need to copy and paste that code into every page.</p>
+<p>Worse, if you ever decide to change that code (say, you decide you want to add a new item to the navigation menu), then you'll have to make that change on every single page you copied the code into. That’s pretty annoying when you have a site with dozens of pages, but becomes downright overwhelming if you're trying to maintain a site with hundreds or thousands of pages.</p>
+<p>Even worse, there are a lot of website features that are either very annoying or basically impossible to include with a static website.  Take something as simple as a basic blog.  Here’s what you want: a homepage that displays the ten most recent posts, with a link to the next page with the next ten posts, which links to the next page, and so on.  Well, with a purely static site, you’d have a real chore ahead of you every time you added a new post: you’d need to update the homepage by adding the new post and deleting what is now the eleventh post, and then you’d need to update page two.  And then three.</p>
+<p>Clearly, the modern web wouldn't be possible if people were coding sites by hand like that.</p>
+<h3 id="static-sites-and-the-rise-of-php">Static Sites and the Rise of PHP</h3>
+<p>So, in the mid-90s, a guy named Rasmus Lerdorf came up with a better system to power his <strong>p</strong>ersonal <strong>h</strong>ome <strong>p</strong>age, which eventually grew into PHP.</p>
+<p>The basic idea behind PHP is to dynamically generate a website whenever a visitor navigates to a page.  Here’s how that would work with our example site:  instead of having a single file for the home page, you’d have a file with the home page content, another file with the navigation menu, and a third with the footer.  Then, you’d have some PHP code that basically says “whenever someone asks for the homepage, build that page by inserting the navigation menu, then the content for the home page, and finally the footer”.  Or, if you were building a blog, you could have PHP that says “build the blog home page by inserting the navigation menu, then the ten most recent posts, and then the footer”.</p>
+<p>Despite some well-deserved criticism, PHP represented a huge improvement, and it powered the explosion of dynamic websites in the late 90s and early 2000s.  If you were building a website around the turn of the century, a dynamic website built with PHP was definitely the way to go.  Sure, it wasn't <em>quite</em> as fast (or as cheap) to get your content to users, since you had to run some logic on your computer every time a visitor requested a page.  But computing power was cheap, and getting even cheaper—and, besides, it was far more costly to pay programmers to maintain a sprawling static site than to have it done automatically with PHP.</p>
+<p>Even better, technologies like <a href="en.wikipedia.org/wiki/WordPress">Wordpress</a> and other Content Management Systems put building even
+a complex dynamic site within the reach of everyday people, even
+without much technical sophistication.</p>
+<p>But, as great as dynamic sites were a decade ago, they're no longer the best way to build a site.  To understand why not, we need to talk about a couple of technologies that have taken off in the last fifteen or so years.</p>
+<p>In the next post, I’ll explain what those technologies are, how they've transformed the demands placed on modern websites, and why they mean that static site generators are the best way to build websites for the modern web.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

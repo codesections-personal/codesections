@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/sunday-screenshot-feb-2019">
+    <title>
+       Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 1.5em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1.25em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 1.15em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/about">About</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup</h1>
+  <p>I recently made a number of pretty significant change to the look and feel of my
+Linux desktop environment, and I'm pretty happy with how my setup looks now.
+It's not for everyone, but I thought at least some of y'all might be interested
+in seeing how it looks.</p>
+<h2 id="what-i-changed">What I changed</h2>
+<p>I was previously using <a href="https://dwm.suckless.org/">dwm</a> as my display manager—and, if you haven't tried it, I highly recommend it.  But I just
+switched to <a href="https://stumpwm.github.io/">stumpwm</a>, which sacrifices a bit in
+minimalism but makes up for it in configurability.  That change deserves—and
+will get—it's own blog post.  But, for now, you'll just get to see the
+pictures.</p>
+<p>At the same time, I've changed from a standard <a href="https://ethanschoonover.com/solarized/">Solarized</a> color scheme for vim to the <a href="https://www.robertmelton.com/posts/syntax-highlighting-off/">nofrils</a> color scheme as part of an experiment with removing (almost) all syntax highlight from my code.  That <strong>also</strong> deserves its own post; again, all you get right now is the
+screenshots.</p>
+<p>The result of all of these changes is a highly <strong>minimalist</strong>, <strong>distraction-free</strong>, and <strong>keyboard-centric</strong> window setup—and I'm very happy with it for now.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p>(In each case, click for a bigger image—and most of these really need it.)</p>
+<p>My main desktop, when I log in:
+<a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/desktop.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/desktop.png" alt="screenshot of my default desktop" /></a></p>
+<p><a name="continue-reading"></a></p>
+<p>A full-screen terminal session open:
+<a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/terminal.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/terminal.png" alt="screenshot of my terminal" /></a></p>
+<p>If I'm relaxing, I might be sending toots from <a href="https://fosstodon.org">fosstodon</a>—and this setup lets me do this right from vim.</p>
+<p><a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/quebrowser.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/qutebrowser.png" alt="screenshot of qutebrowser/vim" /></a></p>
+<p>Of course, I'm never more than a key press away from a terminal—including a drop-down terminal if that breaks the workflow less</p>
+<p><a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/quebrowser_dropdown.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/qutebrowser_dropdown.png" alt="screenshot of dropdown terminal" /></a></p>
+<p>Enough relaxing—time to get some real work done:</p>
+<p><a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/work.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/work.png" alt="screenshot of tmux with multiple windows open" /></a></p>
+<p>And, if I ever need a reminder about the keys I've set up, stumpwm's built-in
+help is always there for me.</p>
+<p><a href="https://www.codesections.com/blog/sunday-screenshot-feb-2019/keys.png"><img src="https://www.codesections.com/blog/sunday-screenshot-feb-2019/keys.png" alt="screenshot of stumpwm's help" /></a></p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2018 |</li>
+      <li><a href="/about#contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://gitlab.com/codesections/codesections-website">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>
