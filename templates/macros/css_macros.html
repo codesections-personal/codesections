@@ -26,7 +26,6 @@
 
 {% macro homepage() %}
       .site-header{
-        margin-bottom: 1.5em;
         text-align: left;
         font-size: 1.618em;
         font-weight: 400;
@@ -35,7 +34,7 @@
       }
       @media (min-width:  600px) { /*Tablet-portrait & up*/
         .site-header {
-          font-size:  2.618em;
+          font-size:  2.518em;
           padding-bottom: 1vh;
         }
       }
@@ -137,7 +136,7 @@
       }
       @media (min-width: 600px) {
         .content-main h2 {
-          margin-top: 1.25em;
+          margin-top: 1em;
         }
       }
       .content-main p {
@@ -243,11 +242,6 @@
 {%- endmacro footer -%}
 
 {% macro projects() %}
-      @media (min-width: 600px) {  /*Tablet-portrait & up*/
-        .content-main {
-          max-width: 90%;
-        }
-      }
       .intro {
         max-width: 750px;
         margin: auto;
@@ -263,9 +257,14 @@
         height: 50ch;
         position: relative;
       }
+      .content-main p {
+        margin-bottom: .5em;
+	margin-top: 0;
+      }
+      .content-main h2 {
+	margin-bottom: 0;
+      }
       .card__link {
-        position: absolute;
-        width: 92%;
         bottom: 5px;
       }
       .source-link {

@@ -1,6 +1,6 @@
 +++
 title = "pass-gen"
-weight = 2
+weight = 3
 [extra]
 external_link = "https://passgen.codesections.com"
 source_link = "https://github.com/codesections/pass-gen"

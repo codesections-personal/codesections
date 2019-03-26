@@ -4,10 +4,7 @@
     {{ section.content | safe }}
   </div>
 
-  <div class="flexbox">
   {% for page in section.pages %}
-    <article class="card">
-      <div>
         <h2>
           {%- if page.content | length > 1000 -%}
             <a href="{{ page.permalink }}"> {{ page.title }}</a>
@@ -34,7 +31,5 @@
         <a href="{{ page.extra.demo_link }}">Live Demo</a>
       {%- endif -%}
       </div>
-    </article>
   {% endfor %}
-  </div>
 {% endmacro content %}

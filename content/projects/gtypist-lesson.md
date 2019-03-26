@@ -1,6 +1,6 @@
 +++
 title = "gtypist typing lessons"
-weight = 5
+weight = 6
 [extra]
 source_link = "https://github.com/codesections/gtypist_programming_characters"
 +++
