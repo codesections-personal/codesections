@@ -18,6 +18,8 @@ highlight_code = true
 
 highlight_theme = "solarized-dark"
 
+extra_syntaxes = ["./extra_syntaxes"]
+
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
