@@ -21,7 +21,7 @@ Raku|https://randomgeekery.org/post/2020/07/tangling-code-from-hugo-content-with
 In case you're not familiar with it, the term "tangling" comes from the
 L<literate programming|https://en.wikipedia.org/wiki/Literate_programming>
 movement.  In literate programming, you write a single file containing B<both> source
-code and extensive, narative documentation and then process that file in two
+code and extensive, narrative documentation and then process that file in two
 ways: you I<weave> the file into documentation designed for human consumption
 and you I<tangle> the file into code designed to be executed.  The idea is that
 you can use this technique to write a program the way you'd write an essay (or a
@@ -61,8 +61,8 @@ code, the documentation is ignored.
 
 This works great for many typical Pod use cases, but it doesn't really let us do the sort
 of thing Brian was talking about: we can't use Pod to write code and to I<display that
-code as part of our documentation>.   That's a little abstract, so maybe an example will
-help.
+code as part of our documentation>.  That's a little abstract, so maybe an example is in
+order.
 
 <!-- more -->
 
@@ -104,11 +104,11 @@ a couple of relevant modules:
 =end pod
 use Pod::Load;
 use Pod::To::Markdown;
+
 =begin pod
 Next, we'll want to be able to parse our source file.  Let's build a
 L<grammar|https://docs.raku.org/language/grammars>!
 =end pod
-
 grammar Weave {
 =begin pod
 But what should our grammar do?  Well, at the most basic level, we need to be able to
@@ -220,8 +220,8 @@ code|pod-weave.txt>, the output of C<pod-weave --tangle>.
 
 =head2 Done? We barely started
 
-I'll end the same way L<Brian
-did|https://randomgeekery.org/post/2020/07/tangling-code-from-hugo-content-with-raku/#done-you-barely-started>,
+I'm tempted to end the same way L<Brian did|
+https://randomgeekery.org/post/2020/07/tangling-code-from-hugo-content-with-raku/#done-you-barely-started>:
 by noting that this is just a proof-of-concept/good start.  In particular, it's missing
 the ability to present code in a different order from the one in which it's executed.
 Many fans of literate programming would consider this failure tantamount to missing the
@@ -238,9 +238,9 @@ maintaining, I'd rather have the tangled code than the woven essay.
 
 What I am interested in, as this post's title might have given away, is B<semiliterate>
 programming.  I'm interested in writing blog posts about code – something the Raku
-community has L<excelled|https://raku-advent.blog/> at
-L<for|https://perl6advent.wordpress.com/> a
-L<very|http://blogs.perl.org/users/damian_conway/2019/09/to-compute-a-constant-of-calculusa-treatise-on-multiple-ways.html>
+community has L<excelled|https://raku-advent.blog/> at L<for|
+https://perl6advent.wordpress.com/> a L<very|
+http://blogs.perl.org/users/damian_conway/2019/09/to-compute-a-constant-of-calculusa-treatise-on-multiple-ways.html>
 long L<time|https://perl6advent.wordpress.com/2009/12/>.  And when writing a blog post
 about programming, you don't want fancy bells and whistles that make the code in your post
 significantly different than the source code your readers will write.  You want (or, at
@@ -252,8 +252,27 @@ So, sure, our simple weaving implementation might not check all the boxes for tr
 literate programming.  But, by keeping it simple and close to the actual source code,
 we've written a tool that's perfect for blogging about Raku code.
 
-And, in that spirit, I'm releasing the code for this post B<both> as woven documentation
-B<and> as a set of distributions.  The woven documentation is, of course, the 
+=head2 Announcing pod-weave and pod-tangle v0.0.1
 
+And, in that spirit, I'm releasing the code for this post B<both> as woven documentation
+B<and> as a set of distributions.  The woven documentation is, of course, the blog post
+you're reading right now, which was built from L<Raku code available on GitHub|
+https://github.com/codesections-personal/codesections/blob/master/pod-src/weaving-raku.raku>.
+That code genuinely is valid Raku, and can genuinely run on itself to produce the
+L<Markdown output|
+https://github.com/codesections-personal/codesections/blob/master/content/blog/weaving-raku/index.md>
+for the page you're reading.
+
+However, that's not the code I plan to use, maintain, and develop going forward.  Instead,
+I plan to maintain L<pod-weave|https://github.com/codesections/pod-weave> and
+L<pod-tangle|https://github.com/codesections/pod-tangle/> instead.  These two CLIs are
+extremely similar to the code from this blog post.  But they're more modular, easier to
+install, and allow you to weave your output into Markdown, HTML, or plaintext.  In short,
+they work better I<as programs> at the same time they don't work as well I<as explanations
+of themselves>.
+
+And that's the model I, as a semiliterate programmer, plan to follow: I'll use
+C<pod-weave> to help build literate blog posts, building on the power of Pod.  And for my
+regular Raku coding, I'll focus on keeping code clear, concise, and comprehensible.
 
 =end pod
