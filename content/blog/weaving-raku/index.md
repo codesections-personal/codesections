@@ -10,7 +10,7 @@ The other day (er, ok, month) Brian Wisti wrote an excellent blog post about [ta
 
 <aside>
 
-In case you're not familiar with it, the term "tangling" comes from the [literate programming](https://en.wikipedia.org/wiki/Literate_programming) movement. In literate programming, you write a single file containing **both** source code and extensive, narative documentation and then process that file in two ways: you *weave* the file into documentation designed for human consumption and you *tangle* the file into code designed to be executed. The idea is that you can use this technique to write a program the way you'd write an essay (or a blog post): explain your thoughts as you go, and carry the reader along your thought process.</aside>
+In case you're not familiar with it, the term "tangling" comes from the [literate programming](https://en.wikipedia.org/wiki/Literate_programming) movement. In literate programming, you write a single file containing **both** source code and extensive, narrative documentation and then process that file in two ways: you *weave* the file into documentation designed for human consumption and you *tangle* the file into code designed to be executed. The idea is that you can use this technique to write a program the way you'd write an essay (or a blog post): explain your thoughts as you go, and carry the reader along your thought process.</aside>
 
 Inverse inspiration 
 --------------------
@@ -28,7 +28,7 @@ At first, this could sound like I'm just describing Pod6, Raku's [excellent tool
 
 Well, no, not exactly. A Raku file with Pod blocks is cleanly divided into *documentation* (everything inside Pod blocks) and *code* (everything outside Pod blocks). When you render output documentation, the code is ignored; when you run the code, the documentation is ignored.
 
-This works great for many typical Pod use cases, but it doesn't really let us do the sort of thing Brian was talking about: we can't use Pod to write code and to *display that code as part of our documentation*. That's a little abstract, so maybe an example will help.
+This works great for many typical Pod use cases, but it doesn't really let us do the sort of thing Brian was talking about: we can't use Pod to write code and to *display that code as part of our documentation*. That's a little abstract, so maybe an example is in order.
 
 <!-- more -->
 
@@ -151,7 +151,7 @@ All done, and in well under 40 lines of code – in fact, [these 38 lines of cod
 Done? We barely started
 -----------------------
 
-I'll end the same way [Brian did](https://randomgeekery.org/post/2020/07/tangling-code-from-hugo-content-with-raku/#done-you-barely-started), by noting that this is just a proof-of-concept/good start. In particular, it's missing the ability to present code in a different order from the one in which it's executed. Many fans of literate programming would consider this failure tantamount to missing the point entirely. And the proof of concept we built in this blog post doesn't even try to handle multiple programming languages, another key advantage according to literate programming partisans.
+I'm tempted to end the same way [Brian did](https://randomgeekery.org/post/2020/07/tangling-code-from-hugo-content-with-raku/#done-you-barely-started): by noting that this is just a proof-of-concept/good start. In particular, it's missing the ability to present code in a different order from the one in which it's executed. Many fans of literate programming would consider this failure tantamount to missing the point entirely. And the proof of concept we built in this blog post doesn't even try to handle multiple programming languages, another key advantage according to literate programming partisans.
 
 But here's the secret: I'm not **really** interested in literate programming. I'm not interested in having every program I write be one that can be read as an essay. Literate programming may be great for *explaining* code, even for clarifying your thoughts about a problem. But there's a reason it never spread that widely and, 9 times out of 10, I'd rather have tight, concise, readable source. For code I'm actually deploying and maintaining, I'd rather have the tangled code than the woven essay.
 
@@ -159,4 +159,11 @@ What I am interested in, as this post's title might have given away, is **semili
 
 So, sure, our simple weaving implementation might not check all the boxes for truly literate programming. But, by keeping it simple and close to the actual source code, we've written a tool that's perfect for blogging about Raku code.
 
-And, in that spirit, I'm releasing the code for this post **both** as woven documentation **and** as a set of distributions. The woven documentation is, of course, the 
+Announcing pod-weave and pod-tangle v0.0.1
+------------------------------------------
+
+And, in that spirit, I'm releasing the code for this post **both** as woven documentation **and** as a set of distributions. The woven documentation is, of course, the blog post you're reading right now, which was built from [Raku code available on GitHub](https://github.com/codesections-personal/codesections/blob/master/pod-src/weaving-raku.raku). That code genuinely is valid Raku, and can genuinely run on itself to produce the [Markdown output](https://github.com/codesections-personal/codesections/blob/master/content/blog/weaving-raku/index.md) for the page you're reading.
+
+However, that's not the code I plan to use, maintain, and develop going forward. Instead, I plan to maintain [pod-weave](https://github.com/codesections/pod-weave) and [pod-tangle](https://github.com/codesections/pod-tangle/) instead. These two CLIs are extremely similar to the code from this blog post. But they're more modular, easier to install, and allow you to weave your output into Markdown, HTML, or plaintext. In short, they work better *as programs* at the same time they don't work as well *as explanations of themselves*.
+
+And that's the model I, as a semiliterate programmer, plan to follow: I'll use `pod-weave` to help build literate blog posts, building on the power of Pod. And for my regular Raku coding, I'll focus on keeping code clear, concise, and comprehensible.
