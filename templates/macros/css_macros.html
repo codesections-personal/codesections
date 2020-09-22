@@ -34,10 +34,15 @@
       }
       @media (min-width:  600px) { /*Tablet-portrait & up*/
         .site-header {
-          font-size:  2.518em;
+          font-size:  2.818em;
           padding-bottom: 1vh;
         }
       }
+      .footer {
+          margin-top: 0;
+      }
+
+    
 {%- endmacro homepage -%}
 
 {% macro nav_bar() %}
@@ -115,7 +120,7 @@
         ##Main content
       \*==================================*/
       .content-main{
-        min-height: calc(100vh - 100px - 1.5em);
+        min-height: calc(100vh - 100px - 3em);
         /*  This equals [fullscreen - (top margin) -
          *  (space for the 2-line footer, with margin)]*/
         max-width: 700px; /*  Match nav container width*/
@@ -133,6 +138,13 @@
       }
       .content-main h2 {
         margin-top: .25em;
+      }
+      .content-main blockquote {
+          background-color:#dcdcdc6e;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
       }
       @media (min-width: 600px) {
         .content-main h2 {
@@ -234,7 +246,8 @@
         text-align: center;
       }
       .footer ul {
-        margin: 0;
+        margin: 5px;
+        padding: 0;
       }
       .footer li {
         display: inline-block;

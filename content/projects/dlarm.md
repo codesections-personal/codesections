@@ -1,6 +1,6 @@
 +++
 title = "dlarm"
-weight = 2
+weight = 7
 [extra]
 external_link = "https://crates.io/crates/dlarm"
 source_link = "https://github.com/codesections/dlarm"
