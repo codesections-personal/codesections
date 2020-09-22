@@ -20,6 +20,7 @@ contexts:
     - include: numbers
     - include: double_quote_strings
     - include: single_qoute_strings
+    - include: single_smart_qoute_strings
     - include: built_in_consts
     - include: vars
     - include: storage_types
@@ -107,6 +108,17 @@ contexts:
         - meta_include_prototype: false
         - meta_scope: string.quoted.single.perl6
         - match: ''''
+          scope: punctuation.definition.string.end.perl6
+          pop: true
+
+  single_smart_qoute_strings:
+    # literal strings begin and end with single smart quotes, no escapes
+    - match: '‘'
+      scope: punctuation.definition.string.begin.perl6
+      push:
+        - meta_include_prototype: false
+        - meta_scope: string.quoted.single.perl6
+        - match: '’'
           scope: punctuation.definition.string.end.perl6
           pop: true
 
