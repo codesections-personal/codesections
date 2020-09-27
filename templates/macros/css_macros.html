@@ -140,7 +140,8 @@
         margin-top: .25em;
       }
       .content-main blockquote {
-          background-color:#dcdcdc6e;
+          
+          border-left: #dfe2e5 solid 7px;
           padding-left: .5em;
           padding-right: .5em;
           margin-left: 40px; /* default */
@@ -233,6 +234,25 @@
         margin-top: 0;
       }
       .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-main .highlight {
+        background-color: #EFCB68; /* Orange Yellow Crayola */
+        font-size: larger;
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        border-radius: 7px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main .highlight :first-child {
+        margin-top: 0;
+      }
+      .content-main .highlight :last-child {
         margin-bottom: 0;
       }
 {%- endmacro asside -%}
