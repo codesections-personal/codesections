@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Peas in a Pod6 |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Peas in a Pod6 |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/peas-in-a-pod6">
+    <title>
+       Peas in a Pod6 |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-main .highlight {
+        background-color: #EFCB68; /* Orange Yellow Crayola */
+        font-size: larger;
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        border-radius: 7px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main .highlight :first-child {
+        margin-top: 0;
+      }
+      .content-main .highlight :last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Peas in a Pod6</h1>
+  <p>Maybe you already know this, but it took me <em>way</em> too long to realize it so I'm going to talk about it anyway: <strong>Pod is not Pod6</strong>.</p>
+<aside>
+<p>This post is entirely about the Pod6 documentation language. If you're not familiar with Pod6, it's a lightweight markup language that can be rendered to Markdown, HTML, plaintext, or a variety of other output formats; you can think of it a bit like a more powerful and flexible version of Markdown. It was originally designed to <a href="https://docs.raku.org/language/pod">make inline Raku documentation</a> as pleasant as possible to write, but you can use it anywhere you might want to generate HTML or another output format – in fact, I've started <a href="https://github.com/codesections-personal/codesections/tree/master/pod-src">writing this blog</a> in Pod6. There's even a dedicated <a href="https://zahatski.com/2020/7/22/1/podlite-open-source-pod6-markup-language-editor">editor</a> for writing Pod6 and rendering realtime HTML output.</aside></p>
+<p>I want to be clear about what I'm <em>not</em> saying. My point isn't that Pod6 is a different language from <a href="https://perldoc.perl.org/perlpod.html">POD</a>, aka Plain Ol' Documentation, the markup language used for Perl 5 documentation. That's <em>true</em>, of course – Pod6 and POD are not the same language – but I'm making a different point.</p>
+<p>The point I'm making is that Pod6 and Pod aren't the same language any more that JSON and JavaScript objects are the same language. In fact, Pod6 and Pod have a relationship that is exactly analogous to JSON and JavaScript objects: like JSON, Pod6 is a notation for writing plaintext files that can be read both by humans and machines; like a JavaScript object, Pod is an in-memory representation of that content.</p>
+<p>Put differently, Pod6 is a <strong>markup language</strong>, and Pod is a <strong>data format</strong>.</p>
+<p><a name="continue-reading"></a></p>
+<h3 id="some-code-examples">Some code examples</h3>
+<p>Here's an example of Pod6:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#268bd2;">=begin</span><span style="color:#2aa198;"> pod
+</span><span style="color:#586e75;">Hello, </span><span style="color:#268bd2;">B</span><span style="color:#586e75;">&lt;</span><span style="font-weight:bold;color:#586e75;">world</span><span style="color:#586e75;">&gt;!
+</span><span style="color:#268bd2;">=end</span><span style="color:#b58900;"> pod
+</span></pre>
+<p>And here's some Raku code that reads that same Pod6, parses it into Pod, and then prints a textual representation of the Pod (<em>not</em> the Pod6).</p>
+<pre style="background-color:#002b36;">
+<span style="color:#859900;">use</span><span style="color:#839496;"> Pod::Load;
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">my </span><span style="color:#268bd2;">$pod</span><span style="color:#839496;"> = load(q:to</span><span style="color:#2aa198;">/EOF/</span><span style="color:#839496;">);
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">=begin pod
+</span><span style="color:#586e75;">    </span><span style="color:#586e75;">Hello, B&lt;world&gt;!
+</span><span style="color:#586e75;">    </span><span style="color:#586e75;">=end pod
+</span><span style="color:#839496;">    </span><span style="color:#839496;">EOF
+</span><span style="color:#839496;">
+</span><span style="color:#268bd2;">$pod</span><span style="color:#839496;">.raku.say
+</span></pre>
+<p>If you run that code (or, you know, run the <a href="/blog/weaving-raku/">tangled output</a> of this post's <a href="https://github.com/codesections-personal/codesections/blob/master/pod-src/peas-in-a-pod6.raku">source code</a>), then you get the following output (some line breaks added):</p>
+<pre style="background-color:#002b36;">
+<span style="color:#268bd2;">$[</span><span style="color:#839496;">Pod::Block::Named.new(
+</span><span style="color:#839496;">    </span><span style="color:#839496;">name     =&gt; &quot;</span><span style="color:#2aa198;">pod</span><span style="color:#839496;">&quot;,
+</span><span style="color:#839496;">    </span><span style="color:#839496;">config   =&gt; {},
+</span><span style="color:#839496;">    </span><span style="color:#839496;">contents =&gt; [Pod::Block::Para.new(
+</span><span style="color:#839496;">                   </span><span style="color:#839496;">config   =&gt; {},
+</span><span style="color:#839496;">                   </span><span style="color:#839496;">contents =&gt; [&quot;</span><span style="color:#2aa198;">Hello, </span><span style="color:#839496;">&quot;,
+</span><span style="color:#839496;">                                </span><span style="color:#839496;">Pod::FormattingCode.new(
+</span><span style="color:#839496;">                                  </span><span style="color:#839496;">type   =&gt; &quot;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&quot;,
+</span><span style="color:#839496;">                                  </span><span style="color:#839496;">meta   =&gt; [],
+</span><span style="color:#839496;">                                  </span><span style="color:#839496;">config =&gt; {},
+</span><span style="color:#839496;">                                  </span><span style="color:#839496;">contents =&gt; [&quot;</span><span style="color:#2aa198;">world</span><span style="color:#839496;">&quot;]),
+</span><span style="color:#839496;">                                </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">!</span><span style="color:#839496;">&quot;])])]
+</span></pre>
+<p>That is, the Pod – unlike the Pod6 – is a parsed data structure; it's an object, with attributes and methods; it's something that we can manipulate with the full power of Raku. In contrast, the Pod6 we started with was … a string.</p>
+<h2 id="so-what">So what?</h2>
+<p>Ok, hopefully I've convinced you that Pod and Pod6 aren't the same thing. But why should we care? Is all this just an excuse for pedantry – a reason to be able to correct people's usage when they leave off (or add) a 6?</p>
+<p>No. This isn't pedantry at all; it's actually a key way that Pod is better than Markdown.</p>
+<p>We've gone from a flat string, to a fully parsed tree. As Bruce Grey <a href="https://www.youtube.com/watch?v=wZZtrtoTjt4">recently put it</a> at the <a href="https://tpc20cic.sched.com/event/cDdx/refactoring-and-readability-crouching-regex-hidden-structures">Conference in the Cloud</a>, we've gone from this:</p>
+<p><img src="https://www.codesections.com/blog/peas-in-a-pod6/peas001.png" alt="depiction of HTML as a string" /></p>
+<p>to this:</p>
+<p><img src="https://www.codesections.com/blog/peas-in-a-pod6/peas002.png" alt="depiction of HTML as a tree" /></p>
+<p>That is, we've gone from a flat structure that we'd have to parse before we can do anything useful with to an ordered tree that we can efficiently navigate, including recursively. As the images above illustrate, this is exactly the shift browsers make when they go from HTML to a DOM tree, and it's just as powerful for us as it is with browser front-end code. We can bring exactly the same sort of tree-manipulation logic to bear on our parsed Pod that powers DOM manipulation.</p>
+<p>Now, Pod is hardly the only markup format that is paired with a in-memory tree data structure. Obviously, HTML is too, as are XTML and all of the many S-expression-based markup languages. So having access to our data as a tree is hardly a <em>unique</em> selling point for Pod.</p>
+<p>But it is a selling point that sets Pod6 apart from Markdown, which is the main other markup format in wide use for Pod6's main usecases. Markdown simply cannot be parsed into a tree. Sure, you can parse it into HTML (sacrificing info in the process) and then parse the HTML into a tree, but that's hardly the same thing at all. In fact, Markdown has <em>no</em> canonical in-memory representation; it really is just a markup language.</p>
+<p>So, if you want a markup format with the light weight of Markdown, but far more flexibility and with the power inherent being able to manipulate your markup as a tree, you may just want Pod.</p>
+<p>Or rather, Pod6.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

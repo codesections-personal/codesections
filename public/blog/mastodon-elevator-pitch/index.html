@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Mastodon Is Better than Twitter: Elevator Pitch |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Mastodon Is Better than Twitter: Elevator Pitch |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/mastodon-elevator-pitch">
+    <title>
+       Mastodon Is Better than Twitter: Elevator Pitch |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Mastodon Is Better than Twitter: Elevator Pitch</h1>
+  <p>Mastodon is a newcomer social media platform that is a lot like Twitter—short
+messages, followers, hashtags, all that.  But Mastodon is much better than Twitter,
+and not just because being totally ad-free and keeping chronological timelines make
+it far more enjoyable to use (though that certainly helps!).</p>
+<p>All that is nice, but the real advantage Mastodon has over Twitter is that
+Mastodon is <strong>not</strong> an <a href="http://shamusyoung.com/twentysidedtale/?p=41853">outrage machine that's corroding our ability to view
+our politic opponents as real humans, deserving of sympathy and
+understanding</a>.</p>
+<p>To explain how much better Mastodon is, I'm going to give you three examples of
+<strong>how</strong> Mastodon is better, and then I'll step back and talk about <strong>why</strong>
+Mastodon is better.</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="from-retweets-to-boosts">From Retweets to Boosts</h2>
+<p>One of the most pernicious parts of Twitter is how people will retweet something
+dumb, offensive, or awful that an opponent said, along with a message mocking that
+opponent.  Over time, this leads people on all sides of an issue to see only a
+distorted caricature of their opponents, comprised of an amalgam of all the worst
+features of that group.  (This phenomenon of cherry-picking the worst bits of an
+opposing group <a href="http://slatestarcodex.com/2014/05/12/weak-men-are-superweapons/">exists independently of
+Twitter</a>, but
+Twitter makes it much, much worse.)</p>
+<p>How does Mastodon solve this issue?  Well, Mastodon doesn't have retweets; it has
+&quot;boosts&quot;.  Boosts are essentially like retweets, with one key difference: there's
+no option to add your own commentary.  You simply <em>can't</em> post something awful with
+a message saying how awful it is—all you can do is boost something awful without
+commentary.  What's more, the name itself—&quot;boost&quot;—draws attention to a fact that
+Twitter does its best to obscure: by boosting something you disagree with, you're
+ultimately giving that viewpoint <em>more</em> exposure, not less.</p>
+<p>As a result, Mastodon users basically never boost toots to say how wrong they are,
+and there isn't an issue with armies of followers descending on the original author.</p>
+<h2 id="mastodon-is-local-while-still-being-global">Mastodon Is Local (while still being global)</h2>
+<p>With Twitter, everyone belongs to a single, global Twitter, with a single set of
+moderation policies spanning every group individual on the service.  If you get
+banned from Twitter, you're banned from <em>all</em> of Twitter.</p>
+<p>With Mastodon, you don't really join Mastodon itself.  Instead, you join a particular
+server (called an &quot;instance&quot;).  Your instance might have a few hundred people and a
+moderator or two—just the right scale to keep the discussion civil without degenerating
+into bureaucratic rules-lawyering.  And, because you get a &quot;local&quot; feed of all posts
+on your instance in addition to posts from people you follow, your instance really
+can start to feel like a community.  Finally, with instances, you keep control: if you
+find that you don't like the moderation policies or culture of a particular instance,
+you're always free to pick up and move to a different one.</p>
+<p>This neatly solves Twitter's huge problem with moderation—as Mastodon grows, the
+number of mods will inherently scale with that growth.  Yet, even as their number
+grows, they'll stay part of (and accountable to) a relatively small community on their
+home instance.</p>
+<p>Of course, Mastodon would be pretty useless if it only let you talk to a few hundred
+people, so it doesn't impose that limit at all.  You can follow <em>anyone</em>, regardless
+of what instance they call home.  The only difference is that if you have a problem
+with them, then you'd complain to <em>their</em> instance's moderators rather than to your
+own.</p>
+<p>So what stops people from setting up instances that allow for any sort of awful content
+and then pestering the rest of us?  Well, they <em>can</em>, but Mastodon lets you or your
+moderators decide to block entire instances.  If a particular instance won't mind its
+own users, then it will likely find that few other instances want anything to do with
+it—or at least that it's limited to equally laissez-faire instances.</p>
+<h2 id="a-user-interface-that-encourages-thoughtfulness">A User Interface that Encourages Thoughtfulness</h2>
+<p>Mastodon's user interface provides the very prominent option to hide a portion of
+a post behind a screen that is only removed when and if the user chooses.  This is a
+great format for hiding the punchline in jokes or concealing spoilers.  More
+importantly, it's also commonly used to hide controversial posts—including posts about
+politics.</p>
+<p>What this comes down to is <strong>control</strong>.  This pattern of tagging politics and letting
+the reader decide whether they want to engage with them puts the reader back in control;
+they can chose to engage with politics—and many do!  But if they don't want to (or
+don't want to right now), they also have the option not to view those posts.  And
+that's not the only way the Mastodon UI puts the reader back in control; for example,
+it also has very powerful options for hiding toots based on keywords to give you a
+middle ground between unfollowing someone and seeing every toot they ever make.</p>
+<p>Now, I acknowledge that some of this is just a cultural practice; having political toots
+hidden is dependent on Mastodon users recognizing how corrosive political discussions
+can be and opting to give their readers control over when and if they see those toots.
+But it's a cultural practice that the technology nudges people towards with good
+user-interface design, and it's a cultural practice that, at this point, is firmly
+established.</p>
+<h2 id="the-why-twitter-is-in-the-outrage-business-mastodon-isn-t-a-business">The Why: Twitter Is in the Outrage Business; Mastodon Isn't a Business</h2>
+<p>Twitter is a business that makes money (… er, <em>tries</em> to make money) by selling ads.
+To maximize ad revenue, they want to keep you on Twitter for as long as they possibly
+can, which means making sure their content is as engaging as possible.</p>
+<p>But often, tweets are at their most engaging when they're at their most enraging.
+Any tweet that keeps people clicking and talking—even if they're talking about how
+awful the other side is—is a tweet that keeps people around to view ads.  Outrage
+is good for Twitter's bottom line.</p>
+<p>And that's why Twitter isn't—and will never be—as healthy a community as Mastodon is.
+Mastodon's innovations aren't <em>technologically</em> that challenging (I mean, a lot of the
+tech is pretty cool, but it's nothing Twitter couldn't copy if they really wanted to).
+No, the reason that Mastodon has all these advantages is that they <em>aren't</em> advantages
+from Twitter's perspective.  From Twitter's perspective, anything that makes people
+less likely to angrily retweet a rival's obnoxious view is a loss, pure and simple.</p>
+<p>And Twitter doesn't have any choice in the matter, either.  Even if they wanted to
+sacrifice their ad revenues out of a desire to improve the quality of public discourse,
+they couldn't.  Twitter is a public company, funded by investor money; they thus owe
+a legal duty to make as much money for their investors as they can.  Twitter can't,
+and won't, stop prioritizing ad revenue.</p>
+<p>Mastodon, on the other hand, isn't profit motivated and never will be.  At the top,
+Mastodon is a small, open-source project <a href="https://www.patreon.com/mastodon">funded on
+Patreon</a>.  Mastodon can afford to stay small, because
+it's not trying to be centralized—the vast bulk of the work is being done by thousands
+of small sys-admins across the globe running small instances of a few dozen or a few
+hundred users.  And that part is sustainable too—running a small instance costs only a
+few dollars a month, and is a rewarding gig: it comes with a lot of control, and a
+privileged position to help craft a healthy community.  Mastodon's entire model gets
+its incentives right.</p>
+<h2 id="joining">Joining</h2>
+<p>If this sounds at all appealing to you, I encourage you to check out Mastodon.  It's
+not perfect, and it might not fully replace Twitter if you're a heavy user—if for no
+other reason than that people you like to follow won't (yet) have switched.  But the
+community is really great, and growing quickly.  And I've had a blast with it since I
+got involved. If you'd like to join, the main website,
+<a href="https://joinmastodon.org/">joinmastodon.org</a>, is full of good info.</p>
+<p><a href="https://joinmastodon.org/"><img src="https://www.codesections.com/blog/mastodon-elevator-pitch/mastodon_homepage.png" alt="joinmastodon.org" /></a></p>
+<p>You certainly don't need to understand the details of how Mastodon works, but
+if you would like a bit better understanding of how Mastodon works under the
+hood, Mastodon user <a href="https://fosstodon.org/@kev">@kev</a> wrote
+<a href="https://kevq.uk/how-does-mastodon-work/">an excellent guide to Mastodon</a>.<br />
+And, when you're ready to pick an instance, there's a great tool that
+lets you search available instances at
+<a href="https://instances.social/">instances.social</a>.</p>
+<p>My recommendation is to use that tool to find a few relatively small instances with
+names that sound interesting to you. Then, click through and read about the culture
+and moderation policies of each instance and maybe scan through the public posts to
+get a sense of the local vibe.  And then dive right in—you can always change your
+mind later.</p>
+<p>On a personal note, if you happen to be interested in FOSS (Free and Open Source
+Software), then I can personally vouch for the community at
+<a href="https://fosstodon.org">fosstodon.org</a>.  And, on an even more personal note, whatever
+instance you join, please feel free to look me up.  I'm
+<a href="https://fosstodon.org/@codesections">@codesections@fosstodon.org</a> and would love for
+you to say hi.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

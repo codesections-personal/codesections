@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" A deep dive into Raku&#x27;s Unicode support |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" A deep dive into Raku&#x27;s Unicode support |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/raku-unicode">
+    <title>
+       A deep dive into Raku&#x27;s Unicode support |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-main .highlight {
+        background-color: #EFCB68; /* Orange Yellow Crayola */
+        font-size: larger;
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        border-radius: 7px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main .highlight :first-child {
+        margin-top: 0;
+      }
+      .content-main .highlight :last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>A deep dive into Raku&#x27;s Unicode support</h1>
+  <p>Yesterday, I got curious about a simple question that sent me down a bit of a rabbit hole. But now I've emerged from the hole, and want to share what I've learned. (Should that be &quot;share the rabbits I caught&quot;? I think I'll just drop this analogy before we end up with any dead rabbits.)</p>
+<p>This journey will take us deep into the internals of Raku, Rakudo, Not Quite Perl, and even Moar. But don't worry – this will still be relevant to our everyday use of Raku, even if you (like me!) aren't in the habit of writing any NQP.</p>
+<p>Here was the question: What's the cleanest way to match the alphabetic ASCII characters in a Raku regex? Simple enough, right?</p>
+<p>My first thought was something like this:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/&lt;[A..Za..z]&gt;+/</span><span style="color:#839496;">;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
+</span></pre>
+<p>And that works and is admirably concise. But it suffers from (what I view as) a fatal flaw: it looks <em>exactly</em> like the code someone would write when they want to match all alphabetic characters but forgot that they need to handle Unicode. One rule I try to stick with is that correct code shouldn't <em>look</em> buggy; breaking that rule is a good way to spend time &quot;debugging&quot; functional code. If I did use the syntax above, I'd probably feel the need to add an explanatory comment (or break it out into a named regex).</p>
+<p>That's all pretty minor, but it got me curious. So I decided to see what people thought on the <a href="https://raku.org/community/irc">#raku IRC channel</a> – always a good source of advice. After some helpful comments, I wound up with this:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/[&lt;:ASCII&gt; &amp; &lt;.alpha&gt;]+/</span><span style="color:#839496;">;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
+</span></pre>
+<p>That's a whole lot better. It's slightly longer, but much more explicit.</p>
+<p>But – hang on! – what is that <code>&lt;:ASCII&gt;</code> character class? That's not in <a href="https://docs.raku.org/language/regexes#Unicode_properties">the docs</a>! Is it missing from the documentation? If so, I could add it – I've been trying to do my part with updating the docs.</p>
+<p>Well, no, it isn't missing. Raku supports querying <strong>all</strong> Unicode character properties, and you can access a large number of them in a regex using the <code>:property_name</code> syntax.</p>
+<p>But I'm getting ahead of myself: this post is about the journey of figuring out the answers to three questions:</p>
+<ol>
+<li>What Unicode properties does Raku actually support? (spoiler: all of them, sort of)</li>
+<li>How does Raku enable its Unicode support?</li>
+<li>What additional power does this give us when writing Raku code?</li>
+</ol>
+<p>So, how do we start?</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="diving-in-with-uniprop">Diving in with &uniprop</h2>
+<p>Well, that same section of the docs mentions <a href="https://docs.raku.org/routine/uniprop"><code>&amp;uniprop</code></a>, so let's start there.</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">a</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">ASCII</span><span style="color:#839496;">&#39;);
+</span><span style="color:#839496;">    </span><span style="color:#586e75;"># OUTPUT: «Basic Latin»
+</span></pre>
+<p>Ok, that's promising – and also a bit surprising. The fact that <code>'ASCII'</code> is a valid argument to <code>&amp;uniprop</code> is a pretty good clue that we're on the right track, although at this point I was expecting that we'd get something like <code>True</code> instead of <code>Basic Latin</code>.</p>
+<p>Well, what's actually going on when with <code>&amp;uniprop</code>? To <a href="https://github.com/rakudo/rakudo/blob/master/src/core.c/Cool.pm6#L622">the source code</a>, Robin!</p>
+<h2 id="cool-uniprop">Cool::uniprop</h2>
+<p>Right off, we're confronted with a rather long hash declaration that <em>looks</em> like it'll end up solving our puzzle.</p>
+<pre style="background-color:#002b36;">
+<span style="color:#859900;">my</span><span style="color:#839496;"> constant </span><span style="color:#268bd2;">$prefs</span><span style="color:#839496;"> = nqp::hash(
+</span><span style="color:#839496;">    </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">AHex</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">ASCII_Hex_Digit</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Age</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">S</span><span style="color:#839496;">&#39;,
+</span><span style="color:#839496;">    </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">Alpha</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Alphabetic</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Bidi_C</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;,
+</span><span style="color:#839496;">    </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">Bidi_Class</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">S</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Bidi_Control</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Bidi_M</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">B</span><span style="color:#839496;">&#39;,
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">#`(many more key-value pairs, in alphabetical order)</span><span style="color:#839496;">);
+</span></pre>
+<p>My first thought when seeing this code block was that it contained a full list of all the Unicode properties that Raku supports. That'd mean that Raku does <em>not</em> support all Unicode properties, just the few listed here – and, in that case, we probably ought to add this list to the documentation.</p>
+<p>But that turns out not to be right. The clue is that this list does <em>not</em> include <code>ASCII</code> – and we already know that <code>ASCII</code> works. That means that Rakudo can handle items that aren't in that hash; things aren't quite as simple as they seemed at first.</p>
+<p>Looking just below the hash declaration, we can figure out exactly what Rakudo is doing. When a key isn't present in the hash, Rakudo hits this bit of code:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">nqp::stmts(
+</span><span style="color:#839496;">    </span><span style="color:#839496;">(</span><span style="color:#859900;">my </span><span style="color:#268bd2;">$result</span><span style="color:#839496;"> := nqp::getuniprop_str(</span><span style="color:#268bd2;">$code</span><span style="color:#839496;">,</span><span style="color:#268bd2;">$prop</span><span style="color:#839496;">)),
+</span><span style="color:#839496;">        </span><span style="color:#839496;">nqp::</span><span style="color:#859900;">if</span><span style="color:#839496;">(
+</span><span style="color:#839496;">            </span><span style="color:#839496;">nqp::istrue(</span><span style="color:#268bd2;">$result</span><span style="color:#839496;">),
+</span><span style="color:#839496;">            </span><span style="color:#839496;">nqp::stmts(
+</span><span style="color:#839496;">                </span><span style="color:#839496;">nqp::bindkey(</span><span style="color:#268bd2;">$prefs</span><span style="color:#839496;">, </span><span style="color:#268bd2;">$propname</span><span style="color:#839496;">, &#39;</span><span style="color:#2aa198;">S</span><span style="color:#839496;">&#39;),
+</span><span style="color:#839496;">                </span><span style="color:#268bd2;">$result</span><span style="color:#839496;">), </span><span style="color:#586e75;">#`(else clause omitted)</span><span style="color:#839496;">))
+</span></pre>
+<p>Even without any familiarity with NQP, it's pretty clear what that does: it calls <code>&amp;getuniprop_str</code> and, if that returns a truthy value, updates the hash and returns the value. That means that the real work is being done in an NQP function.</p>
+<h2 id="actually-nope">Actually, nope</h2>
+<p>When we get to the relevant line of the <a href="https://github.com/Raku/nqp/blob/master/src/vm/moar/QAST/QASTOperationsMAST.nqp#L2558">NQP source code</a>, however, we find this:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">QAST::MASTOperations.add_core_moarop_mapping(
+</span><span style="color:#839496;">    </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">getuniprop_str</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">getuniprop_str</span><span style="color:#839496;">&#39;
+</span><span style="color:#839496;">);
+</span></pre>
+<p>This code basically punts on implementing <code>&amp;getuniprop_str</code>.</p>
+<p>NQP says that, instead of doing anything to get Unicode properties, it'll just delegate to the respective VMs and expect them to handle the actual lookup. The line above is the code for MoarVM, but the <a href="https://github.com/Raku/nqp/blob/master/src/vm/js/Operations.nqp#L1896">JavaScript</a> and <a href="https://github.com/Raku/nqp/blob/master/src/vm/jvm/runtime/org/raku/nqp/runtime/Ops.java#L7317-L7319">JVM</a> virtual machines both delegate in similar ways (though, in the JVM's case, it's just a stub – it looks like the relevant feature is Not Yet Implemented in the JVM runtime).</p>
+<h2 id="on-to-moarvm">On to MoarVM</h2>
+<p>If you're a more experienced hacker – particularly if your experience includes hacking on virtual machines written in C – you might be able to follow the trail a bit more easily. Personally, however, my proficiency with C is hovering at about the &quot;used C for the first half of a CS course and worked through K&amp;R&quot; level, and the closest I've come to implementing a VM was the <a href="https://esolangs.org/wiki/Intcode">Intcode computer</a> from last year's Advent of Code challenge.</p>
+<p>Fortunately for us, MoarVM is well documented, even if some of the documentation hasn't been updated all that recently. Grepping through the docs directory for &quot;Unicode&quot; quickly gets us to MoarVM's <a href="https://github.com/MoarVM/MoarVM/blob/master/docs/reveal.md">initial Revelation</a>.</p>
+<aside>
+<p>I would normally call this document MoarVM's release announcement, but the document explicitly says &quot;this is not a release announcement&quot;. Ok, then. The file name is <code>reveal.md</code>, so &quot;Revelation&quot; it is. Anyway, that fits with Raku's theme of <a href="https://design.raku.org/">Apocalypses, Synopses and Exegeses</a>.</p>
+</aside>
+<p>The Revelation tells us that MoarVM has</p>
+<blockquote>
+<p><strong>Unicode strings</strong>, designed with future NFG support in mind. The VM includes the Unicode Character Database, meaning that character name and property lookups, case changing and so forth can be supported without any external dependencies.</p>
+</blockquote>
+<p>Oooh, &quot;includes the Unicode Character Database&quot;! That sounds promising. But, before we run off to our Internet search engine of choice to find out what that is, let's try grepping again, now with that as our search term. Grepping for &quot;Unicode Character Database&quot; brings us to <a href="https://github.com/MoarVM/MoarVM/blob/master/src/strings/unicode_db.c%3E"><code>unicode_db.c</code></a>.</p>
+<p>You can read through that file if you'd like, but I'll warn you in advance that it's a bit long. Specifically, it's 115,540 lines long – so long that GitHub refuses to even display it.</p>
+<aside>
+<p>I think it's a bit ridiculous that GitHub's web UI can't show large files. Sure, it's pretty big, but it's still just text, and when your UI is complicated enough that you can't render text, it seems like you have a pretty serious problem. This is <em>especially</em> annoying when the content in question is HTML, which has really terrific support for <a href="https://jakearchibald.com/2016/fun-hacks-faster-content/">streaming content</a>, making it easy for users to interact with the page while it's still loading. It's pretty much enough for me to conclude that we should all move to a <a href="https://sourcehut.org/blog/2020-04-20-prioritizing-simplitity/">simpler, faster, and lighter weight</a> host for our code. But I digress. </aside></p>
+<p>I'll save you the trouble of looking through that file: all you really need is the first two lines, anyway:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;">/*   DO NOT MODIFY THIS FILE!  YOU WILL LOSE YOUR CHANGES!
+</span><span style="color:#586e75;">This file is generated by ucd2c.pl from the Unicode database.
+</span></pre>
+<p>(Although, if you <em>do</em> have an easy way to browse/search large files, you might notice the snippet <code>{&quot;ASCII&quot;, 6}</code>, which provide nice confirmation that we're closing in on our goal.)</p>
+<p>Let's follow the hint we were just given, and check out <a href="https://github.com/MoarVM/MoarVM/blob/master/tools/ucd2c.pl"><code>ucd2c.pl</code></a>. Once again, the most important info for us is in a leading comment rather than in any of the code:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;"># Before running, downloading UNIDATA.zip from
+</span><span style="color:#586e75;"># http://www.unicode.org/Public/zipped/ and extract them
+</span><span style="color:#586e75;"># into UNIDATA in the root of this repository.
+</span></pre>
+<p>Let's follow these direction – conveniently, we can even use the companion file <a href="https://github.com/MoarVM/MoarVM/blob/master/tools/UCD-download.p6%3E"><code>UCD-download.p6</code></a> to do so. This gives us… well, quite a lot actually. But, most importantly, (as revealed by, once again, trusty old grep) it gives us a file called <code>PropertyValueAliases.txt</code> with the following line:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#268bd2;">blk</span><span style="color:#859900;">; </span><span style="color:#268bd2;">ASCII                            </span><span style="color:#859900;">; </span><span style="color:#268bd2;">Basic_Latin
+</span></pre>
+<p>This, though we may not quite realize it yet, is the end of the line: we now have looked at everything we need to know to fully understand how Raku/Rakudo/MoarVM deal with Unicode properties.</p>
+<h2 id="backing-up-and-summing-up">Backing up, and summing up</h2>
+<p>Ok, <em>now</em> – now that we've found all the relevant files, and have all the pieces of the puzzle – it's time for that Internet search I mentioned earlier. Just what is the Unicode Character Database that we've been downloading, and how does it fit in with Raku?</p>
+<p>Well, it's (exhaustively) <a href="http://www.unicode.org/reports/tr44/#Introduction">documented</a>, of course. But here's the short version: the Unicode Character Database is all of Unicode. The files we downloaded include every character, every property, every script – everything about Unicode and how all of it's categories relate to one another is now in that folder. And the <code>ucd2c.pl</code> file does exactly what it's name suggests: it converts the UCD to a C file. Specifically, to the 100k+ line <code>unicode_db.c</code> file we saw earlier. And then, when you compile MoarVM, that file gets compiled into a complete copy of the Unicode Character Database, available right there at runtime. Yep, MoarVM bundles <em>all of Unicode</em>.</p>
+<p>When I first realized this, I was pretty surprised. To the best of my knowledge, no other language embeds the UCD in its runtime. Perl offers the UCD as <a href="https://metacpan.org/pod/Unicode::UCD">a (core) module</a>; Rust has a <a href="https://github.com/open-i18n/rust-unic">(well-maintained) crate</a>; most C, C++, and Java programs link against the operating system's copy of the <a href="http://site.icu-project.org/">ICU library</a>. Even Swift – a language with a full runtime and which is well-known for its strong Unicode support – doesn't embed the UCD in it's runtime (there was apparently a <a href="https://forums.swift.org/t/pitch-unicode-named-character-escape-sequence/18396/18">proposal to do so</a> but as far as I can tell it never went anywhere).</p>
+<p>I'm not saying that <em>no</em> other languages embed the Unicode Character Database in their runtime – there are a lot of languages out there and I bet one of you can tell me about one I don't know of – but it's definitely rare enough that I was pretty surprised when I figured out what MoarVM was up to. After giving the matter a bit more thought, though, I realized that embedding the UCD has several large advantages:</p>
+<ol>
+<li>It gives Raku code run-time access to all Unicode properties without any performance penalty.</li>
+<li>It allows Raku code to encode, decode, and normalize Unicode <em>extremely</em> quickly. This would be helpful for any language, but is absolutely essential for Raku, because we normalize strings as soon as they're created – i.e., very frequently.</li>
+<li>It ensures that a given version of Raku will always use the same version of Unicode.</li>
+</ol>
+<aside>
+<p>This last point might not seem like a big deal, but it's worth dwelling on because it unlocks one of Raku's super powers: absolutely amazing strings. I don't have space to go into details now – if you're interested, you can check out jnthn's <a href="https://jnthn.net/papers/2015-spw-nfg.pdf">presentation</a> or <a href="https://6guts.wordpress.com/2015/04/12/this-week-unicode-normalization-many-rts/">blog post</a>; the relevant docs (both <a href="https://docs.raku.org/language/unicode">for Raku</a> and <a href="https://github.com/MoarVM/MoarVM/blob/master/docs/strings.asciidoc">for MoarVM</a>) are also worth a read. But the short version is that Raku is basically the <strong>only</strong> language that actually knows how long a string is.</p>
+<p>For example, consider 🤦🏼‍♂️ . Different languages will, <a href="https://hsivonen.fi/string-length/">rather famously</a> report different lengths for that string. Answers include 20, 17, 14, 7, and 5. Raku is, to my knowledge, alone in consistently reporting that this string is 1 character long.</p>
+<p>Swift <strong>almost</strong> gets it right: it will <em>often</em> report that the length of the string is 1. But it sometimes fails, and that failure occurs precisely because Swift doesn't bundle the UCD and thus doesn't always use the same version of Unicode. You see, instead of compiling in the UCD like Raku, Swift <a href="https://hsivonen.fi/string-length/">links against whatever version of ICU is installed on the system</a>. (ICU is the Unicode library I mentioned a couple of paragraphs up as being used by many C, C++, and Java programs.) But this means that Swift is entirely dependent on external update schedules for ICU and, in many LTS Linux distros, &quot;external update schedules&quot; can be very slow – and Windows, of course, is even worse. The upshot of all of this is that the <em>same</em> version of Swift can report <em>different</em> lengths for a string, depending on what external libraries happen to be on the system.</p>
+<p>This might seem like a minor point. &quot;Oh, sometimes the length is off by one, how amusing, maybe someone will make a <a href="https://www.destroyallsoftware.com/talks/wat">WAT</a> video about it&quot;. But it's actually a much bigger deal than that: knowing (sub) string length is a prerequisite to being able to accurately index into a string, and uncertainty about character length is a big reason many modern languages have given up on accurately counting characters and have settled for counting &quot;codepoints&quot; instead.</p>
+<p>There's a lot more we could say about how awesome Raku's strings are – we haven't even mentioned Raku's innovative Normal Form Grapheme approach or the way it cleverly uses <a href="https://en.wikipedia.org/wiki/Rope_(data_structure)">ropes</a> as part of its strings. But the point is, Raku's handling of strings absolutely <em>depends</em> on getting Unicode right, and bundling the UCD is what lets Raku guarantee that.</p>
+</aside>
+<p>After that long aside about Unicode versions and string lengths, I want to return to point 1 from the list above: including the UCD gives Raku code nearly-free runtime access to all Unicode character properties. But what are &quot;all Unicode character properties&quot;? Well, a lot – so many, in fact, that there doesn't seem to be a global list anywhere.</p>
+<p>To start with, it lets you use <code>&amp;uniprop</code>, <code>&amp;uniprops</code>, and <code>&amp;unimatch</code> to query all of the properties listed in Unicode's <a href="https://www.unicode.org/reports/tr44/#Property_Index">Property Index</a>. In the simplest case, this will return a Boolean indicating whether the character had the property you asked about:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">—</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Dash</span><span style="color:#839496;">&#39;);    </span><span style="color:#586e75;"># OUTPUT: «True»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">-¯—</span><span style="color:#839496;">&#39;.uniprops(&#39;</span><span style="color:#2aa198;">Dash</span><span style="color:#839496;">&#39;); </span><span style="color:#586e75;"># OUTPUT: «(True, False, True)»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">—</span><span style="color:#839496;">&#39;.unimatch(&#39;</span><span style="color:#2aa198;">True</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Dash</span><span style="color:#839496;">&#39;); </span><span style="color:#586e75;"># OUTPUT: «True»
+</span></pre>
+<p>Other properties return something more detailed information instead of a simple <code>Bool</code>;</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">a</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Block</span><span style="color:#839496;">&#39;);          </span><span style="color:#586e75;"># OUTPUT: «Basic Latin»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">a</span><span style="color:#839496;">&#39;.unimatch(&#39;</span><span style="color:#2aa198;">Basic Latin</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Block</span><span style="color:#839496;">&#39;); </span><span style="color:#586e75;"># OUTPUT: «True»
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">Ⅴ</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Numeric_Value</span><span style="color:#839496;">&#39;);         </span><span style="color:#586e75;"># OUTPUT: «5»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">Ⅴ</span><span style="color:#839496;">&#39;.unimatch(&#39;</span><span style="color:#2aa198;">5</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Numeric_Value</span><span style="color:#839496;">&#39;);   </span><span style="color:#586e75;"># OUTPUT: «True»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">±</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Name</span><span style="color:#839496;">&#39;);       </span><span style="color:#586e75;"># OUTPUT: «PLUS-MINUS SIGN»
+</span></pre>
+<p>Note that, somewhat surprisingly, <code>&amp;unimatch</code> always returns a stringified version of the return value, even when <code>&amp;uniprop</code> returns a numerical value. Some of the more advanced Unicode properties include <code>Uppercase_Mapping</code> (helpful for addressing odd edge cases, such as when multiple lower-case letters upper case to the same value) and <code>Bidi_Mirroring_Glyph</code>, which displays the matching pair, if any, for a given character:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">a</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Uppercase_Mapping</span><span style="color:#839496;">&#39;);        </span><span style="color:#586e75;"># OUTPUT: «A»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">ςρσ</span><span style="color:#839496;">&#39;.comb.map({
+</span><span style="color:#839496;">    </span><span style="color:#839496;">.unimatch(&#39;</span><span style="color:#2aa198;">Σ</span><span style="color:#839496;">&#39;, &#39;</span><span style="color:#2aa198;">Uppercase_Mapping</span><span style="color:#839496;">&#39;)
+</span><span style="color:#839496;">});                           </span><span style="color:#586e75;"># OUTPUT: «(True False True)»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">(</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">Bidi_Mirroring_Glyph</span><span style="color:#839496;">&#39;);      </span><span style="color:#586e75;"># OUTPUT: «)»
+</span></pre>
+<p>Additionally, you can use any of the (many, many) <a href="https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt">Property Value Aliases</a> that Unicode defines (mostly shorthands for accessing languages) – or, at least, you can <em>sort of</em> use them. Specifically, you can call them, but MoarVM will only run the first item in the query, not the whole thing. For example, as we saw above, <code>ASCII</code> should be an abbreviation for checking that <code>Block</code> equals <code>Basic Latin</code>, but <code>&amp;uniprop</code> will only run the <code>Block</code> query. Thus it will <em>return</em> <code>Basic Latin</code> rather than <code>True</code>, as one might expect.</p>
+<p>I <strong>believe</strong> that this is a bug in MoarVM, but I am not 100% positive – as I mentioned, I'm not confident in my reading of MoarVM's C code. If anyone is sure, please let me know!</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;"># Alias for Block; Basic Latin but runs Block
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">f</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">ASCII</span><span style="color:#839496;">&#39;); </span><span style="color:#586e75;"># OUTPUT: «Basic Latin»
+</span><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">Σ</span><span style="color:#839496;">&#39;.uniprop(&#39;</span><span style="color:#2aa198;">ASCII</span><span style="color:#839496;">&#39;); </span><span style="color:#586e75;"># OUTPUT: «Greek and Coptic»
+</span></pre>
+<p>With that, we have figured out quite a lot about how Raku handles Unicode. The ability to query the Unicode Character Database is a secret superpower for Raku, and helps us write code that says what we mean, instead of what we <strong>almost</strong> mean.</p>
+<aside>
+<p>If you're particularly observant, you may have noticed that this post ended with an explanation of how <code>'a'.uniprop('ASCII')</code> worked, even though it <strong>started</strong> by asking about something more like <code>'a' ~~ /&lt;:ASCII&gt;/</code>. There's actually a reason for that discrepancy: I started digging into <code>&amp;uniprop</code> on the assumption that <code>Regex</code>es were implemented by calling <code>&amp;uniprop</code> or <code>&amp;unimatch</code> under the hood. But, when I got to the bottom of this particular rabbit hole, I discovered that this isn't the case: a Regex doesn't call <code>&amp;uniprop</code> at all. I'm sure that Regexes are still querying the built-in UCD, but they do so directly rather than by going through <code>&amp;uniprop</code>.</p>
+<p>As a result, Regexes are subject to a somewhat different set of constraints than <code>&amp;uniprop</code> is. For instance, <code>/&lt;:ASCII&gt;/</code> matches <code>'a'</code> – even though, based on <code>&amp;uniprop</code> we might have expected to need <code>/&lt;:ASCII('Basic Latin')&gt;/</code>. On the other hand, <code>/&lt;:Uppercase_Mapping('A')&gt;/</code> does <em>not</em> match <code>'a'</code>, as we might have expected. On yet a third hand, <code>/&lt;:Numeric_Value(5)&gt;/</code> does match <code>'Ⅴ'</code> (the Roman numeral 5).</p>
+<p>I am honestly not yet entirely sure what the exact rules are – or even if these distinctions are driven by design decisions or are a result of bugs. And not being able to figure that out has really been driving me crazy. If and when I do, you can expect another blog post from me on the topic. In the meantime, the good news is that you can call Raku code from inside a Regex, so you can always use <code>&amp;unimatch</code> if you need to. For example, we could duplicate the Σ <code>Uppercase_Mapping</code> example from above inside a Regex with code such as <code>'ςρσ' ~~ m:g/[. &lt;?{ $/.Str.unimatch('Σ', 'Uppercase_Mapping') }&gt;]/</code>. That's may not have quite the elegance that I expect from Raku, but definitely gets the job done. </aside></p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

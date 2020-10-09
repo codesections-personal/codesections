@@ -1,0 +1,4 @@
+Usage:
+  tangle.p6 [-t|--tangle] <file> -- Weave Markdown documentation from Raku code
+  
+    -t|--tangle    Tangle the file instead of weaving it (the default)

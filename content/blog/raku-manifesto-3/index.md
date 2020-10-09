@@ -19,7 +19,7 @@ the values on the right.  I also explained that, in my view, the final value pai
 prioritizing individual productivity over large-group productivity – is the most fundamental
 value driving Raku's design.  All the other sets of priorities in my Raku manifesto play a
 supporting role in prioritizing individual productivity over large-group productivity.  In
-this post, I explain why I've convinced that Raku made the right call.
+this post, I explain why I'm convinced that Raku made the right call.
 
 ### Why Raku is correct to prioritize individual productivity 
 

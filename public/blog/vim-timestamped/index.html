@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Using Vim to take time-stamped notes |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Using Vim to take time-stamped notes |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/vim-timestamped">
+    <title>
+       Using Vim to take time-stamped notes |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-main .highlight {
+        background-color: #EFCB68; /* Orange Yellow Crayola */
+        font-size: larger;
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        border-radius: 7px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main .highlight :first-child {
+        margin-top: 0;
+      }
+      .content-main .highlight :last-child {
+        margin-bottom: 0;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Using Vim to take time-stamped notes</h1>
+  <p>I frequently find myself needing to take time-stamped notes.  Specifically, I'll
+be in a call, meeting, or interview and need to take notes that show how long
+it's been since the meeting started.  Basically, I want something that looks
+like this:</p>
+<p><img src="https://www.codesections.com/blog/vim-timestamped/result.jpg" alt="Screenshot of time stamps generated in vim" /></p>
+<p>My first thought was that there's be a plugin to add time stamps, but a quick
+search didn't turn anything up.  However, I little digging <strong>did</strong> turn up the
+fact that vim has the built-in ability to tell time.</p>
+<p>This means that writing a bit of vimscript to insert a time stamp is pretty
+easy.  After a bit of fiddling, I came up with something that serves my needs, and I decided it might be useful enough to others to be worth sharing.  Here's what I came up with:</p>
+<p><a name="continue-reading"></a></p>
+<pre style="background-color:#002b36;">
+<span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+</span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+</span><span style="color:#859900;">command</span><span style="color:#839496;">! TimeStampToggle call </span><span style="color:#859900;">TimeStampToggle</span><span style="color:#839496;">()
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">function </span><span style="color:#b58900;">TimeStampToggle</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
+</span><span style="color:#839496;">  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = !</span><span style="color:#268bd2;">g:time_stamp_enabled
+</span><span style="color:#839496;">  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) 
+</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; Time in seconds since the Unix epoch
+</span><span style="color:#859900;">endfunction
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">inoremap &lt;expr&gt; &lt;CR&gt; </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> ?</span><span style="color:#859900;">\
+</span><span style="color:#839496;">   </span><span style="color:#586e75;">&quot;\&lt;ESC&gt;:call TimeStamp()\&lt;CR&gt;a&quot;\: &quot;\&lt;CR&gt;&quot;
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">function</span><span style="color:#839496;">! </span><span style="color:#b58900;">TimeStamp</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) - </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#6c71c4;">0
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">     </span><span style="color:#859900;">while </span><span style="color:#268bd2;">l:current_sec </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
+</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
+</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> += </span><span style="color:#6c71c4;">1
+</span><span style="color:#839496;">     </span><span style="color:#859900;">endwhile
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">     </span><span style="color:#859900;">while </span><span style="color:#268bd2;">l:current_min </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
+</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
+</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  += </span><span style="color:#6c71c4;">1
+</span><span style="color:#839496;">     </span><span style="color:#859900;">endwhile
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">)
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; Go to the beginning of the line,
+</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; print the current zero-padded time,
+</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; print `  -  ` as a separator
+</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; and move the cursor over for the next line (with separator)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">execute </span><span style="color:#586e75;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
+</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_hr</span><span style="color:#859900;">\&lt;CR&gt;</span><span style="color:#839496;">:</span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_min</span><span style="color:#859900;">\&lt;CR&gt;</span><span style="color:#839496;">:</span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_sec </span><span style="color:#859900;">\&lt;CR&gt;\
+</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#839496;">—</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;</span><span style="color:#839496;">o</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
+</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#586e75;">&quot;
+</span><span style="color:#839496;">
+</span><span style="color:#839496;"> </span><span style="color:#859900;">endfunction
+</span></pre>
+<p>This is made <em>slightly</em> more complicated than it needs to be by my desire for a
+relative time stamp.  If you'd prefer an absolute time stamp, you could simplify it considerably:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+</span><span style="color:#859900;">command</span><span style="color:#839496;">! TimeStampToggle </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = !</span><span style="color:#268bd2;">g:time_stamp_enabled
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">inoremap &lt;expr&gt; &lt;CR&gt; </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> ? </span><span style="color:#2aa198;">&quot;\&lt;ESC&gt;:call TimeStamp()\&lt;CR&gt;a&quot;</span><span style="color:#839496;"> : </span><span style="color:#2aa198;">&quot;\&lt;CR&gt;&quot;
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">function</span><span style="color:#839496;">! </span><span style="color:#b58900;">TimeStamp</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_time</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%H:%M:%S&quot;</span><span style="color:#839496;">)
+</span><span style="color:#839496;">     </span><span style="color:#859900;">execute </span><span style="color:#586e75;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
+</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_time</span><span style="color:#859900;">\&lt;CR&gt;\
+</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#839496;">—</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;</span><span style="color:#839496;">o</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
+</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#586e75;">&quot;
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">endfunction
+</span></pre>
+<p>This produces time stamps like <code>14:21:55</code>—and, of course, you can customize the time stamp to your own needs with the normal arguments to <code>strftime</code> (basically the same ones as <code>date</code>, but check <code>:help strftime()</code> for full details.)</p>
+<aside>
+I thought about packaging this up as a plugin, but decided it's a bit too simple.  But feel free to copy this code into your own .vimrc—like the other code samples on this site, it's released under an MIT license
+</aside>
+<p>So, vimscript will probably never win any beauty contests—and will <strong>definitely</strong> never be my favorite language.  But it can be pretty handy for wiping together quick utilities.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

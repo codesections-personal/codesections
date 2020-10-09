@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Gutenberg Quick Start: from 0 to Hello, World |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Gutenberg Quick Start: from 0 to Hello, World |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/gutenberg-quickstart-1">
+    <title>
+       Gutenberg Quick Start: from 0 to Hello, World |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Gutenberg Quick Start: from 0 to Hello, World</h1>
+  <p>Gutenberg is a fantastic static site generator.  It is likely the fastest
+generator in existence, it's got an easy-to-use yet powerful templating syntax,
+and it supports advanced features like syntax highlighting and Sass compilation
+out of the box.</p>
+<p>This quick start guide will give you everything you need to know to build a
+custom static site, with your own templates, and taking advantage of all of
+Gutenberg's powerful features.  At each stage, you'll be able to see demo
+sites that show exactly what a site like the one I've described looks like, and
+you'll be able to see the exact code that generated that demo site—it's all on
+GitHub, and there'll be links at every step.</p>
+<p>In this first part, we'll start with creating a simple, single-page site.  It
+won't be much, but it will give us a firm foundation to build on.</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="installation-and-initialization">Installation and initialization</h2>
+<p>The first step, of course, is to install Gutenberg by following the
+<a href="https://www.getgutenberg.io/documentation/getting-started/installation/">Installation instructions</a>
+in its documentation.</p>
+<p>Once you've installed it, you'll have access to three new terminal commands:
+<code>gutenberg build</code>, which will build output HTML and other static files for your
+website, <code>gutenberg serve</code>, which will create a test server with live reload
+(we'll use that a lot when testing our site), and <code>gutenberg init</code>, which
+starts a new site.</p>
+<p>Lets use this last command now.  Navigate to the parent folder that you would
+like to contain your Gutenberg site (in my case, went to <code>~/projects</code>).  Then
+we need to pick out a name for our site; we'll be using <code>demo</code> in this example.</p>
+<p>Run <code>gutenberg init demo</code>.  Gutenberg will ask you a few questions.  If you
+have a domain name already picked out, feel free to provide it—but that won't
+matter until we deploy our site much later.  Answer <code>n</code> to all the other
+questions (we'll return to these more advanced features soon).</p>
+<p>When you've finished, you should have a new folder.  Navigate to that folder,
+and you'll see a directory that looks like this:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">  </span><span style="color:#268bd2;">demo/
+</span><span style="color:#839496;">  </span><span style="color:#268bd2;">├──</span><span style="color:#839496;"> config.toml
+</span><span style="color:#839496;">  </span><span style="color:#268bd2;">├──</span><span style="color:#839496;"> content
+</span><span style="color:#839496;">  </span><span style="color:#268bd2;">├──</span><span style="color:#839496;"> static
+</span><span style="color:#839496;">  </span><span style="color:#268bd2;">├──</span><span style="color:#839496;"> templates
+</span><span style="color:#839496;">  </span><span style="color:#268bd2;">└──</span><span style="color:#839496;"> themes
+</span></pre>
+<p>Now, run <code>gutenberg serve</code> and you'll get your first site.  Navigate to the
+URL, and you'll see it live!  (Admittedly, it's not—yet—all that impressive).</p>
+<p>If everything has gone according to plan, you should see something like this
+(with this and all other screenshots, click for a live version).</p>
+<p><span class="give-border">
+<a href="https://v01--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-1/v1.png" alt="v1 screenshot" /></a>
+</span></p>
+<h2 id="our-first-template">Our first template</h2>
+<p>As you can see, we just got a placeholder template.  However, it tells us what
+we need to do: make an <code>index.html</code> template.</p>
+<p>So, navigate to the <code>demo/templates</code> folder and create a <code>index.html</code> file.  in
+that file, type the following code:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">{{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">}}
+</span></pre>
+<p>What does that do?  Well, Gutenberg uses the <a href="https://tera.netlify.com/">Tera</a>
+templating language, which has basically the same syntax as
+<a href="http://jinja.pocoo.org/docs/2.10/">Jinja2</a>,
+<a href="https://shopify.github.io/liquid/basics/introduction/">Liquid</a>,
+and <a href="https://twig.symfony.com/">Twig</a> templating languages.  If you don't
+know any of those languages, don't worry—we'll cover all the essentials in
+due course.</p>
+<p>For now, it's enough to know that surrounding words in <code>{{}}</code> lets you access
+variables defined outside your template.  Specifically, <code>{{ section.content }}</code>
+tells Tera to go to the current <strong>section</strong> and get the <strong>content</strong> of that
+section.</p>
+<p>So, what is the content of our section?  Well, we have to make it.  To do that,
+navigate to the <code>demo/content</code> folder and create a new file called <code>_index.md</code>.</p>
+<p>Type the following code into that file:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">+++
+</span><span style="color:#839496;">title = &quot;Gutenberg demo site&quot;
+</span><span style="color:#839496;">+++
+</span><span style="color:#839496;">Hello, world
+</span></pre>
+<p>What is up with the first bit, inside the <code>+++</code>?  Well, it's the
+&quot;front-matter&quot;—basically a way for you to include meta-data <em>about</em> a page or
+section without actually including the data in the section itself.</p>
+<p>OK, now we have an <code>index.html</code> template, and an <code>_index.md</code> content page.
+Lets run our server command and see what we get.  If you're following along,
+you should get something like this (again, click for the live site):</p>
+<p><span class="give-border">
+<a href="https://v02--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-1/v2.png" alt="Screenshot of v2" /></a>
+</span></p>
+<p>And your code, minimal though it is, should <a href="https://github.com/codesections/gutenberg-simple-demo/tree/v01">look like the code in this
+branch</a>.  Well,
+sort of, anyway: your code won't have the LICENSE or README files, since those
+are there to explain the demo project; but your project <em>will</em> have a couple
+of empty folders—one quirk of git is that it typically <a href="https://stackoverflow.com/questions/3030230/does-git-ignore-empty-folders">ignores empty
+folders)</a>.</p>
+<h2 id="fixing-our-content">Fixing our content</h2>
+<p>So, was that what you expected?  We got our content, &quot;Hello, world&quot;, but we
+also got something else, the printed <code>&lt;p&gt;</code> HTML tags that surround it.  Why
+did that happen?  It happened because Gutenberg is protecting us—whenever we
+pass it HTML content, it will automatically <em>sanatize</em> the HTML.  That is,
+Gutenberg will automatically prevent the HTML from rendering <em>as HTML</em>, and
+will instead replace it with encoded characters that present the HTML as plain
+text.  This is a nice default for a templating language to have (to prevent
+<a href="https://en.wikipedia.org/wiki/Cross-site_scripting">cross-site scripting</a>
+attacks), but not really relevant to building a static site where we control
+all of our content.  So, how do we turn it off?</p>
+<p>Pretty easily, as it turns out. What we need to do is edit our <code>index.html</code>
+template to change <code>{{ section.content }}</code> to <code>{{ section.content | safe }}</code>.
+This is our first <strong>filter</strong>, a command after a <code>|</code> that tells Gutenberg to
+process the provided text differently.  In this case <code>safe</code> tells Gutenberg
+<em>not</em> to sanitize the text.</p>
+<p>After that change, we get a site that looks like this (click for live site):</p>
+<p><span class="give-border">
+<a href="https://v03--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-1/v3.png" alt="Screenshot of v03" /></a>
+</span></p>
+<h2 id="adding-some-formatting">Adding some formatting</h2>
+<p>We've made it!  A (very) basic webpage saying &quot;Hello, world&quot;.  But lets see if
+we can make it at least a little prettier; lets add a tiny bit of CSS and
+Markdown formatting.</p>
+<p>First, the CSS.  Lets open up our template and add seven lines of CSS.  And,
+while we're at it, lets add in enough HTML to generate an (almost) valid
+page.  Change the <code>templates/index.html</code> page to have the following content:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;">&lt;!</span><span style="color:#268bd2;">DOCTYPE</span><span style="color:#839496;"> html</span><span style="color:#586e75;">&gt;
+</span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">html </span><span style="color:#839496;">lang</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">en</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">meta </span><span style="color:#839496;">charset</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">UTF-8</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#b58900;">body </span><span style="color:#839496;">{
+</span><span style="color:#839496;">        </span><span style="color:#859900;">margin</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">40</span><span style="color:#859900;">px </span><span style="color:#839496;">auto;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">max-width</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">650</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.6</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">font-size</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">18</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#444</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">padding</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">0 10</span><span style="color:#859900;">px
+</span><span style="color:#839496;">      </span><span style="color:#839496;">}
+</span><span style="color:#839496;">      </span><span style="color:#b58900;">h1</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h2</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h3 </span><span style="color:#839496;">{
+</span><span style="color:#839496;">        </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.2</span><span style="color:#839496;">;
+</span><span style="color:#839496;">      </span><span style="color:#839496;">}
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
+</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">html</span><span style="color:#586e75;">&gt;
+</span></pre>
+<p>Now, open up the <code>content/_index.md</code> file and add it some Markdown-formatted
+text.  You can use all of the
+<a href="https://daringfireball.net/projects/markdown/basics">Markdown</a> syntax, and
+you can add any text you want.  Here's what I added:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#839496;">+++
+</span><span style="color:#839496;">title = &quot;Gutenberg demo site&quot;
+</span><span style="color:#839496;">+++
+</span><span style="color:#839496;">
+</span><span style="color:#b58900;"># Hello, world
+</span><span style="color:#839496;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+</span><span style="color:#839496;">incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+</span><span style="color:#839496;">nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</span><span style="color:#839496;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+</span><span style="color:#839496;">eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+</span><span style="color:#839496;">in culpa qui officia deserunt mollit anim id est laborum
+</span><span style="color:#839496;">
+</span><span style="color:#839496;"> </span><span style="color:#839496;">*  Basic markdown formatting
+</span><span style="color:#839496;"> </span><span style="color:#839496;">*  Including lists
+</span><span style="color:#839496;"> </span><span style="color:#839496;">*  And </span><span style="font-style:italic;color:#839496;">_italics_
+</span><span style="color:#839496;"> </span><span style="color:#839496;">*  And </span><span style="font-weight:bold;color:#839496;">**bold**
+</span><span style="color:#839496;">
+</span></pre>
+<p>With those two changes, we're starting to get something that at least
+resembles an actual website:</p>
+<p><span class="give-border">
+<a href="https://v04--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-1/v4.png" alt="v04 screenshots" /></a>
+</span></p>
+<p>As always, click for the live site, and visit the <a href="https://github.com/codesections/gutenberg-simple-demo/tree/v04">relevant
+branch</a> of
+the GitHub repo for the code.</p>
+<h2 id="final-touches">Final touches</h2>
+<p>We need to make two additional changes before we can declare our &quot;Hello, world&quot;
+site done.  First, we need to add a title to our page, which is required to
+have a valid HTML5 document.  This should be old-hat by now: just open up the
+<code>index.html</code> template and add in the title tag.  When you're done, it should
+look like this:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;">&lt;!</span><span style="color:#268bd2;">DOCTYPE</span><span style="color:#839496;"> html</span><span style="color:#586e75;">&gt;
+</span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">html </span><span style="color:#839496;">lang</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">en</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">title</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Gutenberg Demo</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">title</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">meta </span><span style="color:#839496;">charset</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">UTF-8</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">      </span><span style="color:#b58900;">body </span><span style="color:#839496;">{
+</span><span style="color:#839496;">        </span><span style="color:#859900;">margin</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">40</span><span style="color:#859900;">px </span><span style="color:#839496;">auto;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">max-width</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">650</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.6</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">font-size</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">18</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#444</span><span style="color:#839496;">;
+</span><span style="color:#839496;">        </span><span style="color:#859900;">padding</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">0 10</span><span style="color:#859900;">px
+</span><span style="color:#839496;">      </span><span style="color:#839496;">}
+</span><span style="color:#839496;">      </span><span style="color:#b58900;">h1</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h2</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h3 </span><span style="color:#839496;">{
+</span><span style="color:#839496;">        </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.2</span><span style="color:#839496;">;
+</span><span style="color:#839496;">      </span><span style="color:#839496;">}
+</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
+</span><span style="color:#839496;">    </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
+</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
+</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">html</span><span style="color:#586e75;">&gt;
+</span></pre>
+<p>Finally, we should add a favicon, one of those little pictures that shows up
+in the tab bar.  This isn't <strong>stictly</strong> required, but it sure helps our site
+look a bit better and it will let us see the process for uploading static
+files.</p>
+<p>Since we don't have a favicon of our own, let's borrow Gutenberg's.  I've
+<a href="https://raw.githubusercontent.com/codesections/gutenberg-simple-demo/v05/static/favicon.ico">saved a copy of the file</a> to the GitHub repository.  Go
+ahead and download it now, and save it to <code>static/favicon.ico</code>.  Having
+done that, what else do we need to do?</p>
+<p>Nothing!  Fire up your server, and you should see something like this:</p>
+<p><span class="give-border">
+<a href="https://v05--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-1/v5.png" alt="v5 screenshot" /></a>
+</span></p>
+<p>How does this magic work?  To understand this, let's talk a bit about how
+Gutenberg generates your site.  At a big-picture level, it takes all the files
+in your <code>content</code> directory, processes them according to rules in your
+<code>templates</code> directory (including by parsing Markdown files into HTML), and
+then places the output files in your <code>public</code> directory.  Next, it also places
+all the files in the <code>static</code> directory directly into <code>public</code>—without
+processing them at all.</p>
+<p>Thus, when we put <code>favicon.ico</code> in the <code>static</code> directory, and then ran the
+<code>serve</code> command, it was copied directly into the <code>public</code> directory and was
+immediately available to our generated site.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, that's everything you need to know to build a very basic site with
+Gutenberg.  Once again, feel free to look at any of the live demo sites we
+built today (<a href="https://v01--gutenberg-simple-demo.netlify.com/">v1</a>,
+<a href="https://v02--gutenberg-simple-demo.netlify.com/">v2</a>,
+<a href="https://v03--gutenberg-simple-demo.netlify.com/">v3</a>,
+<a href="https://v04--gutenberg-simple-demo.netlify.com/">v4</a>,
+<a href="https://v05--gutenberg-simple-demo.netlify.com/">v5</a>), or to check out the
+<a href="https://github.com/codesections/gutenberg-simple-demo/tree/master">source repository</a>, which has the code for each version in separate branches.</p>
+<p>In the next part of this tutorial, we'll walk through how to add multiple
+pages to your site, including how to manage multiple templates in a way that's
+powerful and maintainable.</p>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

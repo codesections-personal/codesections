@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" Fixing the One Problem With Password Managers |  CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" Fixing the One Problem With Password Managers |  CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers">
+    <title>
+       Fixing the One Problem With Password Managers |  CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+  <h1>Fixing the One Problem With Password Managers</h1>
+  <p>I recently tweaked the way I use my password manager, and it's already
+saved me considerable frustration.  Not only that, it's also brought my
+usage more in line with the Unix philosophy of using tools that do only
+one thing, and do it well—and illustrated, once again, why that philosophy
+is so great.</p>
+<p>This post explains my tweak, and how you can apply it.  But first, some
+background.</p>
+<p><a name="continue-reading"></a></p>
+<h2 id="password-managers">Password managers</h2>
+<p>I love password managers like Pass, 1Pass, KeePass, KeePassXC, LastPass (ok,
+I'm sensing a theme here—and awarding zero points for creative naming!).</p>
+<p>As Troy Hunt, the mad genius behind <a href="https://HaveIBeenPwned.com">HaveIBeenPwned</a>,
+is fond of writing, <a href="https://www.troyhunt.com/only-secure-password-is-one-you-cant/">The only secure password is the one you can’t
+remember</a>.
+That is, if you can remember a password, then
+it's probably too short to be secure.  If it's not, it might well be
+<a href="https://xkcd.com/792/">one you've used before</a>—which
+is even worse, since it means someone who figures out one of your passwords
+suddenly has access to much more of your digital life.  So if you want to
+avoid insecure passwords, you basically have to make a record of your
+passwords.</p>
+<p>And that basically means using a password manager to store an encrypted
+vault containing your passwords.  If you pick a good password manager, you can
+have it automatically generate a secure password for you, and automatically
+type that password in whenever you log in.  Instead of struggling to remember
+whether your password is 123qwe or 1q2w3e (both in the <a href="https://www.huffingtonpost.com/entry/2016-most-common-passwords_us_587f9663e4b0c147f0bc299d">top 25 most-used
+passwords</a>, by the way), you're using
+a bulletproof password like <a href="https://kevq.uk/are-password-managers-worth-it/">F^EHHtSIbPyDm2&amp;kHsPhSppNYwzQDg</a>.<br />
+<strong>And</strong> you're having that password filled in for you
+automatically, without any memory struggles at all.  It's really great.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>It's really great … right until it's not.  And then it's really, really, not.  As anyone who's used a password manager can tell you, eventually autofill
+will fail you.  Maybe you need to log in on a computer or mobile device that
+doesn't have your passwords synced to it.  Maybe you have to use a service that
+<a href="https://www.troyhunt.com/the-cobra-effect-that-is-disabling/">idiotically disables autofill in your
+browser</a>.
+Maybe you'll be on the
+phone with tech support on a spotty cell connection during a hail storm.  And,
+when you are, you'll really wish you could tell them that your password was
+<code>qwerty</code> instead of <code>F^EHH</code>​<code>tSIbP</code>​<code>yDm2&amp;k</code>​<code>HsPhSp</code>​<code>pNYw</code>​<code>zQDg</code>.</p>
+<p>What you'd really like is to have a password that is just as
+secure as <code>F^EHH</code>​<code>tSIbP</code>​<code>yDm2&amp;k</code>​<code>HsPhSp</code>​<code>pNYw</code>​<code>zQDg</code> without being
+anywhere near as difficult to type (or shout during that hail storm).
+Fortunately, this is a famously solved problem:</p>
+<p><a href="https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/xkcd_936.jpg"><img src="https://www.codesections.com/blog/fixing-the-one-problem-with-password-managers/xkcd_936.jpg" alt="XKCD comic depicting use of a passphrase instead of a password" /></a></p>
+<p>All you need to do is to use passphrases consisting of simple words
+chained together, creating something long enough to be secure while
+understandable enough to be easy to remember for long enough to type in.  If
+you're as paranoid as I am, you'll throw in some special characters,
+capitalization, or numbers, too, so that your final password is something like
+<code>2222@</code>​<code>Correct@</code>​<code>Horse@</code>​<code>Battery@</code>​<code>Staple</code>.  That's just as secure as the
+unpronounceable password up above, and way easier to shout during a hail storm.</p>
+<p>Of course, you really don't want to be inventing these sorts of passwords on
+your own.  For one thing, humans aren't that good at randomness; for another,
+that just sounds like a lot of work.  Fortunately, you don't have to: Bart
+Busschots has put together <a href="https://xkpasswd.net">an online tool</a> that
+automates generating passwords like that (with
+user-configurable settings about how many words, numbers, and special
+characters to use).  I don't know why any of the top password managers haven't
+incorporated a system like this into their password generating code (although
+KeePassXC, to its credit, does let you generate a passphrase), but no
+matter what password manager you use, you can go to that site, get your
+passwords, and then save them to your preferred password vault.</p>
+<h2 id="it-gets-even-better">It gets even better</h2>
+<p>If that was the best we could do, it'd be pretty great: we'd trade some
+inconvenience when we generate the password (when we're likely not time
+constrained) in return for much greater convenience when we enter the password
+without autofill.  But, with the right password manager, we can do
+<strong>much</strong> better than that—and we can do it in a way that
+exemplifies the advantages of the <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a> of having programs serve one, and only one, function.</p>
+<p>Specifically, we can take advantage of the fact that Bart Busschots—in
+addition to running the website mentioned above—released a very Unix-y
+<a href="https://www.bartbusschots.ie/s/publications/software/xkpasswd/">Perl script</a>
+that generates the same sort of passwords, right from the command line.  I won't go through the details of how to set up or configure the Perl
+script, in part because Bart already lays out the details in <a href="https://www.bartbusschots.ie/s/2015/08/22/using-the-hsxkpasswd-terminal-command-part-1-of-2/">two
+excellent</a> <a href="https://www.bartbusschots.ie/s/2015/09/06/using-the-hsxkpasswd-terminal-command-part-2-of-2/">blog posts</a>.  Suffice it
+to say that, after following those directions, you can configure his script to
+produce exactly the sort of password you'd like, whenever you type
+&quot;hsxkpasswd&quot; in your terminal.  (Or, if you agree that that's too many
+consonants in a row to reliably remember, whenever you type whatever you've
+aliased it to; I picked &quot;xckd-pass&quot;).</p>
+<p>Now that we have a command line tool to generate our passwords, we can feed
+those passwords into our password manager … or at least we can if we have a
+password manager that follows the Unix philosophy and plays well with standard
+input.  Sadly, many of them don't.</p>
+<h2 id="meet-pass">Meet "Pass"</h2>
+<p>Fortunately, there's a tool called <a href="https://www.passwordstore.org/">Pass</a>
+that bills itself as &quot;the standard unix password manager&quot;.  This is a pretty
+bold claim, especially for a program that was written in this century.  But,
+despite the pomposity, Pass seems to back up its claims with real performance.</p>
+<p>As Pass explains:</p>
+<blockquote>
+<p>Password management should be simple and follow Unix philosophy.
+With pass, each password lives <em>inside of a gpg encrypted file</em>
+whose filename is
+the title of the website or resource that requires the password. These
+encrypted files may be organized into meaningful folder hierarchies, copied
+from computer to computer, and, in general, manipulated using standard
+command line file management utilities.</p>
+</blockquote>
+<p>That means we can use Pass without trusting it at all; all the encryption
+is handled by GPG (the GNU Privacy Guard, which provides some of the best
+crypto available anywhere).  It also means that we don't need to rely on any
+external software to sync our passwords, but can sync them the same way we
+would sync any other file.  (I use a git sever running on a Raspberry Pi, but
+Github, NextCloud, Dropbox, or any other way of syncing files would work
+too).</p>
+<p>And, most importantly for our purposes, it means that Pass plays well
+with standard input.  Specifically, we can create a new username/password
+pair with the command &quot;pass insert username&quot;, and then Pass will prompt us
+to type a password, and then to retype it to confirm.  This means that we can
+use pipe the output from hsxkpasswd into Pass.  We could do that directly,
+but we can simplify things with an <em>extremely</em> simple shell script that
+does this for us:</p>
+<pre style="background-color:#002b36;">
+<span style="color:#586e75;">#!/bin/bash
+</span><span style="color:#268bd2;">NEWPASSWORD</span><span style="color:#657b83;">=</span><span style="color:#859900;">$</span><span style="color:#2aa198;">(</span><span style="color:#268bd2;">hsxkpasswd</span><span style="color:#2aa198;">)
+</span><span style="color:#839496;">
+</span><span style="color:#859900;">if [[ $</span><span style="color:#268bd2;">1 </span><span style="color:#859900;">]]; then
+</span><span style="color:#839496;">  </span><span style="color:#859900;">echo </span><span style="color:#268bd2;">-e </span><span style="color:#839496;">&quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">NEWPASSWORD</span><span style="color:#2aa198;">\n</span><span style="color:#859900;">$</span><span style="color:#268bd2;">NEWPASSWORD</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">| </span><span style="color:#268bd2;">pass</span><span style="color:#839496;"> insert </span><span style="color:#859900;">$</span><span style="color:#268bd2;">1
+</span><span style="color:#859900;">else
+</span><span style="color:#839496;">  </span><span style="color:#859900;">echo </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Usage: pass-new &lt;pass-name&gt;</span><span style="color:#839496;">&quot;
+</span><span style="color:#859900;">fi
+</span></pre>
+<p>Once we have this script set somewhere in our path, we can just type &quot;pass-
+new [pass-name]&quot; and have a xkcd-style password automatically saved in our
+Pass database.  And then, of course, we can access it with all the normal Pass
+commands, like &quot;pass [pass-name] -c&quot; to copy the password to our clipboard.</p>
+<h2 id="summing-up">Summing up</h2>
+<p>So, bottom line: What have we done, and what did we accomplish?  Well, we:</p>
+<ul>
+<li>Installed and configured <a href="https://www.bartbusschots.ie/s/publications/software/xkpasswd/">hsxkpasswd</a>.</li>
+<li>Installed and set up <a href="https://www.passwordstore.org/">Pass</a>.</li>
+<li>Wrote some basic glue code to get them working together.</li>
+</ul>
+<p>Having done all this, we can use a single command to create a new passphrase
+and automatically add that passphrase to a password manager. That passphrase
+is long enough—and contains enough special characters and numbers—to be just
+as secure as any impossible-to-pronounce-or-remember password that our
+password manager might have generated but is still much easier to type in when
+our autofill inevitably fails us.  And all this has been possible because two
+tools, written entirely independently, could be easily combined because both
+followed the Unix philosophy.</p>
+<p><asside class="note">
+<strong style="margin-left: 30%">Room for improvement</strong><br>
+All that said, I am not <em>100%</em> satisfied with this setup.  The problem
+is that hsxkpasswd is a Perl script and thus requires a Perl runtime.  This
+was fine a few years ago when Perl was more dominant and most people already
+had it installed.  But it feels a bit heavy in today's
+world—personally, hsxkpasswd is the only reason I have Perl installed on my
+current computer.  So, it would be really nice if there were a version of
+hsxkpasswd that was written in a more portable language—ideally bash, since
+that's what Pass is written in.  I'm currently playing with a bash script along
+those lines, and may polish it up for public release if there's any interest.
+<strong>EDIT: Playing around led to <a href="https://www.gitlab.com/codesections/pass-gen">pass-gen</a>, which implements all my ideas and has now replaced the workaround described in this post.</strong></p>
+</aside>
+
+
+  <div>
+    
+    
+  </div>
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+</body>
+</html>

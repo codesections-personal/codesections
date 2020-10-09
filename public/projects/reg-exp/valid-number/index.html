@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content=" CodeSections"> 
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content=" CodeSections">
+    <meta name="twitter:image:src" content="https://www.codesections.com/codesections_logo.png"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="www.codesections.com">
+    <meta property="og:site_name" content="CodeSections">
+    <meta property="article:section" content="Article Section">
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://www.codesections.com/codesections_logo_large.png"><meta name="og:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <meta name="twitter:description" content="The personal website and blog of Daniel Long Sockwell, a lawyer-turned-programmer with an interest in web development, open source, and making things as simple as possible.">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#d9d9d9">
+    <link rel="canonical" href="https://www.codesections.com/projects/reg-exp/valid-number">
+    <title>
+       CodeSections 
+    </title>
+    <style> 
+      /*==================================*\
+        ##All CSS for this page
+      \*==================================*/
+      
+      /*  Theme colors
+       *  #cde     pastel blue (note boxes)
+       *  #000     true black (site header)
+       *  #4F82BB; Dark Blue  (Nav bar)
+       *  #223     near black (text & logo)
+       *  #fff     white (menu text)
+       *  #07e     sky blue (links)
+       *  #dfe2e5  Light grey (tables & borders)
+       */
+      html {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,
+          Ubuntu,Roboto,Cantarell,"Helvetica Neue",sans-serif;
+        font-size: 17px;
+        color: #223; /*near black*/
+      }
+      a {
+        color: #0071F0; /*sky blue*/
+        text-decoration: none;
+      }
+      .hidden {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background-color: #4F82BB; /*Dark Blue*/
+        box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        top: 0;
+      }
+      .nav-bar__container {
+        display: flex;
+        max-width: 700px; /*max comfortable line length*/
+        padding-left: 8px;
+        padding-right:8px;
+        margin: auto;
+        justify-content: space-between;
+      }
+      .nav-bar__btn {
+        position: relative;
+        cursor: pointer;
+        background-color: inherit;
+        height: 1.25em;
+        display: inline-block;
+      }
+      .nav-bar__btn a {
+        color: white;
+      }
+      .nav-bar__btn a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        content: "";
+        transition: all 0.4s ease;
+        border-top: 3px solid #223; /*near black*/
+      }
+      .nav-bar__btn:not(.nav-bar__btn--icon) a:hover:after {
+          width: 100%;
+      }
+      .svg__logo {
+        height: 40px;
+        width: 40px;
+      }
+      .svg__logo--background {
+        fill: #4F82BB;
+      }
+      @media (max-width: 599px) { /*Phone only*/
+        .nav-bar__btn {
+          font-size: 1.382em;
+          line-height: 1.382em;
+        }
+      }
+      @media (min-width: 600px) {  /*Tablet-portrait & up*/
+        .nav-bar__btn {
+          font-size: 2em;
+        }
+        .svg__logo {
+          height: 64px;
+          width: 64px;
+        }
+      }
+      
+      /*==================================*\
+        ##Main content
+      \*==================================*/
+      .content-main{
+        min-height: calc(100vh - 100px - 3em);
+        /*  This equals [fullscreen - (top margin) -
+         *  (space for the 2-line footer, with margin)]*/
+        max-width: 700px; /*  Match nav container width*/
+        margin: 3em auto auto auto;
+        padding: .1em;
+        font-size: 1.15em;
+        line-height: 1.6em;
+        color: #444;
+      }
+      .content-main h1 {
+        font-size: 1.7em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1.1em;
+      }
+      .content-main h2 {
+        margin-top: .25em;
+      }
+      .content-main blockquote {
+          
+          border-left: #dfe2e5 solid 7px;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: 40px; /* default */
+          width: calc(100% - 1em - 40px);
+      }
+      @media (min-width: 600px) {
+        .content-main h2 {
+          margin-top: 1em;
+        }
+      }
+      .content-main p {
+        margin-bottom: 1.75em;
+      }
+      .content-main p code,
+      .content-main ul code {
+        color: #c0341d;
+        background-color: #fbe5e1;
+        border-radius: 3px;
+      }
+      .content-main pre {
+        overflow-x: auto;
+        padding: .5em;
+        line-height: 1.3em;
+      }
+      .content-main img {
+        width: 100%;
+      }
+      .content-main .give-border img {
+        border: #dfe2e5 solid 1px;
+      }
+      .page-nav__earlier {
+        float: right;
+      }
+      
+      /*==================================*\
+        ##Footer
+      \*==================================*/
+      .footer {
+        margin-top: 2em;
+        text-align: center;
+      }
+      .footer ul {
+        margin: 5px;
+        padding: 0;
+      }
+      .footer li {
+        display: inline-block;
+      }
+  
+    
+    .list-of-questions__item{
+      padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: top;
+      border-top: 1px solid #ddd
+    }
+    .list-of-questions__row: hover{
+      background-color: #f5f5f5
+    }
+    .list-of-questions{
+      border-collapse: collapse;
+      margin: auto;
+      font-size: 1.4rem;
+      width: 100%
+    }
+    html{
+      font-size: 10px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+    }
+    .nav-bar{
+      font-size: 16px;
+    }
+    .footer {
+      font-size: 16px;
+    }
+    .content-wrapper{
+      margin: auto;
+      position: relative
+    }
+    .page-title{
+      font-size: 3em;
+      font-weight: normal;
+      margin-top: 5rem;
+      margin-bottom: 0px
+    }
+    .page-discription__details{
+      font-size: 1.4em;
+      margin-top: 1em;
+      text-align: left
+    }
+    .page-discription__title{
+      margin: auto;
+      margin-top: 8rem;
+      font-size: 3em;
+      font-weight: normal;
+      text-align: left
+    }
+    .button{
+      color: #fff;
+      font-size: 1.4rem;
+      background-color: #337ab7;
+      border-color: #2e6da4;
+      border-width: 1px;
+      border-radius: 6px;
+      padding: 1rem;
+      cursor: pointer;
+      width: 100px;
+      width: fit-content;
+      float: right
+    }
+    .button--back{
+      margin-top: -3em
+    }
+    .page-header{
+      margin: auto;
+      text-align: center
+    }
+    .page-header__home{
+      margin: 5rem
+    }
+    .regex-input{
+      margin: auto;
+      margin-top: 7em;
+      text-align: center
+    }
+    .regex-input__boarder{
+      font-size: 6em
+    }
+    .regex-solution{
+      font-size: 1.4em;
+      padding: .6em 1.2em;
+      margin: 1em;
+      width: 25em;
+      vertical-align: bottom
+    }
+    .result-msg{
+      font-size: 1.4em;
+      margin-top: 7em;
+      font-style: italic
+    }
+    .desired-output{
+      max-width: 60%;
+      margin: auto;
+      width: fit-content;
+      display: flex;
+      font-size: 1.4rem
+    }
+    .desired-output__title{
+      padding: 1em;
+      padding-left: 0;
+      font-size: 2.4rem
+    }
+    .should-match{
+      padding-right: 6em
+    }
+    .should-not-match{
+      padding-left: 6em
+    }
+    .should-match-string,.should-not-match-string{
+      padding-top: 1em;
+      padding-left: 1em;
+      font-size: 1.4rem
+    }
+    .should-match-string{
+      color: green
+    }
+    .should-not-match-string{
+      color: red
+    }
+
+  
+</style>
+  </head>
+
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-bar__container">
+        <li class="nav-bar__btn"><a href="/">Home</a></li>
+        <li class="nav-bar__btn"><a href="/contact">Contact</a></li>
+        <li class="nav-bar__btn nav-bar__btn--icon">
+            <!-- site logo, as an inline SVG because that loads faster-->
+            <a href="/"><span class="hidden">Home</span>
+            <svg class="svg__logo" viewBox="0 0 100 120" stroke-width="1px"
+              stroke="#000" height="100" width="100">
+              <title>Logo image/link to homepage</title>
+              <circle class="svg__logo--background" fill="#fff"
+              stroke="none" cx="50" cy="35" r="69"/>
+              <path d="M -9,50 25,10 V 25 L 4,50 25,75 v 15 z"/>
+              <path d="m 49,92 c 12,0 20,-8 20,-17 0,-7 -3,-11 -7,-13 5,-3 7,-7
+              7,-12 0,-18 -30,-12 -30,-25 3,-11 17,-7 26,-3 l 2,-7 c -13,-7
+              -35,-4 -35,11 0,6 3,11 9,14 -5,2 -9,7 -9,13 0,16 29,11 29,24 0,5
+              -6,8 -13,8 -6,0 -11,-4 -15,-6 l -2,7 c 5,3 11,6 18,6 z"/>
+              <path d="M 110,50 75,90 V 75 L 98,50 75,25 V 10 Z"/>
+              <ellipse class="svg__logo--background" ry="8.5" rx="11.5"
+              cy="51" cx="50" fill="#fff"/>
+            </svg>
+            </a>
+        </li>
+        <li class="nav-bar__btn"><a href="/blog">Blog</a></li>
+        <li class="nav-bar__btn"><a href="/projects">Projects</a></li>
+      </ul>
+    </nav>
+    <section class="content-main">
+  
+    
+
+  <h2></h2>
+  <div class="content-wrapper">
+<section class="page-header">
+<h1 class="page-title">RegEx Game</h1>
+<div class="page-discription">
+  <h2 class="page-discription__title">Valid Number?</h2>
+  <p class="page-discription__details">Match a valid phone number</p>
+</div>
+<a href="..">
+  <div class="button button--back">Back
+  </div>
+</a>
+</section>
+<section class="regex-input">
+<span class="regex-input__boarder">/</span>
+<input class="regex-solution" type="text" placeholder="RegEx solution…"> 
+<span class="regex-input__boarder">/</span>
+<div class="result-msg">Make all words turn green to complete the challenge</div>
+<section class="desired-output">
+<div class="should-match desired-output__title">
+  Should match
+  <div class="should-match-string">(123) 321-4444</div>
+  <div class="should-match-string">444-444-9898</div>
+  <div class="should-match-string">000.123.4321</div>
+  <div class="should-match-string">(111) 111-1111</div>
+  <div class="should-match-string">752-491-4234</div>
+</div>
+<div class="should-not-match desired-output__title">Should <strong>not</strong> match
+  <div class="should-not-match-string">(2342) 342-444</div>
+  <div class="should-not-match-string">4447864673</div>
+  <div class="should-not-match-string">(231) 770-000</div>
+  <div class="should-not-match-string">111.111.232.1</div>
+  <div class="should-not-match-string">888,888,8976</div>
+</div>
+</section>
+</section></div> 
+
+
+
+  
+</section>
+    
+  <footer class="footer">
+    <ul>
+      <li>© 2020 |</li>
+      <li><a href="/contact">Contact</a> |</li>
+      <li><a href="/license/">Few Rights Reserved</a> |</li>
+      <li><a href="/rss.xml" type="application/rss+xml"> RSS</a></li>
+    </ul>
+    <ul>
+      <li><a href="/privacy">Privacy Guarantees</a> |</li>
+      <li><a href="https://github.com/codesections-personal/codesections">
+        Source Code for codesections.com</a>
+      </li>
+    </ul>
+  </footer>
+
+  
+    
+  <script>
+  document.querySelector('.regex-solution').addEventListener('input', () => {
+    updateWords({
+      targetString: '.should-match-string',
+      matchColor: 'green',
+      nonMatchColor: 'red',
+      matchWord: 'yes',
+      nonMatchWord: 'no'
+    });
+    updateWords({
+      targetString: '.should-not-match-string',
+      matchColor: 'red',
+      nonMatchColor: 'green',
+      matchWord: 'no',
+      nonMatchWord: 'yes'
+    });
+    displayResultMessage()
+  });
+
+  const updateWords = function updateWordsBasedOnRegExInput({
+    targetString,
+    matchColor,
+    nonMatchColor,
+    matchWord,
+    nonMatchWord
+  }) {
+    document.querySelector(targetString).style.color = '';
+    try {
+      const regexSearch = RegExp(
+        document.querySelector('.regex-solution').value
+      );
+      
+      document.querySelectorAll(targetString).forEach((targetWord) => {
+        if (regexSearch && regexSearch.test(targetWord.innerHTML)) {
+          targetWord.style.color = matchColor;
+          targetWord.dataset.regexSuccess = matchWord;
+        } else {
+          targetWord.style.color = nonMatchColor;
+          targetWord.dataset.regexSuccess = nonMatchWord;
+        }
+      });
+    } catch(e) {}
+  };
+
+  const displayResultMessage = function () {
+    let result = '';
+    try {
+      const regexSearch = RegExp(
+        document.querySelector('.regex-solution').value
+      );
+      if (document.querySelectorAll('[data-regex-success=no]').length === 0) {
+        result = 'All patterns matched!';
+      } else {
+        result = 'Sorry, please try again';
+      }
+    } catch(e) {
+      result = 'Please enter a vaid Regular Expression'
+    }
+    document.querySelector('.result-msg').innerHTML = result;
+  };
+  </script> 
+
+  
+</body>
+</html>
