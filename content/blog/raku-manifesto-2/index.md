@@ -48,7 +48,7 @@ doesn't – enforcing those rules keeps the language less surprising, and thus m
 easier to reason about.
 
 And Rust is hardly alone in this regard.  Indeed, the majority of programming languages
-don't allow [operator overoloading](https://en.wikipedia.org/wiki/Operator_overloading) and
+don't allow [operator overloading](https://en.wikipedia.org/wiki/Operator_overloading) and
 even fewer allow the programmer to define new operators.  Put differently, most languages
 are willing to deny programmers the considerable power of user-defined operators to keep the
 language less surprising.
@@ -109,7 +109,7 @@ that
 too](https://perl6advent.wordpress.com/2016/12/08/how-to-make-use-and-abuse-perl-6-subsets/).
 
 You might think that the last example is so far-fetched that it'd never actually be used,
-but the standard library actually employees it, albeit to deliver an Easter egg.  Normally,
+but the standard library actually employs it, albeit to deliver an Easter egg.  Normally,
 calling the `.WHY` method on an object provides the docstring for that object's class, or a
 message stating that no docstring has been written.  Thus, this is totally expected:
 
@@ -203,11 +203,11 @@ working together.  A type system allows one programmer to write code that expose
 limited API and then let other programmers use that code without worrying (as much) about
 how they might _misuse_ it.
 
-For example, the untyped `fibinacci` function I defined above
+For example, the untyped `fibonacci` function I defined above
 could go wrong in a lot of different ways: to name just one, if called with `-1` or `2.2`,
 the program will go into an infinite loop.  If you wrote that function in a large team,
 you'd have to trust others to understand _not_ to call it like that.  But Raku's type system
-allows you to require that function to take a non-negative integer (`sub fibinacci(UInt $n)
+allows you to require that function to take a non-negative integer (`sub fibonacci(UInt $n)
 {...}`), which removes that whole class of bugs.  (Of course, this simple example hardly
 scratches the surface of the benefits of a good type system.)
 

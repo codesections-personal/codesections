@@ -31,8 +31,8 @@ draft.  I've put considerable thought into this but haven't yet discussed my vie
 I also artificially limited myself to four pairs of values (following the form set by the
 Agile Manifesto), and I could easily imagine changing my mind.  If you disagree or just have
 a different perspective, I'd love to hear your thoughts on the
-[r/rakulang](https://www.reddit.com/r/rakulang/) thread for this post on the [#raku IRC
-channel](https://raku.org/community/irc).
+[r/rakulang](https://www.reddit.com/r/rakulang/comments/j0vq6u/a_raku_manifesto_part_1/?)
+thread for this post on the [#raku IRC channel](https://raku.org/community/irc).
 
 <aside>
 
@@ -181,7 +181,7 @@ And the value in being easy to learn is obvious: No one is born knowing a progra
 language – to attract new users, a language must convince programmers that spending their
 time learning the language is a worthwhile investment.  The less time it takes to learn
 the language, the easier it is to make this case.  And, indeed, languages that are more difficult
-to learn, such as Rust, frequently site their difficulty as an impediment to the language's
+to learn, such as Rust, frequently cite their difficulty as an impediment to the language's
 adoption.
 
 ### How Raku values ease of learning
