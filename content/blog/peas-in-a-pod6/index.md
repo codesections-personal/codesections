@@ -44,7 +44,7 @@ my $pod = load(q:to/EOF/);
 $pod.raku.say
 ```
 
-If you run that code (or, you know, run the [tangled output](@/blog/weaving-raku/) of this post's [source code](https://github.com/codesections-personal/codesections/blob/master/pod-src/peas-in-a-pod6.raku)), then you get the following output (some line breaks added):
+If you run that code (or, you know, run the [tangled output](/blog/weaving-raku/) of this post's [source code](https://github.com/codesections-personal/codesections/blob/master/pod-src/peas-in-a-pod6.raku)), then you get the following output (some line breaks added):
 
 ```raku
 $[Pod::Block::Named.new(
