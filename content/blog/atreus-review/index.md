@@ -10,7 +10,7 @@ a fair shake and can give you my full impressions.  And my full impression is th
 
 <aside>
 
-This review is **not** a detailed comparison by someone who knows a lot about mechanical
+This review is **not** a detailed comparison written by someone who knows a lot about mechanical
 keyboards.  I've heard that the Kailh BOX Brown switches in my keys are pretty good, but I
 can't compare them to any other switches.  This is the first mechanical keyboard I've ever
 owned – about all I can tell you about the keys is that it sure feels nicer to type on
@@ -516,7 +516,7 @@ cord, and _still_ come out under the cost of an ErgodoxEZ.
 
 I've described a number of features – ergonomics, portability, and speed – that make me
 love the Atreus.  I've also described its flaws, as I see them.  But I worry that
-I've left out something essentials: I'm almost 5,000 words into this review, but I worry
+I've left out something essentials: I'm almost 5,000 words into this review, but I worry
 that I haven't captured what makes the Atreus special enough for me to _want_ to write a
 5,000+ word review.
 
@@ -526,7 +526,7 @@ large enough to transform into differences in **kind**_.
 An analogy to software might be helpful, because the same phenomenon shows up there pretty
 frequently.  Consider a set of software tests that run in 30 minutes.  If you speed them
 up by 10%, that's a nice win but not a big deal.  If you speed them up by another 10%,
-you'll see another modest win; the return is roughly linear. 
+you'll see another modest win; the return is roughly linear. 
 
 But if you speed tests up by 99.9% – so that they run in ~2 seconds – then the return is
 suddenly and astoundingly non-linear.  Developers can now run their tests interactively as
@@ -548,3 +548,6 @@ layout instead of attempting to divine one from first principles.
 
 So here's my one-sentence review: The Keyboardio Atreus – not perfect, but transformativly
 amazing.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTc1MjgwMDgwOF19
+-->
