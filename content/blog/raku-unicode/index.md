@@ -28,7 +28,7 @@ say ‘Raku's mascot: »ö«’ ~~ m:g/[<:ASCII> & <.alpha>]+/;
     # OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
 ```
 
-That's a whole lot better. It's slightly longer, but much more explicit.
+That's a whole lot better. It's slightly longer, but it's much more explicit.
 
 But – hang on! – what is that `<:ASCII>` character class? That's not in [the docs](https://docs.raku.org/language/regexes#Unicode_properties)! Is it missing from the documentation? If so, I could add it – I've been trying to do my part with updating the docs.
 
