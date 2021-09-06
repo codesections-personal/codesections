@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/vim-timestamped">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;vim-timestamped">
     <title>
        Using Vim to take time-stamped notes |  CodeSections 
     </title>
@@ -258,9 +258,10 @@
     <section class="content-main">
   
     
-  <h1>Using Vim to take time-stamped notes</h1>
+
+  <h2>Using Vim to take time-stamped notes</h2>
   <p>I frequently find myself needing to take time-stamped notes.  Specifically, I'll
-be in a call, meeting, or interview and need to take notes that show how long
+be in a call, meeting, or interview and need to take notes that show how long 
 it's been since the meeting started.  Basically, I want something that looks
 like this:</p>
 <p><img src="https://www.codesections.com/blog/vim-timestamped/result.jpg" alt="Screenshot of time stamps generated in vim" /></p>
@@ -269,68 +270,67 @@ search didn't turn anything up.  However, I little digging <strong>did</strong> 
 fact that vim has the built-in ability to tell time.</p>
 <p>This means that writing a bit of vimscript to insert a time stamp is pretty
 easy.  After a bit of fiddling, I came up with something that serves my needs, and I decided it might be useful enough to others to be worth sharing.  Here's what I came up with:</p>
-<p><a name="continue-reading"></a></p>
-<pre style="background-color:#002b36;">
-<span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+<span id="continue-reading"></span><pre style="background-color:#002b36;">
+<code><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
 </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
 </span><span style="color:#859900;">command</span><span style="color:#839496;">! TimeStampToggle call </span><span style="color:#859900;">TimeStampToggle</span><span style="color:#839496;">()
-</span><span style="color:#839496;">
+
 </span><span style="color:#859900;">function </span><span style="color:#b58900;">TimeStampToggle</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
-</span><span style="color:#839496;">  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = !</span><span style="color:#268bd2;">g:time_stamp_enabled
-</span><span style="color:#839496;">  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) 
-</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; Time in seconds since the Unix epoch
+  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = !</span><span style="color:#268bd2;">g:time_stamp_enabled
+  </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) 
+</span><span style="color:#586e75;">     &quot; Time in seconds since the Unix epoch
 </span><span style="color:#859900;">endfunction
-</span><span style="color:#839496;">
-</span><span style="color:#859900;">inoremap &lt;expr&gt; &lt;CR&gt; </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> ?</span><span style="color:#859900;">\
-</span><span style="color:#839496;">   </span><span style="color:#586e75;">&quot;\&lt;ESC&gt;:call TimeStamp()\&lt;CR&gt;a&quot;\: &quot;\&lt;CR&gt;&quot;
-</span><span style="color:#839496;">
+
+inoremap &lt;expr&gt; &lt;CR&gt; </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> ?</span><span style="color:#859900;">\
+</span><span style="color:#586e75;">   &quot;\&lt;ESC&gt;:call TimeStamp()\&lt;CR&gt;a&quot;\: &quot;\&lt;CR&gt;&quot;
+
 </span><span style="color:#859900;">function</span><span style="color:#839496;">! </span><span style="color:#b58900;">TimeStamp</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) - </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#6c71c4;">0
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">     </span><span style="color:#859900;">while </span><span style="color:#268bd2;">l:current_sec </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
-</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
-</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> += </span><span style="color:#6c71c4;">1
-</span><span style="color:#839496;">     </span><span style="color:#859900;">endwhile
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">     </span><span style="color:#859900;">while </span><span style="color:#268bd2;">l:current_min </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
-</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
-</span><span style="color:#839496;">       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  += </span><span style="color:#6c71c4;">1
-</span><span style="color:#839496;">     </span><span style="color:#859900;">endwhile
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">)
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; Go to the beginning of the line,
-</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; print the current zero-padded time,
-</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; print `  -  ` as a separator
-</span><span style="color:#839496;">     </span><span style="color:#586e75;">&quot; and move the cursor over for the next line (with separator)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">execute </span><span style="color:#586e75;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
-</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_hr</span><span style="color:#859900;">\&lt;CR&gt;</span><span style="color:#839496;">:</span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_min</span><span style="color:#859900;">\&lt;CR&gt;</span><span style="color:#839496;">:</span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_sec </span><span style="color:#859900;">\&lt;CR&gt;\
-</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#839496;">—</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;</span><span style="color:#839496;">o</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
-</span><span style="color:#839496;">           </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#586e75;">&quot;
-</span><span style="color:#839496;">
-</span><span style="color:#839496;"> </span><span style="color:#859900;">endfunction
-</span></pre>
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%s&quot;</span><span style="color:#839496;">) - </span><span style="color:#268bd2;">g:time_stamp_start</span><span style="color:#839496;">)
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#6c71c4;">0
+
+     </span><span style="color:#859900;">while </span><span style="color:#268bd2;">l:current_sec </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
+       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
+       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> += </span><span style="color:#6c71c4;">1
+     </span><span style="color:#859900;">endwhile
+
+     while </span><span style="color:#268bd2;">l:current_min </span><span style="color:#859900;">&gt;= </span><span style="color:#6c71c4;">60
+       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> -= </span><span style="color:#6c71c4;">60
+       </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  += </span><span style="color:#6c71c4;">1
+     </span><span style="color:#859900;">endwhile
+
+     let </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_sec</span><span style="color:#839496;">)
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;"> = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_min</span><span style="color:#839496;">)
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">  = </span><span style="color:#859900;">printf</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%02d&quot;</span><span style="color:#839496;">, </span><span style="color:#268bd2;">l:current_hr</span><span style="color:#839496;">)
+
+</span><span style="color:#586e75;">     &quot; Go to the beginning of the line,
+     &quot; print the current zero-padded time,
+     &quot; print `  -  ` as a separator
+     &quot; and move the cursor over for the next line (with separator)
+     </span><span style="color:#859900;">execute </span><span style="color:#2aa198;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
+           \&lt;C-R&gt;=l:current_hr\&lt;CR&gt;:\&lt;C-R&gt;=l:current_min\&lt;CR&gt;:\&lt;C-R&gt;=l:current_sec \&lt;CR&gt;\
+           \&lt;SPACE&gt;\&lt;SPACE&gt;—\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;o\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
+           \&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;&quot;
+
+ </span><span style="color:#859900;">endfunction
+</span></code></pre>
 <p>This is made <em>slightly</em> more complicated than it needs to be by my desire for a
 relative time stamp.  If you'd prefer an absolute time stamp, you could simplify it considerably:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
+<code><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = </span><span style="color:#6c71c4;">0
 </span><span style="color:#859900;">command</span><span style="color:#839496;">! TimeStampToggle </span><span style="color:#859900;">let </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> = !</span><span style="color:#268bd2;">g:time_stamp_enabled
-</span><span style="color:#839496;">
+
 </span><span style="color:#859900;">inoremap &lt;expr&gt; &lt;CR&gt; </span><span style="color:#268bd2;">g:time_stamp_enabled</span><span style="color:#839496;"> ? </span><span style="color:#2aa198;">&quot;\&lt;ESC&gt;:call TimeStamp()\&lt;CR&gt;a&quot;</span><span style="color:#839496;"> : </span><span style="color:#2aa198;">&quot;\&lt;CR&gt;&quot;
-</span><span style="color:#839496;">
+
 </span><span style="color:#859900;">function</span><span style="color:#839496;">! </span><span style="color:#b58900;">TimeStamp</span><span style="color:#657b83;">(</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_time</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%H:%M:%S&quot;</span><span style="color:#839496;">)
-</span><span style="color:#839496;">     </span><span style="color:#859900;">execute </span><span style="color:#586e75;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
-</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;C-R&gt;</span><span style="color:#839496;">=</span><span style="color:#268bd2;">l:current_time</span><span style="color:#859900;">\&lt;CR&gt;\
-</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#839496;">—</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;</span><span style="color:#839496;">o</span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
-</span><span style="color:#839496;">          </span><span style="color:#859900;">\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;</span><span style="color:#586e75;">&quot;
-</span><span style="color:#839496;">
+     </span><span style="color:#859900;">let </span><span style="color:#268bd2;">l:current_time</span><span style="color:#839496;"> = </span><span style="color:#859900;">strftime</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&quot;%H:%M:%S&quot;</span><span style="color:#839496;">)
+     </span><span style="color:#859900;">execute </span><span style="color:#2aa198;">&quot;normal! 0i\&lt;SPACE&gt;\&lt;ESC&gt;0dwi\
+          \&lt;C-R&gt;=l:current_time\&lt;CR&gt;\
+          \&lt;SPACE&gt;\&lt;SPACE&gt;—\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;ESC&gt;o\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\
+          \&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;\&lt;SPACE&gt;&quot;
+
 </span><span style="color:#859900;">endfunction
-</span></pre>
+</span></code></pre>
 <p>This produces time stamps like <code>14:21:55</code>—and, of course, you can customize the time stamp to your own needs with the normal arguments to <code>strftime</code> (basically the same ones as <code>date</code>, but check <code>:help strftime()</code> for full details.)</p>
 <aside>
 I thought about packaging this up as a plugin, but decided it's a bit too simple.  But feel free to copy this code into your own .vimrc—like the other code samples on this site, it's released under an MIT license
@@ -338,10 +338,6 @@ I thought about packaging this up as a plugin, but decided it's a bit too simple
 <p>So, vimscript will probably never win any beauty contests—and will <strong>definitely</strong> never be my favorite language.  But it can be pretty handy for wiping together quick utilities.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

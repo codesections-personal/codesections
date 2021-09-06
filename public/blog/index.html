@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog">
     <title>
        CodeSections 
     </title>
@@ -189,6 +189,26 @@
       .content-main article h1 a {
         color: #4F82BB;
       }
+      .content-main table {
+        overflow: auto;
+        border-spacing: 0;
+        margin: auto;
+      }
+      .content-main table th {
+        font-weight: 600;
+      }
+      .content-main table th,
+      .content-main table td {
+        padding: 6px 13px;
+        border: 0.5px solid #dfe2e5;
+      }
+      .content-main table tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+      }
+      .content-main table tr:nth-child(2n) {
+        background-color: #f6f8fa;
+      }
       .content-main aside {
         background-color: #cde; /* Pastel blue*/
         display: block;
@@ -280,12 +300,73 @@
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto-3&#x2F;"> A Raku Manifesto, Part 3</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;terminal-life&#x2F;"> Accepting that I don&#x27;t live in my terminal</a>
+        </h1>
+
+        
+          <p>I've realized that, as much as I might <em>want</em> to be one of those
+people who lives entierly in the terminal, I'm just not.  Don't get me
+wrong, I very much enjoy the terminal and my setup in it – coding away
+in emacs or vim is very much my preferred professional setup.  But
+that's just the thing – being in the terminal is something that makes me ``</p>
+<p>(setq super-save-auto-save-when-idle t)
+(setq super-save-idle-duration 0.05)</p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;terminal-life&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;atreus-review&#x2F;"> Open Source Keyboardio Atreus Keyboard – Six Week Review</a>
+        </h1>
+
+        
+          <p>As I write this, I've now had my Keyboardio Atreus for a full six weeks and have been
+using it pretty much exclusively that whole time.  After a month and a half, I've given it
+a fair shake and can give you my full impressions.  And my full impression is that it is
+<strong>amazing</strong>.</p>
+<aside>
+<p>This review is <strong>not</strong> a detailed comparison by someone who knows a lot about mechanical
+keyboards.  I've heard that the Kailh BOX Brown switches in my keys are pretty good, but I
+can't compare them to any other switches.  This is the first mechanical keyboard I've ever
+owned – about all I can tell you about the keys is that it sure feels nicer to type on
+than my ThinkPad keyboard.  If you're looking for that sort of comparison, you'll need to
+<a href="https://www.youtube.com/watch?v=R0mchmVeh4w">look</a> somewhere
+<a href="https://no-kill-switch.ghost.io/keyboardio-atreus-yeah-or-meh-review/">else</a>. </p>
+<p>This also isn't a short, to-the-point, objective list of pros and cons.  It's less
+Consumer Reports, and more <a href="https://blog.scottlogic.com/2020/10/09/ergo-rabbit-hole.html">Down the Ergonomic Keyboard Rabbit
+Hole</a> (though, tragically,
+without the MS Paint illustrations).  As that post seems to prove, apparently at least
+<em>some</em> people like reading long, at times idiosyncratic, accounts of a really cool
+keyboard setup.  This one is mine – well, mine and the Atreus's, I suppose.</p>
+<p>(Though if you are here for brevity, I offer a one-sentence review at the very end.)</p>
+</aside>
+<h2 id="atreus-background">Atreus background</h2>
+<p>Before I tell you what I love about it, what <em>is</em> the Atreus?  Well, it's a keyboard. It's
+a <em>tiny</em> keyboard.</p>
+<p>More specifically, it's a keyboard with 44 keys – compared with 84 on my ThinkPad
+keyboard, and a full 108 on a traditional desktop keyboard.  How does it get by with so
+few keys?  More on that in a minute; for now, just focus on how small the thing is,
+without needing to cramp any of the individual keys in the least.</p>
+<p><img src="./atreus.jpeg" alt="The Atreus keyboard on top of a ThinkPad" /></p>
+
+        
+      </div>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;atreus-review&#x2F;">(read more)</a>
+    </article>
+  
+    <article>
+      <div>
+        <h1>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto-3&#x2F;"> A Raku Manifesto, Part 3</a>
         </h1>
 
         
           <p>In <a href="/blog/raku-manifesto">part 1</a> and <a href="/blog/raku-manifesto-2">part 2</a> I discussed my
-personal take on a Raku manifesto:</p>
+personal take on a Raku manifesto: </p>
 <div class="highlight">
 <ol>
 <li><strong>Expressive code         <small>over uniform code</small></strong></li>
@@ -309,11 +390,11 @@ paper through today – you might get the impression that small scale programmin
 problem and that the only interesting/meaningful question is how we increase the
 productivity of large software teams.  Certainly many of the programming languages that have
 gained popularity recently seem to reflect that view:</p>
-<table><thead><tr><th> Language   </th><th align="left"> Developer </th><th align="left"> Purpose                       </th></tr></thead><tbody>
-<tr><td> Golang     </td><td align="left"> Google    </td><td align="left"> build large software projects </td></tr>
-<tr><td> Rust       </td><td align="left"> Mozilla   </td><td align="left"> build large software projects </td></tr>
-<tr><td> TypeScript </td><td align="left"> Microsoft </td><td align="left"> build large software projects </td></tr>
-<tr><td> Hask       </td><td align="left"> Facebook  </td><td align="left"> build large software projects </td></tr>
+<table><thead><tr><th>Language</th><th align="left">Developer</th><th align="left">Purpose</th></tr></thead><tbody>
+<tr><td>Golang</td><td align="left">Google</td><td align="left">build large software projects</td></tr>
+<tr><td>Rust</td><td align="left">Mozilla</td><td align="left">build large software projects</td></tr>
+<tr><td>TypeScript</td><td align="left">Microsoft</td><td align="left">build large software projects</td></tr>
+<tr><td>Hask</td><td align="left">Facebook</td><td align="left">build large software projects</td></tr>
 </tbody></table>
 <p>Looking at that list, you might conclude that we clearly need a programming language for
 large projects and that older languages do fine for smaller groups.</p>
@@ -321,13 +402,13 @@ large projects and that older languages do fine for smaller groups.</p>
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto-3&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto-3&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto-2&#x2F;"> A Raku Manifesto, Part 2</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto-2&#x2F;"> A Raku Manifesto, Part 2</a>
         </h1>
 
         
@@ -383,13 +464,13 @@ programming – each of which, in its own way, promotes predictable code.</p>
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto-2&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto-2&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto&#x2F;"> A Raku Manifesto, Part 1</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto&#x2F;"> A Raku Manifesto, Part 1</a>
         </h1>
 
         
@@ -432,7 +513,7 @@ to make tradeoffs that reflect their design goals.</p>
 I think Golang is a poorly designed language – quite the reverse, in fact.  I think Golang
 is an extremely <em>well</em> designed language, and one where the designers have been wonderfully
 explicit about their design goals.  I also think that Golang's design goals are, in many
-cases, the exact opposite of Raku's, which makes it a particularly useful contrast.</p>
+cases, the exact opposite of Raku's, which makes it a particularly useful contrast. </p>
 </aside>
 <p>Before we get started, I want to remind you of a statement from the Agile Manifesto:</p>
 <blockquote>
@@ -450,13 +531,13 @@ Raku's decision to prioritize the values on the left is absolutely the correct o
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-manifesto&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-manifesto&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-unicode&#x2F;"> A deep dive into Raku&#x27;s Unicode support</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-unicode&#x2F;"> A deep dive into Raku&#x27;s Unicode support</a>
         </h1>
 
         
@@ -465,15 +546,15 @@ Raku's decision to prioritize the values on the left is absolutely the correct o
 <p>Here was the question: What's the cleanest way to match the alphabetic ASCII characters in a Raku regex? Simple enough, right?</p>
 <p>My first thought was something like this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/&lt;[A..Za..z]&gt;+/</span><span style="color:#839496;">;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
-</span></pre>
+<code><span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/&lt;[A..Za..z]&gt;+/</span><span style="color:#839496;">;
+    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
+</span></code></pre>
 <p>And that works and is admirably concise. But it suffers from (what I view as) a fatal flaw: it looks <em>exactly</em> like the code someone would write when they want to match all alphabetic characters but forgot that they need to handle Unicode. One rule I try to stick with is that correct code shouldn't <em>look</em> buggy; breaking that rule is a good way to spend time &quot;debugging&quot; functional code. If I did use the syntax above, I'd probably feel the need to add an explanatory comment (or break it out into a named regex).</p>
 <p>That's all pretty minor, but it got me curious. So I decided to see what people thought on the <a href="https://raku.org/community/irc">#raku IRC channel</a> – always a good source of advice. After some helpful comments, I wound up with this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/[&lt;:ASCII&gt; &amp; &lt;.alpha&gt;]+/</span><span style="color:#839496;">;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
-</span></pre>
+<code><span style="color:#839496;">say ‘</span><span style="color:#2aa198;">Raku&#39;s mascot: »ö«</span><span style="color:#839496;">’ ~~ m:g</span><span style="color:#2aa198;">/[&lt;:ASCII&gt; &amp; &lt;.alpha&gt;]+/</span><span style="color:#839496;">;
+    </span><span style="color:#586e75;"># OUTPUT: «(｢Raku｣ ｢s｣ ｢mascot｣)»
+</span></code></pre>
 <p>That's a whole lot better. It's slightly longer, but much more explicit.</p>
 <p>But – hang on! – what is that <code>&lt;:ASCII&gt;</code> character class? That's not in <a href="https://docs.raku.org/language/regexes#Unicode_properties">the docs</a>! Is it missing from the documentation? If so, I could add it – I've been trying to do my part with updating the docs.</p>
 <p>Well, no, it isn't missing. Raku supports querying <strong>all</strong> Unicode character properties, and you can access a large number of them in a regex using the <code>:property_name</code> syntax.</p>
@@ -487,13 +568,13 @@ Raku's decision to prioritize the values on the left is absolutely the correct o
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-unicode&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-unicode&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;peas-in-a-pod6&#x2F;"> Peas in a Pod6</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;peas-in-a-pod6&#x2F;"> Peas in a Pod6</a>
         </h1>
 
         
@@ -502,17 +583,17 @@ Raku's decision to prioritize the values on the left is absolutely the correct o
 <p>This post is entirely about the Pod6 documentation language. If you're not familiar with Pod6, it's a lightweight markup language that can be rendered to Markdown, HTML, plaintext, or a variety of other output formats; you can think of it a bit like a more powerful and flexible version of Markdown. It was originally designed to <a href="https://docs.raku.org/language/pod">make inline Raku documentation</a> as pleasant as possible to write, but you can use it anywhere you might want to generate HTML or another output format – in fact, I've started <a href="https://github.com/codesections-personal/codesections/tree/master/pod-src">writing this blog</a> in Pod6. There's even a dedicated <a href="https://zahatski.com/2020/7/22/1/podlite-open-source-pod6-markup-language-editor">editor</a> for writing Pod6 and rendering realtime HTML output.</aside></p>
 <p>I want to be clear about what I'm <em>not</em> saying. My point isn't that Pod6 is a different language from <a href="https://perldoc.perl.org/perlpod.html">POD</a>, aka Plain Ol' Documentation, the markup language used for Perl 5 documentation. That's <em>true</em>, of course – Pod6 and POD are not the same language – but I'm making a different point.</p>
 <p>The point I'm making is that Pod6 and Pod aren't the same language any more that JSON and JavaScript objects are the same language. In fact, Pod6 and Pod have a relationship that is exactly analogous to JSON and JavaScript objects: like JSON, Pod6 is a notation for writing plaintext files that can be read both by humans and machines; like a JavaScript object, Pod is an in-memory representation of that content.</p>
-<p>Put differently, Pod6 is a <strong>markup language</strong>, and Pod is a <strong>data format</strong>.</p>
+<p>Put differently, Pod6 is a <strong>markup language</strong>, and Pod is a <strong>data format</strong>. </p>
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;peas-in-a-pod6&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;peas-in-a-pod6&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;weaving-raku&#x2F;"> Weaving Raku: semiliterate programming in a beautiful language</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;weaving-raku&#x2F;"> Weaving Raku: semiliterate programming in a beautiful language</a>
         </h1>
 
         
@@ -530,13 +611,13 @@ Raku's decision to prioritize the values on the left is absolutely the correct o
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;weaving-raku&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;weaving-raku&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-unit-testing-with-conditional-compilation&#x2F;"> Raku testing and conditional compilation</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-unit-testing-with-conditional-compilation&#x2F;"> Raku testing and conditional compilation</a>
         </h1>
 
         
@@ -555,13 +636,13 @@ conditional compilation.</p>
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;raku-unit-testing-with-conditional-compilation&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;raku-unit-testing-with-conditional-compilation&#x2F;">(read more)</a>
     </article>
   
     <article>
       <div>
         <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;cleaning-github-with-a-simple-bash-script&#x2F;"> Cleaning your GitHub profile with a simple Bash script</a>
+            <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;cleaning-github-with-a-simple-bash-script&#x2F;"> Cleaning your GitHub profile with a simple Bash script</a>
         </h1>
 
         
@@ -573,67 +654,14 @@ conditional compilation.</p>
 
         
       </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;cleaning-github-with-a-simple-bash-script&#x2F;">(read more)</a>
-    </article>
-  
-    <article>
-      <div>
-        <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;sunday-screenshot-feb-2019&#x2F;"> Screenshots from arch&#x2F;stumpwm&#x2F;tmux&#x2F;vim&#x2F;qutebrowser setup</a>
-        </h1>
-
-        
-          <p>I recently made a number of pretty significant change to the look and feel of my
-Linux desktop environment, and I'm pretty happy with how my setup looks now.
-It's not for everyone, but I thought at least some of y'all might be interested
-in seeing how it looks.</p>
-<h2 id="what-i-changed">What I changed</h2>
-<p>I was previously using <a href="https://dwm.suckless.org/">dwm</a> as my display manager—and, if you haven't tried it, I highly recommend it.  But I just
-switched to <a href="https://stumpwm.github.io/">stumpwm</a>, which sacrifices a bit in
-minimalism but makes up for it in configurability.  That change deserves—and
-will get—it's own blog post.  But, for now, you'll just get to see the
-pictures.</p>
-<p>At the same time, I've changed from a standard <a href="https://ethanschoonover.com/solarized/">Solarized</a> color scheme for vim to the <a href="https://www.robertmelton.com/posts/syntax-highlighting-off/">nofrils</a> color scheme as part of an experiment with removing (almost) all syntax highlight from my code.  That <strong>also</strong> deserves its own post; again, all you get right now is the
-screenshots.</p>
-<p>The result of all of these changes is a highly <strong>minimalist</strong>, <strong>distraction-free</strong>, and <strong>keyboard-centric</strong> window setup—and I'm very happy with it for now.</p>
-<h2 id="screenshots">Screenshots</h2>
-<p>(In each case, click for a bigger image—and most of these really need it.)</p>
-<p>My main desktop, when I log in:
-<a href="http://192.168.0.235:1111/blog/sunday-screenshot-feb-2019/desktop.png"><img src="http://192.168.0.235:1111/blog/sunday-screenshot-feb-2019/desktop.png" alt="screenshot of my default desktop" /></a></p>
-
-        
-      </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;sunday-screenshot-feb-2019&#x2F;">(read more)</a>
-    </article>
-  
-    <article>
-      <div>
-        <h1>
-            <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;vim-timestamped&#x2F;"> Using Vim to take time-stamped notes</a>
-        </h1>
-
-        
-          <p>I frequently find myself needing to take time-stamped notes.  Specifically, I'll
-be in a call, meeting, or interview and need to take notes that show how long
-it's been since the meeting started.  Basically, I want something that looks
-like this:</p>
-<p><img src="http://192.168.0.235:1111/blog/vim-timestamped/result.jpg" alt="Screenshot of time stamps generated in vim" /></p>
-<p>My first thought was that there's be a plugin to add time stamps, but a quick
-search didn't turn anything up.  However, I little digging <strong>did</strong> turn up the
-fact that vim has the built-in ability to tell time.</p>
-<p>This means that writing a bit of vimscript to insert a time stamp is pretty
-easy.  After a bit of fiddling, I came up with something that serves my needs, and I decided it might be useful enough to others to be worth sharing.  Here's what I came up with:</p>
-
-        
-      </div>
-      <a href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;vim-timestamped&#x2F;">(read more)</a>
+      <a href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;cleaning-github-with-a-simple-bash-script&#x2F;">(read more)</a>
     </article>
   
 
   <div>
     
     
-    <a class="page-nav__earlier" href="http:&#x2F;&#x2F;192.168.0.235:1111&#x2F;blog&#x2F;page&#x2F;2&#x2F;">Earlier posts →</a>
+    <a class="page-nav__earlier" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;blog&#x2F;page&#x2F;2&#x2F;">Earlier posts →</a>
     
   </div>
 
@@ -654,5 +682,5 @@ easy.  After a bit of fiddling, I came up with something that serves my needs, a
       </li>
     </ul>
   </footer>
-<script src="/livereload.js?port=1024&mindelay=10"></script></body>
+</body>
 </html>

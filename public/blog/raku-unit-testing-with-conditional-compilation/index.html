@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/raku-unit-testing-with-conditional-compilation">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;raku-unit-testing-with-conditional-compilation">
     <title>
        Raku testing and conditional compilation |  CodeSections 
     </title>
@@ -258,7 +258,8 @@
     <section class="content-main">
   
     
-  <h1>Raku testing and conditional compilation</h1>
+
+  <h2>Raku testing and conditional compilation</h2>
   <p>I've been really falling in love with the <a href="https://raku.org">Raku</a>
 programming language – it's powerful, expressive, has great support
 for introspection, strong pattern matching, and <strong>extremely</strong> good
@@ -271,8 +272,7 @@ possible, usually with just a few lines of code.</p>
 <p>Today, I'd like to talk about one example: Writing unit tests in the
 same file as the code under test, without any runtime cost thanks to
 conditional compilation.</p>
-<p><a name="continue-reading"></a></p>
-<h2 id="organizing-tests">Organizing tests</h2>
+<span id="continue-reading"></span><h2 id="organizing-tests">Organizing tests</h2>
 <p>Putting code and unit tests together in the same file is generally
 <em>not</em> standard procedure in Raku.  Instead, as explained in the <a href="https://docs.raku.org/language/Testing">Test
 docs</a>, you typically put all
@@ -315,14 +315,14 @@ indeed, it doesn't: it uses conditional compilation to compile test
 code <em>only</em> when running tests.  The standard way to write tests in
 Rust looks like this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">#[</span><span style="color:#268bd2;">cfg</span><span style="color:#839496;">(test)]
-</span><span style="color:#268bd2;">mod </span><span style="color:#839496;">test {
-</span><span style="color:#839496;">    </span><span style="color:#859900;">use super</span><span style="color:#839496;">::</span><span style="color:#859900;">*</span><span style="color:#839496;">;
-</span><span style="color:#839496;">    </span><span style="color:#839496;">
-</span><span style="color:#839496;">    </span><span style="color:#839496;">#[</span><span style="color:#268bd2;">test</span><span style="color:#839496;">]
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">first_test</span><span style="color:#839496;">() {}
-</span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#839496;">#</span><span style="color:#657b83;">[</span><span style="color:#268bd2;">cfg</span><span style="color:#657b83;">(</span><span style="color:#839496;">test</span><span style="color:#657b83;">)]
+</span><span style="color:#268bd2;">mod </span><span style="color:#b58900;">test </span><span style="color:#657b83;">{
+    </span><span style="color:#859900;">use super</span><span style="color:#839496;">::</span><span style="color:#657b83;">*</span><span style="color:#839496;">;
+    
+    #</span><span style="color:#657b83;">[</span><span style="color:#268bd2;">test</span><span style="color:#657b83;">]
+    </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">first_test</span><span style="color:#657b83;">() {}
+}
+</span></code></pre>
 <p>In case you don't speak Rust, the <code>#[cfg(test)]</code> on the first line is
 an attribute that tells the Rust compiler to <em>only</em> compile the
 following block when it's running a test.  If you compile that project
@@ -350,9 +350,9 @@ Both of these blocks execute code <em>only</em> at compile time, with <code>BEGI
 executing at the beginning of compile time, while <code>CHECK</code> executes at the
 end.  So, imagine you have code like this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#cb4b16;">CHECK </span><span style="color:#839496;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; }
+<code><span style="color:#b58900;">CHECK </span><span style="color:#657b83;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; </span><span style="color:#657b83;">}
 </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">running</span><span style="color:#839496;">&#39;;
-</span></pre>
+</span></code></pre>
 <p>If you invoke this file with <code>raku -c</code>, you'll compile it without
 running it, and you'll get &quot;compiling&quot; as your output.  If you run
 this file with <code>raku</code>, you'll both compile and run it, and you'll
@@ -374,15 +374,15 @@ be.  If you split this out into its own module, and compile it, you'll
 notice that it does <em>not</em> produce the same bytecode as the file
 without the <code>CHECK</code> block.  That is, this code:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">unit module </span><span style="color:#859900;">Example</span><span style="color:#839496;">;
+<code><span style="color:#b58900;">unit module Example</span><span style="color:#839496;">;
 </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">running</span><span style="color:#839496;">&#39;;
-</span></pre>
+</span></code></pre>
 <p>and this code</p>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">unit module </span><span style="color:#859900;">Example</span><span style="color:#839496;">;
-</span><span style="color:#cb4b16;">CHECK </span><span style="color:#839496;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; }
+<code><span style="color:#b58900;">unit module Example</span><span style="color:#839496;">;
+</span><span style="color:#b58900;">CHECK </span><span style="color:#657b83;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; </span><span style="color:#657b83;">}
 </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">running</span><span style="color:#839496;">&#39;;
-</span></pre>
+</span></code></pre>
 <p>don't produce the same bytecode.  Specifically, the first version
 produces only 24 KiB of bytecode, while the second produces 52 KiB.
 For a long time, I couldn't figure out what caused this discrepancy –
@@ -405,10 +405,10 @@ runtime; unlike those blocks, <code>DOC</code> blocks avoid creating a nested
 runtime inside the compile time.  With that in mind, let's update our
 code:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">unit module </span><span style="color:#859900;">Example</span><span style="color:#839496;">;
-</span><span style="color:#cb4b16;">DOC CHECK </span><span style="color:#839496;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; }
+<code><span style="color:#b58900;">unit module Example</span><span style="color:#839496;">;
+</span><span style="color:#cb4b16;">DOC </span><span style="color:#b58900;">CHECK </span><span style="color:#657b83;">{ </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">compiling</span><span style="color:#839496;">&#39; </span><span style="color:#657b83;">}
 </span><span style="color:#268bd2;">say </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">running</span><span style="color:#839496;">&#39;;
-</span></pre>
+</span></code></pre>
 <p>Great, now we're back to the 24 KiB we'd have had without any compile
 time code.</p>
 <h4 id="using-tests-without-use-test">Using tests without <code>use test</code></h4>
@@ -459,48 +459,48 @@ well worth a read.)</p>
 lines of code.  Here's what testing a simple Fibonacci function would
 look like:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;"># ./bin/fibonacci
-</span><span style="color:#cb4b16;">use </span><span style="color:#268bd2;">v6d</span><span style="color:#839496;">;
-</span><span style="color:#cb4b16;">use </span><span style="color:#859900;">Fibonacci</span><span style="color:#839496;">;
-</span><span style="color:#839496;">
+<code><span style="color:#586e75;"># ./bin/fibonacci
+</span><span style="color:#cb4b16;">use </span><span style="color:#b58900;">v6d</span><span style="color:#839496;">;
+</span><span style="color:#cb4b16;">use </span><span style="color:#b58900;">Fibonacci</span><span style="color:#839496;">;
+
 </span><span style="color:#586e75;">#| Print the first N Fibonacci numbers
-</span><span style="color:#859900;">sub </span><span style="color:#b58900;">MAIN</span><span style="color:#839496;">(Int </span><span style="color:#268bd2;">$N</span><span style="color:#839496;">) { </span><span style="color:#268bd2;">say fibonacci</span><span style="color:#839496;">(</span><span style="color:#859900;">$</span><span style="color:#268bd2;">N</span><span style="color:#839496;">)</span><span style="color:#859900;">.</span><span style="color:#268bd2;">join</span><span style="color:#839496;">(&quot;</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;) }
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;"># ./lib/Fibonacci.pm6
-</span><span style="color:#cb4b16;">use </span><span style="color:#268bd2;">v6d</span><span style="color:#839496;">;
-</span><span style="color:#268bd2;">unit module </span><span style="color:#859900;">Fibonacci</span><span style="color:#839496;">;
-</span><span style="color:#839496;">
+</span><span style="color:#859900;">sub </span><span style="color:#b58900;">MAIN</span><span style="color:#657b83;">(</span><span style="background-color:#6e2e32;color:#839496;">Int</span><span style="color:#839496;"> </span><span style="color:#268bd2;">$</span><span style="background-color:#6e2e32;color:#839496;">N</span><span style="color:#657b83;">) { </span><span style="color:#268bd2;">say </span><span style="color:#b58900;">fibonacci</span><span style="color:#657b83;">(</span><span style="color:#859900;">$</span><span style="color:#268bd2;">N</span><span style="color:#657b83;">)</span><span style="color:#859900;">.</span><span style="color:#268bd2;">join</span><span style="color:#657b83;">(</span><span style="color:#839496;">&quot;</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span style="color:#657b83;">) }
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;"># ./lib/Fibonacci.pm6
+</span><span style="color:#cb4b16;">use </span><span style="color:#b58900;">v6d</span><span style="color:#839496;">;
+</span><span style="color:#b58900;">unit module Fibonacci</span><span style="color:#839496;">;
+
 </span><span style="color:#586e75;">#| Return a list of the first $n Fibonacci numbers
-</span><span style="color:#859900;">sub </span><span style="color:#b58900;">fibonacci</span><span style="color:#839496;">(Int </span><span style="color:#268bd2;">$n </span><span style="color:#657b83;">--</span><span style="color:#859900;">&gt;</span><span style="color:#839496;"> List) is export { 
-</span><span style="color:#839496;">    </span><span style="color:#859900;">state @</span><span style="color:#268bd2;">fib </span><span style="color:#657b83;">= </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">, </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">, </span><span style="color:#657b83;">* + *</span><span style="color:#839496;"> … ∞;
-</span><span style="color:#839496;">    </span><span style="color:#859900;">@</span><span style="color:#268bd2;">fib</span><span style="color:#839496;">[</span><span style="color:#859900;">^$</span><span style="color:#268bd2;">n</span><span style="color:#839496;">]
-</span><span style="color:#839496;">} 
-</span><span style="color:#839496;">
-</span><span style="color:#cb4b16;">DOC CHECK </span><span style="color:#839496;">{ </span><span style="color:#268bd2;">multi is</span><span style="color:#657b83;">-</span><span style="color:#268bd2;">deeply</span><span style="color:#839496;">(</span><span style="color:#859900;">|</span><span style="color:#839496;">) { </span><span style="color:#268bd2;">callsame </span><span style="color:#839496;">}
-</span><span style="color:#839496;">   </span><span style="color:#268bd2;">fibonacci</span><span style="color:#839496;">(</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">)</span><span style="color:#859900;">.&amp;</span><span style="color:#268bd2;">is</span><span style="color:#657b83;">-</span><span style="color:#268bd2;">deeply</span><span style="color:#839496;">((</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,), &#39;</span><span style="color:#2aa198;">Fibonacci of 1</span><span style="color:#839496;">&#39;);
-</span><span style="color:#839496;">   </span><span style="color:#268bd2;">fibonacci</span><span style="color:#839496;">(</span><span style="color:#6c71c4;">5</span><span style="color:#839496;">)</span><span style="color:#859900;">.&amp;</span><span style="color:#268bd2;">is</span><span style="color:#657b83;">-</span><span style="color:#268bd2;">deeply</span><span style="color:#839496;">((</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">2</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">3</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">5</span><span style="color:#839496;">), &#39;</span><span style="color:#2aa198;">Fibonacci of 5</span><span style="color:#839496;">&#39;);
-</span><span style="color:#839496;">}
-</span></pre>
+</span><span style="color:#859900;">sub </span><span style="color:#b58900;">fibonacci</span><span style="color:#657b83;">(</span><span style="background-color:#6e2e32;color:#839496;">Int</span><span style="color:#839496;"> </span><span style="color:#268bd2;">$</span><span style="background-color:#6e2e32;color:#839496;">n</span><span style="color:#839496;"> </span><span style="background-color:#6e2e32;color:#839496;">--&gt;</span><span style="color:#839496;"> </span><span style="background-color:#6e2e32;color:#839496;">List</span><span style="color:#657b83;">) </span><span style="background-color:#6e2e32;color:#839496;">is</span><span style="color:#839496;"> </span><span style="background-color:#6e2e32;color:#839496;">export</span><span style="color:#839496;"> </span><span style="color:#657b83;">{ 
+    </span><span style="color:#268bd2;">state </span><span style="color:#859900;">@</span><span style="color:#268bd2;">fib </span><span style="color:#657b83;">= </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">, </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">, </span><span style="color:#657b83;">* + *</span><span style="color:#839496;"> … ∞;
+    </span><span style="color:#859900;">@</span><span style="color:#268bd2;">fib</span><span style="color:#657b83;">[</span><span style="color:#859900;">^$</span><span style="color:#268bd2;">n</span><span style="color:#657b83;">]
+} 
+
+</span><span style="color:#cb4b16;">DOC </span><span style="color:#b58900;">CHECK </span><span style="color:#657b83;">{ </span><span style="color:#b58900;">multi </span><span style="color:#cb4b16;">is</span><span style="color:#657b83;">-</span><span style="color:#b58900;">deeply</span><span style="color:#657b83;">(</span><span style="color:#859900;">|</span><span style="color:#657b83;">) { </span><span style="color:#cb4b16;">callsame </span><span style="color:#657b83;">}
+   </span><span style="color:#b58900;">fibonacci</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">)</span><span style="color:#859900;">.&amp;</span><span style="color:#b58900;">is</span><span style="color:#657b83;">-</span><span style="color:#b58900;">deeply</span><span style="color:#657b83;">((</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,</span><span style="color:#657b83;">)</span><span style="color:#839496;">, &#39;</span><span style="color:#2aa198;">Fibonacci of 1</span><span style="color:#839496;">&#39;</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+   </span><span style="color:#b58900;">fibonacci</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">5</span><span style="color:#657b83;">)</span><span style="color:#859900;">.&amp;</span><span style="color:#b58900;">is</span><span style="color:#657b83;">-</span><span style="color:#b58900;">deeply</span><span style="color:#657b83;">((</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">2</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">3</span><span style="color:#839496;">,</span><span style="color:#6c71c4;">5</span><span style="color:#657b83;">)</span><span style="color:#839496;">, &#39;</span><span style="color:#2aa198;">Fibonacci of 5</span><span style="color:#839496;">&#39;</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span></code></pre>
 <p>With that code, you can test with <code>raku --doc -c -MTest lib/Fibonacci</code>, which produces</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">ok 1 - Fibonacci of 1
-</span><span style="color:#839496;">ok 2 - Fibonacci of 2
-</span><span style="color:#839496;">Syntax OK
-</span></pre>
+<code><span style="color:#839496;">ok 1 - Fibonacci of 1
+ok 2 - Fibonacci of 2
+Syntax OK
+</span></code></pre>
 <p>And you can run it with <code>raku -Ilib bin/fibonacci</code> which produces</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">Usage:
-</span><span style="color:#839496;">  </span><span style="color:#839496;">bin/fibonacci &lt;N&gt; -- Print the first N Fibonacci numbers
-</span></pre>
+<code><span style="color:#839496;">Usage:
+  bin/fibonacci &lt;N&gt; -- Print the first N Fibonacci numbers
+</span></code></pre>
 <p>(I still can't get over how easy Raku makes producing nice usage
 output!).  Or, for actual output, with <code>raku -Ilib bin/fibonacci 5</code>:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">1
-</span><span style="color:#839496;">1
-</span><span style="color:#839496;">2
-</span><span style="color:#839496;">3
-</span><span style="color:#839496;">5
-</span></pre>
+<code><span style="color:#839496;">1
+1
+2
+3
+5
+</span></code></pre>
 <p>And – perhaps best of all! – our byte code is only 40 KiB.  And that's
 <strong>exactly</strong> the same size as if we'd omitted the tests entirely.  A
 true zero cost abstraction, in a single line of code.</p>
@@ -517,10 +517,6 @@ channel</a>, or post to <a href="https://www.reddit.com/r/rakulang/comments/ih8t
 thread on r/rakulang</a>.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

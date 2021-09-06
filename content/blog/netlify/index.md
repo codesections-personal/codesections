@@ -96,4 +96,4 @@ And that's it!  Your site now has no duplicate content, and won't be unfairly
 lumped in with sites that have scraped content.
 
 If you have any questions, feel free to reach out to me in any of the ways
-listed on [my contact page](@/about/index.md#contact)—I'd be happy to help.
+listed on [my contact page](/contact)—I'd be happy to help.

@@ -16,7 +16,7 @@
         {%- if page.summary -%}
         {{ page.summary | safe }}
         {%- else -%}
-          {{ page.content | safe | truncate(length=1000)}} 
+          {{ page.content | safe | truncate(length=1000) | safe }} 
         {%- endif -%}
       </div>
       <div class="card__link">

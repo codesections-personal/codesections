@@ -127,9 +127,9 @@ In my view, it matters immensely.
 
 Let's do some back-of-the-napkin math: If a software project employs exactly 1,000 software
 developers, and it spends $100,000 to compensate each one (a significant underestimate, but
-fine for our napkin) then it has payroll costs of ten million dollars.  That means that any
+fine for our napkin) then it has payroll costs of a hundred million dollars.  That means that any
 software project employing thousands of developers will need a business model that can bring
-in tens of millions of dollars of revenue – and, realistically, a lot more.
+in hundreds of millions of dollars of revenue – and, realistically, a lot more.
 
 As Facebook, Amazon, and Google amply demonstrate, plenty of software projects can make
 millions or even billions of dollars.  But plenty of others could never make that type of

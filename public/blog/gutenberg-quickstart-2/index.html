@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/gutenberg-quickstart-2">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;gutenberg-quickstart-2">
     <title>
        Gutenberg quickstart 2: From &quot;Hello, World&quot; to macros |  CodeSections 
     </title>
@@ -258,86 +258,90 @@
     <section class="content-main">
   
     
-  <h1>Gutenberg quickstart 2: From &quot;Hello, World&quot; to macros</h1>
+
+  <h2>Gutenberg quickstart 2: From &quot;Hello, World&quot; to macros</h2>
   <p>When we left of, we'd just created a &quot;Hello, World&quot; website—nothing that fancy,
 but enough to get a feel for the basic structure of Gutenberg's templating
 system.</p>
-<p><span class="give-border">
-<a href="https://v05--gutenberg-simple-demo.netlify.com/"><img src="/blog/gutenberg-quickstart-1/v5.png" alt="v5 screenshot" /></a>
-</span></p>
+<span class="give-border">
+  [![v5 screenshot](/blog/gutenberg-quickstart-1/v5.png)](https://v05--gutenberg-simple-demo.netlify.com/)
+</span>
 <p>(<a href="https://github.com/codesections/gutenberg-simple-demo/tree/v05">source code</a>, as always, in the GitHub repo.)</p>
-<p>Today, we're going to dive in a bit deeper and take a look how we can use
+<p>Today, we're going to dive in a bit deeper and take a look how we can use 
 Gutenberg's templates to support a multi-page site.</p>
 <h2 id="an-about-page">An About page</h2>
-<p>First, let's create an About page for our demo site.  Before we do, though,
+<p>First, let's create an About page for our demo site.  Before we do, though, 
 lets add a link to our new page from our homepage.  Add the following HTML to
 your <code>index.html</code> file just after the body begins:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">      </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Home</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/about</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">About</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
-</span></pre>
-<p>Now that we have a link, lets make the page.  To do that, we'll need a
+<code><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+      &lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Home</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#b58900;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/about</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">About</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
+    &lt;/</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
+</span></code></pre>
+<p>Now that we have a link, lets make the page.  To do that, we'll need a 
 template that applies to pages—right now, we only have the <code>index.html</code> template
 but, as we talked about last time, that template <em>only</em> applies to the home page.</p>
 <p>By default, all other pages are governed by the <code>page.html</code> template.  (Note
 that I said <em>pages</em>, which are distinct from <em>sections</em>.  We'll get to sections
-next time.)  So, if we're going to have an About page, we're going to need a
+next time.)  So, if we're going to have an About page, we're going to need a 
 <code>pages.html</code> template.</p>
-<p><a name="continue-reading"></a></p>
-<p>Next, we'll need some content.  To create that content, navigate to your
+<span id="continue-reading"></span>
+<p>To create one, simply copy your <code>index.html</code> template over to <code>pages.html</code> and 
+make one change.  Change the line <code>{{ section.content | safe }}</code> to <code>{{  page.content | safe }}</code> since we want the content of the page rather than of a
+section.</p>
+<p>Next, we'll need some content.  To create that content, navigate to your 
 <code>content</code> directory and create a new <code>about</code> folder.  Inside this folder, create
 a file called <code>index.md</code> and give it this content (or something similar if you
 want to experiment):</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">+++
-</span><span style="color:#839496;">title = &quot;About&quot;
-</span><span style="color:#839496;">+++
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">Some details about this site.
-</span></pre><aside>
+<code><span style="color:#839496;">+++
+title = &quot;About&quot;
++++
+
+Some details about this site.
+</span></code></pre><aside>
   You could skip creating the `about` folder and just create the file as
   `about.md` in your `content` directory.  Either way would create a page on 
   your site that lives at `[BASE_URL]/about`.  The advantage of creating the
   `about` folder is that you can put images or other related files in that 
   folder and then easily link to them, which will be helpful as your site grows.
 </aside>
-<p>And that's all it takes to have a second page up and running.  Fire up your
+<p>And that's all it takes to have a second page up and running.  Fire up your 
 local server with <code>gutenberg serve</code> and you should get something like this,
 with working links:</p>
-<p><span class="give-border">
-<a href="https://v06--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-2/v06.png" alt="v06 screenshot" /></a>
-</span></p>
+<span class="give-border">
+[![v06 screenshot](v06.png)](https://v06--gutenberg-simple-demo.netlify.com/)
+</span>
 <p>(<a href="https://github.com/codesections/gutenberg-simple-demo/tree/v06">Source code</a>)</p>
 <h2 id="first-refactor">First refactor</h2>
 <p>While that definitely <em>worked</em>, there's a lot about it that should have just
-about any experienced web developer cringing.  Most notably, we have two
+about any experienced web developer cringing.  Most notably, we have two 
 separate templates that are literally copies of one another with only a single
 <em>word</em> changed between them.  This is about as blatant a violation of <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">don't
 repeat yourself</a> as
 you could ever hope to find.</p>
-<p>So, let's fix that.  And, in the process, we'll get to know another set of
+<p>So, let's fix that.  And, in the process, we'll get to know another set of 
 Gutenberg's key features: base templates, extends, and blocks.</p>
-<p>To implement this, create another copy of <code>index.html</code>.  (Yes, I know we're
+<p>To implement this, create another copy of <code>index.html</code>.  (Yes, I know we're 
 trying to <em>reduce</em> the amount of copying, but just bear with me.)  You can
 name this one whatever you like, so long as it has an <code>.html</code> extension.  I'll
-go with <code>base.html</code>.  Then, replace everything inside the body tag with</p>
+go with <code>base.html</code>.  Then, replace everything inside the body tag with </p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span></pre>
-<p>What does that do?  It creates a <code>block</code> that has the name &quot;content&quot;.  What
-this means is that any other file can extend <code>base.html</code> and substitute in
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+</span></code></pre>
+<p>What does that do?  It creates a <code>block</code> that has the name &quot;content&quot;.  What 
+this means is that any other file can extend <code>base.html</code> and substitute in 
 content inside that block.</p>
 <p>Let's set that up now.  Delete all the text in <code>index.html</code> and replace it
 with the following:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span></pre>
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
+
+{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+  {{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
+{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+</span></code></pre>
 <p>You may be able to guess what this does: it tells Gutenberg that you want to
 extend the <code>base.html</code> template, and that it should substitute in the stuff
 inside the &quot;content&quot; block for the &quot;content&quot; block in <code>base.html</code>.</p>
@@ -348,25 +352,25 @@ consequence, a template may only extend one parent template.</li>
 <li>However, you can chain extensions—that is, another template could extend
 <code>index.html</code> even though <code>index.html</code> is extending <code>base.html</code>.</li>
 <li>Templates can have more than one <code>block</code>.  For example, I will frequently
-have at least three blocks in my <code>base.html</code>: <code>page_speciffic_css</code>,
-<code>content</code>, and <code>page_specific_js</code>.  That lets me easily add in any of
-those elements if necessary in a child template.</li>
-<li>Blocks can have default values in the parent template.  For instance,
+have at least three blocks in my <code>base.html</code>: <code>page_speciffic_css</code>, 
+<code>content</code>, and <code>page_specific_js</code>.  That lets me easily add in any of 
+those elements if necessary in a child template. </li>
+<li>Blocks can have default values in the parent template.  For instance, 
 if you had put &quot;Hello, World!&quot; inside the &quot;content&quot; template in
-<code>base.html</code>, then that text would be displayed whenever you extended
-<code>base.html</code> but <em>did not</em> provide replacement text for the &quot;content&quot;
-block.</li>
+<code>base.html</code>, then that text would be displayed whenever you extended 
+<code>base.html</code> but <em>did not</em> provide replacement text for the &quot;content&quot; 
+block. </li>
 </ul>
 <p>Let's make the same changes in <code>page.html</code>.  Just like with <code>index.html</code>, we
-can delete the entirety of our current text and replace it with</p>
+can delete the entirety of our current text and replace it with </p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">page</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span></pre>
-<p>We haven't changed our rendered HTML at all—as you can confirm with
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
+
+{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+  {{ </span><span style="color:#268bd2;">page</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
+{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+</span></code></pre>
+<p>We haven't changed our rendered HTML at all—as you can confirm with 
 <code>gutenberg serve</code>, but we've moved our source HTML into a single file, which
 will make it much easier to maintain.</p>
 <h2 id="dealing-with-the-css">Dealing with the CSS</h2>
@@ -375,11 +379,11 @@ coding CSS, so we won't refactor the actual code.  But let's at least get it
 out of a <code>&lt;style&gt;</code> tag mixed in with our HTML.</p>
 <p>Now, at this point there are two directions you could go.  The more standard
 way to go would be to replace your inline CSS with a <code>&lt;link rel=&quot;stylesheet&quot;&gt;</code>
-tag and put our CSS in an external file.  Gutenberg supports going this route,
+tag and put our CSS in an external file.  Gutenberg supports going this route, 
 and even comes with built-in support for compiling your CSS from Sass files.<br />
-If you want to do this, just create <code>.sass</code> or <code>.scss</code> files in your <code>sass</code>
+If you want to do this, just create <code>.sass</code> or <code>.scss</code> files in your <code>sass</code> 
 directory.  Then, during site build, those files will be automatically compiled
-to your static directory and can be linked from your HTML files.  If you want
+to your static directory and can be linked from your HTML files.  If you want 
 more information on going that route, the
 <a href="https://www.getgutenberg.io/documentation/content/sass/">docs</a> are
 helpful as always.</p>
@@ -387,33 +391,33 @@ helpful as always.</p>
 to include CSS inline in our built file, but break it out into a separate file
 in our source.  This gives us most of the advantages of splitting our CSS out
 into a separate file—we separate our concerns, and we can link the same CSS
-file from multiple HTML pages—without paying the cost of additional HTTP
-requests that can unnecessarily slow down sites load their CSS with external
-requests.  The only disadvantage to this approach is that CSS isn't cached,
-which matters for sites loading large quantities of CSS (e.g.,
-<a href="https://getbootstrap.com/">bootstrap</a>) but doesn't matter at all when we're
+file from multiple HTML pages—without paying the cost of additional HTTP 
+requests that can unnecessarily slow down sites load their CSS with external 
+requests.  The only disadvantage to this approach is that CSS isn't cached, 
+which matters for sites loading large quantities of CSS (e.g., 
+<a href="https://getbootstrap.com/">bootstrap</a>) but doesn't matter at all when we're 
 loading only a KB or so.</p>
-<p>Now that we've picked our approach, how do we do it?  Simple.  We move our
+<p>Now that we've picked our approach, how do we do it?  Simple.  We move our 
 CSS into a separate template file, which I'll call <code>css.html</code>.  So that file
 should look like this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#b58900;">body </span><span style="color:#839496;">{
-</span><span style="color:#839496;">  </span><span style="color:#859900;">margin</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">40</span><span style="color:#859900;">px </span><span style="color:#839496;">auto;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">max-width</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">650</span><span style="color:#859900;">px</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.6</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">font-size</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">18</span><span style="color:#859900;">px</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#444</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">padding</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">0 10</span><span style="color:#859900;">px
-</span><span style="color:#839496;">}
-</span><span style="color:#b58900;">h1</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h2</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h3 </span><span style="color:#839496;">{
-</span><span style="color:#839496;">  </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.2</span><span style="color:#839496;">;
-</span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#b58900;">body </span><span style="color:#657b83;">{
+  </span><span style="color:#859900;">margin</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">40</span><span style="color:#859900;">px auto</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">max-width</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">650</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.6</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">font-size</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">18</span><span style="color:#859900;">px</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#444</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">padding</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">0 10</span><span style="color:#859900;">px
+</span><span style="color:#657b83;">}
+</span><span style="color:#b58900;">h1</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h2</span><span style="color:#657b83;">,</span><span style="color:#b58900;">h3 </span><span style="color:#657b83;">{
+  </span><span style="color:#859900;">line-height</span><span style="color:#839496;">: </span><span style="color:#6c71c4;">1.2</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span></code></pre>
 <p>(Depending on your text editor, you may need to tell it to apply CSS syntax
 highlighting to this file.)</p>
-<p>Then, replace the CSS that was in your <code>base.html</code> with the single line
+<p>Then, replace the CSS that was in your <code>base.html</code> with the single line 
 <code>{% include &quot;css.html&quot; %}</code>.  Including files really is that easy.</p>
-<p>If you'd like to see the source code for where we are now, it's in the
+<p>If you'd like to see the source code for where we are now, it's in the 
 <a href="https://github.com/codesections/gutenberg-simple-demo/tree/v07">GitHub repo</a>.
 You can also check out the <a href="https://v07--gutenberg-simple-demo.netlify.com/">live site</a>, though note that it won't have changed at all.</p>
 <h2 id="even-better-system-for-css">Even better system for CSS</h2>
@@ -426,99 +430,100 @@ see the power of macros when dealing with our CSS.  Lets add a bit of CSS
 that applies only to our homepage, not to our About page.</p>
 <p>Imagine you want the following CSS to apply to the homepage:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#b58900;">h1 </span><span style="color:#839496;">{
-</span><span style="color:#839496;">  </span><span style="color:#859900;">text-align</span><span style="color:#839496;">: center;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#85144b </span><span style="color:#586e75;">/* maroon */
-</span><span style="color:#839496;">}
-</span></pre>
-<p>Now, we <em>could</em> do this with includes—we could put this in a separate file,
-and then <code>include</code> it in our <code>index.html</code> file, but not in our <code>base.html</code>
+<code><span style="color:#b58900;">h1 </span><span style="color:#657b83;">{
+  </span><span style="color:#859900;">text-align</span><span style="color:#839496;">: </span><span style="color:#859900;">center</span><span style="color:#839496;">;
+  </span><span style="color:#859900;">color</span><span style="color:#839496;">: </span><span style="color:#cb4b16;">#85144b </span><span style="color:#586e75;">/* maroon */
+</span><span style="color:#657b83;">}
+</span></code></pre>
+<p>Now, we <em>could</em> do this with includes—we could put this in a separate file, 
+and then <code>include</code> it in our <code>index.html</code> file, but not in our <code>base.html</code> 
 file or our <code>page.html</code> file.  But, though this would work, it could get a
-bit messy—we'd need to artificially split our CSS into separate files even
+bit messy—we'd need to artificially split our CSS into separate files even 
 when, as in this case, the size/complexity doesn't justify it.</p>
 <p>Luckily, macros give us a better option.  Here's what you do: rename <code>css.html</code>
 to <code>css_macros.html</code> (optional, but recommended).  Then, update it to have
 the following content:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">macro </span><span style="color:#268bd2;">global_styles</span><span style="color:#839496;">() %}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">body {
-</span><span style="color:#839496;">      </span><span style="color:#839496;">margin: 40px auto;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">max-width: 650px;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">line-height: 1.6;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">font-size: 18px;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">color: #444;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">padding: 0 10px
-</span><span style="color:#839496;">                </span><span style="color:#839496;">
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">h1,h2,h3 {
-</span><span style="color:#839496;">    </span><span style="color:#839496;">line-height: 1.2;
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endmacro </span><span style="color:#268bd2;">global_styles </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">macro </span><span style="color:#268bd2;">homepage</span><span style="color:#839496;">() %}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">h1 {
-</span><span style="color:#839496;">    </span><span style="color:#839496;">text-align: center;
-</span><span style="color:#839496;">    </span><span style="color:#839496;">color: #85144b /* maroon */
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endmacro </span><span style="color:#268bd2;">homepage </span><span style="color:#839496;">%}
-</span></pre>
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">macro </span><span style="color:#268bd2;">global_styles</span><span style="color:#839496;">() %}
+  body {
+      margin: 40px auto;
+      max-width: 650px;
+      line-height: 1.6;
+      font-size: 18px;
+      color: #444;
+      padding: 0 10px
+			    
+  }
+  h1,h2,h3 {
+    line-height: 1.2;
+  }
+{% </span><span style="color:#859900;">endmacro </span><span style="color:#268bd2;">global_styles </span><span style="color:#839496;">%}
+
+
+{% </span><span style="color:#859900;">macro </span><span style="color:#268bd2;">homepage</span><span style="color:#839496;">() %}
+  h1 {
+    text-align: center;
+    color: #85144b /* maroon */
+  }
+{% </span><span style="color:#859900;">endmacro </span><span style="color:#268bd2;">homepage </span><span style="color:#839496;">%}
+</span></code></pre>
 <p>Then revise your <code>base.html</code> file to look like the following:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">import </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">css_macros.html</span><span style="color:#839496;">&quot; </span><span style="color:#268bd2;">as css </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">
-</span><span style="color:#586e75;">&lt;!</span><span style="color:#268bd2;">DOCTYPE</span><span style="color:#839496;"> html</span><span style="color:#586e75;">&gt;
-</span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">html </span><span style="color:#839496;">lang</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">en</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">title</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Gutenberg Demo</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">title</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">meta </span><span style="color:#839496;">charset</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">UTF-8</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">      </span><span style="color:#839496;">{{ css::global_styles() }}
-</span><span style="color:#839496;">      </span><span style="color:#839496;">{% block page_specific_styles %}
-</span><span style="color:#839496;">      </span><span style="color:#839496;">{% endblock page_specific_styles %}
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">style</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">head</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#839496;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">Home</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;"> | </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">a </span><span style="color:#839496;">href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">/about</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;</span><span style="color:#839496;">About</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">a</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">nav</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
-</span><span style="color:#839496;">    </span><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">    </span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">  </span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">body</span><span style="color:#586e75;">&gt;
-</span><span style="color:#586e75;">&lt;/</span><span style="color:#268bd2;">html</span><span style="color:#586e75;">&gt;
-</span></pre>
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">import </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">css_macros.html</span><span style="color:#839496;">&quot; </span><span style="color:#268bd2;">as css </span><span style="color:#839496;">%}
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;Gutenberg Demo&lt;/title&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;style&gt;
+      {{ </span><span style="color:#268bd2;">css</span><span style="color:#839496;">::</span><span style="color:#268bd2;">global_styles</span><span style="color:#839496;">() }}
+      {% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
+      {% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;nav&gt;
+    &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt; | &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;body&gt;
+    {% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+    {% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+  &lt;/body&gt;
+&lt;/html&gt;
+</span></code></pre>
 <p>As you can see, it now starts with an <code>import</code> line, which imports the macro
 and then calls the macro inside the <code>&lt;style&gt;</code> tag.  It also now has a second
 block, a possibility we mentioned above.</p>
 <p>Finally, update your <code>index.html</code> file to the following:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">import </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">css_macros.html</span><span style="color:#839496;">&quot; </span><span style="color:#268bd2;">as css </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">css</span><span style="color:#839496;">::</span><span style="color:#268bd2;">homepage</span><span style="color:#839496;">() }}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span><span style="color:#839496;">  </span><span style="color:#839496;">{{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
-</span><span style="color:#839496;">{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
-</span></pre>
-<p>And now, launch the live site.  If all goes well, you'll have a site that's
-only slightly changed from when you were using includes, but that is now
+<code><span style="color:#839496;">{% </span><span style="color:#859900;">extends </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">base.html</span><span style="color:#839496;">&quot; %}
+{% </span><span style="color:#859900;">import </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">css_macros.html</span><span style="color:#839496;">&quot; </span><span style="color:#268bd2;">as css </span><span style="color:#839496;">%}
+
+{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
+  {{ </span><span style="color:#268bd2;">css</span><span style="color:#839496;">::</span><span style="color:#268bd2;">homepage</span><span style="color:#839496;">() }}
+{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">page_specific_styles </span><span style="color:#839496;">%}
+
+{% </span><span style="color:#859900;">block </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+  {{ </span><span style="color:#268bd2;">section</span><span style="color:#839496;">.</span><span style="color:#268bd2;">content </span><span style="color:#839496;">| </span><span style="color:#268bd2;">safe </span><span style="color:#839496;">}}
+{% </span><span style="color:#859900;">endblock </span><span style="color:#268bd2;">content </span><span style="color:#839496;">%}
+</span></code></pre>
+<p>And now, launch the live site.  If all goes well, you'll have a site that's 
+only slightly changed from when you were using includes, but that is now 
 powered by the full strength of macros.</p>
-<p><span class="give-border">
-<a href="https://v08--gutenberg-simple-demo.netlify.com/"><img src="https://www.codesections.com/blog/gutenberg-quickstart-2/v08.png" alt="v08 screenshot" /></a>
-</span></p>
+<span class="give-border">
+[![v08 screenshot](v08.png)](https://v08--gutenberg-simple-demo.netlify.com/)
+</span>
 <aside>
-  <p>Why are macros better than includes here?  A few reasons:</p>
-<ul>
-<li><strong>Explicit dependencies</strong>: using macros puts all your <code>import</code> statements in a single location at the top of your code.  Conversely, <code>include</code> statements are scattered throughout your file, which can make it harder
-to see what's there.</li>
-<li><strong>Namespacing</strong>: Notice how we called both of our CSS macros using the prefix <code>css::</code>?  Macros give you a built-in way to namespace your functionality without needing to rename files or created a more complicated directory structure.</li>
-<li><strong>File organization</strong>: As mentioned, macros give us the freedom to organize our files however makes sense for the scope of our project.</li>
-<li><strong>Power</strong>: We're not using the full power of macros here—they can become much more powerful and flexible when you start passing in arguments.  Getting used to macros in this simple case will help when you need their more powerful features.</li>
-</ul>
+  &lt;p&gt;Why are macros better than includes here?  A few reasons:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explicit dependencies&lt;&#x2F;strong&gt;: using macros puts all your &lt;code&gt;import&lt;&#x2F;code&gt; statements in a single location at the top of your code.  Conversely, &lt;code&gt;include&lt;&#x2F;code&gt; statements are scattered throughout your file, which can make it harder
+to see what&#x27;s there.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Namespacing&lt;&#x2F;strong&gt;: Notice how we called both of our CSS macros using the prefix &lt;code&gt;css::&lt;&#x2F;code&gt;?  Macros give you a built-in way to namespace your functionality without needing to rename files or created a more complicated directory structure. &lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;File organization&lt;&#x2F;strong&gt;: As mentioned, macros give us the freedom to organize our files however makes sense for the scope of our project.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Power&lt;&#x2F;strong&gt;: We&#x27;re not using the full power of macros here—they can become much more powerful and flexible when you start passing in arguments.  Getting used to macros in this simple case will help when you need their more powerful features.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
 </aside>
 <h2 id="conclusion">Conclusion</h2>
 <p>Ok, that's it for now.  We've gone from a single-page, single template site
@@ -527,10 +532,6 @@ and the power of macros.  Next time, we'll dive into sections and look at
 iterating through Gutenberg pages—we'll add a blog to our example site.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

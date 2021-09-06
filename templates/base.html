@@ -25,10 +25,11 @@
       {%- if context.content is containing("<article") or paginator.pages or context.pages -%}
         {{ css::article() }}
       {%- endif %}
-      {%- if context.content is containing("<table") -%}
+      {%- if context.content is containing("<table") or paginator.pages -%}
         {{ css::table() }}
       {%- endif %}
-      {%- if context.content is containing("<aside") or paginator.pages -%}
+      {%- if context.content is containing("<aside")
+          or context.content is containing('class="highlight') or paginator.pages -%}
         {{ css::aside() }}
       {%- endif %}
       {{ css::footer() }}

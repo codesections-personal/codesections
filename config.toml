@@ -10,7 +10,9 @@ default_language = "en"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
 
-generate_rss = true
+# RSS
+generate_feed = true
+feed_filename = "rss.xml"
 
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Gutenberg

@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/sending-keybase-chats-with-vim">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;sending-keybase-chats-with-vim">
     <title>
        Sending Keybase Chats Using Vim |  CodeSections 
     </title>
@@ -258,26 +258,27 @@
     <section class="content-main">
   
     
-  <h1>Sending Keybase Chats Using Vim</h1>
+
+  <h2>Sending Keybase Chats Using Vim</h2>
   <p>I cannot spell.  Like, was-sent-to-special-classes-as-a-child-and-they-gave-up-on-me cannot spell.  Luckily, this isn't an issue 99% of the time as an adult, because I'm never asked to operate in an environment without a spellcheck.  Except … I just started using keybase.io's chat program, and it doesn't check spelling.  Clearly, this needed to be fixed.</p>
 <p>I found a way to fix it: I now write my chat messages in Vim and then pipe them to keybase chat.  I thought this would be a pretty rare use case (how many other people <em>really</em> care about spelling, or want to edit one-line chat messages in Vim?)  But a number of people expressed interest, so I decided to write this post as a how-to.</p>
 <p>I'll give you the tl;dr how-to version quickly, and then I'll walk though what we're doing in a little more detail and talk about how you could customize it for your use-case.</p>
-<p><a name="continue-reading"></a></p>
-<h2 id="how-to">How To</h2>
+<span id="continue-reading"></span><h2 id="how-to">How To</h2>
 <p>First, you'll need to have the keybase app installed, which will automatically install their command-line client.  If you don't have it, you can get it from <a href="https://keybase.io/download">their website</a>. And you'll obviously need vim/neovim installed too.</p>
 <p>Next, add this bit of code to your <code>.vimrc</code> file (or <code>~/.config/nvim/init.vim</code> file for Neovim users).</p>
 <pre style="background-color:#002b36;">
-<span style="color:#859900;">augroup</span><span style="color:#839496;"> keybase
-</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd</span><span style="color:#839496;">!
-</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* let</span><span style="color:#839496;"> conversation = </span><span style="color:#859900;">expand</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&#39;%:e&#39;</span><span style="color:#839496;">)
-</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* inoremap &lt;CR&gt; &lt;esc&gt;</span><span style="color:#839496;">:w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
-</span><span style="color:#839496;">  </span><span style="color:#859900;">autocmd </span><span style="color:#839496;">BufNewFile,BufRead </span><span style="color:#859900;">*</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* nnoremap &lt;leader&gt;&lt;CR&gt;</span><span style="color:#839496;"> :w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
+<code><span style="color:#859900;">augroup</span><span style="color:#839496;"> keybase
+  </span><span style="color:#859900;">autocmd</span><span style="color:#839496;">!
+  </span><span style="color:#859900;">autocmd BufNewFile</span><span style="color:#839496;">,</span><span style="color:#859900;">BufRead *</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* let</span><span style="color:#839496;"> conversation = </span><span style="color:#859900;">expand</span><span style="color:#839496;">(</span><span style="color:#2aa198;">&#39;%:e&#39;</span><span style="color:#839496;">)
+  </span><span style="color:#859900;">autocmd BufNewFile</span><span style="color:#839496;">,</span><span style="color:#859900;">BufRead *</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* inoremap &lt;CR&gt; &lt;esc&gt;</span><span style="color:#839496;">:w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
+  </span><span style="color:#859900;">autocmd BufNewFile</span><span style="color:#839496;">,</span><span style="color:#859900;">BufRead *</span><span style="color:#839496;">keybase-outbox</span><span style="color:#859900;">* nnoremap &lt;leader&gt;&lt;CR&gt;</span><span style="color:#839496;"> :w</span><span style="color:#859900;">&lt;CR&gt;</span><span style="color:#839496;">:!keybase chat send </span><span style="color:#859900;">&lt;C-R&gt;</span><span style="color:#839496;">=conversation</span><span style="color:#859900;">&lt;CR&gt; &lt; %&lt;CR&gt;</span><span style="color:#839496;">ddi
 </span><span style="color:#859900;">augroup</span><span style="color:#839496;"> END
-</span></pre>
+</span></code></pre>
 <p>Then, to send a chat message to a keybase use vim to open a file with the filename <code>keybase-outbox.&lt;USERNAME&gt;</code> (so, if you wanted to message me, you'd type <code>vim keybase-outbos.codesections</code>).</p>
 <p>Type your message and then (while still in insert mode) hit enter to send it (just like you would in a chat client).  Or, if you're in normal mode, hit <code>&lt;leader&gt;</code> and then enter.  This will send your chat, clear the file, and drop you back into insert mode, ready to type your next message.</p>
 <aside>
-  <p>Note that this doesn't display your chat messages in vim/the terminal.  I'm sure you could do that if you really want to live in the terminal (using the <code>keybase chat read</code> in a loop should do the trick) but that's not the exercise here.  I still have the keybase app up in a split-screen window with Vim next to it.</p>
+  &lt;p&gt;Note that this doesn&#x27;t display your chat messages in vim&#x2F;the terminal.  I&#x27;m sure you could do that if you really want to live in the terminal (using the &lt;code&gt;keybase chat read&lt;&#x2F;code&gt; in a loop should do the trick) but that&#x27;s not the exercise here.  I still have the keybase app up in a split-screen window with Vim next to it.&lt;&#x2F;p&gt;
+
 </aside>
 <h2 id="the-details">The Details</h2>
 <p>How does this work?  Well, I don't claim to be a vimsrcipt master (I'm still halfway through <a href="http://learnvimscriptthehardway.stevelosh.com/">Learn Vimscript the Hard Way</a> and probably won't get around to finishing it for quite some time).  But here's what's going on:</p>
@@ -297,10 +298,6 @@ need to get at the variable we've saved—but we can't access it directly within
 <p>But, with those caveats, this should let you use Vim to edit your chat messages.  Hope this is helpful!</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

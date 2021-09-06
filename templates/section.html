@@ -4,18 +4,16 @@
 {% import "macros/css_macros.html" as css %}
 
 {% block page_specific_styles %}
-  {% if current_path is starting_with("projects") %}
+  {% if current_path is starting_with("/projects") %}
     {{ css::projects() }}
   {% endif %}
 {% endblock page_specific_styles %}
 
 
 {% block content %}
-  {% if current_path is starting_with("blog") %}
+  {% if current_path is starting_with("/blog") %}
     {{ blog::content(section=section, paginator=paginator) }}
-  {% elif current_path is starting_with("projects/reg-exp") %}
-    {{ section.content | safe }}
-  {% elif current_path is starting_with("projects") %}
+  {% elif current_path is starting_with("/projects") %}
     {{ projects::content(section=section) }}
   {% else %}
     {{ unknown_template }}

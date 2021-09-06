@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/raku-manifesto">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;raku-manifesto">
     <title>
        A Raku Manifesto, Part 1 |  CodeSections 
     </title>
@@ -258,7 +258,8 @@
     <section class="content-main">
   
     
-  <h1>A Raku Manifesto, Part 1</h1>
+
+  <h2>A Raku Manifesto, Part 1</h2>
   <div class="highlight">
 <ol>
 <li><strong>Expressive code         <small>over uniform code</small></strong></li>
@@ -298,7 +299,7 @@ to make tradeoffs that reflect their design goals.</p>
 I think Golang is a poorly designed language – quite the reverse, in fact.  I think Golang
 is an extremely <em>well</em> designed language, and one where the designers have been wonderfully
 explicit about their design goals.  I also think that Golang's design goals are, in many
-cases, the exact opposite of Raku's, which makes it a particularly useful contrast.</p>
+cases, the exact opposite of Raku's, which makes it a particularly useful contrast. </p>
 </aside>
 <p>Before we get started, I want to remind you of a statement from the Agile Manifesto:</p>
 <blockquote>
@@ -313,8 +314,7 @@ view, the value on the left is even <strong>more</strong> important (for the lan
 be, anyway), and how Raku prioritizes it in ways that require sacrificing the value on the
 right.  After discussing all four value pairs, I'll close with a post on why I believe that
 Raku's decision to prioritize the values on the left is absolutely the correct one.</p>
-<p><a name="continue-reading"></a></p>
-<h2 id="expressive-code-over-uniform-code">Expressive code over uniform code</h2>
+<span id="continue-reading"></span><h2 id="expressive-code-over-uniform-code">Expressive code over uniform code</h2>
 <p>Uniform code is great.  Tools like <a href="https://prettier.io/">prettier.js</a>,
 <a href="https://golang.org/cmd/gofmt/">gofmt</a>, and <a href="https://github.com/rust-lang/rustfmt">rustfmt</a>
 are popular for a good reason: they let a team consistently apply a uniform style, without
@@ -375,10 +375,10 @@ English (and other natural languages) so expressive.</p>
 call any function as a method.  That is, the two lines after <code>use Test</code> both mean the same
 thing:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#859900;">use</span><span style="color:#839496;"> Test;
+<code><span style="color:#859900;">use</span><span style="color:#839496;"> Test;
 </span><span style="color:#859900;">is</span><span style="color:#839496;">(</span><span style="color:#268bd2;">$the-answer</span><span style="color:#839496;">, </span><span style="color:#6c71c4;">42</span><span style="color:#839496;">);
 </span><span style="color:#268bd2;">$the-answer</span><span style="color:#839496;">.&amp;</span><span style="color:#859900;">is</span><span style="color:#839496;">(</span><span style="color:#6c71c4;">42</span><span style="color:#839496;">);
-</span></pre>
+</span></code></pre>
 <p>The result is the same, but – just as in English – changing the order changes the emphasis
 conveyed to the reader.  Depending on the context, one or the other might be clearer; having
 the option to choose between the two forms makes Raku more expressive.</p>
@@ -396,7 +396,7 @@ say that everything is an object; at the same time, it's also possible to write 
 strongly functional style (and I usually do!).  This flexibility greatly enhances Raku's
 expressive power; after all, some problems are a natural fit for OOP, while others fit well
 within a functional programming paradigm.  But this expressive power comes at the expense
-of code uniformity – it really is possible to write Raku in a style that would look
+of code uniformity – it really is possible to write Raku in a style that would look 
 alien to a different Raku programmer who fully embraces a different paradigm.</p>
 <p>To return to the first topic I mentioned, all of the expressivity/uniformity tradeoffs we've
 discussed apply to code formatters.  Having line breaks between every method call in a
@@ -450,10 +450,6 @@ Raku can be in the right hands.</p>
 <p>In my next post, I'll discuss the other two value pairs in my personal Raku manifesto.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

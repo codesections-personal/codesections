@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/leaving-netlify">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;leaving-netlify">
     <title>
        Thinking about moving the site away from Netlify |  CodeSections 
     </title>
@@ -223,12 +223,12 @@
     <section class="content-main">
   
     
-  <h1>Thinking about moving the site away from Netlify</h1>
+
+  <h2>Thinking about moving the site away from Netlify</h2>
   <p>I'm very strongly considering moving this site away from Netlify.  In fact, I'd go so far as saying that I'm planning to unless writing this post—or hearing from y'all—changes my mind.</p>
 <p>Before I launch into why, though, I want to clarify: I've been very happy with Netlify.  They've delivered exactly what they promised: fast, free, static hosting backed by a global CDN.  Deploying is as easy as running <code>git push</code> in the terminal; if you're thinking about using them, you probably shouldn't let this post dissuade you.</p>
 <p>So, given all those positives, why am I still thinking about migrating the site?</p>
-<p><a name="continue-reading"></a></p>
-<h2 id="the-problem-my-complexity-budget">The Problem: My Complexity Budget</h2>
+<span id="continue-reading"></span><h2 id="the-problem-my-complexity-budget">The Problem: My Complexity Budget</h2>
 <p>Basically, I'm starting to feel that my site is more complex than is justified by how simple my goals are.  Serving this simple, static site involves three separate CDNs: Netlify has their own CDN, they use the Akamai CDN, and they serve images from Amazon's Cloudfront CDN.  That's a lot of interconnected systems to depend on, and I could see it making debugging performance issues harder.</p>
 <p>(On the other hand, I haven't <em>had</em> any performance issues, so maybe I'm borrowing trouble by thinking through debugging them?)</p>
 <p>Somewhat relatedly, I'm not <em>thrilled</em> with the idea that Amazon is involved in serving my site—there's not a <em>ton</em> they can do with data from serving images (there aren't any cookies on my site, for example) but it does still feed a bit more data their way.</p>
@@ -243,10 +243,6 @@
 <p>Anyway, that's what I'm thinking at the moment.  But I'm open to changing my mind—please let me know if I'm thinking about this all wrong.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

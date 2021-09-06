@@ -54,7 +54,7 @@ Even if you've never read a word of markup before in your life, you can probably
 
 In contrast to that, consider this excerpt from the markup for a [modern news article](http://www.businessinsider.com/flashback-this-is-what-the-first-website-ever-looked-like-2011-6) <em>about</em> that early site.  The markup starts like this:
   
-```html
+```jsx
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" >

@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/javascript-vs-rust-linked-list">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;javascript-vs-rust-linked-list">
     <title>
        Comparing Rust and JavaScript Ergonomics with a Simple Linked List |  CodeSections 
     </title>
@@ -258,73 +258,74 @@
     <section class="content-main">
   
     
-  <h1>Comparing Rust and JavaScript Ergonomics with a Simple Linked List</h1>
+
+  <h2>Comparing Rust and JavaScript Ergonomics with a Simple Linked List</h2>
   <p>My day-to-day work involves writing a fair bit of JavaScript but, lately, I've gotten really interested in Rust.</p>
 <p>I'm into the idea of building lightweight programs that can run with lower resource consumption than is typically required for a JS runtime, and Rust's speed, memory safety, and <a href="https://insights.stackoverflow.com/survey/2018/#most-loved-dreaded-and-wanted">status as the most loved programming language</a> was enough to get my attention.  Add in Rust's strong type system and support for many functional-programming features—both areas I've long wanted to dig into—and it's fair to say that I'm Rust-curious at the least.  Curious enough to work through the <a href="https://doc.rust-lang.org/book/index.html">Rust book</a> and the first half of <a href="https://doc.rust-lang.org/rust-by-example/index.html">Rust By Example</a> (both of which are great, by the way!).  I'm certainly enjoying the process so far.</p>
 <p>But, the other day, I decided to take a slightly different approach: I decided to take a simple linked list program—the type can and do ask my students to implement in JavaScript in ~20 minutes—and re-implement it in Rust.  Specifically, I decided to build a queue implemented with a singly linked list.</p>
 <p>Going in, I expected the Rust version to be much more verbose than the JavaScript version, far faster, and moderately difficult to write.  As it turns out, though, the Rust version is hardly any more verbose than the JavaScript version, but was virtually impossible to write—at least in safe Rust.  (I was right about it being faster, though).</p>
-<p><a name="continue-reading"></a></p>
+<span id="continue-reading"></span>
 <p>In this post, I provide a function-by-function comparison of the two very similar programs and discuss the trade offs inherent in Rust's syntax.  Along the way, we'll learn about <em>unsafe</em> Rust, and I'll write my very first unsafe block.</p>
 <h2 id="the-code">The Code</h2>
 <h3 id="setup">Setup</h3>
 <p>In either language, our first task is to set up our overall data structure:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">// JavaScript
-</span><span style="color:#268bd2;">const </span><span style="color:#b58900;">LinkedList </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#839496;">() {
-</span><span style="color:#839496;">  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
-</span><span style="color:#839496;">};
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;">/// Rust
-</span><span style="color:#839496;">#[</span><span style="color:#268bd2;">derive</span><span style="color:#839496;">(Debug)]
-</span><span style="color:#859900;">pub </span><span style="color:#268bd2;">struct </span><span style="color:#839496;">LinkedList {
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">head</span><span style="color:#839496;">: Option&lt;Box&lt;Node&gt;&gt;,
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">tail</span><span style="color:#839496;">: Option&lt;</span><span style="color:#859900;">*mut</span><span style="color:#839496;"> Node&gt;,
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">}
-</span><span style="color:#839496;">#[</span><span style="color:#268bd2;">derive</span><span style="color:#839496;">(Debug)]
-</span><span style="color:#268bd2;">struct </span><span style="color:#839496;">Node {
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">value</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#839496;">,
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">next</span><span style="color:#839496;">: Option&lt;Box&lt;Node&gt;&gt;,
-</span><span style="color:#839496;">}
-</span><span style="color:#839496;">
-</span><span style="color:#268bd2;">impl </span><span style="color:#839496;">LinkedList {
-</span><span style="color:#839496;">  </span><span style="color:#859900;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">new</span><span style="color:#839496;">() -&gt; </span><span style="color:#268bd2;">Self </span><span style="color:#839496;">{
-</span><span style="color:#839496;">    </span><span style="color:#839496;">LinkedList {
-</span><span style="color:#839496;">        </span><span style="color:#839496;">head: </span><span style="color:#859900;">None</span><span style="color:#839496;">,
-</span><span style="color:#839496;">        </span><span style="color:#839496;">tail: </span><span style="color:#859900;">None</span><span style="color:#839496;">,
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#586e75;">// JavaScript
+</span><span style="color:#268bd2;">const </span><span style="color:#839496;">LinkedList </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#657b83;">() {
+  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
+  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;">/// Rust
+</span><span style="color:#839496;">#</span><span style="color:#657b83;">[</span><span style="color:#268bd2;">derive</span><span style="color:#657b83;">(</span><span style="color:#839496;">Debug</span><span style="color:#657b83;">)]
+</span><span style="color:#93a1a1;">pub </span><span style="color:#268bd2;">struct </span><span style="color:#b58900;">LinkedList </span><span style="color:#657b83;">{
+    </span><span style="color:#268bd2;">head</span><span style="color:#839496;">: </span><span style="color:#859900;">Option</span><span style="color:#839496;">&lt;</span><span style="color:#859900;">Box</span><span style="color:#839496;">&lt;Node&gt;&gt;,
+    </span><span style="color:#268bd2;">tail</span><span style="color:#839496;">: </span><span style="color:#859900;">Option</span><span style="color:#839496;">&lt;</span><span style="color:#93a1a1;">*mut</span><span style="color:#839496;"> Node&gt;,
+
+</span><span style="color:#657b83;">}
+</span><span style="color:#839496;">#</span><span style="color:#657b83;">[</span><span style="color:#268bd2;">derive</span><span style="color:#657b83;">(</span><span style="color:#839496;">Debug</span><span style="color:#657b83;">)]
+</span><span style="color:#268bd2;">struct </span><span style="color:#b58900;">Node </span><span style="color:#657b83;">{
+    </span><span style="color:#268bd2;">value</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#839496;">,
+    </span><span style="color:#268bd2;">next</span><span style="color:#839496;">: </span><span style="color:#859900;">Option</span><span style="color:#839496;">&lt;</span><span style="color:#859900;">Box</span><span style="color:#839496;">&lt;Node&gt;&gt;,
+</span><span style="color:#657b83;">}
+
+</span><span style="color:#268bd2;">impl </span><span style="color:#b58900;">LinkedList </span><span style="color:#657b83;">{
+  </span><span style="color:#93a1a1;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">new</span><span style="color:#657b83;">() </span><span style="color:#839496;">-&gt; </span><span style="color:#268bd2;">Self </span><span style="color:#657b83;">{
+</span><span style="color:#839496;">    LinkedList </span><span style="color:#657b83;">{
+</span><span style="color:#839496;">        head: </span><span style="color:#859900;">None</span><span style="color:#839496;">,
+        tail: </span><span style="color:#859900;">None</span><span style="color:#839496;">,
+    </span><span style="color:#657b83;">}
+</span></code></pre>
 <p>In some ways, this is the biggest difference between the two programs—and the biggest difference between the two languages.  In JavaScript, all wee need to do is tell the interpreter that we're building a data structure that will have a &quot;head&quot; field and a &quot;tail&quot; field.  In Rust, however, we also need to specify the types of those fields—here, we tell the compiler that the head will <em>either</em> be <code>None</code> (no value at all) or will be a <code>Node</code> allocated on the heap.  Since <code>Node</code> is also a custom type, we also tell the complier that a <code>Node</code> will have a numerical value and another field—which, itself will be either <code>None</code> or another heap-allocated <code>Node</code>.</p>
 <p>Finally, we also need to tell the complier how to build a new <code>LinkedList</code>—something that JavaScript already knows with the <code>new</code> keyword.</p>
 <h3 id="adding-a-node-to-our-tail">Adding a node to our tail</h3>
 <p>Now that we have a data structure, it'd be great if we could add a node to the end of our queue.  Here's how that looks in both languages:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">//JavaScript
-</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.prototype.</span><span style="color:#b58900;">addToTail </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#839496;">(</span><span style="color:#268bd2;">value</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">newTail </span><span style="color:#657b83;">= </span><span style="color:#839496;">{ value, next: </span><span style="color:#b58900;">null </span><span style="color:#839496;">};
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">  </span><span style="color:#859900;">if </span><span style="color:#839496;">(</span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail) {
-</span><span style="color:#839496;">    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail.next </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
-</span><span style="color:#839496;">  </span><span style="color:#839496;">} </span><span style="color:#859900;">else </span><span style="color:#839496;">{
-</span><span style="color:#839496;">    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
-</span><span style="color:#839496;">};
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;">// Rust
-</span><span style="color:#859900;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">add_to_tail</span><span style="color:#839496;">(</span><span style="color:#859900;">&amp;mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">, </span><span style="color:#268bd2;">value</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">let </span><span style="color:#859900;">mut</span><span style="color:#839496;"> new_tail </span><span style="color:#859900;">= Box</span><span style="color:#839496;">::new(Node { value, next: </span><span style="color:#859900;">None </span><span style="color:#839496;">});
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> raw_tail: </span><span style="color:#859900;">*mut _ = &amp;mut *</span><span style="color:#839496;">new_tail;
-</span><span style="color:#839496;">
-</span><span style="color:#839496;">    </span><span style="color:#859900;">if </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">is_some</span><span style="color:#839496;">() {
-</span><span style="color:#839496;">        </span><span style="color:#859900;">unsafe </span><span style="color:#839496;">{ (</span><span style="color:#859900;">*</span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">unwrap</span><span style="color:#839496;">()).next </span><span style="color:#859900;">= Some</span><span style="color:#839496;">(new_tail) };
-</span><span style="color:#839496;">    </span><span style="color:#839496;">} </span><span style="color:#859900;">else </span><span style="color:#839496;">{
-</span><span style="color:#839496;">        </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.head </span><span style="color:#859900;">= Some</span><span style="color:#839496;">(new_tail);
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail </span><span style="color:#859900;">= Some</span><span style="color:#839496;">(raw_tail);
-</span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#586e75;">//JavaScript
+</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.</span><span style="color:#859900;">prototype</span><span style="color:#839496;">.addToTail </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#657b83;">(</span><span style="color:#268bd2;">value</span><span style="color:#657b83;">) {
+  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">newTail </span><span style="color:#657b83;">= { </span><span style="color:#839496;">value, next: </span><span style="color:#b58900;">null </span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+
+  </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail</span><span style="color:#657b83;">) {
+    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail.next </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
+  </span><span style="color:#657b83;">} </span><span style="color:#859900;">else </span><span style="color:#657b83;">{
+    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
+  </span><span style="color:#657b83;">}
+  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#839496;">newTail;
+</span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;">// Rust
+</span><span style="color:#93a1a1;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">add_to_tail</span><span style="color:#657b83;">(</span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">, </span><span style="color:#268bd2;">value</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#657b83;">) {
+    </span><span style="color:#268bd2;">let </span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> new_tail </span><span style="color:#657b83;">= </span><span style="color:#859900;">Box</span><span style="color:#839496;">::new</span><span style="color:#657b83;">(</span><span style="color:#839496;">Node </span><span style="color:#657b83;">{</span><span style="color:#839496;"> value, next: </span><span style="color:#859900;">None </span><span style="color:#657b83;">})</span><span style="color:#839496;">;
+    </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> raw_tail: </span><span style="color:#93a1a1;">*mut </span><span style="color:#859900;">_ </span><span style="color:#657b83;">= </span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#657b83;">*</span><span style="color:#839496;">new_tail;
+
+    </span><span style="color:#859900;">if </span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">is_some</span><span style="color:#657b83;">() {
+       	</span><span style="color:#93a1a1;">unsafe </span><span style="color:#657b83;">{ (*</span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">unwrap</span><span style="color:#657b83;">())</span><span style="color:#839496;">.next </span><span style="color:#657b83;">= </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">new_tail</span><span style="color:#657b83;">) }</span><span style="color:#839496;">;
+    </span><span style="color:#657b83;">} </span><span style="color:#859900;">else </span><span style="color:#657b83;">{
+        </span><span style="color:#d33682;">self</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">new_tail</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+    </span><span style="color:#657b83;">}
+    </span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">raw_tail</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span></code></pre>
 <p>This code was probably the biggest shock of the whole exercise.  First, I was surprised by just how <em>similar</em> it is.  In both languages, we create a new tail node with the input value.  If the linked list already had a tail, we make that tail point to the new tail; if it didn't have an old tail, we get our list started by having the head point to the tail.  Either way, we update the tail pointer for our list to point to the new tail.  Other than a bit of superficial syntax, the whole thing looks pretty much identical across the two languages.</p>
 <p>… with one giant exception—that <code>unsafe</code> block right in the middle of the Rust code.  What in the world is up with that? Why do we need unsafe code in the middle of what seems like a simple data structure, and how can we trust our code at all once part of it is unsafe?</p>
 <p>These sort of questions actually held me up for quite a while—I was convinced that there must be a simple, performant way to write a linked-list-based queue in Rust that <em>didn't</em> need to be unsafe—and, as a beginner Rustacean, I was frightened enough of <code>unsafe</code> code that I was reluctant to write any.</p>
@@ -334,45 +335,45 @@
 <p>But isn't that <code>unsafe</code> block well, you know, <em>unsafe</em>?  As it turns out, no, not at all.  Yeah, sure, dereferencing raw pointers <em>can</em> be unsafe—Rust has reason to limit the times in which you can do so.  If the contents that pointer points to aren't initialized or have been dropped, you can wind up with exactly the sort of error that Rust's memory safety protects us from.</p>
 <p>So, why isn't that an issue here—why is this <code>unsafe</code> code actually perfectly safe?  Well, let's take another look at that <code>unsafe</code> block:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">// Rust
-</span><span style="color:#859900;">if </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">is_some</span><span style="color:#839496;">() {
-</span><span style="color:#839496;">    </span><span style="color:#859900;">unsafe </span><span style="color:#839496;">{ (</span><span style="color:#859900;">*</span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">unwrap</span><span style="color:#839496;">()).next </span><span style="color:#859900;">= Some</span><span style="color:#839496;">(new_tail) };
-</span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#586e75;">// Rust
+</span><span style="color:#859900;">if </span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">is_some</span><span style="color:#657b83;">() {
+    </span><span style="color:#93a1a1;">unsafe </span><span style="color:#657b83;">{ (*</span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail.</span><span style="color:#859900;">unwrap</span><span style="color:#657b83;">())</span><span style="color:#839496;">.next </span><span style="color:#657b83;">= </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">new_tail</span><span style="color:#657b83;">) }</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span></code></pre>
 <p>We dereference the raw point in self.tail—which means we need to worry about two situations: 1) if the pointed-to memory hasn't yet been initialized, and 2) if the pointed-to memory has already been freed.  Let's take those one at a time:</p>
 <p>On 1), we know that we set up <code>self.tail</code> to start off as <code>None</code>—and we wrap our dereference inside an <code>if self.tail.is_some()</code> block.  Accordingly, if we correctly initialize the memory <code>self.tail</code> points to at the same time we change <code>self.tail</code> to be <code>Some</code>, then we don't need to worry about dereferencing <code>self.tail</code> too early.  And that's exactly what we do inside this function: we initialize the memory that <code>self.tail</code> points to right before getting it to point there.  So 1) is taken care of.</p>
 <p>For 2), we have to handle the flip side: we have to ensure that we don't have a raw pointer left in <code>self.tail</code> <em>after</em> we've thrown away the pointed-to value.  So let's turn to that function now.</p>
 <h3 id="removing-the-head-node">Removing the head node</h3>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">// JavaScript
-</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.prototype.</span><span style="color:#b58900;">removeHead </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#839496;">() {
-</span><span style="color:#839496;">  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">currentHead </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head;
-</span><span style="color:#839496;">  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">newHead </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head.next;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">if </span><span style="color:#839496;">(newHead </span><span style="color:#657b83;">=== </span><span style="color:#b58900;">null</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#839496;">newHead;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">return </span><span style="color:#839496;">currentHead </span><span style="color:#859900;">? </span><span style="color:#839496;">currentHead.value </span><span style="color:#859900;">: </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
-</span><span style="color:#839496;">};
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;">// Rust
-</span><span style="color:#859900;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">remove_head</span><span style="color:#839496;">(</span><span style="color:#859900;">&amp;mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">) -&gt; Option&lt;</span><span style="color:#268bd2;">i32</span><span style="color:#839496;">&gt; {
-</span><span style="color:#839496;">    </span><span style="color:#859900;">if </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#839496;">(head) </span><span style="color:#859900;">= &amp;mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.head {
-</span><span style="color:#839496;">        </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> old_value </span><span style="color:#859900;">= Some</span><span style="color:#839496;">(head.value);
-</span><span style="color:#839496;">            </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> new_head </span><span style="color:#859900;">=</span><span style="color:#839496;"> head.next.</span><span style="color:#859900;">take</span><span style="color:#839496;">();
-</span><span style="color:#839496;">            </span><span style="color:#859900;">if</span><span style="color:#839496;"> new_head.</span><span style="color:#859900;">is_none</span><span style="color:#839496;">() {
-</span><span style="color:#839496;">                </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.tail </span><span style="color:#859900;">= None</span><span style="color:#839496;">;
-</span><span style="color:#839496;">        </span><span style="color:#839496;">};
-</span><span style="color:#839496;">        </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.head </span><span style="color:#859900;">=</span><span style="color:#839496;"> new_head;
-</span><span style="color:#839496;">        </span><span style="color:#839496;">old_value
-</span><span style="color:#839496;">    </span><span style="color:#839496;">} </span><span style="color:#859900;">else </span><span style="color:#839496;">{
-</span><span style="color:#839496;">        </span><span style="color:#859900;">None
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">}
-</span></pre>
+<code><span style="color:#586e75;">// JavaScript
+</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.</span><span style="color:#859900;">prototype</span><span style="color:#839496;">.removeHead </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#657b83;">() {
+  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">currentHead </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head;
+  </span><span style="color:#268bd2;">const </span><span style="color:#839496;">newHead </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head.next;
+  </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span style="color:#839496;">newHead </span><span style="color:#657b83;">=== </span><span style="color:#b58900;">null</span><span style="color:#657b83;">) {
+    </span><span style="color:#d33682;">this</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
+  </span><span style="color:#657b83;">}
+  </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head </span><span style="color:#657b83;">= </span><span style="color:#839496;">newHead;
+  </span><span style="color:#859900;">return </span><span style="color:#839496;">currentHead </span><span style="color:#859900;">? </span><span style="color:#839496;">currentHead.value </span><span style="color:#859900;">: </span><span style="color:#b58900;">null</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;">// Rust
+</span><span style="color:#93a1a1;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">remove_head</span><span style="color:#657b83;">(</span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#268bd2;">self</span><span style="color:#657b83;">) </span><span style="color:#839496;">-&gt; </span><span style="color:#859900;">Option</span><span style="color:#839496;">&lt;</span><span style="color:#268bd2;">i32</span><span style="color:#839496;">&gt; </span><span style="color:#657b83;">{
+    </span><span style="color:#859900;">if </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">head</span><span style="color:#657b83;">) = </span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#d33682;">self</span><span style="color:#839496;">.head </span><span style="color:#657b83;">{
+        </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> old_value </span><span style="color:#657b83;">= </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">head.value</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+            </span><span style="color:#268bd2;">let</span><span style="color:#839496;"> new_head </span><span style="color:#657b83;">=</span><span style="color:#839496;"> head.next.</span><span style="color:#859900;">take</span><span style="color:#657b83;">()</span><span style="color:#839496;">;
+            </span><span style="color:#859900;">if</span><span style="color:#839496;"> new_head.</span><span style="color:#859900;">is_none</span><span style="color:#657b83;">() {
+                </span><span style="color:#d33682;">self</span><span style="color:#839496;">.tail </span><span style="color:#657b83;">= </span><span style="color:#859900;">None</span><span style="color:#839496;">;
+        </span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+        </span><span style="color:#d33682;">self</span><span style="color:#839496;">.head </span><span style="color:#657b83;">=</span><span style="color:#839496;"> new_head;
+        old_value
+    </span><span style="color:#657b83;">} </span><span style="color:#859900;">else </span><span style="color:#657b83;">{
+        </span><span style="color:#859900;">None
+    </span><span style="color:#657b83;">}
+}
+</span></code></pre>
 <p>Finally, we're getting somewhere where the Rust and JavaScript implementations don't look like straight copy-paste jobs.  Let's walk though the two implementations and then we'll circle back to how the Rust version protects us from memory-safety issues.</p>
 <p>First, the JavaScript:  we're saving the current value of the <code>head</code> field, then updating that field to point to the next node in our list.  If there <em>isn't</em> a next node, that means our list is now empty and so we point our <code>tail</code> field to <code>null</code> as well.  Finally, we return the value of our head node, which we get either with the <code>value</code> field of a head node or by directly returning <code>null</code> if there <em>isn't</em> a head node.</p>
-<p>The Rust code approaches the same problem slightly differently:  First, if there is a head node, then it stores the former value of that node, points <code>head</code> to the next node in the list and, if the new head is <code>None</code>, points <code>tail</code> to <code>None</code> as well.  Otherwise—if <code>head</code> was <code>None</code> to begin with, it just returns <code>None</code> without doing anything at all.</p>
+<p>The Rust code approaches the same problem slightly differently:  First, if there is a head node, then it stores the former value of that node, points <code>head</code> to the next node in the list and, if the new head is <code>None</code>, points <code>tail</code> to <code>None</code> as well.  Otherwise—if <code>head</code> was <code>None</code> to begin with, it just returns <code>None</code> without doing anything at all. </p>
 <p>Two paths to the same point but, to my eyes at least, neither is clearer or more expressive than the other.  <em>Maybe</em> JavaScript ekes out a technical victory by having equally expressive code in a couple fewer lines, but it's not by much.</p>
 <p>But what about the <code>unsafe</code> block—how does this function relate to it?  (And <em>why</em> does it relate, given that we don't have any <code>unsafe</code> blocks here?)</p>
 <p>Well, as we said above, we only get into trouble with that <code>unsafe</code> code if we don't deal with our <code>tail</code> pointer correctly when we deallocate the memory it's pointing to.  This is the function that does that deallocation, so we need to be sure to deal with <code>tail</code> correctly here.</p>
@@ -380,50 +381,50 @@
 <h3 id="checking-inside-our-linked-list">Checking inside our linked list</h3>
 <p>Now that we have the basic API for our linked list, lets get a way to see whats in it.  Not only will this make our API more complete, it will also make it easier to test our first couple of methods.</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">// JavaScript
-</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.prototype.</span><span style="color:#b58900;">contains </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#839496;">(</span><span style="color:#268bd2;">target</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">  </span><span style="color:#268bd2;">let </span><span style="color:#839496;">node </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head;
-</span><span style="color:#839496;">  </span><span style="color:#859900;">while </span><span style="color:#839496;">(node) {
-</span><span style="color:#839496;">    </span><span style="color:#859900;">if </span><span style="color:#839496;">(node.value </span><span style="color:#657b83;">=== </span><span style="color:#839496;">target) {
-</span><span style="color:#839496;">      </span><span style="color:#859900;">return </span><span style="color:#b58900;">true</span><span style="color:#839496;">;
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">    </span><span style="color:#839496;">node </span><span style="color:#657b83;">= </span><span style="color:#839496;">node.next;
-</span><span style="color:#839496;">  </span><span style="color:#839496;">}
-</span><span style="color:#839496;">  </span><span style="color:#859900;">return </span><span style="color:#b58900;">false</span><span style="color:#839496;">;
-</span><span style="color:#839496;">};
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;">// Rust
-</span><span style="color:#859900;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">contains</span><span style="color:#839496;">(</span><span style="color:#859900;">&amp;mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">, </span><span style="color:#268bd2;">target</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#839496;">) -&gt; </span><span style="color:#268bd2;">bool </span><span style="color:#839496;">{
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">let </span><span style="color:#859900;">mut</span><span style="color:#839496;"> node </span><span style="color:#859900;">= &amp;</span><span style="color:#268bd2;">self</span><span style="color:#839496;">.head;
-</span><span style="color:#839496;">    </span><span style="color:#859900;">while </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#839496;">(old_node) </span><span style="color:#859900;">=</span><span style="color:#839496;"> node {
-</span><span style="color:#839496;">        </span><span style="color:#859900;">match &amp;mut</span><span style="color:#839496;"> node {
-</span><span style="color:#839496;">            </span><span style="color:#859900;">Some</span><span style="color:#839496;">(node) </span><span style="color:#859900;">if</span><span style="color:#839496;"> node.value </span><span style="color:#859900;">==</span><span style="color:#839496;"> target </span><span style="color:#859900;">=&gt; return </span><span style="color:#b58900;">true</span><span style="color:#839496;">,
-</span><span style="color:#839496;">            </span><span style="color:#859900;">_ =&gt; </span><span style="color:#839496;">(),
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">    </span><span style="color:#839496;">node </span><span style="color:#859900;">= &amp;</span><span style="color:#839496;">old_node.next;
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">    </span><span style="color:#b58900;">false
-</span><span style="color:#839496;">}
-</span></pre>
-<p>And now we're back to nearly identical code.  In both cases, the code stores the value of the head node in a variable and then checks the value of that node to see if it's equal to the <code>target</code> node.  If it is, the function returns early with true; if not, it goes on to check the next node.  If the function runs out of nodes to check, it returns false.  Two languages, but basically the same code.</p>
+<code><span style="color:#586e75;">// JavaScript
+</span><span style="color:#859900;">LinkedList</span><span style="color:#839496;">.</span><span style="color:#859900;">prototype</span><span style="color:#839496;">.contains </span><span style="color:#657b83;">= </span><span style="color:#268bd2;">function</span><span style="color:#657b83;">(</span><span style="color:#268bd2;">target</span><span style="color:#657b83;">) {
+  </span><span style="color:#268bd2;">let </span><span style="color:#839496;">node </span><span style="color:#657b83;">= </span><span style="color:#d33682;">this</span><span style="color:#839496;">.head;
+  </span><span style="color:#859900;">while </span><span style="color:#657b83;">(</span><span style="color:#839496;">node</span><span style="color:#657b83;">) {
+    </span><span style="color:#859900;">if </span><span style="color:#657b83;">(</span><span style="color:#839496;">node.value </span><span style="color:#657b83;">=== </span><span style="color:#839496;">target</span><span style="color:#657b83;">) {
+      </span><span style="color:#859900;">return </span><span style="color:#b58900;">true</span><span style="color:#839496;">;
+    </span><span style="color:#657b83;">}
+    </span><span style="color:#839496;">node </span><span style="color:#657b83;">= </span><span style="color:#839496;">node.next;
+  </span><span style="color:#657b83;">}
+  </span><span style="color:#859900;">return </span><span style="color:#b58900;">false</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}</span><span style="color:#839496;">;
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;">// Rust
+</span><span style="color:#93a1a1;">pub </span><span style="color:#268bd2;">fn </span><span style="color:#b58900;">contains</span><span style="color:#657b83;">(</span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">, </span><span style="color:#268bd2;">target</span><span style="color:#839496;">: </span><span style="color:#268bd2;">i32</span><span style="color:#657b83;">) </span><span style="color:#839496;">-&gt; </span><span style="color:#268bd2;">bool </span><span style="color:#657b83;">{
+    </span><span style="color:#268bd2;">let </span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> node </span><span style="color:#657b83;">= </span><span style="color:#859900;">&amp;</span><span style="color:#d33682;">self</span><span style="color:#839496;">.head;
+    </span><span style="color:#859900;">while </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">old_node</span><span style="color:#657b83;">) =</span><span style="color:#839496;"> node </span><span style="color:#657b83;">{
+        </span><span style="color:#859900;">match &amp;</span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> node </span><span style="color:#657b83;">{
+       	    </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#839496;">node</span><span style="color:#657b83;">) </span><span style="color:#859900;">if</span><span style="color:#839496;"> node.value </span><span style="color:#657b83;">==</span><span style="color:#839496;"> target </span><span style="color:#859900;">=&gt; return </span><span style="color:#b58900;">true</span><span style="color:#839496;">,
+       	    </span><span style="color:#859900;">_ =&gt; </span><span style="color:#657b83;">()</span><span style="color:#839496;">,
+	</span><span style="color:#657b83;">}
+</span><span style="color:#839496;">	node </span><span style="color:#657b83;">= </span><span style="color:#859900;">&amp;</span><span style="color:#839496;">old_node.next;
+    </span><span style="color:#657b83;">}
+    </span><span style="color:#b58900;">false
+</span><span style="color:#657b83;">}
+</span></code></pre>
+<p>And now we're back to nearly identical code.  In both cases, the code stores the value of the head node in a variable and then checks the value of that node to see if it's equal to the <code>target</code> node.  If it is, the function returns early with true; if not, it goes on to check the next node.  If the function runs out of nodes to check, it returns false.  Two languages, but basically the same code. </p>
 <h3 id="testing-and-benchmarking">testing and benchmarking</h3>
 <p>The &quot;test&quot; code is nearly identical—the only difference is that Rust has full support for test code that's excluded from the compiled binary whereas JavaScript would need a separate test framework (like Jest or Mocha) to get the same results.  I'm not going to display that code here, but it's part of the full code I'll link at the end.</p>
-<p>In terms of actually <em>using</em> the API for benchmark purposes, the two languages are again pretty similar:</p>
+<p>In terms of actually <em>using</em> the API for benchmark purposes, the two languages are again pretty similar: </p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">// JavaScript
-</span><span style="color:#268bd2;">const </span><span style="color:#839496;">list </span><span style="color:#657b83;">= </span><span style="color:#859900;">new </span><span style="color:#268bd2;">LinkedList</span><span style="color:#839496;">();
-</span><span style="color:#859900;">for </span><span style="color:#839496;">(</span><span style="color:#268bd2;">let </span><span style="color:#839496;">i </span><span style="color:#657b83;">= </span><span style="color:#6c71c4;">0</span><span style="color:#839496;">; i </span><span style="color:#859900;">&lt; </span><span style="color:#6c71c4;">250000</span><span style="color:#839496;">; i</span><span style="color:#657b83;">++</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">  </span><span style="color:#839496;">list.</span><span style="color:#b58900;">addToTail</span><span style="color:#839496;">(i);
-</span><span style="color:#839496;">}
-</span><span style="color:#859900;">console</span><span style="color:#839496;">.</span><span style="color:#859900;">log</span><span style="color:#839496;">(list.</span><span style="color:#b58900;">contains</span><span style="color:#839496;">(</span><span style="color:#6c71c4;">300000</span><span style="color:#839496;">));
-</span></pre><pre style="background-color:#002b36;">
-<span style="color:#586e75;">// Rust
-</span><span style="color:#268bd2;">let </span><span style="color:#859900;">mut</span><span style="color:#839496;"> list </span><span style="color:#859900;">= </span><span style="color:#839496;">LinkedList::new();
-</span><span style="color:#859900;">for</span><span style="color:#839496;"> i </span><span style="color:#859900;">in </span><span style="color:#6c71c4;">0</span><span style="color:#859900;">..</span><span style="color:#6c71c4;">250_000 </span><span style="color:#839496;">{
-</span><span style="color:#839496;">    </span><span style="color:#839496;">list.</span><span style="color:#859900;">add_to_tail</span><span style="color:#839496;">(i);
-</span><span style="color:#839496;">}
-</span><span style="color:#839496;">println!(&quot;</span><span style="color:#cb4b16;">{:?}</span><span style="color:#839496;">&quot;, list.</span><span style="color:#859900;">contains</span><span style="color:#839496;">(</span><span style="color:#6c71c4;">300_000</span><span style="color:#839496;">));
-</span></pre>
+<code><span style="color:#586e75;">// JavaScript
+</span><span style="color:#268bd2;">const </span><span style="color:#839496;">list </span><span style="color:#657b83;">= </span><span style="color:#859900;">new </span><span style="color:#268bd2;">LinkedList</span><span style="color:#657b83;">()</span><span style="color:#839496;">;
+</span><span style="color:#859900;">for </span><span style="color:#657b83;">(</span><span style="color:#268bd2;">let </span><span style="color:#839496;">i </span><span style="color:#657b83;">= </span><span style="color:#6c71c4;">0</span><span style="color:#839496;">; i </span><span style="color:#859900;">&lt; </span><span style="color:#6c71c4;">250000</span><span style="color:#839496;">; i</span><span style="color:#657b83;">++) {
+  </span><span style="color:#839496;">list.</span><span style="color:#b58900;">addToTail</span><span style="color:#657b83;">(</span><span style="color:#839496;">i</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span><span style="color:#859900;">console</span><span style="color:#839496;">.</span><span style="color:#859900;">log</span><span style="color:#657b83;">(</span><span style="color:#839496;">list.</span><span style="color:#b58900;">contains</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">300000</span><span style="color:#657b83;">))</span><span style="color:#839496;">;
+</span></code></pre><pre style="background-color:#002b36;">
+<code><span style="color:#586e75;">// Rust
+</span><span style="color:#268bd2;">let </span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> list </span><span style="color:#657b83;">= </span><span style="color:#839496;">LinkedList::new</span><span style="color:#657b83;">()</span><span style="color:#839496;">;
+</span><span style="color:#859900;">for</span><span style="color:#839496;"> i </span><span style="color:#859900;">in </span><span style="color:#6c71c4;">0</span><span style="color:#859900;">..</span><span style="color:#6c71c4;">250_000 </span><span style="color:#657b83;">{
+</span><span style="color:#839496;">    list.</span><span style="color:#859900;">add_to_tail</span><span style="color:#657b83;">(</span><span style="color:#839496;">i</span><span style="color:#657b83;">)</span><span style="color:#839496;">;
+</span><span style="color:#657b83;">}
+</span><span style="color:#859900;">println!</span><span style="color:#657b83;">(</span><span style="color:#839496;">&quot;</span><span style="color:#cb4b16;">{:?}</span><span style="color:#839496;">&quot;, list.</span><span style="color:#859900;">contains</span><span style="color:#657b83;">(</span><span style="color:#6c71c4;">300_000</span><span style="color:#657b83;">))</span><span style="color:#839496;">;
+</span></code></pre>
 <p>The only meaningful difference is that Rust uses a range (<code>0..250_000</code>), the way Python and many other languages do, instead of the C-style for loop favored by JavaScript.  Well, that and that Rust allows non-significant <code>_</code> characters in its numbers, which help break up long numbers.</p>
 <p>Of course, the <strong>other</strong> difference was the speed at which these two loops executed.  Rust took about 15 milliseconds to build a linked list with 250,000 nodes and then to search that list for a node that didn't exist.  In contrast, Node took around 75 milliseconds for the same task.</p>
 <h2 id="takeaways-surprises-and-conclusions">Takeaways, Surprises, and Conclusions</h2>
@@ -440,18 +441,20 @@
 <p>But then I remembered: Of course! Rust is different—in Rust, you decide whether a variable is stack allocated or heap allocated; if I use too much stack memory, then I'll overflow the stack—and it makes no difference at all that we're in a single function invocation.</p>
 <p>Since that wasn't the point of this exercise, I just scaled back the size of the linked list in the benchmark and went on with my day, but it's a good lesson to remember for the future.  (Incidentally, if any more experienced Rustaceans can tell me how I'd avoid a stack overflow with this code, I'd love to hear it.  And, no, putting the whole linked list in a <code>box</code> isn't enough to solve it.)</p>
 <aside>
-  <p><strong>Edit</strong>: Thanks to <a href="https://mastodon.technology/@bugaevc">Sergey Bugaev</a> for pointing out that the stack overflow was caused Rust attempting to <em>resursivly</em> drop all of the nodes in the linked list when the list goes out of scope.  I really should have caught this, since the Too Many Linked List book <a href="https://cglab.ca/%7Eabeinges/blah/too-many-lists/book/first-drop.html">covered it</a>—and even called out that the default implementation would lead to a stack overflow.</p>
-<p>Fortunately, the fix is simple: just write our own non-recursive <code>drop</code> method:</p>
+  &lt;p&gt;&lt;strong&gt;Edit&lt;&#x2F;strong&gt;: Thanks to &lt;a href=&quot;https:&#x2F;&#x2F;mastodon.technology&#x2F;@bugaevc&quot;&gt;Sergey Bugaev&lt;&#x2F;a&gt; for pointing out that the stack overflow was caused Rust attempting to &lt;em&gt;resursivly&lt;&#x2F;em&gt; drop all of the nodes in the linked list when the list goes out of scope.  I really should have caught this, since the Too Many Linked List book &lt;a href=&quot;https:&#x2F;&#x2F;cglab.ca&#x2F;%7Eabeinges&#x2F;blah&#x2F;too-many-lists&#x2F;book&#x2F;first-drop.html&quot;&gt;covered it&lt;&#x2F;a&gt;—and even called out that the default implementation would lead to a stack overflow.&lt;&#x2F;p&gt;
+&lt;p&gt;Fortunately, the fix is simple: just write our own non-recursive &lt;code&gt;drop&lt;&#x2F;code&gt; method:&lt;&#x2F;p&gt;
+
 </aside>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">fn </span><span style="color:#b58900;">drop</span><span style="color:#839496;">(</span><span style="color:#859900;">&amp;mut </span><span style="color:#268bd2;">self</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">    </span><span style="color:#268bd2;">let </span><span style="color:#859900;">mut</span><span style="color:#839496;"> node </span><span style="color:#859900;">= </span><span style="color:#268bd2;">self</span><span style="color:#839496;">.head.</span><span style="color:#859900;">take</span><span style="color:#839496;">();
-</span><span style="color:#839496;">    </span><span style="color:#859900;">while </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#839496;">(</span><span style="color:#859900;">mut</span><span style="color:#839496;"> next_node) </span><span style="color:#859900;">=</span><span style="color:#839496;"> node {
-</span><span style="color:#839496;">        </span><span style="color:#839496;">node </span><span style="color:#859900;">=</span><span style="color:#839496;"> next_node.next.</span><span style="color:#859900;">take</span><span style="color:#839496;">()
-</span><span style="color:#839496;">    </span><span style="color:#839496;">}
-</span><span style="color:#839496;">}
-</span></pre><aside>
-  <p>And, just like that, no more stack overflows!  A revised benchmark shows that the Rust code can generate, search, and drop a 10-million item list in ~440 ms (with <code>--release</code> optimizations on, of course); the equivalent number for JavaScript is 800 ms.</p>
+<code><span style="color:#268bd2;">fn </span><span style="color:#b58900;">drop</span><span style="color:#657b83;">(</span><span style="color:#859900;">&amp;</span><span style="color:#93a1a1;">mut </span><span style="color:#268bd2;">self</span><span style="color:#657b83;">) {
+    </span><span style="color:#268bd2;">let </span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> node </span><span style="color:#657b83;">= </span><span style="color:#d33682;">self</span><span style="color:#839496;">.head.</span><span style="color:#859900;">take</span><span style="color:#657b83;">()</span><span style="color:#839496;">;
+    </span><span style="color:#859900;">while </span><span style="color:#268bd2;">let </span><span style="color:#859900;">Some</span><span style="color:#657b83;">(</span><span style="color:#93a1a1;">mut</span><span style="color:#839496;"> next_node</span><span style="color:#657b83;">) =</span><span style="color:#839496;"> node </span><span style="color:#657b83;">{
+</span><span style="color:#839496;">        node </span><span style="color:#657b83;">=</span><span style="color:#839496;"> next_node.next.</span><span style="color:#859900;">take</span><span style="color:#657b83;">()
+    }
+}
+</span></code></pre><aside>
+  &lt;p&gt;And, just like that, no more stack overflows!  A revised benchmark shows that the Rust code can generate, search, and drop a 10-million item list in ~440 ms (with &lt;code&gt;--release&lt;&#x2F;code&gt; optimizations on, of course); the equivalent number for JavaScript is 800 ms.&lt;&#x2F;p&gt;
+
 </aside>
 <h2 id="conclusion">Conclusion</h2>
 <p>So, I hope y'all enjoyed this blow-by-blow comparison of Rust and JavaScript—at least with regards to this one toy problem.  I know I learned a lot, and pretty much everything I learned made me more enthusiastic about continuing to my journey with Rust.</p>
@@ -461,10 +464,6 @@
 <p>If you have any comments or suggestions, I'd love to hear from you.  You can reach me on <a href="https://fosstodon.org/@codesections">Mastodon</a> or via any of the contact methods listed on my <a href="https://www.codesections.com/about#contact">About</a> page.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

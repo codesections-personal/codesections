@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/raku-manifesto-3">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;raku-manifesto-3">
     <title>
        A Raku Manifesto, Part 3 |  CodeSections 
     </title>
@@ -193,6 +193,41 @@
       .content-main table tr:nth-child(2n) {
         background-color: #f6f8fa;
       }
+      .content-main aside {
+        background-color: #cde; /* Pastel blue*/
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main aside p:first-child {
+        margin-top: 0;
+      }
+      .content-main aside p:last-child {
+        margin-bottom: 0;
+      }
+
+      .content-main .highlight {
+        background-color: #EFCB68; /* Orange Yellow Crayola */
+        font-size: larger;
+        display: block;
+        padding: .75em;
+        margin-top: 1em;
+        color: #0d1d25; /*near black*/
+        border: solid 2px #0d1d25; /* Near black*/
+        border-radius: 7px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .content-main .highlight :first-child {
+        margin-top: 0;
+      }
+      .content-main .highlight :last-child {
+        margin-bottom: 0;
+      }
       
       /*==================================*\
         ##Footer
@@ -243,9 +278,10 @@
     <section class="content-main">
   
     
-  <h1>A Raku Manifesto, Part 3</h1>
+
+  <h2>A Raku Manifesto, Part 3</h2>
   <p>In <a href="/blog/raku-manifesto">part 1</a> and <a href="/blog/raku-manifesto-2">part 2</a> I discussed my
-personal take on a Raku manifesto:</p>
+personal take on a Raku manifesto: </p>
 <div class="highlight">
 <ol>
 <li><strong>Expressive code         <small>over uniform code</small></strong></li>
@@ -269,17 +305,16 @@ paper through today – you might get the impression that small scale programmin
 problem and that the only interesting/meaningful question is how we increase the
 productivity of large software teams.  Certainly many of the programming languages that have
 gained popularity recently seem to reflect that view:</p>
-<table><thead><tr><th> Language   </th><th align="left"> Developer </th><th align="left"> Purpose                       </th></tr></thead><tbody>
-<tr><td> Golang     </td><td align="left"> Google    </td><td align="left"> build large software projects </td></tr>
-<tr><td> Rust       </td><td align="left"> Mozilla   </td><td align="left"> build large software projects </td></tr>
-<tr><td> TypeScript </td><td align="left"> Microsoft </td><td align="left"> build large software projects </td></tr>
-<tr><td> Hask       </td><td align="left"> Facebook  </td><td align="left"> build large software projects </td></tr>
+<table><thead><tr><th>Language</th><th align="left">Developer</th><th align="left">Purpose</th></tr></thead><tbody>
+<tr><td>Golang</td><td align="left">Google</td><td align="left">build large software projects</td></tr>
+<tr><td>Rust</td><td align="left">Mozilla</td><td align="left">build large software projects</td></tr>
+<tr><td>TypeScript</td><td align="left">Microsoft</td><td align="left">build large software projects</td></tr>
+<tr><td>Hask</td><td align="left">Facebook</td><td align="left">build large software projects</td></tr>
 </tbody></table>
 <p>Looking at that list, you might conclude that we clearly need a programming language for
 large projects and that older languages do fine for smaller groups.</p>
 <p>You <em>might</em>, but you shouldn't.</p>
-<p><a name="continue-reading"></a></p>
-<h3 id="large-companies-have-built-languages-for-large-teams">Large companies have built languages for large teams</h3>
+<span id="continue-reading"></span><h3 id="large-companies-have-built-languages-for-large-teams">Large companies have built languages for large teams</h3>
 <p>Let's take another look at the names on that list: Google, Mozilla, Microsoft, Facebook.
 <strong>Those</strong> groups are confronting the problem of increasing the productivity of large
 programming teams – the same teams of &quot;hundreds or even thousands&quot; that Rob Pike mentioned
@@ -348,9 +383,9 @@ GitHub).  But does it matter for anyone outside that group?</p>
 <p>In my view, it matters immensely.</p>
 <p>Let's do some back-of-the-napkin math: If a software project employs exactly 1,000 software
 developers, and it spends $100,000 to compensate each one (a significant underestimate, but
-fine for our napkin) then it has payroll costs of ten million dollars.  That means that any
+fine for our napkin) then it has payroll costs of a hundred million dollars.  That means that any
 software project employing thousands of developers will need a business model that can bring
-in tens of millions of dollars of revenue – and, realistically, a lot more.</p>
+in hundreds of millions of dollars of revenue – and, realistically, a lot more.</p>
 <p>As Facebook, Amazon, and Google amply demonstrate, plenty of software projects can make
 millions or even billions of dollars.  But plenty of others could never make that type of
 money but would still make the world a better place.</p>
@@ -398,10 +433,6 @@ with a language that was designed from the ground up to maximize individual prod
 I'm excited for Raku.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>
@@ -422,5 +453,5 @@ I'm excited for Raku.</p>
   </footer>
 
   
-<script src="/livereload.js?port=1024&mindelay=10"></script></body>
+</body>
 </html>

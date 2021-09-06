@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/mastodon-mobs-and-mastodon-mobs">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;mastodon-mobs-and-mastodon-mobs">
     <title>
        Mastodon Mobs and Mastodon Mods: Dealing with Outside Groups Pressuring Instance Administrators |  CodeSections 
     </title>
@@ -278,12 +278,14 @@
     <section class="content-main">
   
     
-  <h1>Mastodon Mobs and Mastodon Mods: Dealing with Outside Groups Pressuring Instance Administrators</h1>
+
+  <h2>Mastodon Mobs and Mastodon Mods: Dealing with Outside Groups Pressuring Instance Administrators</h2>
   <aside>
-  <p>This post is a focused on issues of community governance within <a href="https://www.joinmastodon.org">Mastodon</a> and the fediverse more broadly.  If you're not involved in the fediverse, this might not be as relevant to you.</p>
+  &lt;p&gt;This post is a focused on issues of community governance within &lt;a href=&quot;https:&#x2F;&#x2F;www.joinmastodon.org&quot;&gt;Mastodon&lt;&#x2F;a&gt; and the fediverse more broadly.  If you&#x27;re not involved in the fediverse, this might not be as relevant to you.&lt;&#x2F;p&gt;
+
 </aside>
 <p>The fediverse recently had an incident after a minor celebrity created an account.  I very much do <strong>not</strong> want to talk about the details/merits of that incident¸ but I do want to use it as a prompt for thinking about how the fediverse should deal with some related issues.</p>
-<p><a name="continue-reading"></a></p>
+<span id="continue-reading"></span>
 <p>Here are the <em>very</em> basics of what happened, just as context: A large group of people on separate instances did not like the celebrity; that group of people made many hostile statements directed to the celebrity (with the <code>@</code> feature) and filed reports against the celebrity, alleging that the celebrity was engaging/had engaged in inappropriate conduct.  The administrator of the celebrity's instance felt that these allegations were untrue, but nevertheless decided to ask the celebrity to leave the instance because the administrator could not deal with the volume of reports.  If you would like more details about the facts, I refer you to the <a href="https://www.theverge.com/2018/8/31/17801404/mastodon-harassment-wil-wheaton-mobs-twitter">media coverage</a>.</p>
 <p>Now, I have <em>absolutly</em> no interest in getting into the merits of this particular case—maybe the administrator was wrong to view the reports as unfounded; maybe they were right.  Maybe it's good that the celebrity is off Mastodon; maybe it's bad.  No interest in getting into any of that at all.</p>
 <p>What I <strong>do</strong> want to get in to is the meta issue: How should we set up the fediverse so that instance admins can make decisions on their merits, and not be <em>forced</em> into certain actions because they are overwhelmed by outside pressures?</p>
@@ -298,11 +300,11 @@
 <p>I haven't seen as much discussion of this third point, so it's what I want to talk about here.</p>
 <h2 id="preventing-moderators-from-being-stretched-too-thin">Preventing moderators from being stretched too thin</h2>
 <p>The first thing we should recognize is that moderators vary <em>tremendously</em> in how busy they currently are, but there's <em>absolutly</em> no visibility into that from the outside.  For example, we can measure busyness by how many registered users each moderator needs to deal with.  By this measure, there's significant variance, to say the least.  Take a look at this chart:</p>
-<table><thead><tr><th> Instance              </th><th align="right"> Users </th><th align="right"> Mods </th><th align="right"> Users per Mod </th></tr></thead><tbody>
-<tr><td> <a href="https://fosstodon.org/about">fosstodon.org</a>     </td><td align="right">   1,138 </td><td align="right">  4  </td><td align="right">     285  </td></tr>
-<tr><td> <a href="https://toot.cafe">toot.cafe</a>                   </td><td align="right">   2,033 </td><td align="right">  1  </td><td align="right">   2,033  </td></tr>
-<tr><td> <a href="https://mastodon.cloud/about">mastodon.cloud</a>   </td><td align="right">  48,939 </td><td align="right">  1  </td><td align="right">  48,939  </td></tr>
-<tr><td> <a href="https://mastodon.social/about">mastodon.social</a> </td><td align="right"> 225,831 </td><td align="right">  4* </td><td align="right">  56,458  </td></tr>
+<table><thead><tr><th>Instance</th><th align="right">Users</th><th align="right">Mods</th><th align="right">Users per Mod</th></tr></thead><tbody>
+<tr><td><a href="https://fosstodon.org/about">fosstodon.org</a></td><td align="right">1,138</td><td align="right">4</td><td align="right">285</td></tr>
+<tr><td><a href="https://toot.cafe">toot.cafe</a></td><td align="right">2,033</td><td align="right">1</td><td align="right">2,033</td></tr>
+<tr><td><a href="https://mastodon.cloud/about">mastodon.cloud</a></td><td align="right">48,939</td><td align="right">1</td><td align="right">48,939</td></tr>
+<tr><td><a href="https://mastodon.social/about">mastodon.social</a></td><td align="right">225,831</td><td align="right">4*</td><td align="right">56,458</td></tr>
 </tbody></table>
 <p>*mastodon.social is a bit of a special case, because it—unlike the other instances on this chart—pays its moderators.  So it's reasonable to think that each moderator may be able to handle a slightly larger number of users.</p>
 <p>As you can see, some instances are <em>already</em> asking moderators to deal with 100× more users than other instances are—some moderators are stretched much more thinly than others are.</p>
@@ -310,7 +312,8 @@
 <p>In a way, the brevity of this chart makes my second point for me: users should be able to determine how many moderation resources an instance has <em>before</em> they join an instance but cannot.  An instance with 100 users/mod will provide a very different environment than an instance with 100,000 users/mod—and the instance-picking UI should give users the ability to determine what sort of instance they might be joining <em>before</em> they sign up for an account.</p>
 <p>This wouldn't be hard: the Mastodon software already &quot;knows&quot; how many mods an instance has—it give mods a nice little badge on their profile page.  All it would need to do is add this info to the About page for each instance.  And that's exactly what I propose:</p>
 <aside>
-  <p><strong>Proposal:</strong> The About page for each instance should be modified to show the current number of moderators underneath the current number of registered users.  This would help vulnerable users select instances that have sufficient moderation resources available.</p>
+  &lt;p&gt;&lt;strong&gt;Proposal:&lt;&#x2F;strong&gt; The About page for each instance should be modified to show the current number of moderators underneath the current number of registered users.  This would help vulnerable users select instances that have sufficient moderation resources available.&lt;&#x2F;p&gt;
+
 </aside>
 <p>I created an <a href="https://github.com/tootsuite/mastodon/issues/8557">issue</a> suggesting this as a feature.  If you agree that it would be useful, please feel free to (respectfully) join the discussion surrounding that issue.</p>
 <h2 id="dealing-with-growth">Dealing with growth</h2>
@@ -327,17 +330,14 @@
 <p>No matter where instances fall on this spectrum between allowing high-follower accounts without restriction and banning them entirely, it is <em>imparative</em> that instances think about these issues <em>in advance</em>.  If we think about how to handle the situation, then we can make sure we have the resources to handle it, and we can make any changes to the Code of Conduct that might be necessary.  We can also calmly discuss the issue as a group without passions being inflamed by the particulars of a certain situation.</p>
 <p>This leads to my second proposal:</p>
 <aside>
-  <p><strong>Proposal</strong>: Instances should think carefully—in advance—about how to handle any celebrity/high-follower accounts that might be opened in their instance.  If necessary, instances should update their Codes of Conduct to address the issue of high-follower accounts.</p>
+  &lt;p&gt;&lt;strong&gt;Proposal&lt;&#x2F;strong&gt;: Instances should think carefully—in advance—about how to handle any celebrity&#x2F;high-follower accounts that might be opened in their instance.  If necessary, instances should update their Codes of Conduct to address the issue of high-follower accounts.&lt;&#x2F;p&gt;
+
 </aside>
 <h2 id="conclusion">Conclusion</h2>
 <p>Protecting our communities from organized groups outside the instance isn't an easy problem.  I think that technical solutions that give admins a more powerful set of tools will be part of the solution.  And I think that technical changes that impose rate limits on abusive actions by groups will also be part of the solution.</p>
 <p>But I strongly believe that we should also do more to direct new users to those instances that have more moderation bandwidth—and we can do that by listing the number of mods on the instance About page.  I also believe that each instance should give more thought to how to handle sudden growth—particularly the sudden growth that comes from a high-follower account joining the instance.  Because this isn't going to be the last time the fediverse confronts the issue, and we need good mechanisms to deal with it when it comes up again.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

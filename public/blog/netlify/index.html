@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/netlify">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;netlify">
     <title>
        How to avoid SEO penalties when using Netlify |  CodeSections 
     </title>
@@ -258,14 +258,15 @@
     <section class="content-main">
   
     
-  <h1>How to avoid SEO penalties when using Netlify</h1>
+
+  <h2>How to avoid SEO penalties when using Netlify</h2>
   <h2 id="the-problem">The Problem</h2>
-<p>I've been really happy with my Netlify hosting.  It's fast, free, and deploys
-my site on a global CDN.  Even better, Netlify has all sorts of advanced
+<p>I've been really happy with my Netlify hosting.  It's fast, free, and deploys 
+my site on a global CDN.  Even better, Netlify has all sorts of advanced 
 deploy previews and other features that I'm only starting to play with.</p>
 <p>All that said, today I realized that one consequence of how Netlify does things
 is that sites could end up penalized by Google and other search engines.<br />
-Specifically, because Netlify makes multiple versions of your site available,
+Specifically, because Netlify makes multiple versions of your site available, 
 your site could be penalized for having &quot;duplicate content&quot;—the same penalty
 that search engines apply to content mills that steal other people's work and
 repost it as their own.</p>
@@ -284,10 +285,10 @@ would be available by default at both
 <a href="https://www.codesections.com/blog/netlify">www.codesections.com/blog/netlify</a> and at
 <a href="https://codesections.netlify.com/blog/Netlify">codesections.netlify.com/blog/netlify</a>;
 since it shows up at both locations, it would be counted as duplicate
-content.</p>
-<p>In fact, the problem is even worse than that: Netlify may also (depending on
+content. </p>
+<p>In fact, the problem is even worse than that: Netlify may also (depending on 
 your settings) publish different branches of your site to different URLS (even
-with the same content) and will create &quot;deploy-previews&quot; that allow you to
+with the same content) and will create &quot;deploy-previews&quot; that allow you to 
 test live deploys before publishing them to your primary domain.  These features
 are <strong>really</strong> great, and I make use of both of them.  (In fact, branch deploys
 are what let me easily have
@@ -297,22 +298,22 @@ copies of each page on your site—way more, in fact.</p>
 <h2 id="the-solution">The Solution</h2>
 <p>Fortunately, the solution is very simple.  You to entirely avoid this issue,
 you need to take two steps.</p>
-<p><a name="continue-reading"></a></p>
-<p>First, tell Netlify to redirect traffic from your Netlify subdomain to your
-primary domain.  This is a simple matter of setting the appropriate
+<span id="continue-reading"></span>
+<p>First, tell Netlify to redirect traffic from your Netlify subdomain to your 
+primary domain.  This is a simple matter of setting the appropriate 
 <code>_redirects</code> file in the root of your site.  What you need to do is to tell
 Netlify to redirect all traffic from the <code>.netlify</code> subdomain back to your
 site.  Here's what mine looks like:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;"># Redirect default Netlify subdomain to primary domain
-</span><span style="color:#268bd2;">https://codesections.netlify.com/*</span><span style="color:#839496;"> https://www.codesections.com/:splat 301!
-</span></pre>
-<p>Just replace <code>codesections</code> with your base url, and save that file as
+<code><span style="color:#586e75;"># Redirect default Netlify subdomain to primary domain
+</span><span style="color:#b58900;">https://codesections.netlify.com/*</span><span style="color:#839496;"> https://www.codesections.com/:splat 301!
+</span></code></pre>
+<p>Just replace <code>codesections</code> with your base url, and save that file as 
 <code>_redirects</code> in your site root.  Once you've done that, you'll have solved
 the bigger half of the problem.</p>
 <p>To solve the second half, you'll need to add <code>rel=&quot;canonical&quot;</code> tags to all
 the pages for your site.  Depending on how you build your site, that could
-be easy or painful.  I use <a href="https://www.getgutenberg.io/">Gutenberg</a>,
+be easy or painful.  I use <a href="https://www.getgutenberg.io/">Gutenberg</a>, 
 which makes this process incredibly easy.  (Exactly as I'd expect from such
 a powerful static site generator.)</p>
 <p>All I need to do is to create a new variable in my <code>config.toml</code> file
@@ -320,27 +321,23 @@ that's equal to my base url, and then add it to my templates.</p>
 <p>Specifically, I add this line to the <code>[extra]</code> section of my <code>config.toml</code>
 file:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">live_base_url </span><span style="color:#839496;">= &quot;</span><span style="color:#2aa198;">https://www.codesections.com</span><span style="color:#839496;">&quot;
-</span></pre>
+<code><span style="color:#268bd2;">live_base_url </span><span style="color:#839496;">= &quot;</span><span style="color:#2aa198;">https://www.codesections.com</span><span style="color:#839496;">&quot;
+</span></code></pre>
 <p>and then add this line to each of my templates inside the <code>&lt;head&gt;</code> section:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#586e75;">&lt;</span><span style="color:#268bd2;">link </span><span style="color:#839496;">rel</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">canonical</span><span style="color:#839496;">&quot; href</span><span style="color:#657b83;">=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">{{ config.extra.live_base_url }}{{ current_path }}</span><span style="color:#839496;">&quot;</span><span style="color:#586e75;">&gt;
-</span></pre>
-<p>(Why are we using our own <code>live_base_url</code> instead of Gutenberg's built-in
-<code>base_url</code>?  Because you may want to <a href="https://www.getgutenberg.io/documentation/deployment/netlify/">change the
-base_url</a> if
+<code><span style="color:#839496;">&lt;link rel=&quot;canonical&quot; href=&quot;{{ </span><span style="color:#268bd2;">config</span><span style="color:#839496;">.</span><span style="color:#268bd2;">extra</span><span style="color:#839496;">.</span><span style="color:#268bd2;">live_base_url </span><span style="color:#839496;">}}{{ </span><span style="color:#268bd2;">current_path </span><span style="color:#839496;">}}&quot;&gt;
+</span></code></pre>
+<p>(Why are we using our own <code>live_base_url</code> instead of Gutenberg's built-in 
+<code>base_url</code>?  Because you may want to <a href="https://www.getgutenberg.io/documentation/deployment/netlify/">change the 
+base_url</a> if 
 you use Netlify's deploy previews, and we don't want to limit ourselves from
 using that very helpful feature.)</p>
 <p>And that's it!  Your site now has no duplicate content, and won't be unfairly
 lumped in with sites that have scraped content.</p>
 <p>If you have any questions, feel free to reach out to me in any of the ways
-listed on <a href="@/about/index.md#contact">my contact page</a>—I'd be happy to help.</p>
+listed on <a href="/contact">my contact page</a>—I'd be happy to help.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>

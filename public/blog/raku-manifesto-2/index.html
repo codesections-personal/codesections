@@ -19,7 +19,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#d9d9d9">
-    <link rel="canonical" href="https://www.codesections.com/blog/raku-manifesto-2">
+    <link rel="canonical" href="https:&#x2F;&#x2F;www.codesections.com&#x2F;&#x2F;blog&#x2F;raku-manifesto-2">
     <title>
        A Raku Manifesto, Part 2 |  CodeSections 
     </title>
@@ -258,7 +258,8 @@
     <section class="content-main">
   
     
-  <h1>A Raku Manifesto, Part 2</h1>
+
+  <h2>A Raku Manifesto, Part 2</h2>
   <p>If you recall from <a href="/blog/raku-manifesto">part 1 in this series</a>, we're talking about my
 personal take on a Raku manifesto (modeled loosely after the <a href="https://agilemanifesto.org/">Agile
 Manifesto</a>):</p>
@@ -308,7 +309,7 @@ embraced lexical scoping; even when you modify Raku's very syntax, your changes 
 limited to your current lexical block.  And, as I mentioned in <a href="/blog/raku-maifesto">part
 1</a>, Raku strongly supports both object-oriented and functional
 programming – each of which, in its own way, promotes predictable code.</p>
-<p><a name="continue-reading"></a></p>
+<span id="continue-reading"></span>
 <p>In fact, part of Raku's support for functional programming includes fairly comprehensive,
 language-level support for immutable data structures.  <code>Map</code>s, <code>Set</code>s, and <code>Bag</code>s are all
 immutable, and the <code>:=</code> (bind) operator can be used to immutably bind values to variables.
@@ -328,7 +329,7 @@ Raku is, to my knowledge, the only language that
 <aside>
 <p>In case you're not familiar with those terms, a circumfix operator surrounds its arguments.
 For example, in the expression <code>[1, 2, 3]</code> the circumfix operator <code>[ ]</code> surrounds the
-arguments <code>1, 2, 3</code>; in Raku, that operator transforms the List 1, 2, 3 into the Array 1, 2, 3.</p>
+arguments <code>1, 2, 3</code>; in Raku, that operator transforms the List 1, 2, 3 into the Array 1, 2, 3. </p>
 <p>A postcircumfix operator is one that follows one argument and surrounds a second.  For
 example, consider the expression <code>%hash&lt;key&gt;</code>.  In that expression <code>&lt; &gt;</code> is a postcircumfix
 operator with a first argument of <code>%hash</code> and a second argument of <code>key</code>; in Raku, that
@@ -350,17 +351,17 @@ but the standard library actually employs it, albeit to deliver an Easter egg.  
 calling the <code>.WHY</code> method on an object provides the docstring for that object's class, or a
 message stating that no docstring has been written.  Thus, this is totally expected:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">foo</span><span style="color:#839496;">&#39;.WHY;
+<code><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">foo</span><span style="color:#839496;">&#39;.WHY;
 </span><span style="color:#586e75;"># OUTPUT: «No documentation available for type &#39;Str&#39;.
-</span><span style="color:#586e75;">#          Perhaps it can be found at
-</span><span style="color:#586e75;">#          https://docs.raku.org/type/Str»
-</span></pre>
+#          Perhaps it can be found at
+#          https://docs.raku.org/type/Str»
+</span></code></pre>
 <p>However, some clever wag <a href="https://github.com/rakudo/rakudo/commit/672c5d403cd3d608557839245ecff9d02cdf7f44">added
 code</a>
 using the overloading-for-a-specific-value trick described above.  As a result, you can get this:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">Life, the Universe and Everything</span><span style="color:#839496;">&#39;.WHY </span><span style="color:#586e75;"># OUTPUT: «42»
-</span></pre>
+<code><span style="color:#839496;">say &#39;</span><span style="color:#2aa198;">Life, the Universe and Everything</span><span style="color:#839496;">&#39;.WHY </span><span style="color:#586e75;"># OUTPUT: «42»
+</span></code></pre>
 <p>Obviously, Raku is more than willing to give you enough rope to hang yourself with – when
 abused, Raku's features let you write code that isn't just surprising, but that's actually
 shocking.  (And I haven't even mentioned the ability Raku provides for defining new terms or
@@ -369,12 +370,12 @@ switching to entirely separate sub-languages.)</p>
 concise code.  For example, the exact same technique that enables the Easter egg mentioned
 above allows you to write a Fibonacci function that very nearly reads as plain English:</p>
 <pre style="background-color:#002b36;">
-<span style="color:#268bd2;">multi </span><span style="color:#b58900;">sub</span><span style="color:#839496;"> fibonacci(</span><span style="color:#6c71c4;">0</span><span style="color:#839496;">)  { </span><span style="color:#6c71c4;">0</span><span style="color:#839496;"> }
+<code><span style="color:#268bd2;">multi </span><span style="color:#b58900;">sub</span><span style="color:#839496;"> fibonacci(</span><span style="color:#6c71c4;">0</span><span style="color:#839496;">)  { </span><span style="color:#6c71c4;">0</span><span style="color:#839496;"> }
 </span><span style="color:#268bd2;">multi </span><span style="color:#b58900;">sub</span><span style="color:#839496;"> fibonacci(</span><span style="color:#6c71c4;">1</span><span style="color:#839496;">)  { </span><span style="color:#6c71c4;">1</span><span style="color:#839496;"> }
 </span><span style="color:#268bd2;">multi </span><span style="color:#b58900;">sub</span><span style="color:#839496;"> fibonacci(</span><span style="color:#268bd2;">$n</span><span style="color:#839496;">) {
-</span><span style="color:#839496;">    </span><span style="color:#839496;">fibonacci(</span><span style="color:#268bd2;">$n</span><span style="color:#839496;"> - </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">) + fibonacci(</span><span style="color:#268bd2;">$n</span><span style="color:#839496;"> - </span><span style="color:#6c71c4;">2</span><span style="color:#839496;">)
-</span><span style="color:#839496;">}
-</span></pre>
+    fibonacci(</span><span style="color:#268bd2;">$n</span><span style="color:#839496;"> - </span><span style="color:#6c71c4;">1</span><span style="color:#839496;">) + fibonacci(</span><span style="color:#268bd2;">$n</span><span style="color:#839496;"> - </span><span style="color:#6c71c4;">2</span><span style="color:#839496;">)
+}
+</span></code></pre>
 <p>Raku gives you enough rope to hang yourself with, but you can also use that rope to build a
 wonderful… um, something one builds out of rope.  Swinging bridge?  Rope ladder?… It's
 really darn powerful is the point, ok?</p>
@@ -503,10 +504,6 @@ easily reduce productivity in a large team.</p>
 individual productivity over large-group productivity was 100% the right choice.</p>
 
 
-  <div>
-    
-    
-  </div>
 
   
 </section>
