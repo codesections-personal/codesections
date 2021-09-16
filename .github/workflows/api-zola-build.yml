@@ -1,0 +1,24 @@
+name: api-zola-build
+
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Trigger a zola build on the linode server
+      - name: Run a one-line script
+        env: # Or as an environment variable
+          API_USER: ${{ secrets.CodesectionsApiUser }}
+          API_PW:   ${{ secrets.CodesectionsApiPassword }}
+        run: curl -I -X POST -u "$API_USER:$API_PW" https://api.codesections.com/v1/zola/build
