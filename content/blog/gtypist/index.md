@@ -7,8 +7,7 @@ Just published a [gtypist lesson](https://github.com/codesections/gtypist_progra
 The README is below.
 
 GNU's [gtypist program](https://www.gnu.org/software/gtypist/) is a great
-way for Linux users to improve their typing speed right from the command
-line, and is widely available for every distribution. I personally used
+way for Linux users to improve their typing speed from the comfort of their terminal, and it's widely available for every distribution. I personally used
 it extensively when I switched from practicing law to programming and
 discovered that the keyboard was full of keys I'd basically never needed
 before.  (If you need convincing of the importance of typing speed to 
@@ -64,3 +63,6 @@ to the same directory that holds gtypist's other lessons (usually
 `/usr/share/gtypist` or `/usr/local/share/gtypist`).  After doing so,
 you can run the lesson by supplying just the filename as a final argument
 to gtypist.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMjgyNjg2MjMyXX0=
+-->
