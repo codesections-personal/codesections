@@ -43,13 +43,13 @@ Now, I don't know about you, but if I ever have so many nested loops that I need
 I'd rather put them to use: I use labels to label code, replacing comments like the ones in Carmack's sample above.  Here are few reasons I like labels better than comments:
 
 ### Comments are overworked
-Comments have to play a bunch of different roles.  Sometimes they're commenting out code.  Sometimes they're explaining something tricky, or why you didn't take a seemingly obvious approach.  They might be a doc comment, a `// TODO`, or a `# FIXME`.  They might be psudocode for not-yet-implemented functionality, or might be a cross-reference to a lengthy discussion in a bug tracker.  They might even be a [joking-not-joking warning left long ago](https://stackoverflow.com/a/482129/10173009).
+Comments have to play a bunch of different roles.  Sometimes they're commenting out code.  Sometimes they're explaining something tricky, or why you didn't take a seemingly obvious approach.  They might be a doc comment, a `// TODO`, or a `# FIXME`.  They might be pseudocode for not-yet-implemented functionality, or might be a cross-reference to a lengthy discussion in a bug tracker.  They might even be a [joking-not-joking warning left long ago](https://stackoverflow.com/a/482129/10173009).
 
 Without actually *reading* a comment in full, it's hard to know what role that comment has.  Slowing down to figure that out may not take much time or effort, but every bit of cognitive load we can avoid is a win.
 
 And, because of the many roles we ask comments to play, people configure their editors to display them in all sorts of different ways.  Depending on your/your reader's editor setup, they might jump out with more importance than the rest of the code, or might be faded practically into the background.  (At least [one theme out there](https://www.benkuhn.net/syntax/) has a toggle to switch between these two ways of displaying comments, depending on whether you're working on "projects where the comments are not deceit and lies.")
 
-In contrast, a label has exactly one function: it labels code.  And its form follows that function – it's nearly always displayed about lime any other identifier.
+In contrast, a label has exactly one function: it labels code.  And its form follows that function – it's nearly always displayed about like any other identifier.
 
 ### Labels play well with blocks
 
@@ -82,6 +82,6 @@ But, as they say, [software **is** details](https://gotopia.eu/2020/sessions/144
  
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNjE5MTkzMDcsMTkyNTUzOTE2OSwxNz
-E4MDIyODg1XX0=
+eyJoaXN0b3J5IjpbLTIwNTQ4MDUwNiwxOTI1NTM5MTY5LDE3MT
+gwMjI4ODVdfQ==
 -->
