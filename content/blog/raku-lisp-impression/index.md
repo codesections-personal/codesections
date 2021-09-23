@@ -92,7 +92,8 @@ Rakoons don't need to imitate the syntax of Lisp, APL, or C – even though the 
 
 ---
 Notes:
+
 [^1]: I’m using  “Lisp” broadly in this post, and am including the whole [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDk3NjUyODBdfQ==
+eyJoaXN0b3J5IjpbNjE4MDMyNzU0XX0=
 -->
