@@ -55,7 +55,7 @@ So, let's see how Raku looks if it embraces that style.  This is about matching 
 
 And here's the Raku:
 
-```raku
+```racket
 (sub (:&is-even = (sub (\n)
                     {([or] ([==] 0, n),
                            (is-odd (pred n:)))}),
@@ -77,7 +77,7 @@ Now, I'm not sure about you, but to _my_ eyes, that code looks quite a bit more 
 
 Is the bottom line that Rakoons should all switch to Lisp syntax?  No, not at all.  In fact, by my own lights, I'd probably toss out the code above in favor of something like the below (assuming we want to keep the same recursive implementation):
 
-```raku
+```racket
 sub (:&is-even = sub ($n) {$n == 0 or $n.pred.&is-odd  },
      :&is-odd =  sub ($n) {$n ≠ 0 and $n.pred.&is-even })
 { is-odd 11}()
@@ -96,5 +96,5 @@ Rakoons don't need to imitate the syntax of Lisp, APL, or C – even though the 
 
 [^1]: I’m using  “Lisp” broadly in this post, and am including the whole [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0MjczOTExNF19
+eyJoaXN0b3J5IjpbLTE4MjQ1OTI1NjBdfQ==
 -->
