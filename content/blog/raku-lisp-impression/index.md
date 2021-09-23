@@ -9,6 +9,8 @@ Raku, on the other hand, has a bit more syntax.
 
 Ok, that's an understatement.  Raku is syntactically maximalist to exactly the same degree that Lisps are syntactically minimalist.  Forget “[syntax that fits on a postcard](https://richardeng.medium.com/syntax-on-a-post-card-cb6d85fabf88)”; Raku's syntax struggles to [fit on an A4 sheet of paper](https://raw.githubusercontent.com/Raku/mu/master/docs/Perl6/Cheatsheet/cheatsheet.txt).  Raku has the type of syntactic riches that inspire Rakoons to classify its operators into beautiful (though now sadly dated) [Periodic Tables](http://www.ozonehouse.com/mark/periodic/).
 
+<!-- more -->
+
 I'm not saying that Raku has _too much_ syntax; I think it has an amount perfectly suited to its design goals.  Raku embraces the power of syntax; it's learned from natural languages that the ability to chose between different ways of articulating the same basic thought gives languages expressive power – and no small amount of beauty.  Raku's syntactic profusion is a big driver of its flexibility: Raku [has been described as](https://www.evanmiller.org/a-review-of-perl-6.html) “multi-paradigm, maybe omni-paradigm”, and its syntax sure helps make it so.
 
 And, though I don't make a secret of how powerful I find Raku's maximalist approach, I also wouldn't say that Lisps have _too little_ syntax.  There's something wonderful about working through [The Little Schemer](https://mitpress.mit.edu/books/little-schemer-fourth-edition) and [growing a language](https://archive.org/details/GrowingALanguageByGuySteeleAhvzDzKdB0) one step at a time.  More practically, starting from a minimal base makes the practice of building your own language on top – aka, [Language Oriented Programming](https://beautifulracket.com/appendix/why-lop-why-racket.html) – all the more tractable. 
@@ -94,5 +96,5 @@ Rakoons don't need to imitate the syntax of Lisp, APL, or C – even though the 
 
 [^1]: I’m using  “Lisp” broadly in this post, and am including the whole [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzNjUzNjkzNl19
+eyJoaXN0b3J5IjpbMTY5NjI2NjkyNF19
 -->
