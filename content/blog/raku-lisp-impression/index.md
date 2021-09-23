@@ -70,7 +70,7 @@ Now, I'm not sure about you, but to _my_ eyes, that code looks quite a bit more 
 
 * The `[…]` [reduction](https://docs.raku.org/language/operators#index-entry-[+]_(reduction_metaoperators)) operator pulls double duty, letting us call infix operators act as prefix ones.
 * Similarly, `pred n:` uses [indirect invocation syntax](https://docs.raku.org/language/objects#index-entry-indirect_invocant_syntax) (the `:`) to call a method like a function – that is, in prefix position.
-* Our stand-in for Lisp's `letrec` is that old standby, the [Immediately Invoked Function Expression](https://developer.mozilla.org/en-US/docs/Glossary/IIFE).  We combine the IFFE with Raku's ability to declare optional named arguments to effectively create scope-limited variables, exactly the power that Lisp's various `let` constructs typically provide.
+* Our stand-in for Lisp's `letrec` is that old standby, the [Immediately Invoked Function Expression](https://developer.mozilla.org/en-US/docs/Glossary/IIFE).  We combine the IIFE with Raku's ability to declare optional named arguments to effectively create scope-limited variables, exactly the power that Lisp's various `let` constructs typically provide.
 * Many of the parentheses are optional, thrown in for fun.  But some of them are functional.  In Raku, you need to provide enough info to prevent ambiguity about which arguments go with which functions, but there's no rule that says you need to use the postfix `(…)` syntax to do so.  For example, say you want to call `f` with `1` and `2` and then call `say` with both `f`'s return value and `'foo'`.  To do that, most Rakoons would write `say f(1, 2), 'foo'`.  That works, unlike `say f 1, 2, 'foo'` – which ends up passing all three arguments to `f`.  But you're also free to place your parens the way a Lisper might: `say (f 1, 2), 'foo'`, which _also_ makes it clear which args go with which function.  (Or even `(say (f 1, 2), 'foo')`, if you just really love [the elegance of a good parenthesis](https://m.xkcd.com/297/).
 
 #### So what?
@@ -95,5 +95,5 @@ Notes:
 [^1]:  I’m using  “Lisp” broadly in this post, and am including the whole
  [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjgxMzk5MjM2XX0=
+eyJoaXN0b3J5IjpbLTEyMTIzOTMxMTldfQ==
 -->
