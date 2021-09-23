@@ -22,7 +22,7 @@ And yet.
 
 And yet it's possible to write Raku in a style that looks tremendously like Lisp – much more like Lisp than most languages could manage.  To see what I mean, lets start with some especially Lispy code.  Here's a toy program (pulled from the [Racket docs](https://docs.racket-lang.org/reference/let.html#%28form._%28%28lib._racket%2Fprivate%2Fletstx-scheme..rkt%29._letrec%29%29)) that recursively calculates whether a positive integer is odd.
 
-```scheme
+```racket
 (letrec ([is-even? (lambda (n)
                        (or (zero? n)
                            (is-odd? (sub1 n))))]
@@ -42,7 +42,7 @@ What makes this code so distinctively Lispy?  Lets count:
 
 So, let's see how Raku looks if it embraces that style.  This is about matching the aesthetic, so we're not interested in nearly built-in "solutions" like `11 !%% 2`.   Just to have everything together, here's the Lisp again:
 
-```scheme
+```racket
 (letrec ([is-even? (lambda (n)
                        (or (zero? n)
                            (is-odd? (sub1 n))))]
@@ -96,5 +96,5 @@ Rakoons don't need to imitate the syntax of Lisp, APL, or C – even though the 
 
 [^1]: I’m using  “Lisp” broadly in this post, and am including the whole [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5NjI2NjkyNF19
+eyJoaXN0b3J5IjpbMTY0MjczOTExNF19
 -->
