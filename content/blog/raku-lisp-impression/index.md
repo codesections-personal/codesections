@@ -37,7 +37,7 @@ What makes this code so distinctively Lispy?  Lets count:
 1. mutually recursive definitions – we use `letrec` to define `is-even?` in terms of `is-odd?`, and also to define `is-odd?` in terms of `is-even?`; neither can be completely defined without the other.
 2. Prefix precedence – even operations (like subtraction or `and`) that would involve infix operators in other languages are done with prefix function calls.
 3. Recursion all the way down – this code never defines "even" with anything as simple as "is divisible by 2"; it just walks our `n` down to 0, and then resolves the nested recursion to get an answer.
-4. [Semantic indentation](https://metaredux.com/posts/2020/12/06/semantic-clojure-formatting.html) – lines aren't indented by a fixed amount (like 4 spaces per block), but rather are indented to line up in semantically meaningful way with the line above.
+4. [Semantic indentation](https://metaredux.com/posts/2020/12/06/semantic-clojure-formatting.html) – lines aren't indented by a fixed amount (like 4 spaces per block), but rather are indented to line up in semantically meaningful ways with the line above.
 5. Last but not least, parentheses.  So many parentheses.  (Admittedly, in Racket some of them are square, but that doesn't actually matter; `[…]` is interchangeable with `(…)`.)
 
 So, let's see how Raku looks if it embraces that style.  This is about matching the aesthetic, so we're not interested in nearly built-in "solutions" like `11 !%% 2`.   Just to have everything together, here's the Lisp again:
@@ -95,5 +95,5 @@ Notes:
 [^1]:  I’m using  “Lisp” broadly in this post, and am including the whole
  [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjM4NjUxNzVdfQ==
+eyJoaXN0b3J5IjpbLTE0MjUzNzg3NzhdfQ==
 -->
