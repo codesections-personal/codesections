@@ -15,7 +15,7 @@ I'm not saying that Raku has _too much_ syntax; I think it has an amount perfect
 
 And, though I don't make a secret of how powerful I find Raku's maximalist approach, I also wouldn't say that Lisps have _too little_ syntax.  There's something wonderful about working through [The Little Schemer](https://mitpress.mit.edu/books/little-schemer-fourth-edition) and [growing a language](https://archive.org/details/GrowingALanguageByGuySteeleAhvzDzKdB0) one step at a time.  More practically, starting from a minimal base makes the practice of building your own language on top – aka, [Language Oriented Programming](https://beautifulracket.com/appendix/why-lop-why-racket.html) – all the more tractable. 
 
-So I'm not really arguing for Lisp's syntactic minimalism or for Raku's maximalism.  I'm just pointing out that they're _very_ different aesthetics.  If there's a spectrum, Lisp and Raku are on pretty much opposite sides of it. 
+So I'm not really arguing for Lisp's syntactic minimalism or for Raku's maximalism.  I'm just pointing out that they're _very_ different aesthetics.  If there's a spectrum, Lisp and Raku are on pretty much opposite ends of it. 
 
 ---
 And yet.
@@ -95,5 +95,5 @@ Notes:
 [^1]:  I’m using  “Lisp” broadly in this post, and am including the whole
  [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTIzOTMxMTldfQ==
+eyJoaXN0b3J5IjpbLTEzMjM4NjUxNzVdfQ==
 -->
