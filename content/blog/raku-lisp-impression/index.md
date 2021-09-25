@@ -11,7 +11,7 @@ Ok, that's an understatement.  Raku is syntactically maximalist to exactly the s
 
 <!-- more -->
 
-I'm not saying that Raku has _too much_ syntax; I think it has an amount perfectly suited to its design goals.  Raku embraces the power of syntax; it's learned from natural languages that the ability to chose between different ways of articulating the same basic thought gives languages expressive power – and no small amount of beauty.  Raku's syntactic profusion is a big driver of its flexibility: Raku [has been described as](https://www.evanmiller.org/a-review-of-perl-6.html) “multi-paradigm, maybe omni-paradigm”, and its syntax sure helps make it so.
+I'm not saying that Raku has _too much_ syntax; I think it has an amount perfectly suited to its design goals.  Raku embraces the power of syntax; it's learned from natural languages that the ability to chose between different ways of articulating the same basic thought gives languages expressive clarity – and no small amount of beauty.  Raku's syntactic profusion is a big driver of its flexibility: Raku [has been described as](https://www.evanmiller.org/a-review-of-perl-6.html) “multi-paradigm, maybe omni-paradigm”, and its syntax sure helps make it so.
 
 And, though I don't make a secret of how powerful I find Raku's maximalist approach, I also wouldn't say that Lisps have _too little_ syntax.  There's something wonderful about working through [The Little Schemer](https://mitpress.mit.edu/books/little-schemer-fourth-edition) and [growing a language](https://archive.org/details/GrowingALanguageByGuySteeleAhvzDzKdB0) one step at a time.  More practically, starting from a minimal base makes the practice of building your own language on top – aka, [Language Oriented Programming](https://beautifulracket.com/appendix/why-lop-why-racket.html) – all the more tractable. 
 
@@ -85,7 +85,7 @@ sub (:&is-even = sub ($n) {$n == 0 or $n.pred.&is-odd  },
 
 This not only throws out many of the Lispy features we had above, it actually inverts some of them: `$n.pred.&is-odd` leans strongly into postfix notation.
 
-And, in the end, that's exactly my point and exactly Raku's strength.  With a Lisp, you'll always have prefix notation, which lends your code predictability.  With Raku, you'll always have choices, which lends your code expressive clarity.  Do you want to say `is-odd $n.pred`, or `(pred $n:).&is-odd`, or `$n.pred.&is-odd`, or `(with $n {is-odd .pred})`, or something else altogether?  To the computer, they all mean the same thing, but each shifts the emphasis.  And, depending on what you want to say, a different choice might be a better fit.
+And, in the end, that's exactly my point and exactly Raku's strength.  With a Lisp, you'll always have prefix notation, which lends your code predictability.  With Raku, you'll always have choices, which lets your code better express your intent.  Do you want to say `is-odd $n.pred`, or `(pred $n:).&is-odd`, or `$n.pred.&is-odd`, or `(with $n {is-odd .pred})`, or something else altogether?  To the computer, they all mean the same thing, but each shifts the emphasis.  And, depending on what you want to say, a different choice might be a better fit.
 
 Rakoons don't need to imitate the syntax of Lisp, APL, or C – even though the language is up to the task.  But it is helpful to remember that we have the option to embrace a wide variety of styles and to make a conscious choice about how to best express ourselves. 
 
@@ -95,5 +95,5 @@ Notes:
 [^1]:  I’m using  “Lisp” broadly in this post, and am including the whole
  [Lisp family of languages](https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages), from the most minimal of schemes all the way to the baroque majesty of Common Lisp.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODA1MzA0NDNdfQ==
+eyJoaXN0b3J5IjpbLTE5MDE2NjE5N119
 -->
