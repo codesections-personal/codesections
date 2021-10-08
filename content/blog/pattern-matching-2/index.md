@@ -45,8 +45,8 @@ And, since `match` takes `*@fns` as a slurpy, it also lets you do this:
 
 ```raku
 for (:add(1, 5), :sub(9, 8), :mul(7, 7)) {
-    match -> :$add  ($a, $b) { say "$a + $b is {$a+$b}" },
-          -> :$sub  ($a, $b) { say "$a - $b is {$a-$b}" },
+    match -> :$add ($a, $b) { say "$a + $b is {$a+$b}" },
+          -> :$sub ($a, $b) { say "$a - $b is {$a-$b}" },
           -> :$mul ($a, $b) { say "$a × $b is {$a×$b}" } }
 ```
 
@@ -56,5 +56,5 @@ I haven't had my coffee yet, but I'm pretty sold on that as a function, at least
 
 But all of the above was based on waking up with some pretty odd convictions – so please feel free to tell me just how wrong you think I am!
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4Njk5MzkxMF19
+eyJoaXN0b3J5IjpbOTQxNTYwNDE0XX0=
 -->
