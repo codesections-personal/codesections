@@ -31,12 +31,12 @@ And here's that function in action:
 ```raku
 # before
 ```raku
-for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
+for (:add(1, 5), :sub(9, 8), :mul(7, 7)) {
     try -> :$add ($a, $b) { say "$a + $b is {$a+$b}" }(|$_)
 }
 
 # After
-for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
+for (:add(1, 5), :sub(9, 8), :mul(7, 7)) {
     match -> :$add ($a, $b) { say "$a + $b is {$a+$b}" }
 }
 ```
@@ -44,15 +44,17 @@ for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
 And, since `match` takes `*@fns` as a slurpy, it also lets you do this:
 
 ```raku
-for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
-    match -> :add($)  ($a, $b) { say "$a + $b is {$a+$b}" },
-          -> :sub($)  ($a, $b) { say "$a - $b is {$a-$b}" },
-          -> :mult($) ($a, $b) { say "$a × $b is {$a×$b}" } }
+for (:add(1, 5), :sub(9, 8), :mul(7, 7)) {
+    match -> :$add  ($a, $b) { say "$a + $b is {$a+$b}" },
+          -> :$sub  ($a, $b) { say "$a - $b is {$a-$b}" },
+          -> :$mul ($a, $b) { say "$a × $b is {$a×$b}" } }
 ```
 
 I haven't had my coffee yet, but I'm pretty sold on that as a function, at least in my own code.  After trying it out a bit (and reflecting a bit on it, post-coffee), I'll probably release that as a module – even though the idea of releasing a 6-line function as a "module" [pains me a bit](https://www.davidhaney.io/npm-left-pad-have-we-forgotten-how-to-program/), it seems like something that others could benefit from and an area where standardization wouldn't hurt.
 
+(One change I _may_ make before doing so is to add an error when there's no match, since it'd be easy to add a `-> | { }` default case if you want to, and an throwing an error might help surface typos/etc. a lot faster.)
+
 But all of the above was based on waking up with some pretty odd convictions – so please feel free to tell me just how wrong you think I am!
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM0OTY2OTFdfQ==
+eyJoaXN0b3J5IjpbMTE4Njk5MzkxMF19
 -->
