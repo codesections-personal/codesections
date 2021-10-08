@@ -5,7 +5,7 @@ date = 2021-10-07
 
 Raku has _extremely_ strong support for pattern matching in function/method [signatures](https://docs.raku.org/type/Signature#Destructuring_arguments) – you can match on literals, types, names, or pretty much anything at all and can conveniently destructure the value you're matching on into a set of variables that fit your needs.
 
-But Raku also has a second type of pattern matching (or at least something very much like pattern matching): the `~~` smartmatch powered by the [.ACCEPTS](https://docs.raku.org/routine/ACCEPTS) method.  This form of matching is also very convenient; is has a slightly different use case from matching on a signature, but it's no less powerful on the whole.  And, when it fits, it can be an even better/more lightweight solution to the same set of problems.  In fact, I'd bet that `when` (which is powered by this sort of matching) is one of the keywords that shows up most often in my Raku code.
+But Raku also has a second type of pattern matching (or at least something very much like pattern matching): the `~~` [smartmatch operator](https://docs.raku.org/language/operators#index-entry-smartmatch_operator) powered by the [.ACCEPTS](https://docs.raku.org/routine/ACCEPTS) method.  This form of matching is also very convenient; is has a slightly different use case from matching on a signature, but it's no less powerful on the whole.  And, when it fits, it can be an even better/more lightweight solution to the same set of problems.  In fact, I'd bet that `when` (which is powered by this sort of matching) is one of the keywords that shows up most often in my Raku code.
 
 #### The problem
 Since these two forms of pattern matching are different, there are some problems that are easier to solve with signature matching and others that are easier to solve with smartmatching.  Fortunately, Raku makes it very easy to add smartmatching into a signature – you can easily smartmatch in a [where clause](https://docs.raku.org/type/Signature#index-entry-where_clause), for example.
@@ -91,5 +91,5 @@ for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzE5MDc5MjJdfQ==
+eyJoaXN0b3J5IjpbMTM5MDQ5Nzg0OSwtMjEzMTkwNzkyMl19
 -->
