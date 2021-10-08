@@ -27,7 +27,7 @@ Of course, you can use full signature matching here if you'd like to.  That woul
 
 ```raku
 for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
-    multi match(:add($) ($a, $b)) { say "$a + $b is {$a+$b}" }
+    multi match(:$add ($a, $b)) { say "$a + $b is {$a+$b}" }
     multi match(|) {}
     match |$_
 }
@@ -43,7 +43,7 @@ Earlier today, though, I decided to [try](https://docs.raku.org/language/excepti
 
 ```raku
 for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
-    try -> :add($) ($a, $b) { say "$a + $b is {$a+$b}" }(|$_)
+    try -> :$add ($a, $b) { say "$a + $b is {$a+$b}" }(|$_)
 }
 ```
 
@@ -91,5 +91,6 @@ for (:add(1, 5), :sub(9, 8), :mult(7, 7)) {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MDQ5Nzg0OSwtMjEzMTkwNzkyMl19
+eyJoaXN0b3J5IjpbLTE1NTkzNTEyNzEsLTIxMzE5MDc5MjJdfQ
+==
 -->
