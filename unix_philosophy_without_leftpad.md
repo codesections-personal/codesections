@@ -18,15 +18,13 @@ This practice of writing micro packages contrasts sharply with the practice of w
 
 As this post's title probably gave away, the problem with overusing micro packages is that it can lead to what happened with left-pad.  Without rehashing [all the details](https://www.davidhaney.io/npm-left-pad-have-we-forgotten-how-to-program/), there was an 11-line JavaScript package (left-pad) that did nothing other than pad each line of a string with a specified amount of whitespace – and yet, somehow, a huge percentage of the JavaScript ecosystem depended on this simple function either directly or (far more commonly) indirectly.  As a result, when the developer removed the package (in a way that couldn't happen anymore for reasons not relevant here), that same fraction of the JavaScript ecosystem fell over.  I'm not sure exactly how many builds failed, but [one source](https://www.theregister.com/2016/03/23/npm_left_pad_chaos/) estimated that over 2.4 _million_ software builds depended on left-pad every month.  So not a small number.
 
-So, basically, someone finally pulled out the one domino that the entire Internet depended on:
+In other words, someone finally pulled out that one domino that the entire Internet depends on:
 
 [![xkcd 2347. [A tower of blocks is shown. The upper half consists of many tiny blocks balanced on top of one another to form smaller towers, labeled:]  All modern digital infrastructure  [The blocks rest on larger blocks lower down in the image, finally on a single large block. This is balanced on top of a set of blocks on the left, and on the right, a single tiny block placed on its side. This one is labeled:]  A project some random person in Nebraska has been thanklessly maintaining since 2003.  {alt-text:} Someday ImageMagick will finally break for good and we'll have a long period of scrambling as we try to reassemble civilization from the rubble.](https://codesections.com/xkcd_2347.png)](https://xkcd.com/2347/)
 
-And while left-pad may be an extreme example, the problem of[direct consequence of JavaScript's embrace of the Unix philosophy](https://www.chevtek.io/why-i-think-micro-packages-are-a-good-thing/) is JavaScript programs commonly depending on huge numbers of micro packages is endemic as a [direct consequence of JavaScript's embrace of the Unix philosophy](https://www.chevtek.io/why-i-think-micro-packages-are-a-good-thing/)
+And while left-pad may be an extreme example, the [direct consequence of JavaScript's embrace of the Unix philosophy](https://www.chevtek.io/why-i-think-micro-packages-are-a-good-thing/) is that JavaScript programs commonly depend on huge numbers of micro packages.
 
-
-
-![tweet by Steve Klabnik with the text "developers are like 'The UNIX philosophy, the pinnacle of software dev: Make each program to one thing well.'  'lol your project has tons of tiny dependencies? leftpad lolol'" and an image of the Daily Struggle meme (https://knowyourmeme.com/memes/daily-struggle)](https://codesections.com/steveklabnik-tweet-re-unix-vs-leftpad.png)](https://twitter.com/steveklabnik/status/1100978262875037701)third-party packages.  A [2020 study](https://i.blackhat.com/USA-20/Wednesday/us-20-Edwards-The-Devils-In-The-Dependency-Data-Driven-Software-Composition-Analysis.pdf) found that the typical JavaScript program depends on 377 packages (here, "typical" means "at the geometric mean", which reduces the impact of outliers).  And a full 10% depend on over 1,400 third-party-libraries.  Many of these dependencies are admirably tiny: one of the most depended-on packages (used by 86% of JavaScript packages – literally tens of millions of developers – is [essentially just one line of code](https://github.com/juliangruber/isarray/blob/master/index.js).   It's hard to take "do just one thing" to any greater extreme.
+A [2020 study](https://i.blackhat.com/USA-20/Wednesday/us-20-Edwards-The-Devils-In-The-Dependency-Data-Driven-Software-Composition-Analysis.pdf) found that the typical JavaScript program depends on 377 packages (here, "typical" means "at the geometric mean", which reduces the impact of outliers).  And a full 10% depend on over 1,400 third-party-libraries.  Many of these dependencies are admirably tiny: one of the most depended-on packages (used by 86% of JavaScript packages – literally tens of millions of developers – is [essentially just one line of code](https://github.com/juliangruber/isarray/blob/master/index.js).   It's hard to take "do just one thing" to any greater extreme.
 
 And yet.
 
@@ -35,43 +33,71 @@ And yet, I don't believe that any developer can reasonably comprehend a system m
 The many different problems that can arise from this abundance of micro packages leads some people to conclude that you should [kill your dependencies](https://www.mikeperham.com/2016/02/09/kill-your-dependencies/).  Or, as Joel Spolsky [put it](https://www.joelonsoftware.com/2001/10/14/in-defense-of-not-invented-here-syndrome/)
 
 > “Find the dependencies — and eliminate them.” When you’re working on a really, really good team with great programmers, everybody else’s code, frankly, is bug-infested garbage, and nobody else knows how to ship on time. When you’re a cordon bleu chef and you need fresh lavender, you grow it yourself instead of buying it in the farmers’ market, because sometimes they don’t have fresh lavender or they have old lavender which they pass off as fresh.
+> … 
+> This principle, unfortunately, seems to be directly in conflict with the ideal of “code reuse good — reinventing wheel bad.”
 
 ### A wild dilemma appears
 
-At this point, I hope the tension is pretty clear: on the one hand, it's great to keep components small, simple, and composable.  On the other hand, it's terrible to bury yourself in a tangle of different packages, no matter how tiny they are.  The Unix philosophy and killing your dependencies are in tension.
+At this point, I hope the tension is pretty clear: on the one hand, it's great to keep components small, simple, and composable.  On the other hand, it's terrible to bury yourself in a tangle of different packages, no matter how tiny they are.  The Unix philosophy and killing your dependencies pull in opposite directions.
 
 Of course, this is hardly a new insight.  It's a point many people have made over the years; I particularly enjoyed how Rust-evangelist extraordinaire Steve Klabnik put it a couple of years ago:
 
-![tweet by Steve Klabnik with the text "developers are like 'The UNIX philosophy, the pinnacle of software dev: Make each program to one thing well.'  'lol your project has tons of tiny dependencies? leftpad lolol'" and an image of the Daily Struggle meme (https://knowyourmeme.com/memes/daily-struggle)](https://codesections.com/steveklabnik-tweet-re-unix-vs-leftpad.png)](https://twitter.com/steveklabnik/status/1100978262875037701)
+[![tweet by Steve Klabnik with the text "developers are like 'The UNIX philosophy, the pinnacle of software dev: Make each program to one thing well.'  'lol your project has tons of tiny dependencies? leftpad lolol'" and an image of the Daily Struggle meme (https://knowyourmeme.com/memes/daily-struggle)](https://codesections.com/steveklabnik-tweet-re-unix-vs-leftpad.png)](https://twitter.com/steveklabnik/status/1100978262875037701)
 
-But I want to do more than note the tension: I want to provide a solution (or at least an outline of what I view the solution to be).  Before I do so, however, I'd like to note a few non-solutions that I reject.
+But I want to do more than note the tension: I want to provide a solution (or at least an outline of what I view the solution to be).  Before I do so, however, I need to mention a few non-solutions that I reject.
 
 First, I don't think that we should resolve this dilemma by fully choosing one side or the other.  Like [Russ Cox](https://queue.acm.org/detail.cfm?id=3344149), I acknowledge that installing a dependency entails allowing your "program's execution [to] literally depend[] on code downloaded from [some] stranger on the Internet"; I don't believe that doing so thousands of times will ever be a recipe for crafting robust software.  As much wisdom as there is in the Unix philosophy, it simply won't do to accept it 100% and embrace the micro package dystopia.
 
-At the same time, I don't believe that we can land fully on the "kill your dependencies" side, either.  It would be appealing to live in an ideal world where, like [one developer I admire](https://drewdevault.com/2020/02/06/Dependencies-and-maintainers.html), "I [could] list the entire dependency graph, including transitive dependencies, off of the top of my head", I don't believe that's a tenable solution.  For one thing, the code reuse and code sharing that micro packages enable is a huge part of what gives open source and free software developers superpowers: If a project can only be done by a team of dozens, it will almost certainly be built by a for-profit company.  But if relying on existing packages lets one or two hackers, working alone, create that software – well, then, there's an excellent chance that we'll have a free software version of the program.  (Remember, mega-projects like Linux are very much the exception, not the rule – the median number of maintainers for free software projects is 1, as I've [discussed at length](https://archive.fosdem.org/2021/schedule/event/programming_lang_for_free_software/) elsewhere.)
+At the same time, I also cannot fully embrace the "kill your dependencies" side extreme.  While it would be appealing to live in an ideal world where, like [one developer I admire](https://drewdevault.com/2020/02/06/Dependencies-and-maintainers.html), "I [could] list the entire dependency graph, including transitive dependencies, off of the top of my head", I don't believe that's a tenable solution.  For one thing, the code reuse and code sharing that micro packages enable is a huge part of what gives open source and free software developers superpowers: If a project can only be done by a team of dozens, it will almost certainly be built by a for-profit company.  But if relying on existing packages lets one or two hackers, working alone, create that software – well, then, there's an excellent chance that we'll have a free software version of the program.  (Remember, mega-projects like Linux are very much the exception, not the rule – the median number of maintainers for free software projects is 1, as I've [discussed at length](https://archive.fosdem.org/2021/schedule/event/programming_lang_for_free_software/) elsewhere.)
 
 Even setting aside the practical benefits of code reuse, I _still_ wouldn't agree that we should jettison micro packages.  The inconvenient reality is that the Unix philosophy is just plain correct: for any given volume of code/features, it'll be easier to reason about the system if it's composed of many small, independent modules instead of being one massive blob.  Killing our dependencies and replacing that code with our own implementation would, in many cases, just make a bad situation worse.  So I reject the idea that we can "solve" this problem by picking one extreme or the other.
 
-But I also view a naive compromise between the extremes to be a non-solution. Both extremes have real problems, but that doesn't provide any guarantee that splitting the baby will be any better.  Indeed, there's a real possibility that it'll be worse: if you take a program that depends on 500 micro packages and re-architect it to instead depend on 200 larger packages, then you **still** have far too many packages to manually review and maintain.  But now you are _also_ dealing with packages that are each harder to understand when you do need to start debugging.  [Nice job breaking it, hero](https://tvtropes.org/pmwiki/pmwiki.php/Main/NiceJobBreakingItHero).
+But I also view a naive compromise between the extremes to be a non-solution. Both extremes have real problems, but that doesn't provide any guarantee that splitting the baby will be any better.  Indeed, there's a real risk that it'll be worse: if you take a program that depends on 500 micro packages and re-architect it to instead depend on 200 larger packages, then you **still** have far too many packages to manually review and maintain.  But now you are _also_ dealing with packages that are each harder to understand when you do need to start debugging.  [Nice job breaking it, hero](https://tvtropes.org/pmwiki/pmwiki.php/Main/NiceJobBreakingItHero).
 
 ### A less naive compromise
 
-Having just rejected both extremes and simple compromise, it's clearly on me to come up with better way to strike this balance.  What we need is a way to limit the _number_ of dependencies for any given software project without leading to a corresponding increase in the _average size_ of each dependency.  (I'm going to discuss this in the context of my programming language of choice, [Raku](https://docs.raku.org), but I'm hopping that these thoughts will be more broadly relevant.)
+Having just rejected both extremes and a simple compromise, it's clearly on me to come up with better way to strike this balance.  What we need is a way to limit the _number_ of dependencies for any given software project without leading to a corresponding increase in the _average size_ of each dependency.  I have some ideas about how we can do so, at the programming language level.  (I'm going to discuss this in the context of my programming language of choice, [Raku](https://docs.raku.org), but I believe these prescriptions to be more broadly relevant.)
 
 I believe that a programming language/community can balance the Unix philosophy and dependency minimization by following three steps.  In order from most to least fundamental, the programming language should:
 * Maximize the language's expressiveness;
 * Have a great standard library; and
 * Embrace a utility package (or a few utility packages)
-Let's take each of these in turn.
+
+I'll discuss each of these in turn and then conclude with a few thoughts about more individual actions we can all take to protect our own code
 
 #### Maximize expressiveness
-[TODO]
+
+At first blush, "language expressiveness" may seem like an odd place to start.  If the goal is to write libraries that "do just one thing", then it seems like the number of words that it takes to implement that "one thing" shouldn't really matter.
+
+But what this ignores is that "one thing" is not well defined.  Consider the output from the `ls` command.
+
+![colorized output from `ls` printed in three columns](https://codesections.com/ls-out.png)
+
+In pretty much every Unix-based OS, the current consensus is that `ls` is best thought of as "one thing".  But in that original [Unix Environment](http://harmful.cat-v.org/cat-v/unix_prog_design.pdf) paper, Pike and Kernighan argued that it is really two things: (1) listing the files; (2) formatting the output into columns.  But I could see an argument for adding a third (colorizing the output) or even a fourth (determining whether the program is being run interactively or in a script).
+
+My point isn't that `ls` is "really" four things instead of one – it's that there isn't a single correct way to divide `ls` into packages that do only one thing each.  Any division will inherently leave room for at least a bit of subjective judgment.
+
+Moreover, that's exactly what we should want: when we say "a library should do only one thing", that's a convenient shorthand but doesn't need to be taken 100% literally.  (Even Pike and Kernighan agree that it's _sometimes_ correct to add options to an existing program.)  And when deciding what level of functionality to consider as "one thing", we should 
+(and inevitably do) consider factors such as code complexity and code length; a library that takes only 30 lines likely strikes many developers as accomplishing "one thing" in a way that the same functionality in a 3,000 line library might not.
+
+This is especially true because one of the main reasons we want to follow the Unix philosophy is to write bug-free code – and as [studies](https://steve-yegge.blogspot.com/2007/12/codes-worst-enemy.html) have [shown](https://www.mayerdan.com/ruby/2012/11/11/bugs-per-line-of-code-ratio) over [and](https://blog.codinghorror.com/diseconomies-of-scale-and-lines-of-code/) over [again](https://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670), longer code gives bugs more places to hide.  This means that library with only a few lines is much more likely to be correct – ant thus can more fairly be viewed as following the Unix philosophy of doing just one thing – than a longer library is.
+
+As a result, the language's overall support for writing concise, expressive code matters quite a bit.  Highly expressive languages are less likely to need deep dependency graphs to keep each package to a Unix-philosophy-compliant size; packages can be "micro" in size (and complexity) without being "micro" in power.   Fortunately for those of us writing Raku, it's one of the [most expressive languages](https://www.codesections.com/blog/raku-manifesto/), so we're off to a strong start.
 ### Great standard library
-[TODO]
+
+Next (and more obviously) you can avoid an abundance of left-pad-like micro packages by using a language with a great standard library.  Standard libraries have an obvious direct impact: when a function is built into the standard library, no one needs to rely on a package that provides that function.  As a concrete example: no one would ever write a `left-pad` package in Raku because the standard library already has [sprintf](https://docs.raku.org/routine/sprintf) and `'%5s'.sprintf($str)` already does the job of `left-pad($str, 5)`.
+
+The direct effects of the standard library are fairly limited – each standard library function can only _directly_ replace a single micro package.  Fortunately, a great standard library can have a much larger indirect effect.   If a standard library has many small, composable functions that can be put together in different ways, then a vast majority of "micro packages" can be trivially replaced with a simple call to two or three standard library functions – which means that those micro packages never get written in the first place.  Again, this is an area where Rakoons are in luck, since we benefit from exactly that sort of composable standard library (which was the topic of my [Raku Conf talk](https://conf.raku.org/talk/149).
+
+<aside> One note on the subject of standard libraries: It's very helpful for a language to have a _great_ standard library, but that doesn't mean it needs a huge one.  It certainly doesn't need a "batteries included" standard library – after all, when a standard library includes too many batteries, they [tend to leak battery acid](https://pyfound.blogspot.com/2019/05/amber-brown-batteries-included-but.html?m=1) or at least [need replacing](https://www.python.org/dev/peps/pep-0594/).  The difference between a "great" standard library and a "batteries included" one is that a great standard library includes all the composable functions you need to avoid left-pad-like micro packages whereas a batteries-included standard library attempts to include non-micro packages (e.g., a web server) in the core standard library.</aside>
+
+
 ### Utility package(s)
+
+The final way for a language to reduce the size of dependency trees without giving up on the Unix philosophy is to collectively agree on one (or a few) utility packages that aggregate what would be 
 [TODO]i
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTQxNTA5MDEsLTE5ODc1MTU5NDJdfQ==
+eyJoaXN0b3J5IjpbMjEyNjUwMzkyNCwtMTk4NzUxNTk0Ml19
 -->
