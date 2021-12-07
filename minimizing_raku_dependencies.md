@@ -1,13 +1,14 @@
 
-# Minimizing Raku Dependencies with a new utilities package
+# Unix philosophy without left-pad pt. 2: Minimizing Dependencies with a utilities package
 
-In [the previous post](https://raku-advent.blog/2021/12/06/unix_philosophy_without_leftpad), I made a case for why Raku should have a utility library that provides small-but-commonly-needed functions.  Today I'm introducing a package that I hope will fill that gap.
+In [the previous post](https://raku-advent.blog/2021/12/06/unix_philosophy_without_leftpad), I made a case for why programming languages should have a utility library that provides small-but-commonly-needed functions.  Today I'm introducing a Raku package that I hope will fill that gap.
 
-I'm going to start by telling you what the package is right now.  Then I'll turn to plans for the future and how I'd like to see this package (or a similar one) grow over time.  Finally, we'll wrap up by tying all this back in to the bigger-picture issues we talked about last time.
+I'm going to start by giving you an overview of this new package as it exists today.  Then I'll turn to plans for the future and how I'd like to see this package (or a similar one) grow over time. 
+
 ## _
 
 ####	The name
-First of all, the name: the utility package I've started is named `_` (pronounced/a.k.a. `lowbar`just like [in
+First of all, the name: the utility package I've started is named `_` (pronounced/a.k.a. `lowbar` just like [in
 the HTML spec](https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references)).  I recognize that most people will view this name as a nod to JavaScript's [underscore](https://underscorejs.org/) and [lodash](https://lodash.com/) libraries, but it's not really meant as one.  Lodash is a good library, but our goals/contents are different enough that I don't feel any desire to reference them with `_`'s name
 
 Instead, the name `_` just fell naturally out of Raku's topic variables: in Raku, if you want to refer to the current topic without giving it a specific name, you use the appropriate sigil followed by `_`: [`$_`](https://docs.raku.org/language/variables#The_$__variable) [`@_`](https://docs.raku.org/language/functions#Automatic_signatures), or [`%_`](https://docs.raku.org/language/functions#Automatic_signatures).  So it only follows that a utilities package – which, by its nature, can't really sum its functionality up in a name  – would use `_` (in this case without a sigil, since Modules don't use sigils).
@@ -83,7 +84,7 @@ During both alpha and beta periods, `_` explicitly makes **no** guarantees about
 
 ####  sub-packages
 
-Currently `_` includes the following sub-packages.  You can find more information about each one in it's `README` file
+Currently `_` includes the following sub-packages.  You can find more information about each one in its `README` file
 
   * `Pattern::Match` - provides a `choose` sub that enables pattern matching using Raku's [signature destructuring](https://docs.raku.org/type/Signature#Destructuring_arguments) as a control-flow construct similar to [`given`/`when`](https://docs.raku.org/language/control#given).  `choose` can detect a pattern that is unreachable because it is fully   shadowed by a prior pattern; when it detects an unrechable pattern, it raises an exception.  It also raises an exception at runtime if input fails to match any pattern and no default option was provided.  (Fun fact: [musing](https://www.codesections.com/blog/pattern-matching-2/) about a function like `choose` but not wanting to create a micro package is what first started me on the trail towards `_`).
   
@@ -94,20 +95,77 @@ Currently `_` includes the following sub-packages.  You can find more informatio
   * `Text::Paragraphs` - provides a `paragraphs` function analogous to Raku's [`lines`](https://docs.raku.org/routine/lines): that is, it splits a `Str` or text from a file into paragraphs.  It can detect paragraphs that are separated by blank lines and/or paragraphs that are only marked by the indentation of their first line.  It is also able to distinguish between the start of a new paragraph and the a bulleted or numbered list (which is _not_ a new paragraph).
   
   * `Text::Wrap` - provides `wrap-words`, a replacement for the Rakudo `implementation-detail` `Str.naive-word-wrapper`.  `wrap-words` is slightly less naive because it provides basic support for wide Unicode (supporting character width without knowing the font is [impossible in theory but works ok in practice](https://stackoverflow.com/questions/3634627)).  `wrap-words` respects the existing whitespace in between words so, unlike Rakudo's version, it doesn't need to have an opinion about how many spaces to put after a period (though, for the record, Rakudo's view that periods should be followed by [two spaces](https://github.com/rakudo/rakudo/blob/master/src/core.c/Str.pm6#L3646) it [the correct one](https://web.archive.org/web/20170926073154/http://bartlebysbackpack.com/2017/07/meta-contrarian-typography/)).  `wrap-words` uses the same greedy wrapping algorithm as Rakudo (though if anyone wants a challenge, I'd welcome a PR that implements the [Knuth & Plass line-breaking algorithm](http://defoe.sourceforge.net/folio/knuth-plass.html) … in under 70 lines of code – here's a JS implementation in [only ~300 lines](https://github.com/bramstein/typeset/blob/master/src/linebreak.js) to get you started)!  
-  * `Test::Doctest::Markdown` - provides a `doctest` multi that tests Raku code contained in a Markdown file.  `doctest` is designed Specifically, it scans a Markdown file for any Raku code blocks and tests each one.  If the code block contains `OUTPUT: «…»` comments, `doctest` runs the code and tests its output against the expected output; if the code block doesn't have comments like that, `doctest` tests whether the code can be `EVAL`ed ok.  `doctest` also supports adding configuration info by preceding the code block with a `<!-- doctest -->` comment; currently, the only config option is to provide setup code to be run as part of the test without being displayed in the Markdown file.
-  * `Test::Fluent` - TODO
-
   
+  * `Test::Doctest::Markdown` - provides a `doctest` multi that tests Raku code contained in a Markdown file with the goal of testing example code in a `README` or other documentation.  (Nothing's worse than broken examples!) `doctest` tests each code block as follows:  If the code block has `OUTPUT: «…»` comments, `doctest` tests the code's output against the expected output; if the code block doesn't have `OUTPUT` comments, `doctest` tests whether the code can be `EVAL`ed ok.  `doctest` also supports adding configuration info by preceding the code block with a `<!-- doctest -->` comment; currently, the only config option is to provide setup code that's run as part of the test without being displayed in the Markdown file.  Inspired by [Rust's documentation tests](https://doc.rust-lang.org/rustdoc/documentation-tests.html).
+  
+  * `Test::Fluent` - provides a thin wrapper over Raku's Core [Test](https://docs.raku.org/type/Test) module that supports testing in a more fluent style as shown in the example below.  Most notably, this style supports providing test descriptions in pod6 declarator comments.  Inspired by the [Fluent Assertions](https://fluentassertions.com/) (.NET's) and [Chai](https://www.chaijs.com/) (JS) packages.
+ 
+```raku
+# with Raku's Test:
+unlike escape-str($str), /<invalid-chars>/, "Escaped strings don't contain invalid characters";
 
-#### Dependency management
+# with Test::Fluent:
+#| Escaped strings don't contain invalid characters
+escape-str($str).is.not.like: /<invalid-chars>/;
+```
 
-## Future plans
+#### sub-package selection
+
+As I mentioned earlier, you can import all of `_`'s sub-packages with `use _`.  If you would like more control, you can pass a list of sub-package names to import.  For example, to import only the two text-processing sub-packages, you would write `use _ <Text::Paragraph Text::Wrap>`.  
+
+## Future plans/questions
+
+In addition to my immediate goal of finishing up the various `README`s and releasing a beta version of `_`, I have one medium-term goal for `_` and several questions I'm pondering (thoughts/ideas appreciated!).
 
 #### Version control
 
-#### Paths in and paths out
+The goal – and the largest blocker for a 1.0.0 release for `_` – is to figure out the best way for `_` to version sub-packages and to implement such a versioning system.  I'm still in the design phase for this part of `_`, but I'm imaging a system where users can select sub-package versions independently but where doing so is largely optional for most users.  I'm also trying to decide the best way for `_` to comply with [semantic versioning](https://semver.org/).  On the one hand, definitely want to comply with semver – one of `_`'s goals is to protect users against unexpected breaking changes, after all.  On the other hand, I'm not sure it makes sense to treat a breaking change in _any_ `_` sub-package as a breaking change in `_` as a whole.  The sub-packages are independent, after all, and announcing a `_` breaking change too often could lead to announcement fatigue – especially if, as `_` grows, most "breaking changes" exclusively involve changes to packages that you don't use.
+
+There may be a way to resolve these issues or `_` might be one of the rare packages that should follow a non-semver versioning scheme.  Calendar versioning ([calvar](https://calver.org/)) may be worth considering – at the very least, having periodic scheduled `_` releases would give a natural way to bundle sub-package changes.
+
+I also want to put some thought into sub-package version selection when the user doesn't fully specify a version.  I don't want to reinvent the wheel here or to be needlessly inconsistent with [zef](https://github.com/ugexe/zef).  At the same time, I'm not sure whether the dependency-resolution scheme that makes sense Raku Distributions will also make sense for `_` sub-packages.  In particular, I want to think more deeply about the arguments for/against [minimal version selection](https://research.swtch.com/vgo-mvs) – which seems like a potentially good fit for `_` sub-packages.
+
+Finally, `_` needs to have a decent [responsible disclosure](https://en.wikipedia.org/wiki/Responsible_disclosure) process before I'd consider it 1.0.0 (maybe that's not technically a "versioning" issue, but it's close enough; a security bug would certainly lead to a new version!).  The inherent simplicity of `_` sub-packages _should_ make security flaws much less likely – but that phrase has "famous last words" written all over it, so `_` will definitely err on the side of caution.  I don't think there's a whole lot to decide here; it's just a matter of setting it up.
+
+So, lots to think about, several decisions to make, and some implementation code to write.
+
+#### Packages that outgrow `_`
+
+Another question I'm mulling over is how `_` should act when a package is removed from `_`.  This seems like something that could happen either because the package grows to a size that's incompatible with `_`'s rules or because it "graduates" into Raku's standard library or Core modules.  (Or a package could be removed because it was a bad idea in the first place, but that's hopefully rare and can be handled as a normal breaking change).
+
+If a sub-package is removed from `_` and a user tries to use one of its functions then, of course, they'd get an error by default.  If that sub-package still exists but just lives elsewhere, then `_` could import it and re-export it as a sub-package, which would prevent needlessly breaking user code.  However, this would mean that someone could _believe_ that they were use a `_` sub-package but actually be using an external package – which risks drastically weakening `_`'s guarantees.
+
+I suspect that the best answer here is to re-export the old packages but to throw a deprecation warning.  But I'd like to give it a bit more thought.
 
 #### Handling existing micro packages
+
+Next, I'd like to put some thought into how (if at all) `_` should approach existing micro packages in the Raku ecosystem.  For the initial packages in `_`, I focused entirely on preventing new micro packages from becoming widely used dependencies.  In particular, I avoided knowingly duplicating any existing Raku packages (well, with the slight exception of guifa's [Debug::Transput](https://github.com/alabamenhu/DebugTransput), but that was based off an idea I mentioned to guifa on IRC anyway, so I figured that was fine).
+
+But it might make sense for `_` to one day include the code from Raku packages (or slightly modified versions of them).  To keep its guarantees, `_` would need to create a sub-package based on the package's code, i.e. fork the package.  I would want to be _very_ careful about this – even though forking and re-distributing a free software package is entirely allowed by the license, it can sometimes come off as a bit rude.  And I don't want anyone to think of `_` as a package that's interested in taking credit for other people's work.
+
+Despite those reservations, there's one really compelling reason to consider forking packages: `_`'s purpose is to reduce the number of widely-used micro package dependencies in the Raku ecosystem, and there's no better way to do that than to find packages that are _already_ widely used micro packages.  (Or, said differently, to find packages that are furthest upstream in the [Raku River](http://neilb.org/2015/04/20/river-of-cpan.html).)  And, fortunately, this sort of hard data for the Raku ecosystem is easy to get, either directly through `zef` or using the [ModuleCitation](https://github.com/finanalyst/ModuleCitation) module to generate a visual/interactive display similar to the Raku [Ecosystem Citation Index](https://finanalyst.github.io/ModuleCitation):
+
+<p align="center"><img src="https://codesections.com/photos/top_deps.png" 
+alt="A line chart with unlabeled lines depicting the most Raku modules with the most dependencies from January 2016 through January 2019.  The top line is at about 40%, and 6 others are above 20%" 
+width="70%" ></p>
+
+This sort of info would let us find modules that are small and widely depended on; in short, ones that are perfect candidates for adding to `_`. 
+
+Given that we **can** do this, I'd like to put some thought into whether we should and, if so, what the best way to do so is.  I can already see a few options: we could look for modules that are high on that list and that seem like they'd benefit from re-writing (perhaps because they were written some time ago or with a different goal) and create sub-packages based on those (without forking them).  Or we could look for packages that might be abandoned and, if so, fork them as sub-packages.  Or try to work with package maintainers to have _them_ add (a version of) the package to `_`.  And I'm sure there are other approaches too; it's something I plan to put a bit more thought into.
+
+(When writing this section, I realized that the ecosystem index hasn't been updated in a couple of years.  I sent in a [PR](https://github.com/finanalyst/p6-task-popular/pull/1) but, until that's merged/the site is updated, you can also see the recent top dependencies at [this gist](https://gist.github.com/codesections/155c74180fbbfe0291c7468f248937e4).)
+
+
+#### Making `_` trustworthy 
+
+Finally, I've been thinking a bit about how `_` can be as trustworthy as possible (even before the subject [came up](https://www.reddit.com/r/ProgrammingLanguages/comments/raau00/following_the_unix_philosophy_without_getting/hnhi5km/) last time).  The goal, of course, is for `_` to be as close to [zero trust](https://en.wikipedia.org/wiki/Zero_trust_security_model) as possible: because each sub-package is a single short, readable (I hope!) file with zero dependencies, you shouldn't _need_ to trust me – just read the code (and tests) and see for yourself.
+
+That's a fine theory, but in practice there's still a big difference between "as close as possible to zero trust" and "actually zero trust".  And it's true that at least some aspects of `_` depend on its maintainers (i.e., right now, me) being trustworthy.  That works out well for me – I kind of have to trust myself anyway! – and I hope that many in the Raku community know me well enough that it's ok for them too.  But I can fully understand anyone who doesn't share that trust, and I'd like to put some thought into the best ways to add some additional safeguards (both against malicious code and against insecure code).
+
+But that's definitely a someday-well-after-1.0.0 question – after all, maybe no one else will find `_` useful, and I'll be its only user.  If so, being trusted won't be an issue at all.
+
+
+
 
 ## What problem is `_` solving?
 
@@ -206,5 +264,5 @@ language.  If I'm right about that, then the range of problems that `_` can solv
 it's comprehensibility is correspondingly expanded as well.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTkyOTUxMTI3XX0=
+eyJoaXN0b3J5IjpbMTc1NjYwNTYxMF19
 -->
