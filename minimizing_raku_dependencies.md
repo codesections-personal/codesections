@@ -164,7 +164,11 @@ That's a fine theory, but in practice there's still a big difference between "as
 
 But that's definitely a someday-well-after-1.0.0 question – after all, maybe no one else will find `_` useful, and I'll be its only user.  If so, being trusted won't be an issue at all.
 
+## Conclusion: `_` and the Unix philosophy
 
+I want to close with a few bigger picture thoughts about `_` and its relationship to the values that (imo) contribute to well-designed software.  One [comment I got](https://lobste.rs/s/nu3xyw/following_unix_philosophy_without#c_wwvb3j) on the first post in this series was "I’m all for left-pad-sized packages".  I think that was meant as a point of disagreement, but my immediate internal response was "me too!"
+
+I love left-pad-sized packages; if I didn't, I'd hardly have written a seven of them for `_`'s initial release.  I kn
 
 
 ## What problem is `_` solving?
@@ -264,5 +268,5 @@ language.  If I'm right about that, then the range of problems that `_` can solv
 it's comprehensibility is correspondingly expanded as well.
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc1NjYwNTYxMF19
+eyJoaXN0b3J5IjpbLTE0NDc4NTAwMjFdfQ==
 -->
