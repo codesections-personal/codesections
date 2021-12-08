@@ -60,7 +60,7 @@ When viewing a `_` sub-package, you can look at a single file and, without needi
 
 The rules we just talked about limit on what packages `_` can include – but they don't say give us any guidance about what `_` _should_ include.  Let's address that now.
 
-`_`'s scope is easy enough to state in broad terms: `_` should include a package if that package fits in the constraints above and provides functionality that many Raku packages would get utility from.  If the package's scope is small enough that it can be implemented in 70 lines, then having it as an independent package would create a micro package; if that micro package would be useful in a bunch of Raku programs, then it would likely become a _widely used_ micro package.  Since `_`'s goal is to reduce limit the number of widely used micro-packages in the Raku ecosystem, any package that meets these two critera is a good candidate for `_`.
+`_`'s scope is easy enough to state in broad terms: `_` should include a package if that package fits in the constraints above and provides functionality that many Raku packages would get utility from.  If the package's scope is small enough that it can be implemented in 70 lines, then having it as an independent package would create a micro package; if that micro package would be useful in a bunch of Raku programs, then it would likely become a _widely used_ micro package.  Since `_`'s goal is to limit the number of widely depended-on micro-packages in the Raku ecosystem, any package that meets these two criteria is a good candidate for `_`.
 
 But all that basically boils down to "`_` should include packages that are (1) small and (2) useful".  While I doubt that many of you will disagree, knowing what "useful" means in practice is the hard part.  
 
@@ -72,7 +72,7 @@ That said, I do have three general categories of packages that be good fit for `
 
 * **Code that ought to stay out of Raku's standard library** - there are some small packages that we can reasonably expect to be widely used but that, for one reason or another, don't seem like a good fit for Raku's standard library; `_` could provide a home for those.  Just as the packages in the first category share a lot with packages behind`use experimental`, this category shares a lot with Raku's [Core modules](https://docs.raku.org/language/modules-core).  And, again, `_`'s role could be a testing ground of sorts for modules that might one day graduate to being added as a Core module.  Or it might not; I don't want to suggest that being a `_` sub-package is or should be a temporary status.  The vast majority of `_` sub packages will stay `_` sub-packages – and that's exactly as it should be.
 
-* **Code that is already in Raku(do)'s standard library but that we shouldn't use** – Raku quite correctly makes [fairly strong guarantees](https://marketing.raku.org/id/1541379592/any) about not breaking spec'd code. But, in return, it asks us to _not_ rely on code outside that guarantee – that is, not to rely on implementation details.  Unfortunately Rakoons, [just like everybody else](https://www.hyrumslaw.com/), are fairly rubbish at keeping up our end of that bargain – it's all too easy to think "well, this function is already installed and does _just_ what I need.  And it's in Rakudo, so I know it's decently well-written.  So what if it's marked with `is implementation-detail`, I'm sure it'll be _fine_".  I'm not judging those thoughts – I've had them myself – but the fact is that it's **not** fine.  When we, as a community, ignore signposts like `is implementation-detail`, the [inevitable negative result](https://github.com/Raku/6.d-prep/blob/master/d-docs/New-Features-Policy.md) is that we force Rakudo developers to chose between not changing that implementation detail or breaking user code.  Even if they're "allowed" to break that code under the terms of the agreement that we're ignoring, none of the Rakudo devs enjoy breaking things. If changing an `implementation-detail` makes [blin runs](https://perl6advent.wordpress.com/2018/12/23/day-23-blin-its-christmas-soon/#project-blin--toasting-reinvented) start failing, then devs _will_ think twice about that change – even if it's a good change.  What's worse is that the (totally understandable!) desire to discourage users from depending on implementation details risks tempting Rakudo devs to [avoid fully documenting those details](https://github.com/Raku/problem-solving/issues/277) – which creates/exacerbates the problem of tacit knowledge (sometimes called "[tribal knowledge](https://en.wikipedia.org/wiki/Tribal_knowledge)") – that knowledge that many people in the community have, but which isn't written down or otherwise accessible to new people.  Tacit knowledge, in turn, creates barriers to new developers looking to understand how to improve the Raku's main language implementation.  And that hurts everyone.  Accordingly, one additional goal for `_` is to head this problem off by providing alternatives to any of Rakudo's `implementation-detail`s that developers might be tempted to depend on.
+* **Code that is already in Raku(do)'s standard library but that we shouldn't use** – Raku quite correctly makes [fairly](https://6guts.wordpress.com/2016/02/09/a-few-words-on-perl-6-versioning-and-compatibility/) [strong](https://gist.github.com/jnthn/c10742f9d51da80226fa) [guarantees](https://marketing.raku.org/id/1541379592/any) about not breaking spec'd code. But, in return, it asks us to _not_ rely on code outside that guarantee – that is, not to rely on implementation details.  Unfortunately Rakoons, [just like everybody else](https://www.hyrumslaw.com/), are fairly rubbish at keeping up our end of that bargain – it's all too easy to think "well, this function is already installed and does _just_ what I need.  And it's in Rakudo, so I know it's decently well-written.  So what if it's marked with `is implementation-detail`, I'm sure it'll be _fine_".  I'm not judging those thoughts – I've had them myself – but the fact is that it's **not** fine.  When we, as a community, ignore signposts like `is implementation-detail`, the [inevitable negative result](https://github.com/Raku/6.d-prep/blob/master/d-docs/New-Features-Policy.md) is that we force Rakudo developers to chose between not changing that implementation detail or breaking user code.  Even if they're "allowed" to break that code under the terms of the agreement that we're ignoring, none of the Rakudo devs enjoy breaking things. If changing an `implementation-detail` makes [blin runs](https://perl6advent.wordpress.com/2018/12/23/day-23-blin-its-christmas-soon/#project-blin--toasting-reinvented) start failing, then devs _will_ think twice about that change – even if it's a good change.  What's worse is that the (totally understandable!) desire to discourage users from depending on implementation details risks tempting Rakudo devs to [avoid fully documenting those details](https://github.com/Raku/problem-solving/issues/277) – which creates/exacerbates the problem of tacit knowledge (sometimes called "[tribal knowledge](https://en.wikipedia.org/wiki/Tribal_knowledge)") – that knowledge that many people in the community have, but which isn't written down or otherwise accessible to new people.  Tacit knowledge, in turn, creates barriers to new developers looking to understand how to improve the Raku's main language implementation.  And that hurts everyone.  Accordingly, one additional goal for `_` is to head this problem off by providing alternatives to any of Rakudo's `implementation-detail`s that developers might be tempted to depend on.
 
 So, let's see: a package is a good fit for `_` if it's one that should be in the standard library but isn't, or if it shouldn't be in the standard library, or if it is in the standard library but shouldn't be used.  I think that covers all possible packages except for those that are in the standard library and should be used.  I guess that doesn't really narrow it down; maybe I should have just stuck with "if it has utility"!  I suppose we'll just have to find out together as `_` grows.  But maybe taking a look at `_`'s initial packages will provide some examples. 
 
@@ -80,7 +80,7 @@ So, let's see: a package is a good fit for `_` if it's one that should be in the
 
 As of today (December 8, 2021), `_` includes 7 sub-packages and is in alpha status.  This status reflects the fact that not all of the current sub-packages are fully documented/tested.  Once the current sub-packages are documented and tested, I'll upgrade `_` to beta status and add it to the [fez](https://github.com/tony-o/raku-fez) ecosystem.  I believe that should happen some time later this week but, out of a sense of tradition, I'll say that `_` will be in beta and in the ecosystem by Christmas. 
 
-During both alpha and beta periods, `_` explicitly makes **no** guarantees about backwards compatibility.  Because backwards compatibility is very important for a package like `_`, my goal is to reach 1.0.0 as soon as possible, with an exact date depending in part on what approach `_` takes to compatibility (more on that below). 
+During both alpha and beta periods, `_` explicitly makes **no** guarantees about backwards compatibility.  In particular, ensuring that `_` is strongly backwards compatible once promises to be may require breaking changes to _every_ `_` when 1.0.0 version is released.  Because backwards compatibility is very important for a package like `_`, my goal is to reach 1.0.0 as soon as possible, with an exact date depending in part on what approach `_` takes to compatibility (more on that below – and, as you'll see, there's a good chance that `_`'s 1.0.0 version won't actually be called "1.0.0"). 
 
 ####  sub-packages
 
@@ -119,11 +119,17 @@ In addition to my immediate goal of finishing up the various `README`s and relea
 
 #### Version control
 
-The goal – and the largest blocker for a 1.0.0 release for `_` – is to figure out the best way for `_` to version sub-packages and to implement such a versioning system.  I'm still in the design phase for this part of `_`, but I'm imaging a system where users can select sub-package versions independently but where doing so is largely optional for most users.  I'm also trying to decide the best way for `_` to comply with [semantic versioning](https://semver.org/).  On the one hand, definitely want to comply with semver – one of `_`'s goals is to protect users against unexpected breaking changes, after all.  On the other hand, I'm not sure it makes sense to treat a breaking change in _any_ `_` sub-package as a breaking change in `_` as a whole.  The sub-packages are independent, after all, and announcing a `_` breaking change too often could lead to announcement fatigue – especially if, as `_` grows, most "breaking changes" exclusively involve changes to packages that you don't use.
+The goal – and the largest blocker for a 1.0.0 release for `_` – is to figure out the best way for `_` to version sub-packages and to implement that a versioning system.  
 
-There may be a way to resolve these issues or `_` might be one of the rare packages that should follow a non-semver versioning scheme.  Calendar versioning ([calvar](https://calver.org/)) may be worth considering – at the very least, having periodic scheduled `_` releases would give a natural way to bundle sub-package changes.
+I'm still in the design phase for this part of `_`, but I'm optimistic. 
 
-I also want to put some thought into sub-package version selection when the user doesn't fully specify a version.  I don't want to reinvent the wheel here or to be needlessly inconsistent with [zef](https://github.com/ugexe/zef).  At the same time, I'm not sure whether the dependency-resolution scheme that makes sense Raku Distributions will also make sense for `_` sub-packages.  In particular, I want to think more deeply about the arguments for/against [minimal version selection](https://research.swtch.com/vgo-mvs) – which seems like a potentially good fit for `_` sub-packages.
+Raku offers nearly unique opportunity to get versioning right.  With the exception of [Unison](https://www.unisonweb.org/docs/tour), I'm not aware of any language that supports versioning as a first-class concept to the [degree that Raku does](https://docs.raku.org/type/Version); Raku even allows us to set both [`version` and `api` info](https://docs.raku.org/type/Metamodel::Versioning) for nearly every language construct.  Even better, Raku's strong support for [multiple dispatch](https://docs.raku.org/language/functions#index-entry-declarator_multi-Multi-dispatch) lets us "grow" Raku functions without breaking them: when we define a new `multi` candidate with a narrower signature, we add something new without breaking any existing calls.  (I'm using "grow" in the sense [Rich Hickey introduced](http://beppu.github.io/post/spec-ulation/) – you grow a function by either requiring less from or providing more to that function's callers).  
+
+Given all these advantages, I'm hoping that `_` 1.0.0 will manage versions in a way that gives users fine-grained control over which version of a `_` sub-package they use – but where exercising that control is largely optional for most users because [nothing ever breaks](https://www.joelonsoftware.com/2004/06/13/how-microsoft-lost-the-api-war/).  
+
+But will that 1.0.0 release actually be a "1.0.0" release?  I have always used [semantic versioning](https://semver.org/) and think it's a great tool for communicating the size of changes to users.  That said, it's also true that [semver has real problems](https://hynek.me/articles/semver-will-not-save-you/).  If particular, it seems like `_` nature – it's a collection of independent sub-packages, and changes to one sub-package have no effect on any other – might make calendar versioning ([calvar](https://calver.org/)) or some other versioning scheme worth considering.  At the very least, having periodic scheduled `_` releases would give a natural way to bundle sub-package changes.  It might even make sense to follow Raku's version, and to not allow any breaking (non-growing) changes other than when a new language version is released.
+
+If we adopt a versioning system that allows for breaking changes, I also want to put some thought into sub-package version selection when the user doesn't fully specify a version.  I don't want to reinvent the wheel here or to be needlessly inconsistent with [zef](https://github.com/ugexe/zef) but the arguments for/against [minimal version selection](https://research.swtch.com/vgo-mvs) have me intrigued.
 
 Finally, `_` needs to have a decent [responsible disclosure](https://en.wikipedia.org/wiki/Responsible_disclosure) process before I'd consider it 1.0.0 (maybe that's not technically a "versioning" issue, but it's close enough; a security bug would certainly lead to a new version!).  The inherent simplicity of `_` sub-packages _should_ make security flaws much less likely – but that phrase has "famous last words" written all over it, so `_` will definitely err on the side of caution.  I don't think there's a whole lot to decide here; it's just a matter of setting it up.
 
@@ -168,105 +174,19 @@ But that's definitely a someday-well-after-1.0.0 question – after all, maybe n
 
 I want to close with a few bigger picture thoughts about `_` and its relationship to the values that (imo) contribute to well-designed software.  One [comment I got](https://lobste.rs/s/nu3xyw/following_unix_philosophy_without#c_wwvb3j) on the first post in this series was "I’m all for left-pad-sized packages".  I think that was meant as a point of disagreement, but my immediate internal response was "me too!"
 
-I love left-pad-sized packages; if I didn't, I'd hardly have written a seven of them for `_`'s initial release.  I kn
+I love left-pad-sized packages; if I didn't, I'd hardly have written a seven of them for `_`'s initial release.  This post has said something like "reduce the number of micro packages" so often that it'd be easy to forget, so I want to be perfectly clear: **I think micro packages are great and that we should have more of them.**  If you're considering writing a micro package, please do!
 
+What I don't like is having hundreds or thousands of dependencies.  I _especially_ don't like having a reasonable number of direct dependencies but _still_ having hundreds of transitive dependencies many layers deep.  My goal with `_` is to address that problem: I want to have my cake and eat it too.  I want each of my dependencies to be small _and also_ to have as few transitive dependencies as possible.  And I believe that `_` (if successful) can help us all to get both.  After all, if three of my dependencies need to wrap text and each uses a different micro package, then I've just picked up three new dependencies; but if they all use `_`, then I've only picked up one (or even zero, in the hopefully more likely case that one of my other dependencies already used `_`).  In that way, I hope that `_` can flatten dependency trees and help us have _both_ micro packages and fewer dependencies. 
 
-## What problem is `_` solving?
+This dual goal of minimizing dependency _size_ and dependency _number_ also ties into a point that came up in [an interesting and thoughtful set of reactions to my previous post](https://www.reddit.com/r/ProgrammingLanguages/comments/raau00/following_the_unix_philosophy_without_getting/hnh34a9/).  Paraphrasing a bit, the overall critique was that I'd misunderstood the Unix philosophy and that a _correct_ understanding of that philosophy wouldn't lead to massive dependency graphs or any of the other problems that I described as coming from following the Unix philosophy too far.  
 
-I want to build reliable software – software that works well, delights its users, and that isn't
-subject to major security flaws.  To that end, I have two beliefs (well, ok, I have _lots_ of
-beliefs, but two that I'd like to focus on now):
+In some ways, this is a semantic disagreement: by "Unix philosophy", do we mean the [nuanced but not fully consistent set of practices](https://homepage.cs.uri.edu/~thenry/resources/unix_art/ch01s06.html) that emerged from the early days of UNIX?  Or do we mean the [simplified](https://hackaday.com/2018/09/10/doing-one-thing-well-the-unix-philosophy/) [version](https://itzone.com.vn/en/article/focus-on-one-thing-and-do-it-well-the-unix-philosophy/) that most people mean when they refer to "the Unix philosophy" today?  I'm not interested in debating the definitions of our terms but, to be clear, when I say that following "the Unix philosophy" leads to micro-package multiplicity, I'm using the phrase in its more contemporary, simplified sense – a.k.a., the way "many [people have] misapplied 'The Unix Philosophy' [as] justif[ying] 'micro-packages', when it really doesn't", according to at least one commenter (a friend and fellow Rakoon).
 
-    * Software is more reliable when it's composed of small pieces, each of which is responsible for
-      [only one task](https://en.wikipedia.org/wiki/Unix_philosophy)
+(Ok, saying "I'm not interested in debating definitions" is a total lie – I'm a lawyer so _of course_ I'm happy to go back and forth about how definition change over time (or don't), what role original intent plays in contemporary interpretation, whether to be prescriptive or descriptiveness, and all sorts of wonderful nonsense.  But I *really* don't think either of us wants that right now!)
 
-    * Software is difficult to reason about – and therefore dificult to build well – when it has too
-      many moving parts or systems become too big
+So it may well be that the True Unix Philosophy™ wouldn't lead to programs with 1,000+ dependencies.  I view `_` as striking a balance between the Unix philosophy's push towards micro packages and my simultaneous desire to keep my code's dependency count in the double digits.  But from that other point of view, `_` could be about correctly (albeit still partially) applying the Unix philosophy by encouraging shallower and narrower dependency trees.
 
-In many instances, these two beliefs complement one another – keeping things simple will reduce the
-number of pieces it takes to build software _and_ will lower the complexity of each piece.  But
-there are obviously times when these two values trade off against each other.  We sometimes have to
-decide whether to one pretty big software "thing" or to combine many smaller and individually less
-complex alternatives.
-
-One area where this comes up a lot is in selecting the dependencies (libraries, modules, etc) to use
-in a project.  At one extreme, you can try to keep each dependency as small as possible, accepting
-that this will lead to many dependencies.  Or you can focus more on relying on fewer dependencies,
-even if that means some of them will be too large for you to deeply understand.
-
-This isn't a theoretical question – different developers strike that balance in very different
-ways.  So do different programming language communities.
-
-A [2020
-report](https://i.blackhat.com/USA-20/Wednesday/us-20-Edwards-The-Devils-In-The-Dependency-Data-Driven-Software-Composition-Analysis.pdf)
-found that the typical JavaScript application has 377 dependencies on open source libraries – and
-that 10% have over 1,400. That doesn't mean that JavaScript developers are manually installing
-hundreds of libraries; most of those were transitive dependencies, not direct ones. In a way,
-though, that makes it even worse: to fully understand that sort of application, the developer needs
-to not only understand every package they _chose_ to depend on but hundreds of others they didn't.
-
-On the other hand, the JavaScript packages are admirably small and single-purpose.  That same report
-showed that several of the most-depended-on packages JavaScript packages are tiny – one that 86% of
-JS programs use is [just four lines](https://github.com/juliangruber/isarray/blob/master/index.js)
-(its a polyfill for old browsers).  Pretty much anyone can look at those four lines and be sure that
-they don't contain any major bugs.
-
-At the other end of the spectrum, the language with the fewest dependencies had an average of
-just 4.  Before we get too excited about that, though, I should note that the language in question
-is [Swift](https://en.wikipedia.org/wiki/Swift_(programming_language)) and that the report only
-covered _open source_ dependencies.  I don't have a citation, but I don't think it's a stretch to
-believe that the vast majority of Swift programs depend on a large volume of Apple code, much of
-which we can't look at even if we wanted to.
-
-So it looks like we're faced with a spectrum of options, and both extremes are pretty frightening.
-At one extreme, you can end up with easy-to-comprehend libraries – but in an overwhelming quantity;
-at the other, a you get a manageable number of dependencies, but each one is giant enough to be
-pretty impenetrable without dedicated study.  Of course it's possible to avoid both extremes and
-settle somewhere in the middle.  But that risks a worst-of-both worlds outcome, where you have too
-many dependencies to realistically track *and* your individual dependencies are too large to fully
-comprehend.
-
-`_` is my attempt to help the Raku ecosystem strike a better balance between too-many-small
-libraries and libraries that are too large to deeply understand.  My hope is that aggregating many
-small and still independent libraries into `_` will play a role in reducing the average dependencies
-in a typical Raku program without adding anything so large that it defies easy understanding.
-
-## Not a new idea
-
-Of course, creating this sort of utility library is hardly a new idea; I think programmers have been
-keeping a `./utils` directory for pretty much as long as they've had directories.  And, in
-particular, the same report I cited before also showed that 88% of JavaScript libraries depend on
-the [Lodash](https://lodash.com/) utility library.  (I'm aware of the similarity in name, though
-calling this `_`/Lowbar is less about homage to Lodash and more a case of convergent evolution; when
-a library isn't _about_ any one thing, it just makes sense to use the one non-alphabetic character
-available.  And, besides, the other obvious name, 'Utils', is [somewhat
-taken](https://github.com/Util)).
-
-As Lodash proves, a utility library like this is no panacea – JavaScript have a widely used utility
-library and _still_ has an explosion of other dependencies.  I'm well aware that it will take much
-more than `_` to have the low-dependency Raku ecosystem we'd like.
-
-But still, I'm optimistic that `_` can do bit more than Lodash and similar utility libraries for
-three reasons.  First, Lodash and other JS utility libraries have to work from the fairly small
-JavaScript standard library; many (most?) of the utilities they provide already built in with Raku.
-Our larger standard library frees libraries like this to have a bit broader of a focus, which should
-help increase the number of dependencies we can replace.
-
-Second, because many utility libraries are attempting to supplement the standard library, they
-typically put a lot of emphasis on developing a standard and coherent API – they're building a
-single library designed to be used as one coherent whole.  Since we're operating at a bit higher
-level – Raku's standard library is great; `_` is mostly about things that don't belong in Core – we
-have the freedom to let each sublibrary be a bit more individual.
-
-And, finally, we have the secret weapon of any Raku project – Raku itself.  I've said that `_`
-submodules should be under 70 lines.  That's so that each one can fit on a single page; you can
-literally look at all the code at one time.  That sort of global visibility is hugely empowering,
-but the brevity can also be limiting – there are, of course, limits to what you can achieve in a
-single page of code.  It's my belief that Raku's unrivaled expressiveness will let us fit far more
-onto a single, clearly written page of code than we could if writing in any other programming
-language.  If I'm right about that, then the range of problems that `_` can solve without losing
-it's comprehensibility is correspondingly expanded as well.
-
+I'm happy with either framing; either way is a path towards simpler, more reliable, and more composable software.  I hope that `_` can play its small part in making that happen and that other languages embrace the use of utility packages to prevent overly deep dependency trees.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDc4NTAwMjFdfQ==
+eyJoaXN0b3J5IjpbMTU3OTY3MTI3NywtMTQ0Nzg1MDAyMV19
 -->
