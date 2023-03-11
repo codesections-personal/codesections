@@ -9,11 +9,10 @@ not use either of those services—instead, I use
 [Mastodon](https://joinmastodon.org/) as my primary social network.
 
 | Contact Method | Link                          |
-|:--------|:------------------------------------------------------------------|
-| Mastodon| [fosstodon.org/@codesections](https://fosstodon.org/@codesections)|
-| GitLab  | [gitlab.com/codesections](https://gitlab.com/codesections)        |
-| GitHub  | [github.com/codesections](https://github.com/codesections)        |
-| LinkedIn| [linkedin.com/in/daniel-sockwell](https://www.linkedin.com/in/daniel-sockwell) |
-| KeyBase | [keybase.io/codesections](https://keybase.io/codesections)        |
-| Email   | <daniel@codesections.com>                                         |
-|Public Key| [codesections.com/public-key.txt](https://www.codesections.com/public-key.txt) |
+|:---------------|:------------------------------------------------------------------|
+| Email          | <daniel@codesections.com>                                         |
+| Public Key     | [codesections.com/pubkey.txt](https://www.codesections.com/pubkey.txt) |
+| Mastodon       | [fosstodon.org/@codesections](https://fosstodon.org/@codesections)|
+| GitHub         | [github.com/codesections](https://github.com/codesections)        |
+| GitLab         | [gitlab.com/codesections](https://gitlab.com/codesections)        |
+| Reddit         | [reddit.com/user/codesections](https://www.reddit.com/user/codesections)        |
