@@ -1,0 +1,90 @@
+backend:
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+  branch: master # optional, defaults to master
+# backend:
+#   name: git-gateway
+#   local_backend: true
+#   branch: main # Branch to update (optional; defaults to master)
+local_backend:
+  # when using a custom proxy server port
+  url: http://localhost:8081/api/v1
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: 'blog-config'
+    label: 'Blog configuration options'
+    folder: 'content/blog'
+    filter: {field: "post", value: false}
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Post',  name: 'post', widget: 'hidden', default: false }
+      - { label: 'Title for blog list page', name: 'title', widget: 'string' }
+      - { label: 'Hidden', name: 'draft', widget: 'boolean', default: true }
+  - name: 'blog'
+    label: 'Blog posts'
+    folder: 'content/blog'
+    filter: {field: "post", value: true}
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Post',  name: 'post', widget: 'hidden', default: true }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Hidden', name: 'draft', widget: 'boolean', default: true}
+  - name: 'pages'
+    label: 'Pages'
+    files: 
+    - label: "Home Page"
+      name: "homepage"
+      file: "data/homepage.yml"
+      editor:
+        preview: false
+      fields:
+        - {label: "Enable Main Section", name: "enabled", widget: "hidden", default: true, required: false}
+        - {label: "Main Image", name: "img", widget: "image", required: false }
+        - {label: "Image Title", name: "img_title", widget: "string", required: false}
+        - {label: "Quote", name: "quote", widget: "string", required: false}
+        - {label: "Description", name: "description", widget: "markdown"}
+    - name: 'about'
+      label: 'About'
+      file: 'content/about.md'
+      create: true
+      fields:
+        - { label: 'Menu',  name: 'menu', widget: 'hidden', default: "main" }
+        - { label: 'Title', name: 'title', widget: 'string' }
+        - { label: 'Body', name: 'body', widget: 'markdown' }
+        - { label: 'Hidden', name: 'draft', widget: 'boolean', default: false}
+    - name: 'editing'
+      label: 'Editing'
+      file: 'content/Editing.md'
+      create: true
+      fields:
+        - { label: 'Menu',  name: 'menu', widget: 'hidden', default: "main" }
+        - { label: 'Title', name: 'title', widget: 'string' }
+        - { label: 'Body', name: 'body', widget: 'markdown' }
+        - { label: 'Hidden', name: 'draft', widget: 'boolean', default: true }
+    - name: 'publications'
+      label: 'Publications'
+      file: 'content/publications.md'
+      create: true
+      fields:
+        - { label: 'Title', name: 'title', widget: 'string' }
+        - { label: 'Body', name: 'body', widget: 'markdown' }
+        - { label: 'Hidden',  name: 'draft', widget: 'boolean', default: false }
+    - name: 'contact'
+      label: 'Contact'
+      file: 'content/contact.md'
+      create: true
+      fields:
+        - { label: 'Title', name: 'title', widget: 'string' }
+        - { label: 'Body', name: 'body', widget: 'markdown' }
+        - { label: 'Hidden',  name: 'draft', widget: 'boolean', default: false }

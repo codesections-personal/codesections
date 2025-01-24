@@ -13,22 +13,10 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: 'blog-config'
-    label: 'Blog configuration options'
-    folder: 'content/blog'
-    filter: {field: "post", value: false}
-    create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
-    editor:
-      preview: false
-    fields:
-      - { label: 'Post',  name: 'post', widget: 'hidden', default: false }
-      - { label: 'Title for blog list page', name: 'title', widget: 'string' }
-      - { label: 'Hidden', name: 'draft', widget: 'boolean', default: true }
   - name: 'blog'
     label: 'Blog posts'
     folder: 'content/blog'
-    filter: {field: "post", value: true}
+    path:   '{{slug}}/index.md'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     editor:
@@ -43,48 +31,24 @@ collections:
   - name: 'pages'
     label: 'Pages'
     files: 
-    - label: "Home Page"
-      name: "homepage"
-      file: "data/homepage.yml"
-      editor:
-        preview: false
-      fields:
-        - {label: "Enable Main Section", name: "enabled", widget: "hidden", default: true, required: false}
-        - {label: "Main Image", name: "img", widget: "image", required: false }
-        - {label: "Image Title", name: "img_title", widget: "string", required: false}
-        - {label: "Quote", name: "quote", widget: "string", required: false}
-        - {label: "Description", name: "description", widget: "markdown"}
-    - name: 'about'
-      label: 'About'
-      file: 'content/about.md'
-      create: true
-      fields:
-        - { label: 'Menu',  name: 'menu', widget: 'hidden', default: "main" }
-        - { label: 'Title', name: 'title', widget: 'string' }
-        - { label: 'Body', name: 'body', widget: 'markdown' }
-        - { label: 'Hidden', name: 'draft', widget: 'boolean', default: false}
-    - name: 'editing'
-      label: 'Editing'
-      file: 'content/Editing.md'
-      create: true
-      fields:
-        - { label: 'Menu',  name: 'menu', widget: 'hidden', default: "main" }
-        - { label: 'Title', name: 'title', widget: 'string' }
-        - { label: 'Body', name: 'body', widget: 'markdown' }
-        - { label: 'Hidden', name: 'draft', widget: 'boolean', default: true }
-    - name: 'publications'
-      label: 'Publications'
-      file: 'content/publications.md'
+    - name: 'home'
+      label: 'Home'
+      file: 'content/_index.md'
       create: true
       fields:
         - { label: 'Title', name: 'title', widget: 'string' }
         - { label: 'Body', name: 'body', widget: 'markdown' }
-        - { label: 'Hidden',  name: 'draft', widget: 'boolean', default: false }
+    - name: 'freelancing'
+      label: 'Freelancing'
+      file: 'content/freelancing/index.md'
+      create: true
+      fields:
+        - { label: 'Title', name: 'title', widget: 'string' }
+        - { label: 'Body', name: 'body', widget: 'markdown' }
     - name: 'contact'
       label: 'Contact'
-      file: 'content/contact.md'
+      file: 'content/contact/index.md'
       create: true
       fields:
         - { label: 'Title', name: 'title', widget: 'string' }
         - { label: 'Body', name: 'body', widget: 'markdown' }
-        - { label: 'Hidden',  name: 'draft', widget: 'boolean', default: false }
