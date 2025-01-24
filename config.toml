@@ -11,8 +11,8 @@ default_language = "en"
 compile_sass = false
 
 # RSS
-generate_feed = true
-feed_filename = "rss.xml"
+generate_feeds = true
+feed_filenames = ["rss.xml"]
 
 
 # Whether to build a search index to be used later on by a JavaScript library
